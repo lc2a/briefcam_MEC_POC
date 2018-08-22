@@ -1,8 +1,8 @@
-FROM python:3.7-rc-slim
+FROM python:3.7-slim
 RUN mkdir /docker_producer
 WORKDIR /docker_producer
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 LABEL author="sriramsridharjob78@gmail.com" \
       version="1.0"
 ENV   video_file_path_key=/data
@@ -14,4 +14,4 @@ RUN apt-get install -y \
     procps
 
 COPY . .
-CMD python directory_watch.py
+CMD python3 directory_watch.py

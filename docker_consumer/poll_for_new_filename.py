@@ -1,12 +1,25 @@
 from confluent_kafka import Consumer, KafkaError
 import os
+import logging
+
+logging.basicConfig(format='(%(threadName)-2s:'
+                                       '%(levelname)s:'
+                                       '%(asctime)s:'
+                                       '%(lineno)d:'
+                                       '%(filename)s:'
+                                       '%(funcName)s:'
+                                       '%(message)s',
+                                datefmt='%m/%d/%Y %I:%M:%S %p',
+                                filename='poll_for_new_filename.log',
+                                level=logging.DEBUG)
+
 from upload_video.upload_video_to_briefcam import process_new_file
 
 if __name__=='__main__':
     broker_name = os.getenv("broker_name_key", default=None)
-    print("broker_name={}".format(broker_name))
+    logging.debug("broker_name={}".format(broker_name))
     topic = os.getenv("topic_key", default=None)
-    print("topic={}".format(topic))
+    logging.debug("topic={}".format(topic))
 
     c = Consumer({
         'bootstrap.servers': broker_name,
@@ -27,9 +40,9 @@ if __name__=='__main__':
             if msg.error().code() == KafkaError._PARTITION_EOF:
                 continue
         else:
-            print(msg.error())
+            logging.debug(msg.error())
             break
         filename=msg.value().decode('utf-8')
-        print('Received message: {}'.format(filename))
+        logging.debug('Received message: {}'.format(filename))
         process_new_file(filename)
     c.close()

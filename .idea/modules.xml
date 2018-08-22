@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/briefcam.iml" filepath="$PROJECT_DIR$/.idea/briefcam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../transparent_dns_proxy/.idea/transparent_dns_proxy.iml" filepath="$PROJECT_DIR$/../transparent_dns_proxy/.idea/transparent_dns_proxy.iml" />
     </modules>
   </component>
 </project>
