@@ -1,11 +1,12 @@
 FROM selenium/standalone-chrome-debug
-RUN  sudo mkdir /docker_consumer
-RUN  sudo chown seluser:seluser /docker_consumer
+CMD  sudo su
+CMD  mkdir /docker_consumer
+CMD  cd /docker_consumer
 WORKDIR /docker_consumer
 COPY requirements.txt requirements.txt
-RUN  wget https://bootstrap.pypa.io/get-pip.py
+RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
 RUN  sudo python3 get-pip.py
-RUN  sudo pip3 install -r requirements.txt
+RUN  sudo pip3 install -r /docker_consumer/requirements.txt
 LABEL author="sriramsridharjob78@gmail.com" \
       version="1.0"
 ENV   video_file_path_key=/data
@@ -19,4 +20,4 @@ RUN  sudo apt-get install -y \
      net-tools \
      procps
 COPY . .
-CMD python3 poll_for_new_filename.py
+CMD sudo python3 poll_for_new_filename.py
