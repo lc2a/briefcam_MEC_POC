@@ -1,6 +1,7 @@
 from confluent_kafka import Consumer, KafkaError
 import os
 import logging
+import time
 
 logging.basicConfig(format='(%(threadName)-2s:'
                                        '%(levelname)s:'
@@ -13,14 +14,14 @@ logging.basicConfig(format='(%(threadName)-2s:'
                                 filename='poll_for_new_filename.log',
                                 level=logging.DEBUG)
 
-from upload_video.upload_video_to_briefcam import process_new_file
-
 if __name__=='__main__':
     broker_name = os.getenv("broker_name_key", default=None)
     logging.debug("broker_name={}".format(broker_name))
     topic = os.getenv("topic_key", default=None)
     logging.debug("topic={}".format(topic))
 
+    c=None
+    
     c = Consumer({
         'bootstrap.servers': broker_name,
         'group.id': 'mygroup',
@@ -30,6 +31,7 @@ if __name__=='__main__':
     })
 
     c.subscribe([topic])
+    from upload_video.upload_video_to_briefcam import process_new_file
 
     while True:
         msg = c.poll(1.0)
