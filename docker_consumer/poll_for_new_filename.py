@@ -1,7 +1,9 @@
+import time
+time.sleep(60)
+
 from confluent_kafka import Consumer, KafkaError
 import os
 import logging
-import time
 import sys
 
 logging.basicConfig(format='(%(threadName)-2s:'
@@ -20,7 +22,7 @@ if __name__=='__main__':
     logging.debug("broker_name={}".format(broker_name))
     topic = os.getenv("topic_key", default=None)
     logging.debug("topic={}".format(topic))
-
+  
     c=None
     while c==None:
         c = Consumer({

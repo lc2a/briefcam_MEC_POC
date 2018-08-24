@@ -24,4 +24,4 @@ ENV   case_name_key=MEC-POC
 #RUN xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 RUN sudo chown seluser:seluser -R /docker_consumer
 COPY . .
-#CMD python3 poll_for_new_filename.py
+RUN python3 /docker_consumer/poll_for_new_filename.py &
