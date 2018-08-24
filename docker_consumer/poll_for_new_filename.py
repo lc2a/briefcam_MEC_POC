@@ -2,6 +2,7 @@ from confluent_kafka import Consumer, KafkaError
 import os
 import logging
 import time
+import sys
 
 logging.basicConfig(format='(%(threadName)-2s:'
                                        '%(levelname)s:'
@@ -21,17 +22,28 @@ if __name__=='__main__':
     logging.debug("topic={}".format(topic))
 
     c=None
-    
-    c = Consumer({
-        'bootstrap.servers': broker_name,
-        'group.id': 'mygroup',
-        'default.topic.config': {
-        'auto.offset.reset': 'smallest'
-        }
-    })
-
+    while c==None:
+        c = Consumer({
+            'bootstrap.servers': broker_name,
+            'group.id': 'mygroup',
+            'default.topic.config': {
+            'auto.offset.reset': 'smallest'
+            }
+        })
+    logging.debug('Successfully attached to bootstrap server={},'.format(broker_name))
     c.subscribe([topic])
-    from upload_video.upload_video_to_briefcam import process_new_file
+    logging.debug('Successfully subscribed to topic={},'.format(topic))
+    connected=False
+    while connected==False:
+        try:
+            from upload_video.upload_video_to_briefcam import process_new_file
+        except:
+            logging.debug(sys.exc_info()[0])
+            print(sys.exc_info()[0])
+        else:
+             logging.debug("successfully connected to xhost display")
+             print("successfully connected to xhost display")
+             connected=True        
 
     while True:
         msg = c.poll(1.0)
