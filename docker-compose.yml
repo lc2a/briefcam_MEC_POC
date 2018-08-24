@@ -1,0 +1,70 @@
+version: '2'
+services:
+  ZOOKEEPER:
+    image: confluentinc/cp-zookeeper:5.0.0-beta30
+    hostname: ZOOKEEPER
+    container_name: ZOOKEEPER
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+  BROKER:
+    image: confluentinc/cp-enterprise-kafka:5.0.0-beta30
+    hostname: BROKER
+    container_name: BROKER
+    depends_on:
+      - ZOOKEEPER
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'ZOOKEEPER:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
+      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: ZOOKEEPER:2181
+      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
+      CONFLUENT_METRICS_ENABLE: 'true'
+      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+  docker_producer:
+    image: ssriram1978/docker_producer:latest
+    depends_on:
+      - ZOOKEEPER
+      - BROKER
+    hostname: docker_producer
+    container_name: docker_producer
+    environment:
+      video_file_path_key: /data
+      broker_name_key: BROKER:9092
+      topic_key: video-file-name
+    volumes:
+      - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
+  docker_consumer:
+    image: ssriram1978/docker_consumer:latest
+    depends_on:
+      - ZOOKEEPER
+      - BROKER
+    hostname: docker_consumer
+    container_name: docker_consumer
+    environment:
+      video_file_path_key: /data
+      broker_name_key: BROKER:9092
+      topic_key: video-file-name
+      case_url_key: http://localhost/synopsis/#/review/cases
+      browser_loc_key: google-chrome
+      case_name_key: MEC-POC
+      DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
+    ports:
+      - "5903:5900"
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /var/run/dbus/:/var/run/dbus/:ro
+      - /tmp:/tmp
+      - /dev/shm:/dev/shm:ro
+      - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
