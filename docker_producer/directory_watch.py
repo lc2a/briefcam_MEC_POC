@@ -77,18 +77,37 @@ class NoProcessExcept(Exception):
         logging.debug(__class__ + "arg=%s"%(self.arg))
 
 
+def watch_a_directory2(video_file_path):
+    before = dict([(f, None) for f in os.listdir(video_file_path)])
+    while 1:
+        time.sleep(1)
+        after = dict([(f, None) for f in os.listdir(video_file_path)])
+        added = [f for f in after if not f in before]
+        removed = [f for f in before if not f in after]
+        if added:
+            print("Added: ",added)
+            logging.debug("Added: ", added)
+            for filename in added:
+                process_new_file(video_file_path+'/'+filename)
+        if removed:
+            print("Removed: ", removed)
+            logging.debug("Removed: ", removed)
+        before = after
+
 if __name__ == "__main__":
     try:
         #if proceed_with_execution() == True:
         video_file_path = os.getenv("video_file_path_key", default=None)
         logging.debug("video_file_path={}".format(video_file_path))
-        watch_a_directory(video_file_path)
+        print("video_file_path={}".format(video_file_path))
+        #watch_a_directory(video_file_path)
+        watch_a_directory2(video_file_path)
     except NoProcessExcept as e:
-        logging.debug("No Process exception occured.{}".format(e))
+        logging.debug("No Process exception occurred.{}".format(e))
     except KeyboardInterrupt:
         logging.debug("You terminated the program by pressing ctrl + c")
     except BaseException:
-        logging.debug("Base Exception occured")
+        logging.debug("Base Exception occurred")
     except:
         logging.debug("Unhandled exception")
     finally:
