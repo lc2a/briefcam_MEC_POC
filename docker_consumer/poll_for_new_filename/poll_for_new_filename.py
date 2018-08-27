@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import time
-#time.sleep(60)
+time.sleep(2)
 
 from confluent_kafka import Consumer, KafkaError
 import os
@@ -14,7 +14,8 @@ class poll_for_new_file_name:
         self.broker_name = None
         self.topic = None
         self.consumer_instance = None
-
+        import upload_video.upload_video_to_briefcam
+        self.briefcam_obj= None
         logging.basicConfig(format='(%(threadName)-2s:'
                                '%(levelname)s:'
                                '%(asctime)s:'
@@ -48,20 +49,20 @@ class poll_for_new_file_name:
     def connect_to_xhost_environment(self):
         connected = False
         sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        #sys.path.append('..\\upload_video')
+        #sys.path.append('..\\upload_video.upload_video_to_briefcam')
         while connected == False:
             try:
-                import upload_video.upload_video_to_briefcam
+                from upload_video.upload_video_to_briefcam import upload_video_to_briefcam
             except:
                 logging.debug("Unable to import module upload_video" + sys.exc_info()[0])
                 print("Unable to import module upload_video" + sys.exc_info()[0])
             else:
                 logging.debug("successfully connected to xhost display")
                 print("successfully connected to xhost display")
+                self.briefcam_obj=upload_video_to_briefcam()
                 connected = True
 
     def poll_for_new_message(self):
-        from upload_video.upload_video_to_briefcam import process_new_file
         continue_poll=True
         while continue_poll == True:
             try:
@@ -78,7 +79,7 @@ class poll_for_new_file_name:
                 else:
                     filename = msg.value().decode('utf-8')
                     logging.debug('Received message: {}'.format(filename))
-                    process_new_file(filename)
+                    self.briefcam_obj.process_new_file(filename)
 
             except KeyboardInterrupt:
                 logging.debug("Keyboard interrupt." + sys.exc_info()[0])

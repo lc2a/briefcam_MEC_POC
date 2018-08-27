@@ -68,5 +68,5 @@ services:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - /var/run/dbus/:/var/run/dbus/:ro
       - /tmp:/tmp
-      - /dev/shm:/dev/shm:ro
+      - /dev/shm:/dev/shm
       - /home/sriramsridhar/PycharmProjects/briefcam/data:/data

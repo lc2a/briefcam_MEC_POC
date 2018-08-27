@@ -13,6 +13,8 @@ COPY requirements.txt requirements.txt
 RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
 RUN  sudo python3 get-pip.py
 RUN  sudo pip3 install -r requirements.txt
+RUN  sudo apt-get update
+RUN  sudo apt-get install -y scrot
 #ENV   video_file_path_key=/data
 #ENV   broker_name_key=broker:9092
 #ENV   topic_key=video-file-name
@@ -25,4 +27,4 @@ RUN  sudo pip3 install -r requirements.txt
 COPY . .
 RUN sudo chown seluser:seluser -R /docker_consumer
 RUN sudo chmod 700 -R /docker_consumer
-RUN /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &
+CMD ["/opt/bin/entry_point.sh", "&& /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &"]
