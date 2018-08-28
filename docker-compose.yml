@@ -3,7 +3,6 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:5.0.0-beta30
     hostname: zookeeper
-    container_name: zookeeper
     ports:
       - "2181:2181"
     environment:
@@ -12,7 +11,6 @@ services:
   broker:
     image: confluentinc/cp-enterprise-kafka:5.0.0-beta30
     hostname: broker
-    container_name: broker
     depends_on:
       - zookeeper
     ports:
@@ -37,7 +35,6 @@ services:
       - zookeeper
       - broker
     hostname: docker_producer
-    container_name: docker_producer
     environment:
       video_file_path_key: /data
       broker_name_key: broker:9092
@@ -46,27 +43,41 @@ services:
       - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
   docker_consumer:
     image: ssriram1978/docker_consumer:latest
-#    scale: 10
+    deploy:
+      replicas: 10
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: 1000M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "5903:5900"
+      - "5904:5900"
+      - "5905:5900"
+      - "5906:5900"
+      - "5907:5900"
+      - "5908:5900"
+      - "5909:5900"
+      - "5910:5900"
+      - "5911:5900"
+      - "5912:5900"
     depends_on:
       - zookeeper
       - broker
     hostname: docker_consumer
-    container_name: docker_consumer
     environment:
       video_file_path_key: /data
       broker_name_key: broker:9092
       topic_key: video-file-name
-      case_url_key: http://localhost/synopsis/#/review/cases
+      case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
       case_name_key: MEC-POC
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
-    ports:
-#      - "5902-5912:5900"
-      - "5902:5900"
-    privileged: true    
+    privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-      - /var/run/dbus/:/var/run/dbus/:ro
-      - /tmp:/tmp
-      - /dev/shm:/dev/shm
+#      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+#      - /var/run/dbus/:/var/run/dbus/:ro
+#      - /tmp:/tmp
+#      - /dev/shm:/dev/shmdocke
       - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
