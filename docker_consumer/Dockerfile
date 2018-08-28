@@ -27,4 +27,4 @@ RUN  sudo apt-get install -y scrot
 COPY . .
 RUN sudo chown seluser:seluser -R /docker_consumer
 RUN sudo chmod 700 -R /docker_consumer
-CMD ["/opt/bin/entry_point.sh", "&& /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &"]
+CMD ["sh", "-c", "/opt/bin/entry_point.sh ; sudo /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &"]
