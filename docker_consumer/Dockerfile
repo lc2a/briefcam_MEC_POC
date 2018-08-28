@@ -26,5 +26,12 @@ RUN  sudo apt-get install -y scrot
 #RUN xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 COPY . .
 RUN sudo chown seluser:seluser -R /docker_consumer
-RUN sudo chmod 700 -R /docker_consumer
-CMD ["sh", "-c", "/opt/bin/entry_point.sh ; sudo /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &"]
+RUN sudo chmod 777 -R /docker_consumer
+#RUN sudo echo -e "sudo /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &" >> /opt/bin/entry_point.sh
+#RUN touch /docker_consumer/shell_script.sh
+RUN cat /opt/bin/entry_point.sh >> /docker_consumer/shell_script.sh
+#RUN echo "sudo python3 /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &" >> /docker_consumer/shell_script.sh
+RUN sudo chmod 777 /opt/bin/functions.sh
+RUN echo "\nsudo python3 /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &" >> /opt/bin/functions.sh
+RUN sudo chmod 777 /docker_consumer/shell_script.sh
+CMD ["sh", "-c", "/docker_consumer/shell_script.sh"]
