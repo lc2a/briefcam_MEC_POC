@@ -73,6 +73,8 @@ services:
       case_url_key: http://mec-demo-host/synopsis/
       browser_loc_key: google-chrome
       case_name_key: MEC-POC
+      login_username_key: Brief
+      login_password_key: Cam
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     privileged: true
     volumes:

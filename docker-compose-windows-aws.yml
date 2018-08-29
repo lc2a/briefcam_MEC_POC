@@ -40,7 +40,7 @@ services:
       broker_name_key: broker:9092
       topic_key: video-file-name
     volumes:
-      - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
+      - C:\BriefCam\ServerData\VideoData\VideoFiles\fromMobile:/data
   docker_consumer:
     image: ssriram1978/docker_consumer:latest
     deploy:
@@ -73,8 +73,8 @@ services:
       case_url_key: http://mec-demo-host/synopsis/
       browser_loc_key: google-chrome
       case_name_key: MEC-POC
-      login_username_key: Brief
-      login_password_key: Cam
+      login_username_key: Briefcam
+      login_password_key: Briefcam
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     privileged: true
     volumes:
@@ -82,12 +82,6 @@ services:
 #      - /var/run/dbus/:/var/run/dbus/:ro
 #      - /tmp:/tmp
 #      - /dev/shm:/dev/shmdocke
-      - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
-#    command:
-#       - "sh"
-#       - "-c"
-#       - "/opt/bin/entry_point.sh"
-#       - " &&"
-#       - " sudo python3 /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &"
+      - C:\BriefCam\ServerData\VideoData\VideoFiles\fromMobile:/data
     extra_hosts:
       - "mec-demo-host: 10.2.40.160"

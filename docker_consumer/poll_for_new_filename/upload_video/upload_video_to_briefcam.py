@@ -21,6 +21,8 @@ class upload_video_to_briefcam():
         self.case_name=None
         self.case_url=None
         self.browser_loc=None
+        self.username=None
+        self.password=None
         self.import_environment_variables()
 
     def import_environment_variables(self):
@@ -30,6 +32,10 @@ class upload_video_to_briefcam():
         logging.debug("case_url={}".format(self.case_url))
         self.browser_loc = os.getenv("browser_loc_key", default=None)
         logging.debug("browser_loc={}".format(self.browser_loc))
+        self.username = os.getenv("login_username_key", default=None)
+        logging.debug("username={}".format(self.username))
+        self.password = os.getenv("login_password_key", default=None)
+        logging.debug("password={}".format(self.password))
 
     def __proceed_with_execution(self):
         # pyautogui.alert('Shall I proceed in creating a case?')
@@ -63,14 +69,12 @@ class upload_video_to_briefcam():
         return True
 
     def __login_to_briefcam_server(self):
-        username = "Brief"
-        password = "Cam"
         return_value = self.__left_click_this_image(filename_formatted('signin_button.png'), False)
         if return_value == True:
             pyautogui.hotkey('tab')
-            pyautogui.typewrite(username, interval=0.25)
+            pyautogui.typewrite(self.username, interval=0.25)
             pyautogui.hotkey('tab')
-            pyautogui.typewrite(password, interval=0.25)
+            pyautogui.typewrite(self.password, interval=0.25)
             pyautogui.press('enter')  # press the Enter key
 
     def __create_case(self):
