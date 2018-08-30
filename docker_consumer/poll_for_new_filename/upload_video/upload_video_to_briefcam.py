@@ -26,16 +26,19 @@ class upload_video_to_briefcam():
         self.import_environment_variables()
 
     def import_environment_variables(self):
-        self.case_name = os.getenv("case_name_key", default=None)
-        logging.debug("case_name={}".format(self.case_name))
-        self.case_url = os.getenv("case_url_key", default=None)
-        logging.debug("case_url={}".format(self.case_url))
-        self.browser_loc = os.getenv("browser_loc_key", default=None)
-        logging.debug("browser_loc={}".format(self.browser_loc))
-        self.username = os.getenv("login_username_key", default=None)
-        logging.debug("username={}".format(self.username))
-        self.password = os.getenv("login_password_key", default=None)
+        while self.case_name==None:
+            time.sleep(2)
+            logging.debug("Trying to read the environment variables")
+            self.case_name = os.getenv("case_name_key", default=None)
+            self.case_url = os.getenv("case_url_key", default=None)
+            self.browser_loc = os.getenv("browser_loc_key", default=None)
+            self.username = os.getenv("login_username_key", default=None)
+            self.password = os.getenv("login_password_key", default=None)
         logging.debug("password={}".format(self.password))
+        logging.debug("case_name={}".format(self.case_name))
+        logging.debug("case_url={}".format(self.case_url))
+        logging.debug("username={}".format(self.username))
+        logging.debug("browser_loc={}".format(self.browser_loc))
 
     def __proceed_with_execution(self):
         # pyautogui.alert('Shall I proceed in creating a case?')
