@@ -28,10 +28,12 @@ class poll_for_new_file_name:
                         level=logging.DEBUG)
 
     def load_environment_variables(self):
-        self.broker_name = os.getenv("broker_name_key", default=None)
+		while self.broker_name == None and self.topic == None:
+			self.broker_name = os.getenv("broker_name_key", default=None)
+			logging.debug("Trying to read the environment variables, broker_name_key and topic_key")
+			self.topic = os.getenv("topic_key", default=None)
         logging.debug("broker_name={}".format(self.broker_name))
-        self.topic = os.getenv("topic_key", default=None)
-        logging.debug("topic={}".format(self.topic))
+		logging.debug("topic={}".format(self.topic))
 
     def connect_to_kafka_broker(self):
         while self.consumer_instance == None:
