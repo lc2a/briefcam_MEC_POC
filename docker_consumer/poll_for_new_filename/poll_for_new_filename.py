@@ -29,6 +29,7 @@ class poll_for_new_file_name:
 
     def load_environment_variables(self):
 		while self.broker_name == None and self.topic == None:
+                        time.sleep(2)
 			self.broker_name = os.getenv("broker_name_key", default=None)
 			logging.debug("Trying to read the environment variables, broker_name_key and topic_key")
 			self.topic = os.getenv("topic_key", default=None)
