@@ -1,5 +1,13 @@
 version: '3'
 services:
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9000:9000"
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      -  C:\ProgramData\Portainer:/data
   zookeeper:
     image: confluentinc/cp-zookeeper:5.0.0-beta30
     hostname: zookeeper
@@ -44,10 +52,10 @@ services:
   docker_consumer:
     image: ssriram1978/docker_consumer:latest
     deploy:
-      replicas: 10
+      replicas: 1
       resources:
         limits:
-          cpus: "0.2"
+          cpus: "0.4"
           memory: 1000M
       restart_policy:
         condition: on-failure
