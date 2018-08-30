@@ -78,7 +78,7 @@ services:
       video_file_path_key: /data
       broker_name_key: broker:9092
       topic_key: video-file-name
-      case_url_key: http://mec-demo-host/synopsis/
+      case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
       case_name_key: MEC-POC
       login_username_key: Brief
@@ -92,4 +92,4 @@ services:
 #      - /dev/shm:/dev/shmdocke
       - C:\BriefCam\ServerData\VideoData\VideoFiles\fromMobile:/data
     extra_hosts:
-      - "mec-demo-host: 10.2.40.160"
+      - "mec-demo: 10.2.40.160"
