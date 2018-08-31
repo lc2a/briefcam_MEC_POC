@@ -95,7 +95,7 @@ class upload_video_to_briefcam():
             pyautogui.press('enter')  # press the Enter key
             self.__left_click_this_image(filename_formatted('mec_poc_button.png'))
 
-    def __add_video(self, file_name):///
+    def __add_video(self, file_name):
         self.__left_click_this_image(filename_formatted('add_video_to_case2_button.png'))
         self.__left_click_this_image(filename_formatted('same_camera_button.png'), False)
         self.__left_click_this_image(filename_formatted('next_button.png'))
