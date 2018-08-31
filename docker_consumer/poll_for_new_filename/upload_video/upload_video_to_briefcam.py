@@ -79,7 +79,7 @@ class upload_video_to_briefcam():
             pyautogui.press('enter')  # press the Enter key
             pyautogui.press('esc')
 
-    defBrief__create_case(self):
+    def __create_case(self):
         return_value =None
         return_value =self.__left_click_this_image(filename_formatted('mec_poc_button.png'), False)
         if return_value == False:
