@@ -5,16 +5,15 @@ import subprocess
 import time
 import sys
 
-
-def filename_formatted(filename):
-    if __name__ == "__main__":
-        return filename
-    else:
-        return os.path.dirname(os.path.realpath(__file__)) + "/" + self.image_directory + "/" + filename
-
 class upload_video_to_briefcam():
     pyautogui.PAUSE = 0.25
-    unwanted_popup = filename_formatted("restore_pages_button.png")
+
+    def filename_formatted(self,filename):
+        if __name__ == "__main__":
+            #print(os.path.dirname(os.path.realpath(__file__)) + "/" + self.image_directory + "/" + filename)
+            return filename
+        else:
+            return os.path.dirname(os.path.realpath(__file__)) + "/" + self.image_directory + "/" + filename
 
     def __init__(self):
         self.video_filename=None
@@ -69,8 +68,8 @@ class upload_video_to_briefcam():
 
     def __login_to_briefcam_server(self):
         pyautogui.press('esc')
-        self.__left_click_this_image(filename_formatted('sandbox_stability.png'), False)
-        return_value = self.__left_click_this_image(filename_formatted('signin_button.png'), False)
+        self.__left_click_this_image(self.filename_formatted('sandbox_stability.png'), False)
+        return_value = self.__left_click_this_image(self.filename_formatted('signin_button.png'), False)
         if return_value == True:
             pyautogui.hotkey('tab')
             pyautogui.typewrite(self.username, interval=0.25)
@@ -81,10 +80,10 @@ class upload_video_to_briefcam():
 
     def __create_case(self):
         return_value =None
-        return_value =self.__left_click_this_image(filename_formatted('mec_poc_button.png'), False)
+        return_value =self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'), False)
         if return_value == False:
             # MEC-POC case is getting created for the first time.
-            self.__left_click_this_image(filename_formatted('create_case_button.png'))
+            self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
             pyautogui.typewrite(self.case_name, interval=0.25) # prints out the case name with a quarter second delay after each character
             pyautogui.hotkey('tab')
             pyautogui.hotkey('tab')
@@ -93,21 +92,21 @@ class upload_video_to_briefcam():
             pyautogui.hotkey('tab')
             # left_click_this_image('create_button.png')
             pyautogui.press('enter')  # press the Enter key
-            self.__left_click_this_image(filename_formatted('mec_poc_button.png'))
+            self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'))
 
     def __add_video(self, file_name):
-        self.__left_click_this_image(filename_formatted('add_video_to_case2_button.png'))
-        self.__left_click_this_image(filename_formatted('same_camera_button.png'), False)
-        self.__left_click_this_image(filename_formatted('next_button.png'))
-        self.__left_click_this_image(filename_formatted('browse_button.png'))
+        self.__left_click_this_image(self.filename_formatted('add_video_to_case2_button.png'))
+        self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
+        self.__left_click_this_image(self.filename_formatted('next_button.png'))
+        self.__left_click_this_image(self.filename_formatted('browse_button.png'))
         pyautogui.typewrite(file_name, interval=0.25)
         pyautogui.press('enter')  # press the Enter key
         # left_click_this_image('open_button.png')
-        self.__left_click_this_image(filename_formatted('next2_button.png'))
-        self.__left_click_this_image(filename_formatted('process_button.png'))
+        self.__left_click_this_image(self.filename_formatted('next2_button.png'))
+        self.__left_click_this_image(self.filename_formatted('process_button.png'))
 
     def __find_and_close_unwanted_popup(self):
-        self.__left_click_this_image(upload_video_to_briefcam.unwanted_popup, False)
+        self.__left_click_this_image(self.filename_formatted("restore_pages_button.png"), False)
         pyautogui.hotkey('esc')
         pyautogui.hotkey('esc')
 
@@ -136,4 +135,5 @@ if __name__=="__main__":
     #define your unit test cases here.
     #obj=upload_video_to_briefcam()
     #obj.process_new_file("test")
+    #obj.filename_formatted("test")
     pass
