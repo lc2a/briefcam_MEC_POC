@@ -10,7 +10,7 @@ def filename_formatted(filename):
     if __name__ == "__main__":
         return filename
     else:
-        return os.path.dirname(os.path.realpath(__file__)) + "/" + filename
+        return os.path.dirname(os.path.realpath(__file__)) + "/" + self.image_directory + "/" + filename
 
 class upload_video_to_briefcam():
     pyautogui.PAUSE = 0.25
@@ -23,6 +23,7 @@ class upload_video_to_briefcam():
         self.browser_loc=None
         self.username=None
         self.password=None
+        self.image_directory=None
         self.import_environment_variables()
 
     def import_environment_variables(self):
@@ -34,11 +35,13 @@ class upload_video_to_briefcam():
             self.browser_loc = os.getenv("browser_loc_key", default=None)
             self.username = os.getenv("login_username_key", default=None)
             self.password = os.getenv("login_password_key", default=None)
+            self.image_directory = os.getenv("image_directory", default=None)
         logging.debug("password={}".format(self.password))
         logging.debug("case_name={}".format(self.case_name))
         logging.debug("case_url={}".format(self.case_url))
         logging.debug("username={}".format(self.username))
         logging.debug("browser_loc={}".format(self.browser_loc))
+        logging.debug("image_directory={}".format(self.image_directory))
 
     def __proceed_with_execution(self):
         # pyautogui.alert('Shall I proceed in creating a case?')
@@ -51,20 +54,13 @@ class upload_video_to_briefcam():
         button_location = None
         while button_location == None:
             logging.debug("Trying to match " + button_name)
-            button_location = pyautogui.locateOnScreen(button_name, grayscale=False)
-            if button_location == None:
-                button_name2 = button_name[:button_name.find('.')] + '2' + '.png'
-                logging.debug("Trying to match " + button_name2)
-                button_location = pyautogui.locateOnScreen(button_name2, grayscale=False)
-            if button_location == None:
-                try:
-                    button_name2 = button_name[:button_name.find('.')] + '3' + '.png'
-                    logging.debug("Trying to match " + button_name2)
-                    button_location = pyautogui.locateOnScreen(button_name2, grayscale=False)
-                except FileNotFoundError:
-                    logging.debug("File Not Found")
-            if button_location == None and force_wait == False:
-                return False
+            try:
+                button_location = pyautogui.locateOnScreen(button_name, grayscale=False)
+            except FileNotFoundError:
+                logging.debug("File Not Found")
+                break
+        if button_location == None and force_wait == False:
+            return False
         logging.debug("button_name={},location={}".format(button_name, button_location))
         buttonx, buttony = pyautogui.center(button_location)
         logging.debug("buttonx={} and buttony={}".format(buttonx, buttony))
@@ -72,6 +68,8 @@ class upload_video_to_briefcam():
         return True
 
     def __login_to_briefcam_server(self):
+        pyautogui.press('esc')
+        self.__left_click_this_image(filename_formatted('sandbox_stability.png'), False)
         return_value = self.__left_click_this_image(filename_formatted('signin_button.png'), False)
         if return_value == True:
             pyautogui.hotkey('tab')
@@ -79,8 +77,9 @@ class upload_video_to_briefcam():
             pyautogui.hotkey('tab')
             pyautogui.typewrite(self.password, interval=0.25)
             pyautogui.press('enter')  # press the Enter key
+            pyautogui.press('esc')
 
-    def __create_case(self):
+    defBrief__create_case(self):
         return_value =None
         return_value =self.__left_click_this_image(filename_formatted('mec_poc_button.png'), False)
         if return_value == False:
@@ -96,7 +95,7 @@ class upload_video_to_briefcam():
             pyautogui.press('enter')  # press the Enter key
             self.__left_click_this_image(filename_formatted('mec_poc_button.png'))
 
-    def __add_video(self, file_name):
+    def __add_video(self, file_name):///
         self.__left_click_this_image(filename_formatted('add_video_to_case2_button.png'))
         self.__left_click_this_image(filename_formatted('same_camera_button.png'), False)
         self.__left_click_this_image(filename_formatted('next_button.png'))

@@ -83,6 +83,7 @@ services:
       case_name_key: MEC-POC
       login_username_key: Brief
       login_password_key: Cam
+      image_directory: image_cont
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     privileged: true
     volumes:
