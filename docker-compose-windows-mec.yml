@@ -53,10 +53,10 @@ services:
     image: ssriram1978/docker_consumer:latest
     deploy:
       replicas: 10
-      resources:
-        limits:
-          cpus: "0.8"
-          memory: 2000M
+#      resources:
+#        limits:
+#          cpus: "0.8"
+#          memory: 2000M
       restart_policy:
         condition: on-failure
     ports:

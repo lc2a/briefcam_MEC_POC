@@ -4,11 +4,16 @@ import logging
 import subprocess
 import time
 import sys
+from datetime import datetime
+ 
+hostname = os.getenv("hostname", default=None)
+cont_id = os.popen("cat /proc/self/cgroup | grep \"cpu:/\" | sed \'s/\([0-9]\):cpu:\/docker\///g\'").read()
 
 def logging_to_console_and_syslog(log):
     logging.debug(log)
-    print(log)
-
+    i = datetime.now()
+    print(str(i) + " hostname={} containerID={} ".format(hostname,cont_id[:5]) + log)
+    
 class upload_video_to_briefcam():
     pyautogui.PAUSE = 0.25
 

@@ -7,10 +7,15 @@ from confluent_kafka import Consumer, KafkaError
 import os
 import logging
 import sys
+from datetime import datetime
+
+hostname = os.getenv("hostname", default=None)
+cont_id = os.popen("cat /proc/self/cgroup | grep \"cpu:/\" | sed \'s/\([0-9]\):cpu:\/docker\///g\'").read()
 
 def logging_to_console_and_syslog(log):
     logging.debug(log)
-    print(log)
+    i = datetime.now()
+    print(str(i) + " hostname={} containerID={} ".format(hostname,cont_id[:5]) + log)
 
 class poll_for_new_file_name:
     def __init__(self):
@@ -72,21 +77,26 @@ class poll_for_new_file_name:
         continue_poll=True
         while continue_poll == True:
             try:
-                msg = self.consumer_instance.poll(1.0)
-                if msg is None:
+                #msg = self.consumer_instance.poll(1.0)
+                self.connect_to_kafka_broker()
+                msgs = self.consumer_instance.consume(1)
+                if msgs is None:
                     logging_to_console_and_syslog("No message in Kafka Topic={}".format(self.topic))
                     continue
-                elif msg.error():
-                    if msg.error().code() == KafkaError._PARTITION_EOF:
-                        logging_to_console_and_syslog("Error message received from KafkaQ.KafkaError._PARTITION_EOF")
-                    else:
-                        logging_to_console_and_syslog("Kafka error response: " + msg.error())
-                    continue
                 else:
-                    filename = msg.value().decode('utf-8')
-                    logging_to_console_and_syslog('Received message: {}'.format(filename))
-                    self.briefcam_obj.process_new_file(filename)
-
+                    for msg in msgs:
+                        if msg.error():
+                            if msg.error().code() == KafkaError._PARTITION_EOF:
+                                logging_to_console_and_syslog("Error message received from KafkaQ.KafkaError._PARTITION_EOF")
+                                continue
+                        else:
+                            if msg.error() != None:
+                                logging_to_console_and_syslog("Kafka error response: ")
+                                continue
+                            self.consumer_instance.commit(msg)
+                            filename = msg.value().decode('utf-8')
+                            logging_to_console_and_syslog('Received message: {}'.format(filename))
+                            self.briefcam_obj.process_new_file(filename)
             except KeyboardInterrupt:
                 logging_to_console_and_syslog("Keyboard interrupt." + sys.exc_info()[0])
                 print("Keyboard interrupt." + sys.exc_info()[0])
@@ -95,12 +105,11 @@ class poll_for_new_file_name:
             except:
                 logging_to_console_and_syslog("Exception occured while polling for a message from kafka Queue." + sys.exc_info()[0])
                 print("Exception occured while polling for a message from kafka Queue." + sys.exc_info()[0])
-        self.consumer_instance.close()
+            self.consumer_instance.close()
 
 
 if __name__=='__main__':
     poll_instance = poll_for_new_file_name()
     poll_instance.load_environment_variables()
-    poll_instance.connect_to_kafka_broker()
     poll_instance.connect_to_xhost_environment()
     poll_instance.poll_for_new_message()
