@@ -23,7 +23,10 @@ class upload_video_to_briefcam():
         self.username=None
         self.password=None
         self.image_directory=None
+        self.process=None
+        self.browser_ready=False
         self.import_environment_variables()
+        self.prepare_browser()
 
     def import_environment_variables(self):
         while self.case_name==None:
@@ -58,8 +61,9 @@ class upload_video_to_briefcam():
             except FileNotFoundError:
                 logging.debug("File Not Found")
                 break
-        if button_location == None and force_wait == False:
-            return False
+            if button_location == None and force_wait == False:
+                return False
+
         logging.debug("button_name={},location={}".format(button_name, button_location))
         buttonx, buttony = pyautogui.center(button_location)
         logging.debug("buttonx={} and buttony={}".format(buttonx, buttony))
@@ -68,14 +72,14 @@ class upload_video_to_briefcam():
 
     def __login_to_briefcam_server(self):
         pyautogui.press('esc')
-        self.__left_click_this_image(self.filename_formatted('sandbox_stability.png'), False)
-        return_value = self.__left_click_this_image(self.filename_formatted('signin_button.png'), False)
+        return_value = self.__left_click_this_image(self.filename_formatted('signin_button.png'), True)
         if return_value == True:
             pyautogui.hotkey('tab')
             pyautogui.typewrite(self.username, interval=0.25)
             pyautogui.hotkey('tab')
             pyautogui.typewrite(self.password, interval=0.25)
             pyautogui.press('enter')  # press the Enter key
+            pyautogui.press('esc')
             pyautogui.press('esc')
 
     def __create_case(self):
@@ -95,18 +99,21 @@ class upload_video_to_briefcam():
             self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'))
 
     def __add_video(self, file_name):
-        self.__left_click_this_image(self.filename_formatted('add_video_to_case2_button.png'))
+        self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'))
         self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
         self.__left_click_this_image(self.filename_formatted('next_button.png'))
         self.__left_click_this_image(self.filename_formatted('browse_button.png'))
+        time.sleep(1)
         pyautogui.typewrite(file_name, interval=0.25)
         pyautogui.press('enter')  # press the Enter key
         # left_click_this_image('open_button.png')
         self.__left_click_this_image(self.filename_formatted('next2_button.png'))
-        self.__left_click_this_image(self.filename_formatted('process_button.png'))
+        #pyautogui.hotkey('tab')
+        pyautogui.press('enter')  # press the Enter key
+        #self.__left_click_this_image(self.filename_formatted('process_button.png'))
 
     def __find_and_close_unwanted_popup(self):
-        self.__left_click_this_image(self.filename_formatted("restore_pages_button.png"), False)
+        #self.__left_click_this_image(self.filename_formatted("restore_pages_button.png"), False)
         pyautogui.hotkey('esc')
         pyautogui.hotkey('esc')
 
@@ -120,20 +127,27 @@ class upload_video_to_briefcam():
         if process==None:
             return
         process.kill()
+        
+    def prepare_browser(self):
+        if self.process == None:
+            self.process = self.__open_browser()
+            if self.process==None:
+                logging.debug("Process is None")
+                raise NoProcessExcept(self.process)
+            self.__login_to_briefcam_server()
+            self.__create_case()
+            self.browser_ready = True
 
     def process_new_file(self,file_name):
-        process =self.__open_browser()
-        if process==None:
-            logging.debug("Process is None")
-            raise NoProcessExcept(process)
-        self.__login_to_briefcam_server()
-        self.__create_case()
+        while self.browser_ready == False:
+            logging.debug("Waiting for the browser to be ready")
+            time.sleep(1)
         self.__add_video(file_name)
-        self.__close_browser(process)
+        #self.__close_browser(process)
 
 if __name__=="__main__":
     #define your unit test cases here.
     #obj=upload_video_to_briefcam()
     #obj.process_new_file("test")
-    #obj.filename_formatted("test")
+    #Brieobj.filename_formatted("test")
     pass
