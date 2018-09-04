@@ -5,6 +5,10 @@ import subprocess
 import time
 import sys
 
+def logging_to_console_and_syslog(log):
+    logging.debug(log)
+    print(log)
+
 class upload_video_to_briefcam():
     pyautogui.PAUSE = 0.25
 
@@ -31,19 +35,19 @@ class upload_video_to_briefcam():
     def import_environment_variables(self):
         while self.case_name==None:
             time.sleep(2)
-            logging.debug("Trying to read the environment variables")
+            logging_to_console_and_syslog("Trying to read the environment variables")
             self.case_name = os.getenv("case_name_key", default=None)
             self.case_url = os.getenv("case_url_key", default=None)
             self.browser_loc = os.getenv("browser_loc_key", default=None)
             self.username = os.getenv("login_username_key", default=None)
             self.password = os.getenv("login_password_key", default=None)
             self.image_directory = os.getenv("image_directory", default=None)
-        logging.debug("password={}".format(self.password))
-        logging.debug("case_name={}".format(self.case_name))
-        logging.debug("case_url={}".format(self.case_url))
-        logging.debug("username={}".format(self.username))
-        logging.debug("browser_loc={}".format(self.browser_loc))
-        logging.debug("image_directory={}".format(self.image_directory))
+        logging_to_console_and_syslog("password={}".format(self.password))
+        logging_to_console_and_syslog("case_name={}".format(self.case_name))
+        logging_to_console_and_syslog("case_url={}".format(self.case_url))
+        logging_to_console_and_syslog("username={}".format(self.username))
+        logging_to_console_and_syslog("browser_loc={}".format(self.browser_loc))
+        logging_to_console_and_syslog("image_directory={}".format(self.image_directory))
 
     def __proceed_with_execution(self):
         # pyautogui.alert('Shall I proceed in creating a case?')
@@ -55,18 +59,18 @@ class upload_video_to_briefcam():
     def __left_click_this_image(self, button_name, force_wait=True):
         button_location = None
         while button_location == None:
-            logging.debug("Trying to match " + button_name)
+            logging_to_console_and_syslog("Trying to match " + button_name)
             try:
                 button_location = pyautogui.locateOnScreen(button_name, grayscale=False)
             except FileNotFoundError:
-                logging.debug("File Not Found")
+                logging_to_console_and_syslog("File Not Found")
                 break
             if button_location == None and force_wait == False:
                 return False
 
-        logging.debug("button_name={},location={}".format(button_name, button_location))
+        logging_to_console_and_syslog("button_name={},location={}".format(button_name, button_location))
         buttonx, buttony = pyautogui.center(button_location)
-        logging.debug("buttonx={} and buttony={}".format(buttonx, buttony))
+        logging_to_console_and_syslog("buttonx={} and buttony={}".format(buttonx, buttony))
         pyautogui.click(buttonx, buttony)
         return True
 
@@ -84,7 +88,10 @@ class upload_video_to_briefcam():
 
     def __create_case(self):
         return_value =None
-        return_value =self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'), False)
+        for index in range(10):		    
+            return_value =self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'), False)
+            if return_value == True:
+                break
         if return_value == False:
             # MEC-POC case is getting created for the first time.
             self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
@@ -132,7 +139,7 @@ class upload_video_to_briefcam():
         if self.process == None:
             self.process = self.__open_browser()
             if self.process==None:
-                logging.debug("Process is None")
+                logging_to_console_and_syslog("Process is None")
                 raise NoProcessExcept(self.process)
             self.__login_to_briefcam_server()
             self.__create_case()
@@ -140,7 +147,7 @@ class upload_video_to_briefcam():
 
     def process_new_file(self,file_name):
         while self.browser_ready == False:
-            logging.debug("Waiting for the browser to be ready")
+            logging_to_console_and_syslog("Waiting for the browser to be ready")
             time.sleep(1)
         self.__add_video(file_name)
         #self.__close_browser(process)

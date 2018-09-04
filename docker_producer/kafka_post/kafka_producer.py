@@ -2,19 +2,23 @@ from confluent_kafka import Producer
 import os
 import logging
 
+def logging_to_console_and_syslog(log):
+    logging.debug(log)
+    print(log)
+
 broker_name = os.getenv("broker_name_key", default=None)
-logging.debug("broker_name={}".format(broker_name))
+logging_to_console_and_syslog("broker_name={}".format(broker_name))
 topic = os.getenv("topic_key", default=None)
-logging.debug("topic={}".format(topic))
+logging_to_console_and_syslog("topic={}".format(topic))
 
 
 def delivery_report(err, msg):
     """ Called once for each message produced to indicate delivery result.
         Triggered by poll() or flush(). """
     if err is not None:
-        logging.debug('Message delivery failed: {}'.format(err))
+        logging_to_console_and_syslog('Message delivery failed: {}'.format(err))
     else:
-        logging.debug('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
+        logging_to_console_and_syslog('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
 
 def post_filename_to_a_kafka_topic(filename):
@@ -26,7 +30,7 @@ def post_filename_to_a_kafka_topic(filename):
     # Asynchronously produce a message, the delivery report callback
     # will be triggered from poll() above, or flush() below, when the message has
     # been successfully delivered or failed permanently.
-    logging.debug("Posting filename={} into kafka broker={}, topic={}".format(filename,broker_name,topic))
+    logging_to_console_and_syslog("Posting filename={} into kafka broker={}, topic={}".format(filename,broker_name,topic))
     p.produce(topic, filename.encode('utf-8'), callback=delivery_report)
 
     # Wait for any outstanding messages to be delivered and delivery report
