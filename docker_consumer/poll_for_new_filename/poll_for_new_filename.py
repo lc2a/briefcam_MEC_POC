@@ -91,6 +91,7 @@ class poll_for_new_file_name:
 					else:
 						logging_to_console_and_syslog("Kafka error response: ")
 					break
+				self.consumer_instance.commit(msg)
 				filename = msg.value().decode('utf-8')
 				logging_to_console_and_syslog('Received message: {}'.format(filename))
 				self.briefcam_obj.process_new_file(filename)

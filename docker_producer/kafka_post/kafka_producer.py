@@ -31,7 +31,7 @@ def post_filename_to_a_kafka_topic(filename):
     p = Producer({'bootstrap.servers': broker_name})
 
     # Trigger any available delivery report callbacks from previous produce() calls
-    #p.poll(0)
+    p.poll(0)
 
     # Asynchronously produce a message, the delivery report callback
     # will be triggered from poll() above, or flush() below, when the message has

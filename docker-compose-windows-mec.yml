@@ -52,7 +52,8 @@ services:
   docker_consumer:
     image: ssriram1978/docker_consumer:latest
     deploy:
-      replicas: 10
+      replicas: 4
+#      replicas: 4
 #      resources:
 #        limits:
 #          cpus: "0.8"
@@ -64,12 +65,12 @@ services:
       - "5904:5900"
       - "5905:5900"
       - "5906:5900"
-      - "5907:5900"
-      - "5908:5900"
-      - "5909:5900"
-      - "5910:5900"
-      - "5911:5900"
-      - "5912:5900"
+#      - "5907:5900"
+#      - "5908:5900"
+#      - "5909:5900"
+#      - "5910:5900"
+#      - "5911:5900"
+#      - "5912:5900"
     depends_on:
       - zookeeper
       - broker
