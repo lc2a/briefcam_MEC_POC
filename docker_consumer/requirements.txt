@@ -13,3 +13,4 @@ Xlib>=0.21
 python3-xlib>=0
 six>=1.10.0
 pyautogui>=0.9.38
+kafka-python>=0

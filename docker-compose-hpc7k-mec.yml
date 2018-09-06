@@ -1,4 +1,4 @@
-version: '3'
+version: '3.2'
 services:
   portainer:
     image: portainer/portainer
@@ -7,49 +7,38 @@ services:
     command: -H unix:///var/run/docker.sock
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-#      -  C:\ProgramData\Portainer:/data
       - /home/mec-poc/portainer_data:/data
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.0.0-beta30
-    hostname: zookeeper
+    image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-  broker:
-    image: confluentinc/cp-enterprise-kafka:5.0.0-beta30
-    hostname: broker
-    depends_on:
-      - zookeeper
+  kafka:
+    image: wurstmeister/kafka:latest
     ports:
-      - "9092:9092"
-      - "29092:29092"
+      - target: 9094
+        published: 9094
+        protocol: tcp
+        mode: host
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
-      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
-      CONFLUENT_METRICS_ENABLE: 'true'
-      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
+      HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   docker_producer:
     image: ssriram1978/docker_producer:latest
     depends_on:
+      - kafka
       - zookeeper
-      - broker
     hostname: docker_producer
     environment:
       video_file_path_key: /data
-      broker_name_key: broker:9092
+      broker_name_key: kafka:9094
       topic_key: video-file-name
     volumes:
-#      - C:\BriefCam\ServerData\VideoData\VideoFiles\fromMobile:/data
       - /home/mec-poc/fromMobile:/data
   docker_consumer:
     image: ssriram1978/docker_consumer:latest
@@ -73,12 +62,12 @@ services:
       - "5911:5900"
       - "5912:5900"
     depends_on:
+      - kafka
       - zookeeper
-      - broker
     hostname: docker_consumer
     environment:
       video_file_path_key: /data
-      broker_name_key: broker:9092
+      broker_name_key: kafka:9094
       topic_key: video-file-name
       case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
@@ -89,11 +78,6 @@ services:
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     privileged: true
     volumes:
-#      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-#      - /var/run/dbus/:/var/run/dbus/:ro
-#      - /tmp:/tmp
-#      - /dev/shm:/dev/shmdocke
-#      - C:\BriefCam\ServerData\VideoData\VideoFiles\fromMobile:/data
       - /home/mec-poc/fromMobile:/data
     extra_hosts:
       - "mec-demo: 10.2.40.160"
