@@ -32,4 +32,4 @@ def post_filename_to_a_kafka_topic(filename):
 
     # Wait for any outstanding messages to be delivered and delivery report
     # callbacks to be triggered.
-    p.flush()
+    producer.flush()
