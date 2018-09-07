@@ -63,12 +63,12 @@ class PollForNewFileName:
         # sys.path.append('..\\upload_video.upload_video_to_briefcam')
         while connected == False:
             try:
-                from upload_video.upload_video_to_briefcam import upload_video_to_briefcam
+                from upload_video.upload_video_to_briefcam import UploadVideoToBriefCam
             except:
                 logging_to_console_and_syslog("Unable to import module upload_video" + sys.exc_info()[0])
             else:
                 logging_to_console_and_syslog("successfully connected to xhost display")
-                self.briefcam_obj = upload_video_to_briefcam()
+                self.briefcam_obj = UploadVideoToBriefCam()
                 connected = True
 
     def connect_and_poll_for_new_message(self):

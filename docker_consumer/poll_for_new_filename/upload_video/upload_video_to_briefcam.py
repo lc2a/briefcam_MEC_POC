@@ -21,7 +21,7 @@ class TimeOutException(Exception):
         logging_to_console_and_syslog("Time out exception occured")
 
 
-class upload_video_to_briefcam():
+class UploadVideoToBriefCam():
     pyautogui.PAUSE = 0.25
 
     def filename_formatted(self, filename):
@@ -84,7 +84,7 @@ class upload_video_to_briefcam():
             if button_location == None:
                 if force_wait == False:
                     return False
-                elif current_retry_count >= upload_video_to_briefcam.max_retries:
+                elif current_retry_count >= UploadVideoToBriefCam.max_retries:
                     raise TimeOutException
                 else:
                     current_retry_count += 1
@@ -160,6 +160,7 @@ class upload_video_to_briefcam():
         if self.process == None:
             return
         self.process.kill()
+        self.process=None
 
     def prepare_browser(self):
         if self.process == None:
@@ -190,7 +191,7 @@ class upload_video_to_briefcam():
 
 if __name__ == "__main__":
     # define your unit test cases here.
-    # obj=upload_video_to_briefcam()
+    # obj=UploadVideoToBriefCam()
     # obj.process_new_file("test")
     # Brieobj.filename_formatted("test")
     pass
