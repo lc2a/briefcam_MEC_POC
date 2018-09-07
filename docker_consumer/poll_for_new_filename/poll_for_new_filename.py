@@ -54,7 +54,8 @@ class Poll_for_new_file_name():
     def connect_to_kafka_broker(self):
         self.consumer_instance = None
         while self.consumer_instance is None:
-            self.consumer_instance = KafkaConsumer(self.topic, group_id='my_consumer_group')
+            self.consumer_instance = KafkaConsumer(self.topic, bootstrap_servers=self.broker_name,
+            group_id='my_consumer_group')
         logging_to_console_and_syslog('Successfully attached to bootstrap server={},'.format(self.broker_name))
 
     def connect_to_xhost_environment(self):
