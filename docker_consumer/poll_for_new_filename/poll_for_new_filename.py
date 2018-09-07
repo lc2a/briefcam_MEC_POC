@@ -24,7 +24,7 @@ def on_assign_partition_to_subscriber(consumer, partitions):
     logging_to_console_and_syslog("partition {} is assigned to the consumer {}".format(str(partitions), str(consumer)))
 
 
-class Poll_for_new_file_name():
+class PollForNewFileName:
     def __init__(self):
         self.broker_name = None
         self.topic = None
@@ -54,8 +54,7 @@ class Poll_for_new_file_name():
     def connect_to_kafka_broker(self):
         self.consumer_instance = None
         while self.consumer_instance is None:
-            self.consumer_instance = KafkaConsumer(self.topic, bootstrap_servers=self.broker_name,
-            group_id='my_consumer_group')
+            self.consumer_instance = KafkaConsumer(bootstrap_servers=self.broker_name)
         logging_to_console_and_syslog('Successfully attached to bootstrap server={},'.format(self.broker_name))
 
     def connect_to_xhost_environment(self):
@@ -75,21 +74,22 @@ class Poll_for_new_file_name():
     def connect_and_poll_for_new_message(self):
         self.connect_to_kafka_broker()
         try:
+            self.consumer_instance.subscribe([self.topic])
             continue_inner_poll = True
             while continue_inner_poll:
                 for msg in self.consumer_instance:
-                    filename = msg.decode('utf-8')
+                    filename = msg.value.decode('utf-8')
                     logging_to_console_and_syslog('Received message: {}'.format(filename))
-                    #self.briefcam_obj.process_new_file(filename)
+                    self.briefcam_obj.process_new_file(filename)
         except KeyboardInterrupt:
             logging_to_console_and_syslog("Keyboard interrupt. {}".format(sys.exc_info()[0]))
             raise KeyboardInterrupt
         except:
             logging_to_console_and_syslog(
-                "Exception occured while polling for a message from kafka Queue. ".format(sys.exc_info()[0]))
+                "Exception occurred while polling for a message from kafka Queue. {} ".format(sys.exc_info()[0]))
 
 if __name__ == '__main__':
-    poll_instance = Poll_for_new_file_name()
+    poll_instance = PollForNewFileName()
     poll_instance.load_environment_variables()
     poll_instance.connect_to_xhost_environment()
     continue_poll = True
