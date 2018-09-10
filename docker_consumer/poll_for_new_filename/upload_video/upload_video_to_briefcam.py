@@ -1,19 +1,11 @@
 import pyautogui
 import os
-import logging
 import subprocess
 import time
 import sys
-from datetime import datetime
+sys.path.append("..") # Adds higher directory to python modules path.
 
-hostname = os.popen("cat /etc/hostname").read()
-cont_id = os.popen("cat /proc/self/cgroup | head -n 1 | cut -d '/' -f3").read()
-
-
-def logging_to_console_and_syslog(log):
-    logging.debug(log)
-    i = datetime.now()
-    print(str(i) + " hostname={} containerID={} ".format(hostname, cont_id[:12]) + log)
+from log.log_file import logging_to_console_and_syslog
 
 class TimeOutException(Exception):
     def __init__(self):

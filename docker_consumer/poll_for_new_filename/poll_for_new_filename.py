@@ -1,24 +1,15 @@
 #!/usr/bin/env python3
-
 import time
 
 time.sleep(2)
 
 from kafka import KafkaConsumer
+
 import os
-import logging
+
 import sys
-from datetime import datetime
 
-hostname = os.getenv("hostname", default=None)
-cont_id = os.popen("cat /proc/self/cgroup | grep \"cpu:/\" | sed \'s/\([0-9]\):cpu:\/docker\///g\'").read()
-
-
-def logging_to_console_and_syslog(log):
-    logging.debug(log)
-    i = datetime.now()
-    print(str(i) + " hostname={} containerID={} ".format(hostname, cont_id[:5]) + log)
-
+from log.log_file import logging_to_console_and_syslog
 
 def on_assign_partition_to_subscriber(consumer, partitions):
     logging_to_console_and_syslog("partition {} is assigned to the consumer {}".format(str(partitions), str(consumer)))
@@ -31,16 +22,6 @@ class PollForNewFileName:
         self.consumer_instance = None
         import upload_video.upload_video_to_briefcam
         self.briefcam_obj = None
-        logging.basicConfig(format='(%(threadName)-2s:'
-                                   '%(levelname)s:'
-                                   '%(asctime)s:'
-                                   '%(lineno)d:'
-                                   '%(filename)s:'
-                                   '%(funcName)s:'
-                                   '%(message)s',
-                            datefmt='%m/%d/%Y %I:%M:%S %p',
-                            filename='poll_for_new_filename.log',
-                            level=logging.DEBUG)
 
     def load_environment_variables(self):
         while self.broker_name is None and self.topic is None:

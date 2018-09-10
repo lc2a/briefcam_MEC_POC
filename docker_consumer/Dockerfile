@@ -14,9 +14,8 @@ RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
 RUN  sudo python3 get-pip.py
 RUN  sudo pip3 install -r requirements.txt
 RUN  sudo apt-get update
-RUN  sudo apt-get net-tools -y
-     scrot \
-     net-tools
+RUN  sudo apt-get -y scrot
+RUN  sudo apt-get install net-tools
 #ENV   video_file_path_key=/data
 #ENV   broker_name_key=broker:9092
 #ENV   topic_key=video-file-name
