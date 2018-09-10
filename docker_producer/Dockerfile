@@ -1,6 +1,6 @@
 FROM python:3.7-slim
 RUN mkdir /docker_producer
-WORKDIR /docker_producer
+WORKDIR /docker_producer/directory_watch
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 LABEL author="sriramsridharjob78@gmail.com" \

@@ -1,22 +1,14 @@
 from kafka import KafkaProducer
 import os
-import logging
-from datetime import datetime
+import sys
+sys.path.append("..") # Adds higher directory to python modules path.
 
-hostname = os.getenv("hostname", default=None)
-cont_id = os.popen("cat /proc/self/cgroup | grep \"cpu:/\" | sed \'s/\([0-9]\):cpu:\/docker\///g\'").read()
-
-
-def logging_to_console_and_syslog(log):
-    logging.debug(log)
-    i = datetime.now()
-    print(str(i) + " hostname={} containerID={} ".format(hostname, cont_id[:5]) + log)
+from log.log_file import logging_to_console_and_syslog
 
 
 broker_name = os.getenv("broker_name_key", default=None)
 logging_to_console_and_syslog("broker_name={}".format(broker_name))
 topic = os.getenv("topic_key", default=None)
-
 logging_to_console_and_syslog("topic={}".format(topic))
 
 def post_filename_to_a_kafka_topic(filename):
