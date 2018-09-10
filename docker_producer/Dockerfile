@@ -9,9 +9,9 @@ LABEL author="sriramsridharjob78@gmail.com" \
 #ENV   broker_name_key=broker:9092
 #ENV   topic_key=video-file-name
 RUN apt-get update
-RUN apt-get install -y \
-    net-tools \
-    procps
+RUN apt-get install -y vim
+RUN apt-get install -y net-tools
+RUN apt-get install -y procps
 
 COPY . .
 CMD python3 directory_watch.py

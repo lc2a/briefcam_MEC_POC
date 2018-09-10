@@ -15,7 +15,8 @@ RUN  sudo python3 get-pip.py
 RUN  sudo pip3 install -r requirements.txt
 RUN  sudo apt-get update
 RUN  sudo apt-get install -y scrot
-RUN  sudo apt-get install net-tools
+RUN  sudo apt-get install -y net-tools
+RUN  sudo apt-get install -y vim
 #ENV   video_file_path_key=/data
 #ENV   broker_name_key=broker:9092
 #ENV   topic_key=video-file-name
