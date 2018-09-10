@@ -6,15 +6,14 @@ import time
 import sys
 from datetime import datetime
 
-hostname = os.getenv("hostname", default=None)
-cont_id = os.popen("cat /proc/self/cgroup | grep \"cpu:/\" | sed \'s/\([0-9]\):cpu:\/docker\///g\'").read()
+hostname = os.popen("cat /etc/hostname").read()
+cont_id = os.popen("cat /proc/self/cgroup | head -n 1 | cut -d '/' -f3").read()
 
 
 def logging_to_console_and_syslog(log):
     logging.debug(log)
     i = datetime.now()
-    print(str(i) + " hostname={} containerID={} ".format(hostname, cont_id[:5]) + log)
-
+    print(str(i) + " hostname={} containerID={} ".format(hostname, cont_id[:12]) + log)
 
 class TimeOutException(Exception):
     def __init__(self):
