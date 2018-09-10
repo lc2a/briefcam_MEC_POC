@@ -43,7 +43,7 @@ class PollForNewFileName:
             logging_to_console_and_syslog("Trying to read the environment variables, broker_name_key and topic_key")
             self.topic = os.getenv("topic_key", default=None)
             self.broker_name = os.getenv("broker_name_key", default=None)
-            self.redis_server_hostname = os.getenv("redis_server_port_key", default=None)
+            self.redis_server_hostname = os.getenv("redis_server_hostname_key", default=None)
             self.redis_log_keyname = os.getenv("redis_log_keyname_key", default=None)
             self.redis_server_port = int(os.getenv("redis_server_port_key", default=0))
 
