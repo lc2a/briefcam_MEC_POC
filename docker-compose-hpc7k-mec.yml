@@ -13,7 +13,7 @@ services:
     ports:
       - "2181:2181"
   redis:
-    image: redis/redis:latest
+    image: redis:latest
     ports:
       - "6379:6379"
   kafka:
