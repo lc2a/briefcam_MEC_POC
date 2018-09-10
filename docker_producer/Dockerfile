@@ -14,4 +14,4 @@ RUN apt-get install -y net-tools
 RUN apt-get install -y procps
 
 COPY . .
-CMD python3 directory_watch.py
+CMD python3 directory_watch/directory_watch.py
