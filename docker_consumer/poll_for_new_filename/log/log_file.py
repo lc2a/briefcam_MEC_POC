@@ -14,10 +14,23 @@ logging.basicConfig(format='(%(threadName)-2s:'
                            '%(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p',
                     filename='poll_for_new_filename.log',
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 
 
-def logging_to_console_and_syslog(log):
-    logging.debug("hostname=" + hostname + " " + "containerID=" + cont_id[:12] + " " + log)
+def logging_to_console_and_syslog(log, level=logging.INFO):
+    if level == logging.DEBUG:
+        logging.debug("hostname=" + hostname + " " + "containerID=" + cont_id[:12] + " " + log)
+    elif level == logging.INFO:
+        logging.info("hostname=" + hostname + " " + "containerID=" + cont_id[:12] + " " + log)
+    elif level == logging.WARNING:
+        logging.warning("hostname=" + hostname + " " + "containerID=" + cont_id[:12] + " " + log)
+    elif level == logging.ERROR:
+        logging.error("hostname=" + hostname + " " + "containerID=" + cont_id[:12] + " " + log)
+    elif level == logging.CRITICAL:
+        logging.critical("hostname=" + hostname + " " + "containerID=" + cont_id[:12] + " " + log)
+
+    #print it to stdout.
     i = datetime.now()
     print(str(i) + " hostname={} containerID={} ".format(hostname, cont_id[:12]) + log)
+
+
