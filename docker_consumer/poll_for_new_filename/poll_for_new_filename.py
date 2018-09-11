@@ -66,14 +66,20 @@ class PollForNewFileName:
             self.redis_instance=redis.StrictRedis(host=self.redis_server_hostname,
                                               port=self.redis_server_port,
                                               db=0)
+        logging_to_console_and_syslog("Successfully connected "
+                                      "to redis server {},port {}"
+                                      .format(self.redis_server_hostname,
+                                              self.redis_server_port))
 
     def write_an_event_on_redis_db(self,event):
         if self.redis_instance is not None:
             event_string="Hostname=" + self.hostname + \
                   " containerID=" + self.cont_id + \
                          event
-            self.redis_instance.append(self.redis_log_keyname,
-                                       event_string)
+            logging_to_console_and_syslog("Writing {} to {}".format(event_string,
+                                                                    self.redis_log_keyname))
+            #self.redis_instance.append(self.redis_log_keyname,
+                                       #event_string)
 
     def close_kafka_instance(self):
         if self.consumer_instance:
