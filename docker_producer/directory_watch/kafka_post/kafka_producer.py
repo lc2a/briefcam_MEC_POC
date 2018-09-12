@@ -34,7 +34,15 @@ class Producer:
             "Posting filename={} into kafka broker={}, topic={}".format(filename,
                                                                         self.broker_name,
                                                                         self.topic))
-        self.producer_instance.send(self.topic, filename.encode('utf-8'))
+        value=filename.encode('utf-8')
+
+        self.producer_instance.send(self.topic, key=value, value=value)
+        result = self.producer_instance.get(timeout=60)
+        logging_to_console_and_syslog(
+            "Posting filename={} into kafka broker={}, topic={}, result = {}".format(filename,
+                                                                        self.broker_name,
+                                                                        self.topic,
+                                                                        result))
 
         # Wait for any outstanding messages to be delivered and delivery report
         # callbacks to be triggered.
