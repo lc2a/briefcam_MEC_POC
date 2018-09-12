@@ -17,7 +17,7 @@ services:
     ports:
       - "6379:6379"
   kafka:
-    image: wurstmeister/kafka:latest
+    image: ssriram1978/kafka:latest
     ports:
       - target: 9094
         published: 9094
@@ -30,6 +30,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      topic_key: video-file-name
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   docker_producer:
@@ -88,4 +89,4 @@ services:
     volumes:
       - /home/mec-poc/fromMobile:/data
     extra_hosts:
-      - "mec-demo: 10.2.40.160"
+      - "mec-demo: 192.168.1.61"
