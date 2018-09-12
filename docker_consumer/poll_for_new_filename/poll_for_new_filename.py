@@ -131,12 +131,12 @@ class PollForNewFileName:
         self.connect_to_kafka_broker()
         try:
             continue_inner_poll = True
+            self.consumer_instance.subscribe([self.topic])
             while continue_inner_poll:
-                self.consumer_instance.subscribe([self.topic])
                 for msg in self.consumer_instance:
                     filename = msg.value.decode('utf-8')
                     start_time = datetime.now()
-                    self.briefcam_obj.process_new_file(filename)
+                    #self.briefcam_obj.process_new_file(filename)
                     time_elapsed = datetime.now() - start_time
                     try:
                         event = 'Time taken to process {} = (hh:mm:ss.ms) {}'.format(filename, time_elapsed)

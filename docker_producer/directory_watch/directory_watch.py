@@ -30,8 +30,8 @@ class Directory_watch:
         while True:
             time.sleep(1)
             self.after = dict([(f, None) for f in os.listdir(self.video_file_path)])
-            added = [f for f in self.after if not f in before]
-            removed = [f for f in self.before if not f in after]
+            added = [f for f in self.after if not f in self.before]
+            removed = [f for f in self.before if not f in self.after]
             if added:
                 logging_to_console_and_syslog("Added: " + str(added))
                 for filename in added:
@@ -49,9 +49,9 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         logging_to_console_and_syslog("You terminated the program by pressing ctrl + c")
     except BaseException:
-        logging_to_console_and_syslog("Base Exception occurred" + sys.exc_info()[0])
+        logging_to_console_and_syslog("Base Exception occurred {}.".format(sys.exc_info()[0]))
     except:
-        logging_to_console_and_syslog("Unhandled exception" + sys.exc_info()[0])
+        logging_to_console_and_syslog("Unhandled exception {}.".format(sys.exc_info()[0]))
     finally:
         if watch_directory_instance:
             watch_directory_instance.cleanup()
