@@ -91,4 +91,4 @@ services:
     volumes:
       - /home/mec-poc/fromMobile:/data
     extra_hosts:
-      - "mec-demo: 192.168.1.61"
+      - "mec-demo: 10.2.40.160"
