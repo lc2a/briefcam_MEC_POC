@@ -43,7 +43,7 @@ services:
     hostname: docker_producer
     environment:
       video_file_path_key: /data
-      broker_name_key: kafka:9094
+      broker_name_key: kafka:9092
       topic_key: video-file-name
     volumes:
       - /home/mec-poc/fromMobile:/data
@@ -75,7 +75,7 @@ services:
     hostname: docker_consumer
     environment:
       video_file_path_key: /data
-      broker_name_key: kafka:9094
+      broker_name_key: kafka:9092
       topic_key: video-file-name
       case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
