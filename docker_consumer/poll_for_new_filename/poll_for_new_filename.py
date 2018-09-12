@@ -77,9 +77,9 @@ class PollForNewFileName:
     def connect_to_kafka_broker(self):
         self.consumer_instance = None
         while self.consumer_instance is None:
-            group_id = "consumer" + self.cont_id[:12]
+            #group_id = "consumer" + self.cont_id[:12]
             self.consumer_instance = KafkaConsumer(bootstrap_servers=self.broker_name,
-                                                   group_id=group_id)
+                                                   group_id="kafka-consumer")
         logging_to_console_and_syslog('Successfully '
                                       'attached to bootstrap server={},'
                                       .format(self.broker_name),

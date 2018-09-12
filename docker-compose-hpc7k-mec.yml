@@ -33,6 +33,8 @@ services:
       KAFKA_CREATE_TOPICS: "video-file-name:10:1:compact"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
   docker_producer:
     image: ssriram1978/docker_producer:latest
     depends_on:
