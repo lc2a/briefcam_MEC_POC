@@ -30,7 +30,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_CREATE_TOPICS: "video-file-name:10:1:compact"
+      KAFKA_CREATE_TOPICS: "video-file-name:10:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
@@ -43,7 +43,7 @@ services:
     hostname: docker_producer
     environment:
       video_file_path_key: /data
-      broker_name_key: kafka:9092
+      broker_name_key: kafka:9094
       topic_key: video-file-name
     volumes:
       - /home/mec-poc/fromMobile:/data
@@ -75,7 +75,7 @@ services:
     hostname: docker_consumer
     environment:
       video_file_path_key: /data
-      broker_name_key: kafka:9092
+      broker_name_key: kafka:9094
       topic_key: video-file-name
       case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
