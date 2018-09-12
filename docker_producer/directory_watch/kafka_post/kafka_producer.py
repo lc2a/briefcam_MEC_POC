@@ -36,8 +36,8 @@ class Producer:
                                                                         self.topic))
         value = filename.encode('utf-8')
         try:
-            self.producer_instance.send(self.topic, value)
-            result = self.producer_instance.get(timeout=60)
+            future = self.producer_instance.send(self.topic, value)
+            result = future.get(timeout=60)
         except:
             print("Exception in user code:")
             print("-" * 60)
