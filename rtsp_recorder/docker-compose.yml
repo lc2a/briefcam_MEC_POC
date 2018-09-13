@@ -61,5 +61,8 @@ services:
       video_file_path_key: /data
       broker_name_key: kafka:9092
       topic_key: split-video-file
+      rtsp_file_name_prefix_key: briefcam
+      rtsp_duration_of_the_video_key: 30
+      rtsp_capture_application_key: openRTSP
     volumes:
       - /home/mec-poc/fromMobile:/data

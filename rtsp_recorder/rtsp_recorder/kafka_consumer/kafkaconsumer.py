@@ -3,7 +3,8 @@ import time
 from kafka import KafkaConsumer
 import os
 import logging
-import sys, traceback
+import sys
+import traceback
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
 
@@ -12,7 +13,6 @@ def on_assign_partition_to_subscriber(consumer, partitions):
                                   "assigned to the consumer {}"
                                   .format(str(partitions), str(consumer)),
                                   logging.INFO)
-
 class KafkaConsumer:
     def __init__(self):
         self.broker_name = None
@@ -47,7 +47,6 @@ class KafkaConsumer:
             self.consumer_instance = KafkaConsumer(bootstrap_servers=self.broker_name,
                                                    group_id="kafka-consumer")
             time.sleep(5)
-
         logging_to_console_and_syslog('Successfully '
                                       'attached to bootstrap server={},'
                                       .format(self.broker_name),
@@ -59,7 +58,7 @@ class KafkaConsumer:
             self.consumer_instance = None
 
     def connect_and_poll_for_new_message(self):
-        message=None
+        message = None
         try:
             self.connect_to_kafka_broker()
             continue_inner_poll = True
