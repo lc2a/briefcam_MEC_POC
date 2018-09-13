@@ -1,0 +1,14 @@
+couchdb:
+  image: couchdb
+  ports:
+   - 5984:5984
+fauxton:
+  image: 3apaxicom/fauxton
+  ports:
+    - 8000:8000
+  links:
+    - couchdb:db
+  command:
+    - sh
+    - "-c"
+    - "fauxton -c http://192.168.1.61:5984"
