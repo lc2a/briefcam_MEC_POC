@@ -80,6 +80,8 @@ class PollForNewFileName:
             #group_id = "consumer" + self.cont_id[:12]
             self.consumer_instance = KafkaConsumer(bootstrap_servers=self.broker_name,
                                                    group_id="kafka-consumer")
+            time.sleep(5)
+
         logging_to_console_and_syslog('Successfully '
                                       'attached to bootstrap server={},'
                                       .format(self.broker_name),

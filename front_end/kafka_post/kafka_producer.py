@@ -1,15 +1,13 @@
 from kafka import KafkaProducer
 import os
 import sys, traceback
-
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
 import time
 
-
 class Producer:
     def __init__(self):
-        self.producer_instance = None
+        self.producer_instance=None
         self.broker_name = None
         self.topic = None
         self.create_producer_instance()
@@ -35,7 +33,7 @@ class Producer:
                 time.sleep(5)
         logging_to_console_and_syslog("Successfully connected to broker_name={}".format(self.broker_name))
 
-    def post_filename_to_a_kafka_topic(self, filename):
+    def post_filename_to_a_kafka_topic(self,filename):
         if filename is None or len(filename) == 0:
             logging_to_console_and_syslog("filename is None or invalid")
             return
@@ -61,10 +59,10 @@ class Producer:
             print("-" * 60)
         else:
             logging_to_console_and_syslog(
-                "Posting filename={} into kafka broker={}, topic={}, result = {}".format(filename,
-                                                                                         self.broker_name,
-                                                                                         self.topic,
-                                                                                         result))
+            "Posting filename={} into kafka broker={}, topic={}, result = {}".format(filename,
+                                                                        self.broker_name,
+                                                                        self.topic,
+                                                                        result))
 
             # Wait for any outstanding messages to be delivered and delivery report
             # callbacks to be triggered.

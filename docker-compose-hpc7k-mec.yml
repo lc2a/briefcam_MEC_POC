@@ -30,11 +30,51 @@ services:
       KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_CREATE_TOPICS: "video-file-name:10:1"
+      KAFKA_CREATE_TOPICS: "video-file-name:10:1,split-video-file:5:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
+  couchdb:
+    image: couchdb
+    ports:
+      - 5984:5984
+  fauxton:
+    image: 3apaxicom/fauxton
+    depends_on:
+      - couchdb
+    ports:
+      - 8000:8000
+    links:
+      - couchdb:db
+    command:
+      - sh
+      - "-c"
+      - "fauxton -c http://mec-poc:5984"
+    extra_hosts:
+      - "mec-poc: 10.2.40.162"
+  front_end:
+    image: ssriram1978/front_end:latest
+    depends_on:
+        - couchdb
+    environment:
+      broker_name_key: kafka:9092
+      topic_key: split-video-file
+      couchdb_server_key: couchdb:5984
+      database_name_key: briefcam
+  rtsp_recorder:
+    image: ssriram1978/rtsp_recorder:latest
+    depends_on:
+        - couchdb
+        - kafka
+    deploy:
+      replicas: 5
+    environment:
+      video_file_path_key: /data
+      broker_name_key: kafka:9092
+      topic_key: split-video-file
+    volumes:
+      - /home/mec-poc/fromMobile:/data
   docker_producer:
     image: ssriram1978/docker_producer:latest
     depends_on:
@@ -92,3 +132,4 @@ services:
       - /home/mec-poc/fromMobile:/data
     extra_hosts:
       - "mec-demo: 10.2.40.160"
+      - "mec-poc: 10.2.40.162"

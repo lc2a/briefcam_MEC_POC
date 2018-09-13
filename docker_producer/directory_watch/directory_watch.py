@@ -3,7 +3,6 @@ import os
 import sys
 from sys import path
 path.append(os.getcwd())
-import time
 from kafka_post.kafka_producer import Producer
 from log.log_file import logging_to_console_and_syslog
 #from collections import defaultdict
