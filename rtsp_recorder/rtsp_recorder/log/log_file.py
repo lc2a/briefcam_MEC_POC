@@ -13,7 +13,7 @@ logging.basicConfig(format='(%(threadName)-2s:'
                            '%(funcName)s:'
                            '%(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p',
-                    filename='poll_for_new_filename.log',
+                    filename='rtsp_recorder.log',
                     level=logging.INFO)
 
 
