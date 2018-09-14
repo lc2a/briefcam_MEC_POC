@@ -14,7 +14,7 @@ RUN  wget https://bootstrap.pypa.io/get-pip.py
 RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY . .
-RUN chmod 777 -R /Front_end
+RUN chmod 777 -R /rtsp_recorder
 ENV video_file_path_key=/data
 ENV broker_name_key=kafka:9092
 ENV topic_key=split-video-file
