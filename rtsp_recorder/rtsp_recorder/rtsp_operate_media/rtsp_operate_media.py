@@ -3,30 +3,32 @@ import sys
 import time
 import subprocess
 from sys import path
+
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
 from ast import literal_eval
 from collections import defaultdict
 import shutil
 
+
 class RtspOperationsOnMedia:
     def __init__(self):
-        self.process_instance=None
+        self.process_instance = None
         self.video_file_path = None
-        self.rtsp_file_name_prefix=None
-        self.rtsp_duration_of_the_video=0
-        self.read_environment_variables()
+        self.rtsp_file_name_prefix = None
+        self.rtsp_duration_of_the_video = 0
         self.process_id = 0
         self.rtsp_stream_arguments = None
-        self.rtsp_capture_application=None
-        self.couchdb_identifier=None
+        self.rtsp_capture_application = None
+        self.couchdb_identifier = None
         self.rtsp_server_hostname = None
-        self.camera_name=None
+        self.camera_name = None
         self.dictionary_of_values = None
-        self.cwd=os.getcwd()
-        self.before=[]
-        self.after=[]
-        self.video_file_name_size=defaultdict(str)
+        self.cwd = os.getcwd()
+        self.before = []
+        self.after = []
+        self.video_file_name_size = defaultdict(str)
+        self.read_environment_variables()
 
     def read_environment_variables(self):
         while self.video_file_path is None and \
@@ -45,24 +47,36 @@ class RtspOperationsOnMedia:
         logging_to_console_and_syslog(("rtsp_duration_of_the_video={}".format(self.rtsp_duration_of_the_video)))
         logging_to_console_and_syslog("cwd={}".format(self.cwd))
 
-    def __fetch_ip_address_from_message(self,message):
-        self.dictionary_of_values=literal_eval(message)
-        logging_to_console_and_syslog("After literal_eval, dictionary_of_values returned {}"
-                                      .format(repr(self.dictionary_of_values))
+    def __fetch_ip_address_from_message(self, message):
+
+        logging_to_console_and_syslog("Trying to decode message {}".format(message))
+
+        try:
+            self.dictionary_of_values = literal_eval(message)
+        except:
+            logging_to_console_and_syslog("Unable to evaluate message {}".format(message))
+            return
+
+        logging_to_console_and_syslog(
+            "After literal_eval, "
+            "type={} dictionary_of_values={}".format(type(self.dictionary_of_values),
+                                                     repr(self.dictionary_of_values)))
+
         if type(self.dictionary_of_values) != dict:
             logging_to_console_and_syslog("Unable to decode the message")
             return
-        for name,value in self.dictionary_of_values.items():
+
+        for name, value in self.dictionary_of_values.items():
+            logging_to_console_and_syslog("name={}, value={}".format(name, value))
             if name == 'name':
                 self.camera_name = value
-            elif name == 'ip' or name=='hostname':
+            elif name == 'ip' or name == 'hostname':
                 self.rtsp_server_hostname = value
             elif name == '_id':
                 self.couchdb_identifier = value
 
-    def __prepare_rtsp_application_arguments(self,message):
+    def __prepare_rtsp_application_arguments(self, message):
         self.rtsp_stream_arguments = None
-        ip_address=None
         self.__fetch_ip_address_from_message(message)
         if self.rtsp_server_hostname is None:
             logging_to_console_and_syslog("Unable to find a hostname to open RTSP stream {}:".
@@ -84,14 +98,14 @@ class RtspOperationsOnMedia:
         -u admin 123456 # Username and password expected by camera 
         rtsp://192.168.1.108:554/11 # Camera's RTSP URL
         """
-        self.rtsp_stream_arguments = "-D 60 -c -B 10000000 -b 10000000 -4 -F {}  -P {} rtsp://{}".\
+        self.rtsp_stream_arguments = "-D 60 -c -B 10000000 -b 10000000 -4 -F {}  -P {} rtsp://{}". \
             format(self.rtsp_file_name_prefix,
                    self.rtsp_duration_of_the_video,
-                   ip_address)
+                   self.rtsp_server_hostname)
         logging_to_console_and_syslog("openRTSP argument {}:".format(self.rtsp_stream_arguments))
         return True
 
-    def start_rtsp_stream(self,message):
+    def start_rtsp_stream(self, message):
         if message is None:
             return 0
 
@@ -99,16 +113,23 @@ class RtspOperationsOnMedia:
             logging_to_console_and_syslog("Cannot parse this message {}.".format(message))
             return 0
 
-        logging_to_console_and_syslog("Trying to open Process {} with argument {}"
-                                      .format(self.rtsp_capture_application,
-                                              self.rtsp_stream_arguments))
 
-        self.process_id = subprocess.Popen([self.rtsp_capture_application, self.rtsp_stream_arguments])
-        time.sleep(10)
-        if self.process is None:
+        command_list=[]
+        command_list.append(self.rtsp_capture_application)
+        command_list += self.rtsp_stream_arguments.split()
+
+        logging_to_console_and_syslog("Trying to open Process {} with argument {} list={}"
+                                      .format(self.rtsp_capture_application,
+                                              self.rtsp_stream_arguments,
+                                              command_list))
+        self.process_id = subprocess.Popen(command_list)
+        if self.process_id is None:
             logging_to_console_and_syslog("Cannot open Process {}".format(self.rtsp_capture_application))
             return 0
-
+        logging_to_console_and_syslog("Successfully opened {} stream to IP {}. Output={}"
+                                      .format(self.rtsp_capture_application,
+                                              self.rtsp_server_hostname,
+                                              self.process_id))
         return self.couchdb_identifier
 
     def stop_rtsp_stream(self):
@@ -117,15 +138,15 @@ class RtspOperationsOnMedia:
             self.process = None
 
     def check_rtsp_stream(self):
-        result = subprocess.run(['ps'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-         if result.find(self.rtsp_capture_application) == -1:
-             logging_to_console_and_syslog("Cannot find process {} running.".format(self.rtsp_capture_application))
-             return False
-         else:
-             logging_to_console_and_syslog("process {} is running.".format(self.rtsp_capture_application))
-             return True
+        result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+        if result.find(self.rtsp_capture_application) == -1:
+            logging_to_console_and_syslog("Cannot find process {} running.".format(self.rtsp_capture_application))
+            return False
+        else:
+            logging_to_console_and_syslog("process {} is running.".format(self.rtsp_capture_application))
+            return True
 
-    def __getSize(filename):
+    def __getSize(self, filename):
         st = os.stat(filename)
         return st.st_size
 
@@ -133,22 +154,30 @@ class RtspOperationsOnMedia:
         return_list = os.listdir(os.getcwd())
         if return_list is None:
             return False
+        logging_to_console_and_syslog("return_list={}".format(return_list))
         for filename in return_list:
             if filename.endswith('.mp4'):
-                logging_to_console_and_syslog("Found a file name that ends with .mp4 {}"
-                                              .format(filename))
                 filesize = self.__getSize(filename)
+                logging_to_console_and_syslog("Found a file name that ends with .mp4 {}, "
+                                              "filesize={}"
+                                              .format(filename, filesize))
                 if self.video_file_name_size[filename] == filesize:
-                    destination=str("{}/{}".format(self.video_file_path,filename))
+                    destination = str("{}/{}".format(self.video_file_path, filename))
                     logging_to_console_and_syslog("Moving this file {} to {} "
-                                                  "because the file size match."
-                                              .format(filename,
-                                                      destination,
-                                                      self.video_file_name_size[filename]))
-                    shutil.move("filename",destination)
+                                                  "because the file size {} and {} match."
+                                                  .format(filename,
+                                                          destination,
+                                                          self.video_file_name_size[filename],
+                                                          filesize))
+                    try:
+                        shutil.move(filename, destination)
+                    except:
+                        logging_to_console_and_syslog("Unable to move file{} to dst {}"
+                                                      .format(filename, destination))
+
                 else:
                     self.video_file_name_size[filename] = filesize
                     logging_to_console_and_syslog("Storing this file {} size {} in cache "
-                                              .format(filename,
-                                                      filesize))
+                                                  .format(filename,
+                                                          filesize))
         return True

@@ -4,9 +4,11 @@ import os
 import sys
 import traceback
 from sys import path
+
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
 from collections import defaultdict
+import logging
 
 class CouchDBClient:
     def __init__(self):
@@ -14,8 +16,8 @@ class CouchDBClient:
         self.couchdb_server_name = None
         self.database_name = None
         self.database_handle = None
-        self.before = defaultdict(dict)
-        self.after = defaultdict(dict)
+        self.before = defaultdict(str)
+        self.after = defaultdict(str)
         self.read_environment_variables()
         self.connect_to_couchdb_server()
 
@@ -57,9 +59,11 @@ class CouchDBClient:
 
     def populate_dictionary_of_items(self, dict_name):
         for id in self.database_handle:
-            dict_of_items = self.database_handle[id]
-            for name, value in dict_of_items.items():
-                dict_name[id][name] = value
+            document = self.database_handle[id]
+            for name, value in document.items():
+                dict_name[name] = value
+            logging_to_console_and_syslog("id={}, dict={}"
+                                          .format(id, repr(dict_name)), logging.DEBUG)
 
     def watch_database_for_entries(self):
         return_list = None
@@ -68,13 +72,16 @@ class CouchDBClient:
             raise BaseException
 
         self.populate_dictionary_of_items(self.after)
-        added = [f for f in self.after.items() if not f in self.before.items()]
-        removed = [f for f in self.before.items() if not f in self.after.items()]
+        added = {name:value for name,value in self.after.items() if not value in self.before.values()}
+        removed = {name:value for name,value in self.before.items() if not value in self.after.values()}
         if added:
             logging_to_console_and_syslog("Added: " + str(added))
-            return_list = added
+            return_list = repr(added)
         if removed:
             logging_to_console_and_syslog("Removed: " + str(removed))
-        self.before = self.after
-        self.after = defaultdict(dict)
+
+        self.before = defaultdict(str)
+        self.before.update(self.after)
+        self.after = defaultdict(str)
+
         return return_list
