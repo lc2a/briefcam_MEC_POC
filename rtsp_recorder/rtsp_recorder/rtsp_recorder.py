@@ -9,7 +9,7 @@ path.append(os.getcwd())
 from log.log_file import logging_to_console_and_syslog
 from kafka_consumer.kafkaconsumer import KafkaConsumer
 from couchdb_client.couchdb_client import CouchDBClient
-from rtsp_start_stop_move_media.rtsp_start_stop_move_media import RtspStartStopMoveMedia
+from rtsp_operate_media.rtsp_operate_media import RtspOperationsOnMedia
 
 
 class RtspRecorder:
@@ -21,7 +21,7 @@ class RtspRecorder:
     def initialize_instances(self):
         self.kafka_consumer_instance = KafkaConsumer()
         self.couchdb_client_instance = CouchDBClient()
-        self.rtsp_media_instance = RtspStartStopMoveMedia()
+        self.rtsp_media_instance = RtspOperationsOnMedia()
 
     def perform_operation(self):
         # 1. Poll for a new kafka message.

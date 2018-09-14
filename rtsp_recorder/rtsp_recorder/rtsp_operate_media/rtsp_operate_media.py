@@ -9,7 +9,7 @@ from ast import literal_eval
 from collections import defaultdict
 import shutil
 
-class RtspStartStopMoveMedia:
+class RtspOperationsOnMedia:
     def __init__(self):
         self.process_instance=None
         self.video_file_path = None

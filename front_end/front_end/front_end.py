@@ -19,8 +19,11 @@ class FrontEnd:
         message = self.couchdb_instance.watch_database_for_entries()
         if message:
             for item in message:
-                logging_to_console_and_syslog("Sending {} to kafka.".format(repr(item)))
-                self.kafka_producer_instance.post_filename_to_a_kafka_topic(repr(item))
+                if type(item) is list:
+                    for element in item:
+                        if type(element) is dict:
+                            logging_to_console_and_syslog("Sending {} to kafka.".format(repr(element)))
+                            self.kafka_producer_instance.post_filename_to_a_kafka_topic(repr(element))
 
     def cleanup(self):
         self.kafka_producer_instance.close_producer_instance()
