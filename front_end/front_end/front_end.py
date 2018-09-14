@@ -3,10 +3,12 @@ import os
 import sys
 import traceback
 from sys import path
+
 path.append(os.getcwd())
 from log.log_file import logging_to_console_and_syslog
 from kafka_post.kafka_producer import Producer
 from couchdb_client.couchdb_client import CouchDBClient
+
 
 class FrontEnd:
     def __init__(self):
@@ -19,14 +21,20 @@ class FrontEnd:
         message = self.couchdb_instance.watch_database_for_entries()
         if message:
             for item in message:
-                if type(item) is list:
+                if type(item) is tuple:
                     for element in item:
                         if type(element) is dict:
                             logging_to_console_and_syslog("Sending {} to kafka.".format(repr(element)))
                             self.kafka_producer_instance.post_filename_to_a_kafka_topic(repr(element))
+                        else:
+                            logging_to_console_and_syslog(
+                                "element type={},value={}.".format(type(element), repr(element)))
+                else:
+                    logging_to_console_and_syslog("item type={},value={}.".format(type(item), repr(item)))
 
     def cleanup(self):
         self.kafka_producer_instance.close_producer_instance()
+
 
 if __name__ == "__main__":
     front_end_instance = None
