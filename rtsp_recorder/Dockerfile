@@ -21,4 +21,4 @@ ENV topic_key=split-video-file
 ENV rtsp_file_name_prefix_key=briefcam
 ENV rtsp_duration_of_the_video_key=30
 ENV rtsp_capture_application_key=openRTSP
-CMD python3 rtsp_recorder.py
+CMD python3 rtsp_recorder/rtsp_recorder.py
