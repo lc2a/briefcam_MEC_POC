@@ -1,54 +1,60 @@
-version: '3'
+version: '3.2'
 services:
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9000:9000"
+    command: -H unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/mec-poc/portainer_data:/data
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.0.0-beta30
-    hostname: zookeeper
+    image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-  broker:
-    image: confluentinc/cp-enterprise-kafka:5.0.0-beta30
-    hostname: broker
-    depends_on:
-      - zookeeper
+  redis:
+    image: redis:latest
     ports:
-      - "9092:9092"
-      - "29092:29092"
+      - "6379:6379"
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - target: 9094
+        published: 9094
+        protocol: tcp
+        mode: host
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: broker:9092
-      CONFLUENT_METRICS_REPORTER_ZOOKEEPER_CONNECT: zookeeper:2181
-      CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
-      CONFLUENT_METRICS_ENABLE: 'true'
-      CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
-  docker_producer:
-    image: ssriram1978/docker_producer:latest
+      HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_CREATE_TOPICS: "video-file-name:10:1,split-video-file:5:1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
-      - broker
-    hostname: docker_producer
+  job_dispatcher:
+    image: ssriram1978/job_dispatcher:latest
+    depends_on:
+      - kafka
+      - zookeeper
+    hostname: job_dispatcher
     environment:
       video_file_path_key: /data
-      broker_name_key: broker:9092
+      broker_name_key: kafka:9092
       topic_key: video-file-name
     volumes:
-      - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
-  docker_consumer:
-    image: ssriram1978/docker_consumer:latest
+      - /home/mec-poc/fromMobile:/data
+  machine_learning_workers:
+    image: ssriram1978/machine_learning_workers
     deploy:
       replicas: 10
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: 1000M
+#      resources:
+#        limits:
+#          cpus: "0.8"
+#          memory: 2000M
       restart_policy:
         condition: on-failure
     ports:
@@ -63,31 +69,70 @@ services:
       - "5911:5900"
       - "5912:5900"
     depends_on:
+      - kafka
       - zookeeper
-      - broker
-    hostname: docker_consumer
+      - redis
+    hostname: machine_learning_workers
     environment:
       video_file_path_key: /data
-      broker_name_key: broker:9092
+      broker_name_key: kafka:9092
       topic_key: video-file-name
-      case_url_key: http://mec-demo-host/synopsis/
+      case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
       case_name_key: MEC-POC
       login_username_key: Brief
       login_password_key: Cam
+      image_directory: image_cont
+      redis_server_hostname_key: mec-demo
+      redis_server_port_key: 6379
+      redis_log_keyname_key: briefcam-events
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     privileged: true
     volumes:
-#      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-#      - /var/run/dbus/:/var/run/dbus/:ro
-#      - /tmp:/tmp
-#      - /dev/shm:/dev/shmdocke
-      - /home/sriramsridhar/PycharmProjects/briefcam/data:/data
-#    command:
-#       - "sh"
-#       - "-c"
-#       - "/opt/bin/entry_point.sh"
-#       - " &&"
-#       - " sudo python3 /docker_consumer/poll_for_new_filename/poll_for_new_filename.py &"
+      - /home/mec-poc/fromMobile:/data
     extra_hosts:
-      - "mec-demo-host: 10.2.40.160"
+      - "mec-demo: 10.2.40.160"
+      - "mec-poc: 10.2.40.162"
+  couchdb:
+    image: couchdb
+    ports:
+      - 5984:5984
+  fauxton:
+    image: 3apaxicom/fauxton
+    depends_on:
+      - couchdb
+    ports:
+      - 8000:8000
+    links:
+      - couchdb:db
+    command:
+      - sh
+      - "-c"
+      - "fauxton -c http://mec-poc:5984"
+    extra_hosts:
+      - "mec-poc: 10.1.100.100"
+  front_end:
+    image: ssriram1978/front_end:latest
+    depends_on:
+        - couchdb
+    environment:
+      broker_name_key: kafka:9092
+      topic_key: split-video-file
+      couchdb_server_key: couchdb:5984
+      database_name_key: briefcam
+  rtsp_recorder:
+    image: ssriram1978/rtsp_recorder:latest
+    depends_on:
+        - couchdb
+        - kafka
+#    deploy:
+#      replicas: 5
+    environment:
+      video_file_path_key: /data
+      broker_name_key: kafka:9092
+      topic_key: split-video-file
+      rtsp_file_name_prefix_key: briefcam
+      rtsp_duration_of_the_video_key: 30
+      rtsp_capture_application_key: openRTSP
+    volumes:
+      - /home/mec-poc/fromMobile:/data
