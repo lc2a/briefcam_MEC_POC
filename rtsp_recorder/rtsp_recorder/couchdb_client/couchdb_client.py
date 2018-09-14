@@ -79,7 +79,8 @@ class CouchDBClient:
         self.after = defaultdict(dict)
         return return_list
 
-    def update_container_id(self,message):
+    def update_container_id(self,id):
+        pass
 
-
-    def is_the_document_still_valid(self,message):
+    def is_the_document_still_valid(self):
+        return True
