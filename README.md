@@ -7,10 +7,10 @@ There are 3 Tiers to this Architecture.
 
 TIER 1:
 
-An Administrator logins to CouchBD via Fauxton front end web interface.
-After logging in, the administrator creates a database named “briefcam” and creates a document in this talisting the traffic camera details such as (4G LTE IP address or Domain name).
+An Administrator shall be allowed to login to CouchBD via Fauxton front end web interface.
+After logging in, the administrator shall be allowed to create a database named “briefcam” and further be allowed to create a document in this database listing the traffic camera details that hosts the RTSP service. (such as 4G LTE/5G IPv4/v6 address or Domain name).
 
-Note 1: The Adminstrator is allowed to create/update/delete a camera information.
+Note 1: The Adminstrator shall be allowed to create/update/delete a camera information.
 Note 2: Dockers (ssriram1978/front_end:latest, 3apaxicom/fauxton, wurstmeister/kafka:latest, couchdb, wurstmeister/zookeeper) are used in this TIER 1.
 Note 3:  In front_end directory, run the docker-compose command 
 docker-compose -d up
@@ -18,8 +18,9 @@ docker-compose down
 
 TIER 2:
 
-The traffic camera information is passed on to the RTSP (Real Time Streaming Protocol) service infrastructure which connects to the RTSP server hosted on the Traffic camera via the provided credentials (username, password, IP address,...) and start capturing the video feed.
-This video feed is split into 30 second video clips and passed down to the Machine learning algorithms that identifies objects in the video feeds.
+The traffic camera information is passed on to the RTSP (Real Time Streaming Protocol) service infrastructure which connects to the RTSP server hosted on the Traffic camera via the provided credentials (username, password, IP address,...).
+This service start capturing the video feed from the specified traffic camera.
+The video feed is split into 10-30 second video clips (configurable) and passed down to the TIER 3 Machine learning algorithms that identifies objects in the video feeds.
 
 Note: Dockers (ssriram1978/rtsp_recorder:latest, wurstmeister/kafka:latest, couchdb, wurstmeister/zookeeper) are used in this TIER 2.
 
@@ -29,7 +30,7 @@ docker-compose down
 
 TIER 3:
 
-The video feeds are fed into the machine learning algorithm compute network by a swarm of workers and the results can be queried and fetched via the graphical user interface portal via the hosted web service. ( provided by a Vendor -  https://www.briefcam.com/) 
+The video feeds are fed into the machine learning algorithm compute network by a swarm of workers and the identifed objects can be visually inspected, queried and fetched via the graphical user interface portal via the hosted web service. ( provided by a Vendor -  https://www.briefcam.com/) 
 
 Any anomalies or triggers set based upon a certain pattern (RED color vehicle, person wearing glasses, person with black hair) can be set/queried/fetched via the webportal.
 
