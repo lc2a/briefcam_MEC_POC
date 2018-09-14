@@ -32,7 +32,7 @@ TIER 3:
 
 The video feeds are fed into the machine learning algorithm compute network by a swarm of workers and the identifed objects can be visually inspected, queried and fetched via the graphical user interface portal via the hosted web service. ( provided by a Vendor -  https://www.briefcam.com/) 
 
-Any anomalies or triggers set based upon a certain pattern (RED color vehicle, person wearing glasses, person with black hair) can be set/queried/fetched via the webportal.
+Any anomalies and triggers can be set based upon a certain pattern (RED color vehicle, person wearing glasses, person with black hair) can be set/queried/fetched via the webportal.
 
 Note 1: Dockers (ssriram1978/job_dispatcher:latest, ssriram1978/machine_learning_workers:latest, wurstmeister/kafka:latest, portainer/portainer, redis:latest, wurstmeister/zookeeper) are used in this TIER 3.
 Note 2: In machine_learning_workers directory, run the docker stack command. 
