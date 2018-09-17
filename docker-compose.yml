@@ -90,6 +90,7 @@ services:
     privileged: true
     volumes:
       - /home/mec-poc/fromMobile:/data
+      #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
     extra_hosts:
       - "mec-demo: 10.2.40.160"
       - "mec-poc: 10.2.40.162"
@@ -134,5 +135,8 @@ services:
       rtsp_file_name_prefix_key: briefcam
       rtsp_duration_of_the_video_key: 30
       rtsp_capture_application_key: openRTSP
+      couchdb_server_key: couchdb:5984
+      database_name_key: briefcam
     volumes:
       - /home/mec-poc/fromMobile:/data
+      #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
