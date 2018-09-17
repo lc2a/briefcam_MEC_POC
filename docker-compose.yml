@@ -111,7 +111,7 @@ services:
       - "-c"
       - "fauxton -c http://mec-poc:5984"
     extra_hosts:
-      - "mec-poc: 10.1.100.100"
+      - "mec-poc: 10.2.40.162"
   front_end:
     image: ssriram1978/front_end:latest
     depends_on:
