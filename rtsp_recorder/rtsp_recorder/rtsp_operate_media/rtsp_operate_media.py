@@ -27,8 +27,9 @@ class RtspOperationsOnMedia:
         self.cwd = os.getcwd()
         self.before = []
         self.after = []
-        self.video_file_name_size = defaultdict(str)
+        self.video_file_name_size = defaultdict(defaultdict)
         self.read_environment_variables()
+        self.max_attemtps_before_moving_a_file_to_process = 3
 
     def read_environment_variables(self):
         while self.video_file_path is None and \
@@ -98,7 +99,7 @@ class RtspOperationsOnMedia:
         -u admin 123456 # Username and password expected by camera 
         rtsp://192.168.1.108:554/11 # Camera's RTSP URL
         """
-        self.rtsp_stream_arguments = "-D 60 -c -B 10000000 -b 10000000 -4 -F {}  -P {} rtsp://{}". \
+        self.rtsp_stream_arguments = "-D 3 -c -B 1000000000 -b 1000000000 -4 -F {}  -P {} rtsp://{}". \
             format(self.rtsp_file_name_prefix,
                    self.rtsp_duration_of_the_video,
                    self.rtsp_server_hostname)
@@ -133,13 +134,14 @@ class RtspOperationsOnMedia:
         return self.couchdb_identifier
 
     def stop_rtsp_stream(self):
-        if self.process:
-            self.process.kill()
-            self.process = None
+        if self.process_id:
+            self.process_id.kill()
+            self.process_id = None
 
     def check_rtsp_stream(self):
         result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-        if result.find(self.rtsp_capture_application) == -1:
+        if result.find(self.rtsp_capture_application) == -1 or \
+            result.find("[{}] <defunct>".format(self.rtsp_capture_application)) != -1 :
             logging_to_console_and_syslog("Cannot find process {} running.".format(self.rtsp_capture_application))
             return False
         else:
@@ -161,23 +163,45 @@ class RtspOperationsOnMedia:
                 logging_to_console_and_syslog("Found a file name that ends with .mp4 {}, "
                                               "filesize={}"
                                               .format(filename, filesize))
-                if self.video_file_name_size[filename] == filesize:
-                    destination = str("{}/{}".format(self.video_file_path, filename))
-                    logging_to_console_and_syslog("Moving this file {} to {} "
+                if filesize != 0:
+                    dict_obj = self.video_file_name_size[filename]
+                    if dict_obj :
+                        if dict_obj["size"] == filesize :
+                            if dict_obj["count"] == self.max_attemtps_before_moving_a_file_to_process:
+                                destination = str("{}/{}".format(self.video_file_path, filename))
+                                logging_to_console_and_syslog("Moving this file {} to {} "
                                                   "because the file size {} and {} match."
                                                   .format(filename,
                                                           destination,
                                                           self.video_file_name_size[filename],
                                                           filesize))
-                    try:
-                        shutil.move(filename, destination)
-                    except:
-                        logging_to_console_and_syslog("Unable to move file{} to dst {}"
+                                try:
+                                    shutil.move(filename, destination)
+                                except:
+                                    logging_to_console_and_syslog("Unable to move file{} to dst {}"
                                                       .format(filename, destination))
-
-                else:
-                    self.video_file_name_size[filename] = filesize
-                    logging_to_console_and_syslog("Storing this file {} size {} in cache "
+                            else:
+                                dict_obj["count"] += 1
+                                self.video_file_name_size[filename] = dict_obj
+                                logging_to_console_and_syslog("current file size {} matches with "
+                                                      "previous value in the dict."
+                                                      "Incrementing the count to {} "
+                                                      .format(filesize,
+                                                              dict_obj["count"]))
+                        else:
+                            dict_obj["size"] = filesize
+                            dict_obj["count"] = 0
+                            self.video_file_name_size[filename] = dict_obj
+                            logging_to_console_and_syslog("Updating this file {} size {} in cache "
+                                                          .format(filename,
+                                                                  filesize))
+                    else:
+                        dict_obj = defaultdict(int)
+                        dict_obj["size"] = filesize
+                        dict_obj["count"] = 0
+                        self.video_file_name_size[filename] = dict_obj
+                        logging_to_console_and_syslog("Creating and Storing this file "
+                                                      "{} size {} in cache "
                                                   .format(filename,
                                                           filesize))
         return True

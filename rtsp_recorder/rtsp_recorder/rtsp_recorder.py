@@ -56,6 +56,7 @@ class RtspRecorder:
                 logging_to_console_and_syslog("The document {} is still valid.".format(message))
                 while not self.rtsp_media_instance.check_rtsp_stream():
                     logging_to_console_and_syslog("Trying to reopen the RTSP stream..".format(message))
+                    self.rtsp_media_instance.stop_rtsp_stream()
                     time.sleep(1)
                     self.rtsp_media_instance.start_rtsp_stream(message)
                 self.rtsp_media_instance.move_media_files_to_shared_directory()
