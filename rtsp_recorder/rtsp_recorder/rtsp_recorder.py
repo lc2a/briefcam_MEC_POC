@@ -44,6 +44,7 @@ class RtspRecorder:
         self.couchdb_client_instance.update_container_id(message_id)
 
         continue_capturing_video = True
+        no_mp4_files_found_count = 0
         while continue_capturing_video:
             # 4. Every second,
             # a. If the camera entry still exist in couchDB, then,
@@ -55,11 +56,29 @@ class RtspRecorder:
             if self.couchdb_client_instance.is_the_document_still_valid():
                 logging_to_console_and_syslog("The document {} is still valid.".format(message))
                 while not self.rtsp_media_instance.check_rtsp_stream():
-                    logging_to_console_and_syslog("Trying to reopen the RTSP stream..".format(message))
+                    logging_to_console_and_syslog("Detected that no RTSP capture "
+                                                  "process is running. "
+                                                  "Trying to reopen "
+                                                  "the RTSP stream.."
+                                                  .format(message))
                     self.rtsp_media_instance.stop_rtsp_stream()
                     time.sleep(1)
                     self.rtsp_media_instance.start_rtsp_stream(message)
-                self.rtsp_media_instance.move_media_files_to_shared_directory()
+                if not self.rtsp_media_instance.move_media_files_to_shared_directory():
+                    if no_mp4_files_found_count == 5:
+                        logging_to_console_and_syslog("No mp4 files found."
+                                                      "Trying to reopen "
+                                                      "the RTSP stream."
+                                                      .format(message))
+                        self.rtsp_media_instance.stop_rtsp_stream()
+                        time.sleep(1)
+                        self.rtsp_media_instance.start_rtsp_stream(message)
+                        no_mp4_files_found_count = 0
+                    else:
+                        no_mp4_files_found_count += 1
+                        logging_to_console_and_syslog("No mp4 files found."
+                                                      "Incrementing count to {}"
+                                                      .format(no_mp4_files_found_count))
             else:
                 logging_to_console_and_syslog("The document {} is invalid.".format(message))
                 self.rtsp_media_instance.stop_rtsp_stream()
@@ -95,4 +114,3 @@ if __name__ == "__main__":
         finally:
             if rtsp_recorder_instance:
                 rtsp_recorder_instance.cleanup()
-

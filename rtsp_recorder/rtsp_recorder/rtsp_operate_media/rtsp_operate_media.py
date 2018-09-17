@@ -153,6 +153,7 @@ class RtspOperationsOnMedia:
         return st.st_size
 
     def move_media_files_to_shared_directory(self):
+        job_done = False
         return_list = os.listdir(os.getcwd())
         if return_list is None:
             return False
@@ -163,6 +164,7 @@ class RtspOperationsOnMedia:
                 logging_to_console_and_syslog("Found a file name that ends with .mp4 {}, "
                                               "filesize={}"
                                               .format(filename, filesize))
+                job_done = True
                 if filesize != 0:
                     dict_obj = self.video_file_name_size[filename]
                     if dict_obj :
@@ -177,6 +179,7 @@ class RtspOperationsOnMedia:
                                                           filesize))
                                 try:
                                     shutil.move(filename, destination)
+                                    del self.video_file_name_size[filename]
                                 except:
                                     logging_to_console_and_syslog("Unable to move file{} to dst {}"
                                                       .format(filename, destination))
@@ -204,4 +207,4 @@ class RtspOperationsOnMedia:
                                                       "{} size {} in cache "
                                                   .format(filename,
                                                           filesize))
-        return True
+        return job_done
