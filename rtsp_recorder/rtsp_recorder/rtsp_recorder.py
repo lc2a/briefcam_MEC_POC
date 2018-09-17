@@ -60,7 +60,7 @@ class RtspRecorder:
                     self.rtsp_media_instance.start_rtsp_stream(message)
                 self.rtsp_media_instance.move_media_files_to_shared_directory()
             else:
-                logging_to_console_and_syslog("The document {} is still invalid.".format(message))
+                logging_to_console_and_syslog("The document {} is invalid.".format(message))
                 self.rtsp_media_instance.stop_rtsp_stream()
 
     def cleanup(self):
