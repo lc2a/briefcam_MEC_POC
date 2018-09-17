@@ -3,6 +3,7 @@ import sys
 import time
 import subprocess
 from sys import path
+from datetime import datetime
 
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
@@ -170,7 +171,9 @@ class RtspOperationsOnMedia:
                     if dict_obj :
                         if dict_obj["size"] == filesize :
                             if dict_obj["count"] == self.max_attemtps_before_moving_a_file_to_process:
-                                destination = str("{}/{}".format(self.video_file_path, filename))
+                                i = datetime.now()
+                                destination = str("{}/{}.mp4".format(self.video_file_path,
+                                                                   str(i)))
                                 logging_to_console_and_syslog("Moving this file {} to {} "
                                                   "because the file size {} and {} match."
                                                   .format(filename,
