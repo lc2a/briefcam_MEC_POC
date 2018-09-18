@@ -82,6 +82,7 @@ class RtspRecorder:
             else:
                 logging_to_console_and_syslog("The document {} is invalid.".format(message))
                 self.rtsp_media_instance.stop_rtsp_stream()
+                continue_capturing_video=False
 
     def cleanup(self):
         self.kafka_consumer_instance.close_kafka_instance()

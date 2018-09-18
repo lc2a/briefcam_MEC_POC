@@ -177,8 +177,8 @@ class RtspOperationsOnMedia:
                                                                   .replace('-', '_')\
                                                                   .replace(':','_') \
                                                                   .replace('.', '_')
-                                        destination = str("{}/{}.mp4".format(self.video_file_path,
-                                                                             formatted_string))
+                                destination = str("{}/{}.mp4".format(self.video_file_path,
+                                                                    formatted_string))
                                 logging_to_console_and_syslog("Moving this file {} to {} "
                                                   "because the file size {} and {} match."
                                                   .format(filename,
