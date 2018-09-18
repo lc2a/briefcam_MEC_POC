@@ -172,8 +172,13 @@ class RtspOperationsOnMedia:
                         if dict_obj["size"] == filesize :
                             if dict_obj["count"] == self.max_attemtps_before_moving_a_file_to_process:
                                 i = datetime.now()
-                                destination = str("{}/{}.mp4".format(self.video_file_path,
-                                                                   str(i)))
+                                formatted_string = "{}_{}".format(i.date(),
+                                                                  i.time())\
+                                                                  .replace('-', '_')\
+                                                                  .replace(':','_') \
+                                                                  .replace('.', '_')
+                                        destination = str("{}/{}.mp4".format(self.video_file_path,
+                                                                             formatted_string))
                                 logging_to_console_and_syslog("Moving this file {} to {} "
                                                   "because the file size {} and {} match."
                                                   .format(filename,
