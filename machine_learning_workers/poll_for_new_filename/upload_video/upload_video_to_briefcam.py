@@ -101,25 +101,49 @@ class UploadVideoToBriefCam():
             pyautogui.press('esc')
             pyautogui.press('esc')
 
-    def __create_case(self):
+    def __extract_case_name_from_video_file_name(self,filename):
+        if filename is None:
+            logging_to_console_and_syslog("Filename is None")
+            return
+
+        starting_index = filename.rfind('/')
+        if starting_index == -1:
+            logging_to_console_and_syslog("Unable to find / in the filename {}.".format(filename))
+            return
+
+        ending_index = filename.find('_',starting_index)
+        if ending_index == -1:
+            logging_to_console_and_syslog("Unable to find _ in the filename {}.".format(filename))
+            return
+
+        self.case_name = filename[starting_index+1:ending_index]
+
+        logging_to_console_and_syslog("Found casename {}.".format(self.case_name))
+
+    def __create_case_for_the_first_time(self):
+        # MEC-POC case is getting created for the first time.
+        self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
+        pyautogui.typewrite(self.case_name,
+                            interval=0.25)  # prints out the case name with a quarter second delay after each character
+        pyautogui.hotkey('tab')
+        pyautogui.hotkey('tab')
+        pyautogui.hotkey('tab')
+        pyautogui.hotkey('tab')
+        pyautogui.hotkey('tab')
+        pyautogui.press('enter')  # press the Enter key
+        self.__left_click_this_image(self.filename_formatted('Created_button.png'))
+
+    def __create_case(self,filename):
         return_value = None
+        self.__extract_case_name_from_video_file_name(filename)
+        self.__left_click_this_image(self.filename_formatted('Search_button.png'))
+        pyautogui.typewrite(self.case_name, interval=0.25)
         for index in range(10):
-            return_value = self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'), False)
+            return_value = self.__left_click_this_image(self.filename_formatted('Created_button.png'), False)
             if return_value == True:
                 break
         if return_value == False:
-            # MEC-POC case is getting created for the first time.
-            self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
-            pyautogui.typewrite(self.case_name,
-                                interval=0.25)  # prints out the case name with a quarter second delay after each character
-            pyautogui.hotkey('tab')
-            pyautogui.hotkey('tab')
-            pyautogui.hotkey('tab')
-            pyautogui.hotkey('tab')
-            pyautogui.hotkey('tab')
-            # left_click_this_image('create_button.png')
-            pyautogui.press('enter')  # press the Enter key
-            self.__left_click_this_image(self.filename_formatted('mec_poc_button.png'))
+            self.__create_case_for_the_first_time()
 
     def __add_video(self, file_name):
         self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'))
@@ -160,7 +184,6 @@ class UploadVideoToBriefCam():
                 logging_to_console_and_syslog("Process is None")
                 raise NoProcessExcept(self.process)
             self.__login_to_briefcam_server()
-            self.__create_case()
             self.browser_ready = True
 
     def process_new_file(self, file_name):
@@ -170,6 +193,7 @@ class UploadVideoToBriefCam():
                 while self.browser_ready == False:
                     logging_to_console_and_syslog("Waiting for the browser to be ready")
                     time.sleep(1)
+                self.__create_case(file_name)
                 self.__add_video(file_name)
                 job_done = True
             except TimeOutException:
