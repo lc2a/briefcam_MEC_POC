@@ -23,7 +23,7 @@ class RtspOperationsOnMedia:
         self.rtsp_capture_application = None
         self.couchdb_identifier = None
         self.rtsp_server_hostname = None
-        self.camera_name = None
+        self.camera_name = ""
         self.dictionary_of_values = None
         self.cwd = os.getcwd()
         self.before = []
@@ -38,15 +38,23 @@ class RtspOperationsOnMedia:
                 self.rtsp_capture_application is None and \
                 self.rtsp_duration_of_the_video is 0:
             time.sleep(1)
-            self.video_file_path = os.getenv("video_file_path_key", default=None)
-            self.rtsp_file_name_prefix = os.getenv("rtsp_file_name_prefix_key", default=None)
-            self.rtsp_capture_application = os.getenv("rtsp_capture_application_key", default=None)
-            self.rtsp_duration_of_the_video = int(os.getenv("rtsp_duration_of_the_video_key", default=0))
+            self.video_file_path = os.getenv("video_file_path_key",
+                                             default=None)
+            self.rtsp_file_name_prefix = os.getenv("rtsp_file_name_prefix_key",
+                                                   default=None)
+            self.rtsp_capture_application = os.getenv("rtsp_capture_application_key",
+                                                      default=None)
+            self.rtsp_duration_of_the_video = int(os.getenv("rtsp_duration_of_the_video_key",
+                                                            default=0))
 
-        logging_to_console_and_syslog(("video_file_path={}".format(self.video_file_path)))
-        logging_to_console_and_syslog(("rtsp_file_name_prefix={}".format(self.rtsp_file_name_prefix)))
-        logging_to_console_and_syslog(("rtsp_capture_application={}".format(self.rtsp_capture_application)))
-        logging_to_console_and_syslog(("rtsp_duration_of_the_video={}".format(self.rtsp_duration_of_the_video)))
+        logging_to_console_and_syslog(("video_file_path={}"
+                                       .format(self.video_file_path)))
+        logging_to_console_and_syslog(("rtsp_file_name_prefix={}"
+                                       .format(self.rtsp_file_name_prefix)))
+        logging_to_console_and_syslog(("rtsp_capture_application={}"
+                                       .format(self.rtsp_capture_application)))
+        logging_to_console_and_syslog(("rtsp_duration_of_the_video={}"
+                                       .format(self.rtsp_duration_of_the_video)))
         logging_to_console_and_syslog("cwd={}".format(self.cwd))
 
     def __fetch_ip_address_from_message(self, message):
@@ -126,7 +134,8 @@ class RtspOperationsOnMedia:
                                               command_list))
         self.process_id = subprocess.Popen(command_list)
         if self.process_id is None:
-            logging_to_console_and_syslog("Cannot open Process {}".format(self.rtsp_capture_application))
+            logging_to_console_and_syslog("Cannot open Process {}"
+                                          .format(self.rtsp_capture_application))
             return 0
         logging_to_console_and_syslog("Successfully opened {} stream to IP {}. Output={}"
                                       .format(self.rtsp_capture_application,
@@ -143,10 +152,12 @@ class RtspOperationsOnMedia:
         result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
         if result.find(self.rtsp_capture_application) == -1 or \
             result.find("[{}] <defunct>".format(self.rtsp_capture_application)) != -1 :
-            logging_to_console_and_syslog("Cannot find process {} running.".format(self.rtsp_capture_application))
+            logging_to_console_and_syslog("Cannot find process {} "
+                                          "running.".format(self.rtsp_capture_application))
             return False
         else:
-            logging_to_console_and_syslog("process {} is running.".format(self.rtsp_capture_application))
+            logging_to_console_and_syslog("process {} is "
+                                          "running.".format(self.rtsp_capture_application))
             return True
 
     def __getSize(self, filename):
@@ -172,7 +183,8 @@ class RtspOperationsOnMedia:
                         if dict_obj["size"] == filesize :
                             if dict_obj["count"] == self.max_attemtps_before_moving_a_file_to_process:
                                 i = datetime.now()
-                                formatted_string = "{}_{}".format(i.date(),
+                                formatted_string = "{}_{}_{}".format(self.camera_name,
+                                                                  i.date(),
                                                                   i.time())\
                                                                   .replace('-', '_')\
                                                                   .replace(':','_') \
