@@ -17,10 +17,8 @@ services:
     ports:
       - "6379:6379"
   redis-commander:
-    container_name: redis-commander
     hostname: redis-commander
     image: rediscommander/redis-commander:latest
-    build: .
     restart: always
     environment:
       - REDIS_HOSTS=redis:redis:6379
@@ -159,3 +157,12 @@ services:
       - "5601:5601"
       - "9200:9200"
       - "5044:5044"
+  filebeat:
+  image: bargenson/filebeat
+  restart: unless-stopped
+  volumes:
+   - /var/run/docker.sock:/tmp/docker.sock
+  environment:
+   - LOGSTASH_HOST=mec-poc
+   - LOGSTASH_PORT=5044
+   - SHIPPER_NAME=mec
