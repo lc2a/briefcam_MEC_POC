@@ -161,3 +161,5 @@ services:
     - LOGSTASH_HOST=mec-poc
     - LOGSTASH_PORT=5044
     - SHIPPER_NAME=mec
+    extra_hosts:
+    - "mec-poc: 10.2.40.162"
