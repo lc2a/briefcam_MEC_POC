@@ -19,7 +19,6 @@ services:
   redis-commander:
     hostname: redis-commander
     image: rediscommander/redis-commander:latest
-    restart: always
     environment:
       - REDIS_HOSTS=redis:redis:6379
     ports:
@@ -95,7 +94,6 @@ services:
       redis_server_port_key: 6379
       redis_log_keyname_key: briefcam-events
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
-    privileged: true
     volumes:
       - /home/mec-poc/fromMobile:/data
       #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
@@ -112,8 +110,6 @@ services:
       - couchdb
     ports:
       - 8000:8000
-    links:
-      - couchdb:db
     command:
       - sh
       - "-c"
@@ -159,7 +155,6 @@ services:
       - "5044:5044"
   filebeat:
     image: bargenson/filebeat
-    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
     environment:
