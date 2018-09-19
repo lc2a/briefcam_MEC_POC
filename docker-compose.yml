@@ -121,6 +121,9 @@ services:
       topic_key: split-video-file
       couchdb_server_key: couchdb:5984
       database_name_key: briefcam
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
   rtsp_recorder:
     image: ssriram1978/rtsp_recorder:latest
     depends_on:
