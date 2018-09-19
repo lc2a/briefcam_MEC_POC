@@ -140,3 +140,9 @@ services:
     volumes:
       - /home/mec-poc/fromMobile:/data
       #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
+  elk:
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
