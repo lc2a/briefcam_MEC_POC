@@ -7,13 +7,16 @@ sys.path.append("..") # Adds higher directory to python modules path.
 
 from log.log_file import logging_to_console_and_syslog
 
+search_coordinates = (840, 200)
+case_coordinates = (83, 565)
+
 class TimeOutException(Exception):
     def __init__(self):
         logging_to_console_and_syslog("Time out exception occured")
 
 
 class UploadVideoToBriefCam():
-    pyautogui.PAUSE = 0.25
+    pyautogui.PAUSE = 0.1
 
     def filename_formatted(self, filename):
         if __name__ == "__main__":
@@ -61,13 +64,20 @@ class UploadVideoToBriefCam():
 
     max_retries = 10
 
+    def _left_click_this_coordinate(self, coordinates):
+        if coordinates is None:
+            return
+        logging_to_console_and_syslog("Trying to left click this coordinate[{},{}] ".format(coordinates[0],
+                                                                                            coordinates[1]))
+        pyautogui.click(x=coordinates[0], y=coordinates[1])
+
     def __left_click_this_image(self, button_name, force_wait=True):
         button_location = None
         current_retry_count = 0
         while button_location == None:
             logging_to_console_and_syslog("Trying to match " + button_name)
             try:
-                button_location = pyautogui.locateOnScreen(button_name, grayscale=False)
+                button_location = pyautogui.locateOnScreen(button_name, grayscale=True)
             except FileNotFoundError:
                 logging_to_console_and_syslog("File {} Not Found".format(button_name))
                 raise FileNotFoundError
@@ -79,7 +89,7 @@ class UploadVideoToBriefCam():
                     raise TimeOutException
                 else:
                     current_retry_count += 1
-                    time.sleep(5)
+                    #time.sleep(5)
         logging_to_console_and_syslog("button_name={},location={}".format(button_name, button_location))
         buttonx, buttony = pyautogui.center(button_location)
         logging_to_console_and_syslog("buttonx={} and buttony={}".format(buttonx, buttony))
@@ -94,9 +104,11 @@ class UploadVideoToBriefCam():
                 break
         if return_value == True:
             pyautogui.hotkey('tab')
-            pyautogui.typewrite(self.username, interval=0.25)
+            time.sleep(0.25)
+            pyautogui.typewrite(self.username, interval=0.1)
             pyautogui.hotkey('tab')
-            pyautogui.typewrite(self.password, interval=0.25)
+            time.sleep(0.25)
+            pyautogui.typewrite(self.password, interval=0.1)
             pyautogui.press('enter')  # press the Enter key
             pyautogui.press('esc')
             pyautogui.press('esc')
@@ -123,40 +135,55 @@ class UploadVideoToBriefCam():
     def __create_case_for_the_first_time(self):
         # MEC-POC case is getting created for the first time.
         self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
+        time.sleep(0.25)
         pyautogui.typewrite(self.case_name,
-                            interval=0.25)  # prints out the case name with a quarter second delay after each character
+                            interval=0.1)  # prints out the case name with a quarter second delay after each character
         pyautogui.hotkey('tab')
         pyautogui.hotkey('tab')
         pyautogui.hotkey('tab')
         pyautogui.hotkey('tab')
         pyautogui.hotkey('tab')
         pyautogui.press('enter')  # press the Enter key
-        self.__left_click_this_image(self.filename_formatted('Created_button.png'))
+        time.sleep(0.25)
+        self._left_click_this_coordinate(case_coordinates)
 
     def __create_case(self,filename):
-        return_value = None
+        no_results_found = None
         self.__extract_case_name_from_video_file_name(filename)
-        self.__left_click_this_image(self.filename_formatted('Search_button.png'))
-        pyautogui.typewrite(self.case_name, interval=0.25)
-        for index in range(10):
-            return_value = self.__left_click_this_image(self.filename_formatted('Created_button.png'), False)
-            if return_value == True:
+        self._left_click_this_coordinate(search_coordinates)
+        time.sleep(0.25)
+        pyautogui.typewrite(self.case_name, interval=0.1)
+        logging_to_console_and_syslog("Clicking on case at location:{}".format(case_coordinates))
+        self._left_click_this_coordinate(case_coordinates)
+
+    def __check_for_add_video_button(self):
+        return_value = False
+        for index in range(5):
+            return_value = self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'), False)
+            if return_value:
                 break
-        if return_value == False:
-            self.__create_case_for_the_first_time()
+        return return_value
 
     def __add_video(self, file_name):
-        self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'))
-        self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
-        self.__left_click_this_image(self.filename_formatted('next_button.png'))
-        self.__left_click_this_image(self.filename_formatted('browse_button.png'))
-        time.sleep(1)
-        pyautogui.typewrite(file_name, interval=0.25)
-        pyautogui.press('enter')  # press the Enter key
-        # left_click_this_image('open_button.png')
-        self.__left_click_this_image(self.filename_formatted('next2_button.png'))
-        # pyautogui.hotkey('tab')
-        pyautogui.press('enter')  # press the Enter key
+        add_video_button_found=self.__check_for_add_video_button()
+        if not add_video_button_found:
+            logging_to_console_and_syslog("Add video button is not found. Creating the casename. {}."
+                                          .format(self.case_name))
+            self.__create_case_for_the_first_time()
+                if self.__check_for_add_video_button() is False:
+                logging_to_console_and_syslog("Add video button is still not found.")
+                raise TimeOutException
+        else:
+            self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
+            self.__left_click_this_image(self.filename_formatted('next_button.png'))
+            self.__left_click_this_image(self.filename_formatted('browse_button.png'))
+            time.sleep(0.25)
+            pyautogui.typewrite(file_name, interval=0.1)
+            pyautogui.press('enter')  # press the Enter key
+            # left_click_this_image('open_button.png')
+            self.__left_click_this_image(self.filename_formatted('next2_button.png'))
+            # pyautogui.hotkey('tab')
+            pyautogui.press('enter')  # press the Enter key
 
     # self.__left_click_this_image(self.filename_formatted('process_button.png'))
 
