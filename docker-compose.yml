@@ -16,6 +16,16 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    build: .
+    restart: always
+    environment:
+      - REDIS_HOSTS=redis:redis:6379
+    ports:
+      - 8081:8081
   kafka:
     image: wurstmeister/kafka:latest
     ports:
