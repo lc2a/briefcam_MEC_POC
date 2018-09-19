@@ -7,3 +7,4 @@ futures>=0
 msgpack>=0
 kafka-python>=0
 couchdb>=0
+docker>=0

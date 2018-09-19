@@ -141,7 +141,7 @@ services:
       - /home/mec-poc/fromMobile:/data
       #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
   elk:
-    image: sebp/elk
+    image: ssriram1978/elk:latest
     ports:
       - "5601:5601"
       - "9200:9200"
