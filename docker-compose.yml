@@ -158,11 +158,11 @@ services:
       - "9200:9200"
       - "5044:5044"
   filebeat:
-  image: bargenson/filebeat
-  restart: unless-stopped
-  volumes:
-   - /var/run/docker.sock:/tmp/docker.sock
-  environment:
-   - LOGSTASH_HOST=mec-poc
-   - LOGSTASH_PORT=5044
-   - SHIPPER_NAME=mec
+    image: bargenson/filebeat
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    environment:
+    - LOGSTASH_HOST=mec-poc
+    - LOGSTASH_PORT=5044
+    - SHIPPER_NAME=mec
