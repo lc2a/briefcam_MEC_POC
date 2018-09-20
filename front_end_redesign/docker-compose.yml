@@ -1,0 +1,27 @@
+version: '3.2'
+services:
+  couchdb:
+    image: couchdb
+    ports:
+      - 5984:5984
+  fauxton:
+    image: 3apaxicom/fauxton
+    depends_on:
+      - couchdb
+    ports:
+      - 8000:8000
+    links:
+      - couchdb:db
+    command:
+      - sh
+      - "-c"
+      - "fauxton -c http://mec-poc:5984"
+    extra_hosts:
+      - "mec-poc: 10.1.100.100"
+  front_end:
+    image: ssriram1978/front_end_redesign:latest
+    depends_on:
+        - couchdb
+    environment:
+      couchdb_server_key: couchdb:5984
+      database_name_key: briefcam
