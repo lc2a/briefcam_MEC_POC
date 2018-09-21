@@ -117,36 +117,19 @@ services:
     extra_hosts:
       - "mec-poc: 10.2.40.162"
   front_end:
-    image: ssriram1978/front_end:latest
+    image: ssriram1978/front_end_redesign:latest
     depends_on:
         - couchdb
     environment:
-      broker_name_key: kafka:9092
-      topic_key: split-video-file
       couchdb_server_key: couchdb:5984
       database_name_key: briefcam
+      id_to_container_name_key: id_to_container
+      image_name_key: ssriram1978/rtsp_recorder_redesign:latest
+      environment_key: video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 rtsp_capture_application_key=openRTSP
+      bind_mount_key: /home/mec-poc/fromMobile:/data
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
-  rtsp_recorder:
-    image: ssriram1978/rtsp_recorder:latest
-    depends_on:
-        - couchdb
-        - kafka
-#    deploy:
-#      replicas: 5
-    environment:
-      video_file_path_key: /data
-      broker_name_key: kafka:9092
-      topic_key: split-video-file
-      rtsp_file_name_prefix_key: briefcam
-      rtsp_duration_of_the_video_key: 30
-      rtsp_capture_application_key: openRTSP
-      couchdb_server_key: couchdb:5984
-      database_name_key: briefcam
-    volumes:
-      - /home/mec-poc/fromMobile:/data
-      #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
   elk:
     image: ssriram1978/elk:latest
     ports:
@@ -154,11 +137,11 @@ services:
       - "9200:9200"
       - "5044:5044"
   filebeat:
-    image: bargenson/filebeat
+    image: docker.elastic.co/beats/filebeat:6.4.1
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
     environment:
-    - LOGSTASH_HOST=mec-poc
+    - LOGSTASH_HOST=mecpoc-ProLiant-BL460c-Gen9
     - LOGSTASH_PORT=5044
     - SHIPPER_NAME=mec
     extra_hosts:
