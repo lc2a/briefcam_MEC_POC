@@ -46,7 +46,7 @@ class RTSPRecorderOrchestrator:
         is_active=False
         try:
             container = self.docker_instance.containers.get(container_short_id)
-            if container:
+            if container and container.status == 'running':
                 is_active = True
         except:
             is_active = False
@@ -64,7 +64,7 @@ class RTSPRecorderOrchestrator:
         try:
             bind_mount = self.bind_mount.split()
             environment_list = self.environment.split()
-            environment_list.append("document={}".format(repr(document)))
+            environment_list.append("rtsp_message_key={}".format(repr(document)))
 
             logging_to_console_and_syslog("Trying to open a container with"
                                           "image={} "
@@ -115,6 +115,11 @@ if __name__ == "__main__":
 
         logging_to_console_and_syslog("check_if_container_is_active(\"xyz\") returned {}."
                                       .format(rtsp_orchestrator.check_if_container_is_active("xyz")))
+
+        logging_to_console_and_syslog("check_if_container_is_active(\"33a5c5961f\") returned {}."
+                                      .format(rtsp_orchestrator.check_if_container_is_active("33a5c5961f")))
+
+
 
         container_id = rtsp_orchestrator.run_container("{foo:bar}")
         if container_id:
