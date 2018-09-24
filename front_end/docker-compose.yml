@@ -1,28 +1,5 @@
 version: '3.2'
 services:
-  zookeeper:
-    image: wurstmeister/zookeeper
-    ports:
-      - "2181:2181"
-  kafka:
-    image: wurstmeister/kafka:latest
-    ports:
-      - target: 9094
-        published: 9094
-        protocol: tcp
-        mode: host
-    environment:
-      HOSTNAME_COMMAND: "docker info | grep ^Name: | cut -d' ' -f 2"
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
-      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_CREATE_TOPICS: "split-video-file:5:1"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - zookeeper
   couchdb:
     image: couchdb
     ports:
@@ -46,7 +23,12 @@ services:
     depends_on:
         - couchdb
     environment:
-      broker_name_key: kafka:9092
-      topic_key: split-video-file
       couchdb_server_key: couchdb:5984
       database_name_key: briefcam
+      id_to_container_name_key: id_to_container
+      image_name_key: ssriram1978/rtsp_recorder:latest
+      environment_key: video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 rtsp_capture_application_key=openRTSP
+      bind_mount_key: /home/mec-poc/fromMobile:/data
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker

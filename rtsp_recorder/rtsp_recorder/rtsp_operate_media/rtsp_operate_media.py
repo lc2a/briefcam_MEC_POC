@@ -18,6 +18,7 @@ class RtspOperationsOnMedia:
         self.video_file_path = None
         self.rtsp_file_name_prefix = None
         self.rtsp_duration_of_the_video = 0
+        self.rtsp_message = None
         self.process_id = 0
         self.rtsp_stream_arguments = None
         self.rtsp_capture_application = None
@@ -36,7 +37,8 @@ class RtspOperationsOnMedia:
         while self.video_file_path is None and \
                 self.rtsp_file_name_prefix is None and \
                 self.rtsp_capture_application is None and \
-                self.rtsp_duration_of_the_video is 0:
+                self.rtsp_duration_of_the_video is 0 and \
+                self.rtsp_message is None:
             time.sleep(1)
             self.video_file_path = os.getenv("video_file_path_key",
                                              default=None)
@@ -46,6 +48,7 @@ class RtspOperationsOnMedia:
                                                       default=None)
             self.rtsp_duration_of_the_video = int(os.getenv("rtsp_duration_of_the_video_key",
                                                             default=0))
+            self.rtsp_message = os.getenv("rtsp_message_key", default=None)
 
         logging_to_console_and_syslog(("video_file_path={}"
                                        .format(self.video_file_path)))
@@ -57,14 +60,14 @@ class RtspOperationsOnMedia:
                                        .format(self.rtsp_duration_of_the_video)))
         logging_to_console_and_syslog("cwd={}".format(self.cwd))
 
-    def __fetch_ip_address_from_message(self, message):
+    def __fetch_ip_address_from_message(self):
 
-        logging_to_console_and_syslog("Trying to decode message {}".format(message))
+        logging_to_console_and_syslog("Trying to decode message {}".format(self.rtsp_message))
 
         try:
-            self.dictionary_of_values = literal_eval(message)
+            self.dictionary_of_values = literal_eval(self.rtsp_message)
         except:
-            logging_to_console_and_syslog("Unable to evaluate message {}".format(message))
+            logging_to_console_and_syslog("Unable to evaluate message {}".format(self.rtsp_message))
             return
 
         logging_to_console_and_syslog(
@@ -85,12 +88,12 @@ class RtspOperationsOnMedia:
             elif name == '_id':
                 self.couchdb_identifier = value
 
-    def __prepare_rtsp_application_arguments(self, message):
+    def __prepare_rtsp_application_arguments(self):
         self.rtsp_stream_arguments = None
-        self.__fetch_ip_address_from_message(message)
+        self.__fetch_ip_address_from_message()
         if self.rtsp_server_hostname is None:
             logging_to_console_and_syslog("Unable to find a hostname to open RTSP stream {}:".
-                                          format(message))
+                                          format(self.rtsp_message))
             return False
 
         """
@@ -115,14 +118,13 @@ class RtspOperationsOnMedia:
         logging_to_console_and_syslog("openRTSP argument {}:".format(self.rtsp_stream_arguments))
         return True
 
-    def start_rtsp_stream(self, message):
-        if message is None:
+    def start_rtsp_stream(self):
+        if self.rtsp_message is None:
             return 0
 
-        if self.__prepare_rtsp_application_arguments(message) is False:
-            logging_to_console_and_syslog("Cannot parse this message {}.".format(message))
+        if self.__prepare_rtsp_application_arguments() is False:
+            logging_to_console_and_syslog("Cannot parse this message {}.".format(self.rtsp_message))
             return 0
-
 
         command_list=[]
         command_list.append(self.rtsp_capture_application)

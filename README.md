@@ -19,17 +19,15 @@ Note 3:  In front_end directory, run the docker-compose command
 "docker-compose -d up"
 "docker-compose down"
 
+The front end shall read the document created in the database and shall spawn a new RTSP media recorder container instance and pass on the IP camera details to the new instance.
+
 TIER 2:
 -------
 The traffic camera information is passed on to the RTSP (Real Time Streaming Protocol) service infrastructure which connects to the RTSP server hosted on the Traffic camera via the provided credentials (username, password, IP address,...).
 This service start capturing the video feed from the specified traffic camera.
 The video feed is split into 10-30 second video clips (configurable) and passed down to the TIER 3 Machine learning algorithms that identifies objects in the video feeds.
 
-Note 1: Dockers (ssriram1978/rtsp_recorder:latest, wurstmeister/kafka:latest, couchdb, wurstmeister/zookeeper) are used in this TIER 2.
-
-Note 2:  In rtsp_recorder directory, run the docker-compose command 
-"docker-compose -d up"
-"docker-compose down"
+Note 1: Dockers (ssriram1978/rtsp_recorder:latest) is used in this TIER 2.
 
 TIER 3:
 -------

@@ -117,14 +117,14 @@ services:
     extra_hosts:
       - "mec-poc: 10.2.40.162"
   front_end:
-    image: ssriram1978/front_end_redesign:latest
+    image: ssriram1978/front_end:latest
     depends_on:
         - couchdb
     environment:
       couchdb_server_key: couchdb:5984
       database_name_key: briefcam
       id_to_container_name_key: id_to_container
-      image_name_key: ssriram1978/rtsp_recorder_redesign:latest
+      image_name_key: ssriram1978/rtsp_recorder:latest
       environment_key: video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 rtsp_capture_application_key=openRTSP
       bind_mount_key: /home/mec-poc/fromMobile:/data
     volumes:

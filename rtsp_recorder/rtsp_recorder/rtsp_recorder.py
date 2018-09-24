@@ -7,85 +7,55 @@ from sys import path
 
 path.append(os.getcwd())
 from log.log_file import logging_to_console_and_syslog
-from kafka_consumer.kafkaconsumer import Consumer
-from couchdb_client.couchdb_client import CouchDBClient
 from rtsp_operate_media.rtsp_operate_media import RtspOperationsOnMedia
-
 
 class RtspRecorder:
     def __init__(self):
-        self.kafka_consumer_instance = None
-        self.couchdb_client_instance = None
         self.rtsp_media_instance = None
         self.initialize_instances()
+        self.rtsp_message = None
 
     def initialize_instances(self):
         self.rtsp_media_instance = RtspOperationsOnMedia()
-        self.couchdb_client_instance = CouchDBClient()
-        self.kafka_consumer_instance = Consumer()
 
     def perform_operation(self):
-        # 1. Poll for a new kafka message.
-        message = None
-        message = self.kafka_consumer_instance.poll_for_new_message
-        if message is None:
-            return
-
-        logging_to_console_and_syslog("Received message {} from kakfaQ.".format(message))
-
         # 2. Instruct RTSP to start capturing video.
-        message_id = self.rtsp_media_instance.start_rtsp_stream(message)
+        message_id = self.rtsp_media_instance.start_rtsp_stream()
 
         if message_id == 0:
-            logging_to_console_and_syslog("Unable to start RTSP stream {} from kakfaQ.".format(message))
+            logging_to_console_and_syslog("Unable to start RTSP stream.")
             raise BaseException
 
-        # 3. Update the containerID in couchDB.
-        self.couchdb_client_instance.update_container_id(message_id)
-
-        continue_capturing_video = True
         no_mp4_files_found_count = 0
-        while continue_capturing_video:
-            # 4. Every second,
-            # a. If the camera entry still exist in couchDB, then,
+        while True:
             # 1. Make sure that the video capture is still ongoing.
             # 2. Make sure to move the media files periodically into shared media mount.
-            # b. If the camera entry does not exist in couchDB, then.
-            # 1. Stop capturing video.
             time.sleep(1)
-            if self.couchdb_client_instance.is_the_document_still_valid():
-                logging_to_console_and_syslog("The document {} is still valid.".format(message))
-                while not self.rtsp_media_instance.check_rtsp_stream():
-                    logging_to_console_and_syslog("Detected that no RTSP capture "
-                                                  "process is running. "
+            while not self.rtsp_media_instance.check_rtsp_stream():
+                logging_to_console_and_syslog("Detected that no RTSP capture "
+                                              "process is running. "
+                                              "Trying to reopen "
+                                              "the RTSP stream..")
+                self.rtsp_media_instance.stop_rtsp_stream()
+                time.sleep(1)
+                self.rtsp_media_instance.start_rtsp_stream()
+            if not self.rtsp_media_instance.move_media_files_to_shared_directory():
+                if no_mp4_files_found_count == 5:
+                    logging_to_console_and_syslog("No mp4 files found."
                                                   "Trying to reopen "
-                                                  "the RTSP stream.."
-                                                  .format(message))
+                                                  "the RTSP stream.")
                     self.rtsp_media_instance.stop_rtsp_stream()
                     time.sleep(1)
-                    self.rtsp_media_instance.start_rtsp_stream(message)
-                if not self.rtsp_media_instance.move_media_files_to_shared_directory():
-                    if no_mp4_files_found_count == 5:
-                        logging_to_console_and_syslog("No mp4 files found."
-                                                      "Trying to reopen "
-                                                      "the RTSP stream."
-                                                      .format(message))
-                        self.rtsp_media_instance.stop_rtsp_stream()
-                        time.sleep(1)
-                        self.rtsp_media_instance.start_rtsp_stream(message)
-                        no_mp4_files_found_count = 0
-                    else:
-                        no_mp4_files_found_count += 1
-                        logging_to_console_and_syslog("No mp4 files found."
-                                                      "Incrementing count to {}"
-                                                      .format(no_mp4_files_found_count))
-            else:
-                logging_to_console_and_syslog("The document {} is invalid.".format(message))
-                self.rtsp_media_instance.stop_rtsp_stream()
-                continue_capturing_video=False
+                    self.rtsp_media_instance.start_rtsp_stream()
+                    no_mp4_files_found_count = 0
+                else:
+                    no_mp4_files_found_count += 1
+                    logging_to_console_and_syslog("No mp4 files found."
+                                                  "Incrementing count to {}"
+                                                  .format(no_mp4_files_found_count))
 
     def cleanup(self):
-        self.kafka_consumer_instance.close_kafka_instance()
+        pass
 
 
 if __name__ == "__main__":
