@@ -9,11 +9,31 @@ from log.log_file import logging_to_console_and_syslog
 
 search_coordinates = (840, 200)
 case_coordinates = (83, 565)
+add_video_coordinates = (945, 159)
+same_camera_coordinates = (673, 580)
+same_camera_next_coordinates = (971, 866)
+browse_for_file_location_coordinates = (541, 618)
+next_after_uploading_video_coordinates = (971,841)
+process_uploading_video_coordinates = (971,862)
+cancel_coordinates = (980, 287)
+confirm_cancel_coordinates = (717,607)
 
-class TimeOutException(Exception):
+
+class BriefCamAddVideoTimeOutException:
     def __init__(self):
-        logging_to_console_and_syslog("Time out exception occured")
+        logging_to_console_and_syslog("BriefCam Server Add video click timeout occurred.")
 
+class BriefCamClickTimeoutException(Exception):
+    def __init__(self):
+        logging_to_console_and_syslog("BriefCam Server click timeout occurred.")
+
+class BriefCamServerException(Exception):
+    def __init__(self):
+        logging_to_console_and_syslog("BriefCam Server exception occurred.")
+
+class BriefCamNoProcessExcept(Exception):
+    def __init__(self):
+        logging_to_console_and_syslog("BriefCam Server No process occurred.")
 
 class UploadVideoToBriefCam():
     pyautogui.PAUSE = 0.1
@@ -86,7 +106,7 @@ class UploadVideoToBriefCam():
                 if force_wait == False:
                     return False
                 elif current_retry_count >= UploadVideoToBriefCam.max_retries:
-                    raise TimeOutException
+                    raise BriefCamClickTimeoutException
                 else:
                     current_retry_count += 1
                     #time.sleep(5)
@@ -147,7 +167,7 @@ class UploadVideoToBriefCam():
         time.sleep(0.1)
         self._left_click_this_coordinate(case_coordinates)
 
-    def __create_case(self,filename):
+    def __search_and_leftclick_case(self, filename):
         no_results_found = None
         self.__extract_case_name_from_video_file_name(filename)
         self._left_click_this_coordinate(search_coordinates)
@@ -156,36 +176,56 @@ class UploadVideoToBriefCam():
         logging_to_console_and_syslog("Clicking on case at location:{}".format(case_coordinates))
         self._left_click_this_coordinate(case_coordinates)
 
-    def __check_for_add_video_button(self):
+    def __leftclick_add_video_button(self):
         return_value = False
-        for index in range(5):
+        for index in range(20):
             return_value = self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'), False)
             if return_value:
                 break
+            time.sleep(0.1)
         return return_value
 
-    def __add_video(self, file_name):
-        add_video_button_found=self.__check_for_add_video_button()
-        if not add_video_button_found:
-            logging_to_console_and_syslog("Add video button is not found. Creating the casename. {}."
-                                          .format(self.case_name))
-            self.__create_case_for_the_first_time()
-            if self.__check_for_add_video_button() == False:
-                logging_to_console_and_syslog("Add video button is still not found.")
-                raise TimeOutException
 
-        self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
-        self.__left_click_this_image(self.filename_formatted('next_button.png'))
-        self.__left_click_this_image(self.filename_formatted('browse_button.png'))
-        time.sleep(0.1)
+    def __make_sure_you_could_click_add_video_button(self):
+        add_video_button_found = False
+        while not add_video_button_found:
+            add_video_button_found = self.__leftclick_add_video_button()
+            if not add_video_button_found:
+                logging_to_console_and_syslog("Add video button is not found. Creating the casename. {}."
+                                          .format(self.case_name))
+                self.__create_case_for_the_first_time()
+
+    def __add_video(self, file_name):
+        self.__make_sure_you_could_click_add_video_button()
+        #self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
+        #self.__left_click_this_image(self.filename_formatted('next_button.png'))
+        #self.__left_click_this_image(self.filename_formatted('browse_button.png'))
+        self._left_click_this_coordinate(same_camera_coordinates)
+        time.sleep(1)
+        self._left_click_this_coordinate(same_camera_next_coordinates)
+        time.sleep(1)
+        self._left_click_this_coordinate(browse_for_file_location_coordinates)
+        time.sleep(1)
         pyautogui.typewrite(file_name, interval=0.1)
         pyautogui.press('enter')  # press the Enter key
         # left_click_this_image('open_button.png')
         self.__left_click_this_image(self.filename_formatted('next2_button.png'))
+        #self._left_click_this_coordinate(next_after_uploading_video_coordinates)
+        time.sleep(1)
+        self._left_click_this_coordinate(process_uploading_video_coordinates)
+        time.sleep(0.1)
         # pyautogui.hotkey('tab')
-        pyautogui.press('enter')  # press the Enter key
+        #pyautogui.press('enter')  # press the Enter key
+
 
     # self.__left_click_this_image(self.filename_formatted('process_button.png'))
+
+    def __make_sure_video_is_added_successfully(self):
+        self._left_click_this_coordinate(cancel_coordinates)
+        time.sleep(0.1)
+        self._left_click_this_coordinate(confirm_cancel_coordinates)
+        pyautogui.press('esc')
+        pyautogui.press('esc')
 
     def __find_and_close_unwanted_popup(self):
         # self.__left_click_this_image(self.filename_formatted("restore_pages_button.png"), False)
@@ -204,14 +244,26 @@ class UploadVideoToBriefCam():
         self.process.kill()
         self.process=None
 
-    def prepare_browser(self):
+    def prepare_browser(self,skip_login=False):
         if self.process == None:
             self.process = self.__open_browser()
             if self.process == None:
                 logging_to_console_and_syslog("Process is None")
-                raise NoProcessExcept(self.process)
-            self.__login_to_briefcam_server()
+                raise BriefCamNoProcessExcept(self.process)
+            if not skip_login:
+                self.__login_to_briefcam_server()
             self.browser_ready = True
+
+    def clean_up(self):
+        self.browser_ready = False
+        # close the browser and reopen it.
+        logging_to_console_and_syslog("Closing and reopening web browser.")
+        self.__close_browser()
+        self.prepare_browser(skip_login=True)
+
+    def __delete_video_clip_from_shared_volume(self, file_name):
+        logging_to_console_and_syslog("Deleting file_name {}".format(file_name))
+        os.remove(file_name)
 
     def process_new_file(self, file_name):
         job_done = False
@@ -220,14 +272,13 @@ class UploadVideoToBriefCam():
                 while self.browser_ready == False:
                     logging_to_console_and_syslog("Waiting for the browser to be ready")
                     time.sleep(1)
-                self.__create_case(file_name)
+                self.__search_and_leftclick_case(file_name)
                 self.__add_video(file_name)
+                self.__make_sure_video_is_added_successfully()
+                self.__delete_video_clip_from_shared_volume(file_name)
                 job_done = True
-            except TimeOutException:
-                # close the browser and reopen it.
-                logging_to_console_and_syslog("Closing and reopening web browser.")
-                self.__close_browser()
-                self.prepare_browser()
+            except BriefCamServerException:
+                self.clean_up()
 # self.__close_browser(process)
 
 
