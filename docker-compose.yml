@@ -86,6 +86,7 @@ services:
       topic_key: video-file-name
       case_url_key: http://mec-demo/synopsis/
       browser_loc_key: google-chrome
+      browser_name_key: chrome
       case_name_key: MEC-POC
       login_username_key: Brief
       login_password_key: Cam

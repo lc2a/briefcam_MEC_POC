@@ -3,6 +3,8 @@ import os
 import subprocess
 import time
 import sys
+import datetime
+
 sys.path.append("..") # Adds higher directory to python modules path.
 
 from log.log_file import logging_to_console_and_syslog
@@ -17,15 +19,15 @@ next_after_uploading_video_coordinates = (971,841)
 process_uploading_video_coordinates = (971,862)
 cancel_coordinates = (980, 287)
 confirm_cancel_coordinates = (717,607)
-
-
-class BriefCamAddVideoTimeOutException:
-    def __init__(self):
-        logging_to_console_and_syslog("BriefCam Server Add video click timeout occurred.")
+back_coordinates = (36, 69)
+create_case_coordinates = (929, 202)
 
 class BriefCamClickTimeoutException(Exception):
     def __init__(self):
         logging_to_console_and_syslog("BriefCam Server click timeout occurred.")
+        pyautogui.press('esc')
+        pyautogui.press('esc')
+        raise BriefCamServerException
 
 class BriefCamServerException(Exception):
     def __init__(self):
@@ -34,6 +36,7 @@ class BriefCamServerException(Exception):
 class BriefCamNoProcessExcept(Exception):
     def __init__(self):
         logging_to_console_and_syslog("BriefCam Server No process occurred.")
+        raise BriefCamServerException
 
 class UploadVideoToBriefCam():
     pyautogui.PAUSE = 0.1
@@ -55,6 +58,7 @@ class UploadVideoToBriefCam():
         self.image_directory = None
         self.process = None
         self.browser_ready = False
+        self.browser_name = None
         self.import_environment_variables()
         self.prepare_browser()
 
@@ -64,6 +68,7 @@ class UploadVideoToBriefCam():
             logging_to_console_and_syslog("Trying to read the environment variables")
             self.case_name = os.getenv("case_name_key", default=None)
             self.case_url = os.getenv("case_url_key", default=None)
+            self.browser_name = os.getenv("browser_name_key", default=None)
             self.browser_loc = os.getenv("browser_loc_key", default=None)
             self.username = os.getenv("login_username_key", default=None)
             self.password = os.getenv("login_password_key", default=None)
@@ -73,6 +78,7 @@ class UploadVideoToBriefCam():
         logging_to_console_and_syslog("case_url={}".format(self.case_url))
         logging_to_console_and_syslog("username={}".format(self.username))
         logging_to_console_and_syslog("browser_loc={}".format(self.browser_loc))
+        logging_to_console_and_syslog("browser_name={}".format(self.browser_name))
         logging_to_console_and_syslog("image_directory={}".format(self.image_directory))
 
     def __proceed_with_execution(self):
@@ -149,12 +155,31 @@ class UploadVideoToBriefCam():
             return
 
         self.case_name = filename[starting_index+1:ending_index]
+        now = datetime.datetime.now()
+        self.case_name = "{}_{}_{}_{}_{}".format(self.case_name,
+                                       now.year,
+                                       now.month,
+                                       now.day,
+                                       now.hour)
 
-        logging_to_console_and_syslog("Found casename {}.".format(self.case_name))
+        logging_to_console_and_syslog("Prepared casename {}.".format(self.case_name))
+
+    def __check_for_background_process(self,process_name):
+        result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
+        if result.find(process_name) == -1 or \
+                result.find("[{}] <defunct>".format(self.browser_name)) != -1:
+            logging_to_console_and_syslog("Cannot find process {} "
+                                          "running.".format(self.browser_name))
+            return False
+        else:
+            logging_to_console_and_syslog("process {} is "
+                                          "running.".format(self.browser_name))
+            return True
 
     def __create_case_for_the_first_time(self):
         # MEC-POC case is getting created for the first time.
-        self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
+        #self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
+        self._left_click_this_coordinate(create_case_coordinates)
         time.sleep(0.1)
         pyautogui.typewrite(self.case_name,
                             interval=0.1)  # prints out the case name with a quarter second delay after each character
@@ -169,6 +194,8 @@ class UploadVideoToBriefCam():
 
     def __search_and_leftclick_case(self, filename):
         no_results_found = None
+        pyautogui.press('esc')
+        pyautogui.press('esc')
         self.__extract_case_name_from_video_file_name(filename)
         self._left_click_this_coordinate(search_coordinates)
         time.sleep(0.1)
@@ -180,6 +207,7 @@ class UploadVideoToBriefCam():
         return_value = False
         for index in range(20):
             return_value = self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'), False)
+            pyautogui.press('esc')
             if return_value:
                 break
             time.sleep(0.1)
@@ -224,7 +252,9 @@ class UploadVideoToBriefCam():
         self._left_click_this_coordinate(cancel_coordinates)
         time.sleep(0.1)
         self._left_click_this_coordinate(confirm_cancel_coordinates)
+        time.sleep(0.5)
         pyautogui.press('esc')
+        time.sleep(0.2)
         pyautogui.press('esc')
 
     def __find_and_close_unwanted_popup(self):
@@ -243,6 +273,13 @@ class UploadVideoToBriefCam():
             return
         self.process.kill()
         self.process=None
+
+    def validate_browser(self):
+        if self.__check_for_background_process() == False:
+            self.clean_up()
+
+    def go_to_main_screen(self):
+        self._left_click_this_coordinate(back_coordinates)
 
     def prepare_browser(self,skip_login=False):
         if self.process == None:
@@ -276,6 +313,8 @@ class UploadVideoToBriefCam():
                 self.__add_video(file_name)
                 self.__make_sure_video_is_added_successfully()
                 self.__delete_video_clip_from_shared_volume(file_name)
+                self.go_to_main_screen()
+                self.validate_browser()
                 job_done = True
             except BriefCamServerException:
                 self.clean_up()
