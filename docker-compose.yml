@@ -8,14 +8,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /home/mec-poc/portainer_data:/data
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   redis:
     image: redis:latest
     ports:
       - "6379:6379"
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   redis-commander:
     hostname: redis-commander
     image: rediscommander/redis-commander:latest
@@ -23,6 +31,9 @@ services:
       - REDIS_HOSTS=redis:redis:6379
     ports:
       - 8081:8081
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   kafka:
     image: wurstmeister/kafka:latest
     ports:
@@ -40,6 +51,8 @@ services:
       KAFKA_CREATE_TOPICS: "video-file-name:10:1,split-video-file:5:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     depends_on:
       - zookeeper
   job_dispatcher:
@@ -109,6 +122,9 @@ services:
     image: couchdb
     ports:
       - 5984:5984
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   fauxton:
     image: 3apaxicom/fauxton
     depends_on:
@@ -121,6 +137,9 @@ services:
       - "fauxton -c http://mec-poc:5984"
     extra_hosts:
       - "mec-poc: 10.2.40.162"
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   front_end:
     image: ssriram1978/front_end:latest
     depends_on:
@@ -131,7 +150,7 @@ services:
       id_to_container_name_key: id_to_container
       image_name_key: ssriram1978/rtsp_recorder:latest
       environment_key: video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 rtsp_capture_application_key=openRTSP
-      bind_mount_key: /home/mec-poc/fromMobile:/data
+      bind_mount_key: /home/mec-poc/fromMobile:/data /etc/timezone:/etc/timezone:ro /etc/localtime:/etc/localtime:ro
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
@@ -143,10 +162,15 @@ services:
       - "5601:5601"
       - "9200:9200"
       - "5044:5044"
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   filebeat:
     image: docker.elastic.co/beats/filebeat:6.4.1
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     environment:
     - LOGSTASH_HOST=mecpoc-ProLiant-BL460c-Gen9
     - LOGSTASH_PORT=5044
