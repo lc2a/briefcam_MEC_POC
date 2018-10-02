@@ -12,6 +12,6 @@ RUN apt-get update
 RUN apt-get install -y vim
 RUN apt-get install -y net-tools
 RUN apt-get install -y procps
-
+RUN apt-get install -y iputils-ping
 COPY . .
 CMD python3 directory_watch/directory_watch.py

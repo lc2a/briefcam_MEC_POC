@@ -17,6 +17,7 @@ RUN  sudo apt-get update
 RUN  sudo apt-get install -y scrot
 RUN  sudo apt-get install -y net-tools
 RUN  sudo apt-get install -y vim
+RUN  sudo apt-get install -y iputils-ping
 #ENV   video_file_path_key=/data
 #ENV   broker_name_key=broker:9092
 #ENV   topic_key=video-file-name
