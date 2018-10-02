@@ -88,7 +88,7 @@ class UploadVideoToBriefCam():
             return False
         return True
 
-    max_retries = 10
+    max_retries = 4
 
     def _left_click_this_coordinate(self, coordinates):
         if coordinates is None:
@@ -205,7 +205,7 @@ class UploadVideoToBriefCam():
 
     def __leftclick_add_video_button(self):
         return_value = False
-        for index in range(20):
+        for index in range(4):
             return_value = self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'), False)
             pyautogui.press('esc')
             if return_value:
@@ -280,6 +280,7 @@ class UploadVideoToBriefCam():
 
     def go_to_main_screen(self):
         self._left_click_this_coordinate(back_coordinates)
+        time.sleep(4)
 
     def prepare_browser(self,skip_login=False):
         if self.process == None:
