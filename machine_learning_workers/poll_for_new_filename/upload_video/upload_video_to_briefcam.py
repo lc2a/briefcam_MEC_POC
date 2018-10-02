@@ -241,7 +241,7 @@ class UploadVideoToBriefCam():
         #self._left_click_this_coordinate(next_after_uploading_video_coordinates)
         time.sleep(1)
         self._left_click_this_coordinate(process_uploading_video_coordinates)
-        time.sleep(0.1)
+        time.sleep(1)
         # pyautogui.hotkey('tab')
         #pyautogui.press('enter')  # press the Enter key
 
@@ -250,11 +250,12 @@ class UploadVideoToBriefCam():
 
     def __make_sure_video_is_added_successfully(self):
         self._left_click_this_coordinate(cancel_coordinates)
-        time.sleep(0.1)
-        self._left_click_this_coordinate(confirm_cancel_coordinates)
-        time.sleep(0.5)
+        time.sleep(1)
         pyautogui.press('esc')
-        time.sleep(0.2)
+        self._left_click_this_coordinate(confirm_cancel_coordinates)
+        time.sleep(1)
+        pyautogui.press('esc')
+        time.sleep(1)
         pyautogui.press('esc')
 
     def __find_and_close_unwanted_popup(self):
