@@ -166,15 +166,14 @@ class UploadVideoToBriefCam():
 
     def __check_for_background_process(self,process_name):
         result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
-        if result.find(process_name) == -1 or \
-                result.find("[{}] <defunct>".format(self.browser_name)) != -1:
-            logging_to_console_and_syslog("Cannot find process {} "
-                                          "running.".format(self.browser_name))
-            return False
-        else:
+        if self.browser_name in result:
             logging_to_console_and_syslog("process {} is "
                                           "running.".format(self.browser_name))
             return True
+        else:
+            logging_to_console_and_syslog("Cannot find process {} "
+                                          "running.".format(self.browser_name))
+            return False
 
     def __create_case_for_the_first_time(self):
         # MEC-POC case is getting created for the first time.
