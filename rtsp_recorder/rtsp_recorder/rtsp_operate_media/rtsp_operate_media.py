@@ -4,13 +4,11 @@ import time
 import subprocess
 from sys import path
 from datetime import datetime
-
-sys.path.append("..")  # Adds higher directory to python modules path.
-from log.log_file import logging_to_console_and_syslog
 from ast import literal_eval
 from collections import defaultdict
 import shutil
-
+sys.path.append("..")  # Adds higher directory to python modules path.
+from log.log_file import logging_to_console_and_syslog
 
 class RtspOperationsOnMedia:
     def __init__(self):
@@ -19,6 +17,7 @@ class RtspOperationsOnMedia:
         self.rtsp_file_name_prefix = None
         self.rtsp_duration_of_the_video = 0
         self.rtsp_message = None
+        self.min_file_size = 0
         self.process_id = 0
         self.rtsp_stream_arguments = None
         self.rtsp_capture_application = None
@@ -38,6 +37,7 @@ class RtspOperationsOnMedia:
                 self.rtsp_file_name_prefix is None and \
                 self.rtsp_capture_application is None and \
                 self.rtsp_duration_of_the_video is 0 and \
+                self.min_file_size is 0 and \
                 self.rtsp_message is None:
             time.sleep(1)
             self.video_file_path = os.getenv("video_file_path_key",
@@ -49,6 +49,8 @@ class RtspOperationsOnMedia:
             self.rtsp_duration_of_the_video = int(os.getenv("rtsp_duration_of_the_video_key",
                                                             default=0))
             self.rtsp_message = os.getenv("rtsp_message_key", default=None)
+            self.min_file_size = int(os.getenv("min_file_size_key",
+                                               default=0))
 
         logging_to_console_and_syslog(("video_file_path={}"
                                        .format(self.video_file_path)))
@@ -59,6 +61,7 @@ class RtspOperationsOnMedia:
         logging_to_console_and_syslog(("rtsp_duration_of_the_video={}"
                                        .format(self.rtsp_duration_of_the_video)))
         logging_to_console_and_syslog("cwd={}".format(self.cwd))
+        logging_to_console_and_syslog("min_file_length={}".format(self.min_file_size))
 
     def __fetch_ip_address_from_message(self):
 
@@ -200,6 +203,13 @@ class RtspOperationsOnMedia:
                                                           self.video_file_name_size[filename],
                                                           filesize))
                                 try:
+                                    if filesize < self.min_file_size:
+                                        logging_to_console_and_syslog("Deleting this file {} size {} because the file"
+                                                                      "size is less than the min file length {}."
+                                                                      .format(filename,
+                                                                              filesize,
+                                                                              self.min_file_size))
+                                        os.remove(filename)
                                     shutil.move(filename, destination)
                                     del self.video_file_name_size[filename]
                                 except:

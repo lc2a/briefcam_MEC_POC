@@ -100,6 +100,7 @@ if __name__ == "__main__":
     os.environ["environment_key"] = "video_file_path_key=/data " \
                                     "rtsp_file_name_prefix_key=briefcam " \
                                     "rtsp_duration_of_the_video_key=30 " \
+                                    "min_file_size_key=10000000" \
                                     "rtsp_capture_application_key=openRTSP "
     os.environ["bind_mount_key"] = "/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker"
 
