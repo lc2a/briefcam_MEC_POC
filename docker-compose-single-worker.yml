@@ -59,7 +59,7 @@ services:
   machine_learning_workers:
     image: ssriram1978/machine_learning_workers
     deploy:
-      replicas: 10
+      replicas: 1
 #      resources:
 #        limits:
 #          cpus: "0.8"
@@ -68,15 +68,6 @@ services:
         condition: on-failure
     ports:
       - "5903:5900"
-      - "5904:5900"
-      - "5905:5900"
-      - "5906:5900"
-      - "5907:5900"
-      - "5908:5900"
-      - "5909:5900"
-      - "5910:5900"
-      - "5911:5900"
-      - "5912:5900"
     depends_on:
       - kafka
       - zookeeper
