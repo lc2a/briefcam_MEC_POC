@@ -149,22 +149,25 @@ class UploadVideoToBriefCam():
             logging_to_console_and_syslog("Unable to find / in the filename {}.".format(filename))
             return
 
-        ending_index = filename.find('_',starting_index)
+        ending_index = filename.rfind(".mp4")
         if ending_index == -1:
-            logging_to_console_and_syslog("Unable to find _ in the filename {}.".format(filename))
+            logging_to_console_and_syslog("Unable to find .mp4 in the filename {}.".format(filename))
             return
 
-        self.case_name = filename[starting_index+1:ending_index]
-        now = datetime.datetime.now()
-        self.case_name = "{}_{}_{}_{}_{}".format(self.case_name,
-                                       now.year,
-                                       now.month,
-                                       now.day,
-                                       now.hour)
+        case_name = filename[starting_index+1:ending_index]
+        case_name_list = case_name.split('_')
+        if len(case_name_list) <=0:
+            logging_to_console_and_syslog("Unable to find _ in the filename {}.".format(filename))
+            return
+        # Example: case_name = camera1_2018_10_03_10_03_15_282182.mp4
+        #Discard the microseconds, seconds and minutes from the casename.
+        # Just include camera name, date, hour in the case_name.
+        # Just create casename every hour and group videos based on every hour.
+        self.case_name = '_'.join(case_name_list[0:len(case_name_list) - 3])
 
         logging_to_console_and_syslog("Prepared casename {}.".format(self.case_name))
 
-    def __check_for_background_process(self,process_name):
+    def __check_for_background_process(self):
         result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
         if self.browser_name in result:
             logging_to_console_and_syslog("process {} is "
@@ -216,6 +219,7 @@ class UploadVideoToBriefCam():
     def __make_sure_you_could_click_add_video_button(self):
         add_video_button_found = False
         while not add_video_button_found:
+            self.validate_browser()
             add_video_button_found = self.__leftclick_add_video_button()
             if not add_video_button_found:
                 logging_to_console_and_syslog("Add video button is not found. Creating the casename. {}."
