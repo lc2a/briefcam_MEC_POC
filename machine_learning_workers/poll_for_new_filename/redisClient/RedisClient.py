@@ -103,7 +103,7 @@ class RedisClient(object):
     def cleanup(self):
         pass
 
-
+#unit tests
 class TestRedisClient(unittest.TestCase):
     def setUp(self):
         os.environ["redis_server_hostname_key"] = "10.2.40.162"
