@@ -3,11 +3,11 @@ import os
 import subprocess
 import time
 import sys
-import datetime
 
 sys.path.append("..") # Adds higher directory to python modules path.
 
 from log.log_file import logging_to_console_and_syslog
+from redisClient.RedisClient import RedisClient
 
 search_coordinates = (840, 200)
 case_coordinates = (83, 565)
@@ -21,6 +21,7 @@ cancel_coordinates = (980, 287)
 confirm_cancel_coordinates = (717,607)
 back_coordinates = (36, 69)
 create_case_coordinates = (929, 202)
+cancel_search_coordinates = (842,163)
 
 class BriefCamClickTimeoutException(Exception):
     def __init__(self):
@@ -61,6 +62,7 @@ class UploadVideoToBriefCam():
         self.browser_name = None
         self.import_environment_variables()
         self.prepare_browser()
+        self.redis_instance = RedisClient()
 
     def import_environment_variables(self):
         while self.case_name == None:
@@ -180,7 +182,6 @@ class UploadVideoToBriefCam():
 
     def __create_case_for_the_first_time(self):
         # MEC-POC case is getting created for the first time.
-        #self.__left_click_this_image(self.filename_formatted('create_case_button.png'))
         self._left_click_this_coordinate(create_case_coordinates)
         time.sleep(0.1)
         pyautogui.typewrite(self.case_name,
@@ -215,6 +216,8 @@ class UploadVideoToBriefCam():
             time.sleep(0.1)
         return return_value
 
+    def __write_case_name_in_redis(self,case_name):
+        self.redis_instance.write_an_event_on_redis_db(case_name)
 
     def __make_sure_you_could_click_add_video_button(self):
         add_video_button_found = False
@@ -222,15 +225,21 @@ class UploadVideoToBriefCam():
             self.validate_browser()
             add_video_button_found = self.__leftclick_add_video_button()
             if not add_video_button_found:
-                logging_to_console_and_syslog("Add video button is not found. Creating the casename. {}."
+                logging_to_console_and_syslog("Add video button is not found for case name {}."
                                           .format(self.case_name))
-                self.__create_case_for_the_first_time()
+                #look up in redisClient db to check if the case name exists.
+                # if the case name already exists in redisDB, then, keep trying until you find the casename.
+                # else create the case name and update the same in redisClient DB.
+                if self.redis_instance.check_if_the_key_exists_in_redis_db(self.case_name):
+                    logging_to_console_and_syslog("Case name {} already exists. Retrying after a second..")
+                    self._left_click_this_coordinate(cancel_search_coordinates)
+                    time.sleep(0.4)
+                else:
+                    self.redis_instance.set_the_key_in_redis_db(self.case_name)
+                    self.__create_case_for_the_first_time()
 
     def __add_video(self, file_name):
         self.__make_sure_you_could_click_add_video_button()
-        #self.__left_click_this_image(self.filename_formatted('same_camera_button.png'), False)
-        #self.__left_click_this_image(self.filename_formatted('next_button.png'))
-        #self.__left_click_this_image(self.filename_formatted('browse_button.png'))
         self._left_click_this_coordinate(same_camera_coordinates)
         time.sleep(1)
         self._left_click_this_coordinate(same_camera_next_coordinates)
@@ -241,15 +250,11 @@ class UploadVideoToBriefCam():
         pyautogui.press('enter')  # press the Enter key
         # left_click_this_image('open_button.png')
         self.__left_click_this_image(self.filename_formatted('next2_button.png'))
-        #self._left_click_this_coordinate(next_after_uploading_video_coordinates)
         time.sleep(1)
         self._left_click_this_coordinate(process_uploading_video_coordinates)
         time.sleep(1)
         # pyautogui.hotkey('tab')
         #pyautogui.press('enter')  # press the Enter key
-
-
-    # self.__left_click_this_image(self.filename_formatted('process_button.png'))
 
     def __make_sure_video_is_added_successfully(self):
         self._left_click_this_coordinate(cancel_coordinates)
@@ -273,13 +278,13 @@ class UploadVideoToBriefCam():
         return process_id
 
     def __close_browser(self):
-        if self.process == None:
+        if self.process is None:
             return
         self.process.kill()
         self.process=None
 
     def validate_browser(self):
-        if self.__check_for_background_process() == False:
+        if not self.__check_for_background_process():
             self.clean_up()
 
     def go_to_main_screen(self):
@@ -287,9 +292,9 @@ class UploadVideoToBriefCam():
         time.sleep(4)
 
     def prepare_browser(self,skip_login=False):
-        if self.process == None:
+        if self.process is None:
             self.process = self.__open_browser()
-            if self.process == None:
+            if self.process is None:
                 logging_to_console_and_syslog("Process is None")
                 raise BriefCamNoProcessExcept(self.process)
             if not skip_login:
@@ -311,7 +316,7 @@ class UploadVideoToBriefCam():
         job_done = False
         while job_done == False:
             try:
-                while self.browser_ready == False:
+                while not self.browser_ready:
                     logging_to_console_and_syslog("Waiting for the browser to be ready")
                     time.sleep(1)
                 self.__search_and_leftclick_case(file_name)

@@ -6,9 +6,10 @@ time.sleep(2)
 from kafka import KafkaConsumer
 import os
 import sys, traceback
-import redis
+
 import logging
 from log.log_file import logging_to_console_and_syslog
+from redisClient.RedisClient import RedisClient
 from datetime import datetime
 
 
@@ -26,47 +27,24 @@ class PollForNewFileName:
         self.consumer_instance = None
         import upload_video.upload_video_to_briefcam
         self.briefcam_obj = None
-        self.redis_instance = None
-        self.redis_server_hostname = None
-        self.redis_server_port = 0
-        self.redis_log_keyname = None
         self.hostname = os.popen("cat /etc/hostname").read()
         self.cont_id = os.popen("cat /proc/self/cgroup | head -n 1 | cut -d '/' -f3").read()
+        self.redis_instance = RedisClient()
 
     def load_environment_variables(self):
         while self.broker_name is None and \
-                self.topic is None and \
-                self.redis_server_hostname is None and \
-                self.redis_log_keyname is None and \
-                self.redis_server_port == 0:
+                self.topic is None:
             time.sleep(2)
-            logging_to_console_and_syslog("Trying to read the "
-                                          "environment variables...")
             self.topic = os.getenv("topic_key",
                                    default=None)
             self.broker_name = os.getenv("broker_name_key",
                                          default=None)
-            self.redis_server_hostname = os.getenv("redis_server_hostname_key",
-                                                   default=None)
-            self.redis_log_keyname = os.getenv("redis_log_keyname_key",
-                                               default=None)
-            self.redis_server_port = int(os.getenv("redis_server_port_key",
-                                                   default=0))
 
         logging_to_console_and_syslog("broker_name={}"
                                       .format(self.broker_name),
                                       logging.INFO)
         logging_to_console_and_syslog("topic={}"
                                       .format(self.topic),
-                                      logging.INFO)
-        logging_to_console_and_syslog("redis_server_hostname={}"
-                                      .format(self.redis_server_hostname),
-                                      logging.INFO)
-        logging_to_console_and_syslog("redis_log_keyname={}"
-                                      .format(self.redis_log_keyname),
-                                      logging.INFO)
-        logging_to_console_and_syslog("redis_server_port={}"
-                                      .format(self.redis_server_port),
                                       logging.INFO)
 
     def connect_to_kafka_broker(self):
@@ -81,25 +59,6 @@ class PollForNewFileName:
                                       'attached to bootstrap server={},'
                                       .format(self.broker_name),
                                       logging.INFO)
-
-    def connect_to_redis_server(self):
-        self.redis_instance = None
-        while self.redis_instance == None:
-            self.redis_instance = redis.StrictRedis(host=self.redis_server_hostname,
-                                                    port=self.redis_server_port,
-                                                    db=0)
-        logging_to_console_and_syslog("Successfully connected "
-                                      "to redis server {},port {}"
-                                      .format(self.redis_server_hostname,
-                                              self.redis_server_port),
-                                      logging.INFO)
-
-    def write_an_event_on_redis_db(self, event):
-        if self.redis_instance is not None:
-            event_string = "Hostname=" + self.hostname + " containerID=" + self.cont_id[:12] + event
-            logging_to_console_and_syslog("Writing {} to {}".format(event_string, self.redis_log_keyname))
-            # ret = self.redis_instance.append(self.redis_log_keyname, event_string)
-            # logging_to_console_and_syslog(ret)
 
     def close_kafka_instance(self):
         if self.consumer_instance:
@@ -138,9 +97,9 @@ class PollForNewFileName:
                     time_elapsed = datetime.now() - start_time
                     try:
                         event = 'Time taken to process {} = (hh:mm:ss.ms) {}'.format(filename, time_elapsed)
-                        self.write_an_event_on_redis_db(event)
+                        self.redis_instance.write_an_event_on_redis_db(event)
                     except:
-                        logging_to_console_and_syslog("caught an exception when trying to write to redis")
+                        logging_to_console_and_syslog("caught an exception when trying to write to redisClient")
         except KeyboardInterrupt:
             logging_to_console_and_syslog("Keyboard interrupt. {}".format(sys.exc_info()[0]))
             raise KeyboardInterrupt
@@ -187,7 +146,7 @@ class PollForNewFileName:
                         # self.write_an_event_on_redis_db(event)
                         time.sleep(5)
                     except:
-                        logging_to_console_and_syslog("caught an exception when trying to write to redis")
+                        logging_to_console_and_syslog("caught an exception when trying to write to redisClient")
         except KeyboardInterrupt:
             logging_to_console_and_syslog("Keyboard interrupt. {}".format(sys.exc_info()[0]))
             raise KeyboardInterrupt
@@ -209,7 +168,6 @@ if __name__ == '__main__':
     poll_instance = PollForNewFileName()
     poll_instance.load_environment_variables()
     poll_instance.connect_to_xhost_environment()
-    poll_instance.connect_to_redis_server()
     continue_poll = True
     try:
         while continue_poll:

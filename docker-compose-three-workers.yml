@@ -18,17 +18,17 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   redis:
-    image: redis:latest
+    image: redisClient:latest
     ports:
       - "6379:6379"
     volumes:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   redis-commander:
-    hostname: redis-commander
-    image: rediscommander/redis-commander:latest
+    hostname: redisClient-commander
+    image: rediscommander/redisClient-commander:latest
     environment:
-      - REDIS_HOSTS=redis:redis:6379
+      - REDIS_HOSTS=redisClient:redisClient:6379
     ports:
       - 8081:8081
     volumes:
@@ -99,7 +99,7 @@ services:
       login_username_key: Brief
       login_password_key: Cam
       image_directory: image_cont
-      redis_server_hostname_key: mec-demo
+      redis_server_hostname_key: redisClient
       redis_server_port_key: 6379
       redis_log_keyname_key: briefcam-events
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
