@@ -178,10 +178,10 @@ services:
     - LOGSTASH_HOST=mecpoc-ProLiant-BL460c-Gen9
     - LOGSTASH_PORT=5044
     - SHIPPER_NAME=mec
+    extra_hosts:
+    - "mec-poc: 10.2.40.162"
   jenkins:
-    image: jenkins/jenkins
+    image: jenkins/jenkins:lts
     volumes:
       - "/home/mec-poc/briefcam/jenkins_home:/var/jenkins_home"
       - "/home/mec-poc/briefcam/jenkins/jenkins:lts"
-    extra_hosts:
-    - "mec-poc: 10.2.40.162"
