@@ -174,5 +174,4 @@ services:
   jenkins:
     image: jenkins/jenkins:lts
     volumes:
-      - "/home/mec-poc/briefcam/jenkins_home:/var/jenkins_home"
-      - "/home/mec-poc/briefcam/jenkins/jenkins:lts"
+      - "/home/mec-poc/jenkins_home:/var/jenkins_home"
