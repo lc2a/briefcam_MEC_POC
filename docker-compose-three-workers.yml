@@ -102,6 +102,10 @@ services:
       redis_server_hostname_key: redisClient
       redis_server_port_key: 6379
       redis_log_keyname_key: briefcam-events
+      max_retry_attempts_key: 8
+      sleep_time_key: 1
+      time_between_input_character_key: 0.1
+      time_for_browser_to_open_key: 60
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     volumes:
       - /home/mec-poc/fromMobile:/data
@@ -168,5 +172,7 @@ services:
     - LOGSTASH_HOST=mecpoc-ProLiant-BL460c-Gen9
     - LOGSTASH_PORT=5044
     - SHIPPER_NAME=mec
+  jenkins:
+    image: jenkins/jenkins
     extra_hosts:
     - "mec-poc: 10.2.40.162"

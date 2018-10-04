@@ -66,7 +66,7 @@ class RedisClient(object):
     def write_an_event_on_redis_db(self, event):
         return_value = False
         if self.redis_instance is not None:
-            event_string = "Hostname={},containerID={},event={}".format(self.hostname, self.cont_id[:12], event)
+            event_string = "\nHostname={},containerID={},event={}".format(self.hostname, self.cont_id[:12], event)
 
             if self.redis_instance.exists(self.cont_id):
                 self.redis_instance.append(self.cont_id, event_string)
