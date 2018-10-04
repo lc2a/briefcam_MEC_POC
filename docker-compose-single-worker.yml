@@ -25,8 +25,7 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   redis-commander:
-    hostname: redis-commander
-    image: rediscommander/redisClient-commander:latest
+    image: rediscommander/redis-commander:latest
     environment:
       - REDIS_HOSTS=redis:redis:6379
     ports:
