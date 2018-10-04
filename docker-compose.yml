@@ -18,7 +18,7 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   redis:
-    image: redisClient:latest
+    image: redis:latest
     ports:
       - "6379:6379"
     volumes:
@@ -28,7 +28,7 @@ services:
     hostname: redisClient-commander
     image: rediscommander/redisClient-commander:latest
     environment:
-      - REDIS_HOSTS=redisClient:redisClient:6379
+      - REDIS_HOSTS=redis:redis:6379
     ports:
       - 8081:8081
     volumes:
@@ -181,9 +181,8 @@ services:
     - SHIPPER_NAME=mec
   jenkins:
     image: jenkins/jenkins
-
     volumes:
-      - "jenkins_home:/var/jenkins_home"
-      - "jenkins/jenkins:lts"
+      - "/home/mec-poc/briefcam/jenkins_home:/var/jenkins_home"
+      - "/home/mec-poc/briefcam/jenkins/jenkins:lts"
     extra_hosts:
     - "mec-poc: 10.2.40.162"

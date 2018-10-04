@@ -18,7 +18,7 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   redis:
-    image: redisClient:latest
+    image: redis:latest
     ports:
       - "6379:6379"
     volumes:
@@ -28,7 +28,7 @@ services:
     hostname: redisClient-commander
     image: rediscommander/redisClient-commander:latest
     environment:
-      - REDIS_HOSTS=redisClient:redisClient:6379
+      - REDIS_HOSTS=redis:redis:6379
     ports:
       - 8081:8081
     volumes:
