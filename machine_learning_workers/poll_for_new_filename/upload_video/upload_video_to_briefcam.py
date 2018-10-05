@@ -115,31 +115,31 @@ class UploadVideoToBriefCam():
                                                default=None)
 
         self.write_log_to_redis_and_logging_framework("password={}"
-                                                      .format(self.password))
+                                                      .format(self.password),True)
         self.write_log_to_redis_and_logging_framework("case_name={}"
-                                                      .format(self.case_name))
+                                                      .format(self.case_name),True)
         self.write_log_to_redis_and_logging_framework("case_url={}"
-                                                      .format(self.case_url))
+                                                      .format(self.case_url),True)
         self.write_log_to_redis_and_logging_framework("username={}"
                                                       .format(self.username))
         self.write_log_to_redis_and_logging_framework("browser_loc={}"
-                                                      .format(self.browser_loc))
+                                                      .format(self.browser_loc),True)
         self.write_log_to_redis_and_logging_framework("browser_name={}"
-                                                      .format(self.browser_name))
+                                                      .format(self.browser_name),True)
         self.write_log_to_redis_and_logging_framework("image_directory={}"
-                                                      .format(self.image_directory))
+                                                      .format(self.image_directory),True)
         self.write_log_to_redis_and_logging_framework("max_retry_attempts={}"
-                                                      .format(self.max_retry_attempts))
+                                                      .format(self.max_retry_attempts),True)
         self.write_log_to_redis_and_logging_framework("sleep_time={}"
-                                                      .format(self.sleep_time))
+                                                      .format(self.sleep_time),True)
         self.write_log_to_redis_and_logging_framework("time_between_input_character={}"
-                                                      .format(self.time_between_input_character))
+                                                      .format(self.time_between_input_character),True)
         self.write_log_to_redis_and_logging_framework("time_for_browser_to_open={}"
-                                                      .format(self.time_for_browser_to_open))
+                                                      .format(self.time_for_browser_to_open),True)
         self.write_log_to_redis_and_logging_framework("total_job_done_count_redis_name={}"
-                                                      .format(self.total_job_done_count_redis_name))
+                                                      .format(self.total_job_done_count_redis_name),True)
         self.write_log_to_redis_and_logging_framework("redis_log_keyname={}"
-                                      .format(self.redis_log_keyname))
+                                      .format(self.redis_log_keyname),True)
 
     def __proceed_with_execution(self):
         # pyautogui.alert('Shall I proceed in creating a case?')
@@ -269,12 +269,13 @@ class UploadVideoToBriefCam():
         pyautogui.press('esc')
         self.__extract_case_name_from_video_file_name(filename)
         pyautogui.hotkey('esc')
-        time.sleep(self.time_between_input_character)
+        time.sleep(self.sleep_time)
         self._left_click_this_coordinate(search_coordinates)
         time.sleep(self.time_between_input_character)
         pyautogui.typewrite(self.case_name, interval=0.1)
         self.write_log_to_redis_and_logging_framework(
             "Clicking on case at location:{}".format(case_coordinates))
+        time.sleep(self.sleep_time)
         self._left_click_this_coordinate(case_coordinates)
 
     def __leftclick_add_video_button(self):
