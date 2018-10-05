@@ -86,6 +86,7 @@ services:
       redis_server_hostname_key: mec-demo
       redis_server_port_key: 6379
       redis_log_keyname_key: briefcam-events
+      total_job_done_count_redis_name_key: total_job_done_count
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     privileged: true
     volumes:

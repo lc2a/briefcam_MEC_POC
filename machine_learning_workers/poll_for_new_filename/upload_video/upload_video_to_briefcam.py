@@ -3,6 +3,8 @@ import os
 import subprocess
 import time
 import sys
+from subprocess import check_output
+import signal
 
 sys.path.append("..") # Adds higher directory to python modules path.
 
@@ -25,26 +27,33 @@ cancel_search_coordinates = (842,163)
 
 class BriefCamClickTimeoutException(Exception):
     def __init__(self):
-        logging_to_console_and_syslog("BriefCam Server click timeout occurred.")
+        event = "BriefCam Server click timeout occurred."
+        logging_to_console_and_syslog(event)
+        self.redis_instance.write_an_event_on_redis_db(event)
+        self.redis_instance.write_an_event_on_redis_db(event, self.redis_log_keyname)
         pyautogui.press('esc')
         pyautogui.press('esc')
         raise BriefCamServerException
 
 class BriefCamServerException(Exception):
     def __init__(self):
-        logging_to_console_and_syslog("BriefCam Server exception occurred.")
+        event = "BriefCam Server exception occurred."
+        logging_to_console_and_syslog(event)
+        self.redis_instance.write_an_event_on_redis_db(event)
+        self.redis_instance.write_an_event_on_redis_db(event, self.redis_log_keyname)
 
 class BriefCamNoProcessExcept(Exception):
     def __init__(self):
-        logging_to_console_and_syslog("BriefCam Server No process occurred.")
+        event = "BriefCam Server No process occurred."
+        logging_to_console_and_syslog(event)
+        self.redis_instance.write_an_event_on_redis_db(event)
+        self.redis_instance.write_an_event_on_redis_db(event, self.redis_log_keyname)
         raise BriefCamServerException
 
 class UploadVideoToBriefCam():
     pyautogui.PAUSE = 0.1
-
     def filename_formatted(self, filename):
         if __name__ == "__main__":
-            # print(os.path.dirname(os.path.realpath(__file__)) + "/" + self.image_directory + "/" + filename)
             return filename
         else:
             return os.path.dirname(os.path.realpath(__file__)) + "/" + self.image_directory + "/" + filename
@@ -62,15 +71,34 @@ class UploadVideoToBriefCam():
         self.max_retry_attempts = 0
         self.sleep_time = 1
         self.time_for_browser_to_open = 60
+        self.time_between_input_character = 0
+        self.redis_log_keyname = None
+        self.total_job_done_count_redis_name = None
+        self.redis_instance = RedisClient()
         self.import_environment_variables()
         self.prepare_browser()
-        self.redis_instance = RedisClient()
 
+    def write_log_to_redis_and_logging_framework(self, event,write_to_redis_event_summary=False):
+        logging_to_console_and_syslog(event)
+        self.redis_instance.write_an_event_on_redis_db(event)
+        if write_to_redis_event_summary:
+            self.redis_instance.write_an_event_on_redis_db(event, self.redis_log_keyname)
 
     def import_environment_variables(self):
-        while self.case_name == None:
+        while self.case_name is None or \
+            self.case_url is None or \
+            self.browser_name is None or \
+            self.browser_loc is None or \
+            self.username is None or \
+            self.password is None or \
+            self.image_directory is None or \
+            self.max_retry_attempts is 0 or \
+            self.sleep_time is 0 or \
+            self.time_between_input_character is 0 or \
+            self.redis_log_keyname is None or \
+            self.time_for_browser_to_open is 0 :
+
             time.sleep(self.sleep_time)
-            logging_to_console_and_syslog("Trying to read the environment variables")
             self.case_name = os.getenv("case_name_key", default=None)
             self.case_url = os.getenv("case_url_key", default=None)
             self.browser_name = os.getenv("browser_name_key", default=None)
@@ -82,18 +110,36 @@ class UploadVideoToBriefCam():
             self.sleep_time = int(os.getenv("sleep_time_key", default=0))
             self.time_between_input_character = float(os.getenv("time_between_input_character_key", default=0))
             self.time_for_browser_to_open = int(os.getenv("time_for_browser_to_open_key", default=0))
+            self.total_job_done_count_redis_name = os.getenv("total_job_done_count_redis_name_key", default=None)
+            self.redis_log_keyname = os.getenv("redis_log_keyname_key",
+                                               default=None)
 
-        logging_to_console_and_syslog("password={}".format(self.password))
-        logging_to_console_and_syslog("case_name={}".format(self.case_name))
-        logging_to_console_and_syslog("case_url={}".format(self.case_url))
-        logging_to_console_and_syslog("username={}".format(self.username))
-        logging_to_console_and_syslog("browser_loc={}".format(self.browser_loc))
-        logging_to_console_and_syslog("browser_name={}".format(self.browser_name))
-        logging_to_console_and_syslog("image_directory={}".format(self.image_directory))
-        logging_to_console_and_syslog("max_retry_attempts={}".format(self.max_retry_attempts))
-        logging_to_console_and_syslog("sleep_time={}".format(self.sleep_time))
-        logging_to_console_and_syslog("time_between_input_character={}".format(self.time_between_input_character))
-        logging_to_console_and_syslog("time_for_browser_to_open={}".format(self.time_for_browser_to_open))
+        self.write_log_to_redis_and_logging_framework("password={}"
+                                                      .format(self.password))
+        self.write_log_to_redis_and_logging_framework("case_name={}"
+                                                      .format(self.case_name))
+        self.write_log_to_redis_and_logging_framework("case_url={}"
+                                                      .format(self.case_url))
+        self.write_log_to_redis_and_logging_framework("username={}"
+                                                      .format(self.username))
+        self.write_log_to_redis_and_logging_framework("browser_loc={}"
+                                                      .format(self.browser_loc))
+        self.write_log_to_redis_and_logging_framework("browser_name={}"
+                                                      .format(self.browser_name))
+        self.write_log_to_redis_and_logging_framework("image_directory={}"
+                                                      .format(self.image_directory))
+        self.write_log_to_redis_and_logging_framework("max_retry_attempts={}"
+                                                      .format(self.max_retry_attempts))
+        self.write_log_to_redis_and_logging_framework("sleep_time={}"
+                                                      .format(self.sleep_time))
+        self.write_log_to_redis_and_logging_framework("time_between_input_character={}"
+                                                      .format(self.time_between_input_character))
+        self.write_log_to_redis_and_logging_framework("time_for_browser_to_open={}"
+                                                      .format(self.time_for_browser_to_open))
+        self.write_log_to_redis_and_logging_framework("total_job_done_count_redis_name={}"
+                                                      .format(self.total_job_done_count_redis_name))
+        self.write_log_to_redis_and_logging_framework("redis_log_keyname={}"
+                                      .format(self.redis_log_keyname))
 
     def __proceed_with_execution(self):
         # pyautogui.alert('Shall I proceed in creating a case?')
@@ -105,37 +151,39 @@ class UploadVideoToBriefCam():
     def _left_click_this_coordinate(self, coordinates):
         if coordinates is None:
             return
-        logging_to_console_and_syslog("Trying to left click this coordinate[{},{}] ".format(coordinates[0],
-                                                                                            coordinates[1]))
+        event_log = "Trying to left click this coordinate[{},{}] ".format(coordinates[0], coordinates[1])
+        self.write_log_to_redis_and_logging_framework(event_log)
         pyautogui.click(x=coordinates[0], y=coordinates[1])
 
     def __left_click_this_image(self, button_name, force_wait=True):
         button_location = None
         current_retry_count = 0
-        while button_location == None:
-            logging_to_console_and_syslog("Trying to match " + button_name)
+        while button_location is None:
+            event = "Trying to match " + button_name
+            self.write_log_to_redis_and_logging_framework(event)
             try:
                 button_location = pyautogui.locateOnScreen(button_name, grayscale=True)
             except FileNotFoundError:
-                logging_to_console_and_syslog("File {} Not Found".format(button_name))
+                event = "File {} Not Found".format(button_name)
+                self.write_log_to_redis_and_logging_framework(event)
                 raise FileNotFoundError
-                break
-            if button_location == None:
-                if force_wait == False:
+            if button_location is None:
+                if not force_wait:
                     return False
                 elif current_retry_count >= self.max_retry_attempts:
-                    logging_to_console_and_syslog("For button name {} Retry attempts {} is greater than max retries {}"
-                                                  .format(button_name,
+                    event_log = "For button name {} Retry attempts {} is " \
+                            "greater than max retries {}".format(button_name,
                                                           current_retry_count,
-                                                          self.max_retry_attempts))
+                                                          self.max_retry_attempts)
+                    self.write_log_to_redis_and_logging_framework(event_log)
                     raise BriefCamClickTimeoutException
                 else:
                     current_retry_count += 1
                     time.sleep(self.sleep_time)
 
-        logging_to_console_and_syslog("button_name={},location={}".format(button_name, button_location))
         buttonx, buttony = pyautogui.center(button_location)
-        logging_to_console_and_syslog("buttonx={} and buttony={}".format(buttonx, buttony))
+        event_log = "Clicking buttonx={} and buttony={}".format(buttonx, buttony)
+        self.write_log_to_redis_and_logging_framework(event_log)
         pyautogui.click(buttonx, buttony)
         return True
 
@@ -143,7 +191,7 @@ class UploadVideoToBriefCam():
         pyautogui.press('esc')
         for index in range(5):
             return_value = self.__left_click_this_image(self.filename_formatted('signin_button.png'), False)
-            if return_value == True:
+            if return_value:
                 break
         if return_value:
             pyautogui.hotkey('tab')
@@ -158,23 +206,27 @@ class UploadVideoToBriefCam():
 
     def __extract_case_name_from_video_file_name(self,filename):
         if filename is None:
-            logging_to_console_and_syslog("Filename is None")
+            event = "Filename is None"
+            self.write_log_to_redis_and_logging_framework(event)
             return
 
         starting_index = filename.rfind('/')
         if starting_index == -1:
-            logging_to_console_and_syslog("Unable to find / in the filename {}.".format(filename))
+            event = "Unable to find / in the filename {}.".format(filename)
+            self.write_log_to_redis_and_logging_framework(event)
             return
 
         ending_index = filename.rfind(".mp4")
         if ending_index == -1:
-            logging_to_console_and_syslog("Unable to find .mp4 in the filename {}.".format(filename))
+            self.write_log_to_redis_and_logging_framework(
+                "Unable to find .mp4 in the filename {}.".format(filename))
             return
 
         case_name = filename[starting_index+1:ending_index]
         case_name_list = case_name.split('_')
         if len(case_name_list) <=0:
-            logging_to_console_and_syslog("Unable to find _ in the filename {}.".format(filename))
+            self.write_log_to_redis_and_logging_framework(
+                "Unable to find _ in the filename {}.".format(filename))
             return
         # Example: case_name = camera1_2018_10_03_10_03_15_282182.mp4
         #Discard the microseconds, seconds and minutes from the casename.
@@ -182,16 +234,17 @@ class UploadVideoToBriefCam():
         # Just create casename every hour and group videos based on every hour.
         self.case_name = '_'.join(case_name_list[0:len(case_name_list) - 3])
 
-        logging_to_console_and_syslog("Prepared casename {}.".format(self.case_name))
+        self.write_log_to_redis_and_logging_framework(
+            "Prepared casename {}.".format(self.case_name))
 
     def __check_for_background_process(self):
         result = subprocess.run(['ps', 'aux'], stdout=subprocess.PIPE).stdout.decode('utf-8')
         if self.browser_name in result:
-            logging_to_console_and_syslog("process {} is "
+            self.write_log_to_redis_and_logging_framework("process {} is "
                                           "running.".format(self.browser_name))
             return True
         else:
-            logging_to_console_and_syslog("Cannot find process {} "
+            self.write_log_to_redis_and_logging_framework("Cannot find process {} "
                                           "running.".format(self.browser_name))
             return False
 
@@ -215,16 +268,20 @@ class UploadVideoToBriefCam():
         pyautogui.press('esc')
         pyautogui.press('esc')
         self.__extract_case_name_from_video_file_name(filename)
+        pyautogui.hotkey('esc')
+        time.sleep(self.time_between_input_character)
         self._left_click_this_coordinate(search_coordinates)
         time.sleep(self.time_between_input_character)
         pyautogui.typewrite(self.case_name, interval=0.1)
-        logging_to_console_and_syslog("Clicking on case at location:{}".format(case_coordinates))
+        self.write_log_to_redis_and_logging_framework(
+            "Clicking on case at location:{}".format(case_coordinates))
         self._left_click_this_coordinate(case_coordinates)
 
     def __leftclick_add_video_button(self):
         return_value = False
         for index in range(4):
-            return_value = self.__left_click_this_image(self.filename_formatted('add_video_to_case_button.png'), False)
+            return_value = self.__left_click_this_image(
+                self.filename_formatted('add_video_to_case_button.png'), False)
             pyautogui.press('esc')
             if return_value:
                 break
@@ -242,13 +299,16 @@ class UploadVideoToBriefCam():
                 break
             add_video_button_found = self.__leftclick_add_video_button()
             if not add_video_button_found:
-                logging_to_console_and_syslog("Add video button is not found for case name {}."
+                self.write_log_to_redis_and_logging_framework(
+                    "Add video button is not found for case name {}."
                                           .format(self.case_name))
                 #look up in redisClient db to check if the case name exists.
                 # if the case name already exists in redisDB, then, keep trying until you find the casename.
                 # else create the case name and update the same in redisClient DB.
                 if self.redis_instance.check_if_the_key_exists_in_redis_db(self.case_name):
-                    logging_to_console_and_syslog("Case name {} already exists. Retrying after a second..")
+                    self.write_log_to_redis_and_logging_framework(
+                        "Case name {} already exists. Retrying after a second.."
+                                                  .format(self.case_name))
                     self._left_click_this_coordinate(cancel_search_coordinates)
                     current_retry_count+=1
                     if current_retry_count >=self.max_retry_attempts:
@@ -257,6 +317,8 @@ class UploadVideoToBriefCam():
                         time.sleep(self.sleep_time)
                 else:
                     self.redis_instance.set_the_key_in_redis_db(self.case_name)
+                    self._left_click_this_coordinate(cancel_search_coordinates)
+                    pyautogui.press('esc')
                     self.__create_case_for_the_first_time()
         return add_video_button_found
 
@@ -308,6 +370,8 @@ class UploadVideoToBriefCam():
             return
         self.process.kill()
         self.process=None
+        for pid in map(int, check_output(["pidof", self.browser_name]).split()):
+            os.kill(pid, signal.SIGTERM)
 
     def browser_alive(self):
         is_browser_alive = False
@@ -323,7 +387,7 @@ class UploadVideoToBriefCam():
         if self.process is None:
             self.process = self.__open_browser()
             if self.process is None:
-                logging_to_console_and_syslog("Process is None")
+                self.write_log_to_redis_and_logging_framework("Process is None")
                 raise BriefCamNoProcessExcept(self.process)
             if not skip_login:
                 self.__login_to_briefcam_server()
@@ -332,13 +396,15 @@ class UploadVideoToBriefCam():
     def clean_up(self):
         self.browser_ready = False
         # close the browser and reopen it.
-        logging_to_console_and_syslog("Closing and reopening web browser.")
+        self.write_log_to_redis_and_logging_framework(
+            "Closing and reopening web browser.",True)
         self.__close_browser()
         self.case_name = ""
         self.prepare_browser(skip_login=True)
 
     def __delete_video_clip_from_shared_volume(self, file_name):
-        logging_to_console_and_syslog("Deleting file_name {}".format(file_name))
+        self.write_log_to_redis_and_logging_framework(
+            "Deleting file_name {}".format(file_name))
         os.remove(file_name)
 
     def process_new_file(self, file_name):
@@ -346,13 +412,15 @@ class UploadVideoToBriefCam():
         while job_done == False:
             try:
                 while not self.browser_ready:
-                    logging_to_console_and_syslog("Waiting for the browser to be ready")
+                    self.write_log_to_redis_and_logging_framework(
+                        "Waiting for the browser to be ready")
                     time.sleep(self.sleep_time)
 
                 self.__search_and_leftclick_case(file_name)
 
                 if not self.__add_video(file_name):
-                    logging_to_console_and_syslog("Add video failed. Closing and reopening the browser.")
+                    self.write_log_to_redis_and_logging_framework(
+                        "Add video failed. Closing and reopening the browser.",True)
                     self.clean_up()
                     continue
                 self.__make_sure_video_is_added_successfully()
@@ -360,7 +428,8 @@ class UploadVideoToBriefCam():
                 self.go_to_main_screen()
 
                 if not self.browser_alive():
-                    logging_to_console_and_syslog("Browser is not alive. Reopening the browser.")
+                    self.write_log_to_redis_and_logging_framework(
+                        "Browser is not alive. Reopening the browser.",True)
                     self.clean_up()
                 job_done = True
             except BriefCamServerException:

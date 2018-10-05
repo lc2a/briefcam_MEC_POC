@@ -25,6 +25,8 @@ class PollForNewFileName:
         self.broker_name = None
         self.topic = None
         self.consumer_instance = None
+        self.total_job_done_count_redis_name = None
+        self.redis_log_keyname = None
         import upload_video.upload_video_to_briefcam
         self.briefcam_obj = None
         self.hostname = os.popen("cat /etc/hostname").read()
@@ -32,13 +34,23 @@ class PollForNewFileName:
         self.redis_instance = RedisClient()
 
     def load_environment_variables(self):
-        while self.broker_name is None and \
-                self.topic is None:
+        while self.broker_name is None or \
+                self.topic is None or \
+                self.redis_log_keyname is None or \
+                self.total_job_done_count_redis_name is None :
             time.sleep(2)
             self.topic = os.getenv("topic_key",
                                    default=None)
             self.broker_name = os.getenv("broker_name_key",
                                          default=None)
+            self.redis_log_keyname = os.getenv("redis_log_keyname_key",
+                                         default=None)
+            self.total_job_done_count_redis_name = os.getenv("total_job_done_count_redis_name_key",
+                                         default=None)
+
+        logging_to_console_and_syslog("redis_log_keyname={}"
+                                      .format(self.redis_log_keyname),
+                                      logging.INFO)
 
         logging_to_console_and_syslog("broker_name={}"
                                       .format(self.broker_name),
@@ -46,7 +58,9 @@ class PollForNewFileName:
         logging_to_console_and_syslog("topic={}"
                                       .format(self.topic),
                                       logging.INFO)
-
+        logging_to_console_and_syslog("total_job_done_count_redis_name={}"
+                                      .format(self.total_job_done_count_redis_name),
+                                      logging.INFO)
     def connect_to_kafka_broker(self):
         self.consumer_instance = None
         while self.consumer_instance is None:
@@ -93,11 +107,16 @@ class PollForNewFileName:
                 for msg in self.consumer_instance:
                     filename = msg.value.decode('utf-8')
                     start_time = datetime.now()
+                    event = 'Going to process {}'.format(filename)
+                    self.redis_instance.write_an_event_on_redis_db(event)
+                    self.redis_instance.write_an_event_on_redis_db(event, self.redis_log_keyname)
                     self.briefcam_obj.process_new_file(filename)
                     time_elapsed = datetime.now() - start_time
                     try:
                         event = 'Time taken to process {} = (hh:mm:ss.ms) {}'.format(filename, time_elapsed)
                         self.redis_instance.write_an_event_on_redis_db(event)
+                        self.redis_instance.write_an_event_on_redis_db(event,self.redis_log_keyname)
+                        self.redis_instance.increment_key_in_redis_db(self.total_job_done_count_redis_name)
                     except:
                         logging_to_console_and_syslog("caught an exception when trying to write to redisClient")
         except KeyboardInterrupt:

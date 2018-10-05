@@ -8,7 +8,7 @@ from log.log_file import logging_to_console_and_syslog
 import logging
 import traceback
 import unittest
-
+from datetime import datetime
 
 class RedisClient(object):
     __instance = None
@@ -22,7 +22,6 @@ class RedisClient(object):
         self.redis_instance = None
         self.redis_server_hostname = None
         self.redis_server_port = 0
-        self.redis_log_keyname = None
         self.load_environment_variables()
         self.connect_to_redis_server()
         self.hostname = os.popen("cat /etc/hostname").read()
@@ -31,22 +30,16 @@ class RedisClient(object):
 
     def load_environment_variables(self):
         while self.redis_server_hostname is None or \
-                self.redis_log_keyname is None or \
                 self.redis_server_port == 0:
             time.sleep(2)
             logging_to_console_and_syslog("Trying to read environment variables...")
             self.redis_server_hostname = os.getenv("redis_server_hostname_key",
                                                    default=None)
-            self.redis_log_keyname = os.getenv("redis_log_keyname_key",
-                                               default=None)
             self.redis_server_port = int(os.getenv("redis_server_port_key",
                                                    default=0))
 
         logging_to_console_and_syslog("redis_server_hostname={}"
                                       .format(self.redis_server_hostname),
-                                      logging.INFO)
-        logging_to_console_and_syslog("redis_log_keyname={}"
-                                      .format(self.redis_log_keyname),
                                       logging.INFO)
         logging_to_console_and_syslog("redis_server_port={}"
                                       .format(self.redis_server_port),
@@ -63,18 +56,27 @@ class RedisClient(object):
                                               self.redis_server_port),
                                       logging.INFO)
 
-    def write_an_event_on_redis_db(self, event):
+    def write_an_event_on_redis_db(self, event,key=None):
         return_value = False
         if self.redis_instance is not None:
-            event_string = "\n Hostname={},containerID={},event={}".format(self.hostname, self.cont_id[:12], event)
-
-            if self.redis_instance.exists(self.cont_id):
-                self.redis_instance.append(self.cont_id, event_string)
-                logging_to_console_and_syslog("Appending {} to {}".format(event_string, self.redis_log_keyname))
+            current_time = datetime.now()
+            event_string = "\n Time={},Hostname={},containerID={},event={}"\
+                .format(str(current_time),
+                        self.hostname,
+                        self.cont_id[:12],
+                        event)
+            key_name = None
+            if key:
+                key_name = key
+            else:
+                key_name = self.cont_id
+            if self.redis_instance.exists(key_name):
+                self.redis_instance.append(key_name, event_string)
+                logging_to_console_and_syslog("Appending {} to {}".format(event_string, key_name))
                 return_value = True
             else:
-                self.redis_instance.set(self.cont_id, event_string)
-                logging_to_console_and_syslog("Writing {} to {}".format(event_string, self.redis_log_keyname))
+                self.redis_instance.set(key_name, event_string)
+                logging_to_console_and_syslog("Writing {} to {}".format(event_string, key_name))
                 return_value = True
         return return_value
 
@@ -98,6 +100,20 @@ class RedisClient(object):
             if self.redis_instance.exists(key):
                 if self.redis_instance.delete(key):
                     return_value = True
+        return return_value
+
+    def increment_key_in_redis_db(self,key):
+        return_value = False
+        if self.redis_instance is not None:
+            self.redis_instance.incr(key)
+            return_value = True
+        return return_value
+
+    def read_key_value_from_redis_db(self,key):
+        return_value = -1
+        if self.redis_instance is not None:
+            if self.redis_instance.exists(key):
+                return_value = self.redis_instance.get(key)
         return return_value
 
     def cleanup(self):
@@ -139,8 +155,18 @@ class TestRedisClient(unittest.TestCase):
         self.assertTrue(redisClient_inst1.write_an_event_on_redis_db("Hello world2"))
         self.assertTrue(redisClient_inst1.check_if_the_key_exists_in_redis_db(redisClient_inst1.cont_id))
 
+    def test_incr_key(self):
+        redisClient_inst1 = RedisClient()
+        self.assertTrue(redisClient_inst1.increment_key_in_redis_db("incr_key"))
+        self.assertEqual(redisClient_inst1.read_key_value_from_redis_db("incr_key"),b'1')
+        self.assertTrue(redisClient_inst1.increment_key_in_redis_db("incr_key"))
+        self.assertEqual(redisClient_inst1.read_key_value_from_redis_db("incr_key"),b'2')
+        self.assertTrue(redisClient_inst1.increment_key_in_redis_db("incr_key"))
+        self.assertEqual(redisClient_inst1.read_key_value_from_redis_db("incr_key"),b'3')
+
     def tearDown(self):
         self.redisClient.delete_key_from_redis_db("abcxyz")
+        self.redisClient.delete_key_from_redis_db("incr_key")
         self.redisClient.delete_key_from_redis_db(self.redisClient.cont_id)
 
 if __name__ == "__main__":
