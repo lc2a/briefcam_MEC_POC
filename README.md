@@ -4,6 +4,8 @@ This is a Mobile Edge Compute platform Proof Of Concept (POC).
 
 The POC is to demonstrate live object detection (Person, vehicle) from surveillance traffic camera video feed on the Edge Compute network and thereby proving the Edge compute network capabilities such as Low Latency Compute power and 4G LTE / 5G  Bandwidth savings for the Mobile Operator.
 
+![](POC_Demo_setup.png)
+
 There are 3 Tiers to this Architecture.
 
 TIER 1:
