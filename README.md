@@ -8,6 +8,8 @@ The POC is to demonstrate live object detection (Person, vehicle) from surveilla
 
 There are 3 Tiers to this Architecture.
 
+![](Architecture.png)
+
 TIER 1:
 -------
 An Administrator shall be allowed to login to CouchBD via Fauxton front end web interface.
