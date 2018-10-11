@@ -412,10 +412,10 @@ class UploadVideoToBriefCam():
         job_done = False
         while job_done == False:
             try:
-                while not self.browser_ready:
+                if not self.browser_alive():
                     self.write_log_to_redis_and_logging_framework(
-                        "Waiting for the browser to be ready")
-                    time.sleep(self.sleep_time)
+                        "Browser is not alive. Reopening the browser.",True)
+                    self.clean_up()
 
                 self.__search_and_leftclick_case(file_name)
 
