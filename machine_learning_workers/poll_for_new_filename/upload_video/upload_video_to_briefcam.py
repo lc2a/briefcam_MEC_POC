@@ -317,10 +317,10 @@ class UploadVideoToBriefCam():
                     else:
                         time.sleep(self.sleep_time)
                 else:
-                    self.redis_instance.set_the_key_in_redis_db(self.case_name)
                     self._left_click_this_coordinate(cancel_search_coordinates)
                     pyautogui.press('esc')
                     self.__create_case_for_the_first_time()
+                    self.redis_instance.set_the_key_in_redis_db(self.case_name)
         return add_video_button_found
 
     def __add_video(self, file_name):
@@ -428,10 +428,6 @@ class UploadVideoToBriefCam():
                 self.__delete_video_clip_from_shared_volume(file_name)
                 self.go_to_main_screen()
 
-                if not self.browser_alive():
-                    self.write_log_to_redis_and_logging_framework(
-                        "Browser is not alive. Reopening the browser.",True)
-                    self.clean_up()
                 job_done = True
             except BriefCamServerException:
                 self.clean_up()
