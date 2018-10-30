@@ -182,9 +182,9 @@ services:
     extra_hosts:
     - "mec-poc: 10.2.40.162"
   jenkins:
-    image: jenkins/jenkins:lts
+    image: ssriram1978/jenkins:latest
     volumes:
       - "/home/mec-poc/jenkins_home:/var/jenkins_home"
     ports:
       - "8082:8080"
-      - "50000:50000"
+      - "50001:50001"
