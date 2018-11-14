@@ -11,6 +11,12 @@ from log.log_file import logging_to_console_and_syslog
 
 
 class RTSPRecorderOrchestrator:
+    """
+    This class does the following:
+    1. It is a docker container orchestrator.
+    2. It follows commands dictated by the master. (frontend).
+    """
+
     def __init__(self):
         logging_to_console_and_syslog("Initializing RTSPRecorderOrchestrator instance.")
         self.image_name = None
@@ -20,14 +26,17 @@ class RTSPRecorderOrchestrator:
         self.docker_instance = docker.from_env()
 
     def read_environment_variables(self):
+        """
+        This function sinks in the global environment variables.
+        """
         while self.image_name is None or \
-              self.environment is None or \
-              self.bind_mount is None:
+                self.environment is None or \
+                self.bind_mount is None:
 
             self.image_name = os.getenv("image_name_key",
-                                                 default=None)
-            self.environment = os.getenv("environment_key",
                                         default=None)
+            self.environment = os.getenv("environment_key",
+                                         default=None)
             self.bind_mount = os.getenv("bind_mount_key",
                                         default=None)
 
@@ -37,12 +46,18 @@ class RTSPRecorderOrchestrator:
                                       .format(self.image_name,
                                               self.environment,
                                               self.bind_mount))
-
     def yield_container(self):
+        """
+        This function reads all active docker containers and returns them back to the caller one container id at a time.
+        """
         for container in self.docker_instance.containers.list():
             yield container.short_id
 
     def check_if_container_is_active(self, container_short_id):
+        """
+        This function checks if the passed in docker container identifier is active and running.
+        It returns a boolean value True if the container is active and false if the container is not active.
+        """
         is_active=False
         try:
             container = self.docker_instance.containers.get(container_short_id)
@@ -53,6 +68,9 @@ class RTSPRecorderOrchestrator:
         return is_active
 
     def stop_container(self,container_short_id):
+        """
+        This function stops a running docker container.
+        """
         try:
             container = self.docker_instance.containers.get(container_short_id)
             if container:
@@ -61,6 +79,12 @@ class RTSPRecorderOrchestrator:
             return None
 
     def run_container(self, document):
+        """
+        This function starts a docker container.
+        It takes the bind mount path as an argument.
+        It also takes a list of environment variables as an argument.
+        It returns a docker container identifier back to the calling function.
+        """
         try:
             bind_mount = self.bind_mount.split()
             environment_list = self.environment.split()
@@ -92,60 +116,3 @@ class RTSPRecorderOrchestrator:
 
     def cleanup(self):
         pass
-
-if __name__ == "__main__":
-    # debugging code.
-    rtsp_orchestrator = None
-    os.environ["image_name_key"] = "ssriram1978/rtsp_recorder:latest"
-    os.environ["environment_key"] = "video_file_path_key=/data " \
-                                    "rtsp_file_name_prefix_key=briefcam " \
-                                    "rtsp_duration_of_the_video_key=30 " \
-                                    "min_file_size_key=10000000" \
-                                    "rtsp_capture_application_key=openRTSP "
-    os.environ["bind_mount_key"] = "/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker"
-
-    try:
-        rtsp_orchestrator = RTSPRecorderOrchestrator()
-        #while True:
-        #    time.sleep(5)
-        for container_id in rtsp_orchestrator.yield_container():
-            logging_to_console_and_syslog("container = {}".format(container_id))
-            logging_to_console_and_syslog("check_if_container_is_active(\"{}\") returned {}."
-                                          .format(container_id,
-                                                  rtsp_orchestrator.check_if_container_is_active(container_id)))
-
-        logging_to_console_and_syslog("check_if_container_is_active(\"xyz\") returned {}."
-                                      .format(rtsp_orchestrator.check_if_container_is_active("xyz")))
-
-        logging_to_console_and_syslog("check_if_container_is_active(\"33a5c5961f\") returned {}."
-                                      .format(rtsp_orchestrator.check_if_container_is_active("33a5c5961f")))
-
-
-
-        container_id = rtsp_orchestrator.run_container("{foo:bar}")
-        if container_id:
-            logging_to_console_and_syslog("Successfully created a container with id = {}".format(container_id))
-            time.sleep(60)
-            rtsp_orchestrator.stop_container(container_id)
-        else:
-            logging_to_console_and_syslog("Failed to create a container.")
-
-    except KeyboardInterrupt:
-        logging_to_console_and_syslog("You terminated the program by pressing ctrl + c")
-    except BaseException:
-        logging_to_console_and_syslog("Base Exception occurred {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    except:
-        logging_to_console_and_syslog("Unhandled exception {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    finally:
-        if rtsp_orchestrator:
-            rtsp_orchestrator.cleanup()
