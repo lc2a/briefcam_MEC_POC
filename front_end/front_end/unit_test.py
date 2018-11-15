@@ -112,13 +112,29 @@ class TestCouchDB(unittest.TestCase):
         """
         self.delete_rows_from_master_db()
         #give some time for the docker containers to be deleted.
-        time.sleep(25)
+        time.sleep(60)
         self.validate_no_container_id_corresponding_to_document_id()
         self.validate_no_active_containers()
+
+    def validate_self_healing_property(self):
+        """
+         Force delete an active docker container.
+         Check if the front end spawns out a new container and assigns this identifier to the valid document in
+         id to document database.
+        """
+        self.rtsp_orchestrator.stop_container(self.container_id1)
+        self.rtsp_orchestrator.stop_container(self.container_id2)
+        self.validate_no_active_containers()
+        time.sleep(30)
+        self.container_id1 = None
+        self.container_id2 = None
+        self.validate_container_id_corresponding_to_document_id()
+        self.validate_is_container_id_active()
 
     def test_run(self):
         self.assertIsNotNone(self.couchdb_instance)
         self.add_an_entry_to_couch_db_validate_docker_container_added()
+        self.validate_self_healing_property()
         self.delete_an_entry_from_couch_db_validate_docker_container_removed()
 
     def tearDown(self):
