@@ -13,7 +13,7 @@ logging.basicConfig(format='(%(threadName)-2s:'
                            '%(funcName)s:'
                            '%(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p',
-                    filename='{}.log'.format("rtsp_operate_media"),
+                    filename='rtsp_recorder_orchestrator.log',
                     level=logging.INFO)
 
 

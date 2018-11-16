@@ -4,6 +4,8 @@ import time
 import unittest
 import traceback
 from rtsp_operate_media import RtspOperationsOnMedia
+sys.path.append("..")  # Adds higher directory to python modules path.
+from log.log_file import logging_to_console_and_syslog
 
 class TestRTSPOperateMedia(unittest.TestCase):
     def setUp(self):
@@ -16,13 +18,20 @@ class TestRTSPOperateMedia(unittest.TestCase):
         self.rtsp_media_instance = RtspOperationsOnMedia()
 
     def test_rtsp_start_stop_media(self):
+        logging_to_console_and_syslog("Unit testing function start_rtsp_stream()")
         self.assertNotEqual(self.rtsp_media_instance.start_rtsp_stream(),0)
+        logging_to_console_and_syslog("Unit testing function check_rtsp_stream()")
         self.assertTrue(self.rtsp_media_instance.check_rtsp_stream())
+        logging_to_console_and_syslog("Unit testing function stop_rtsp_stream()")
         self.rtsp_media_instance.stop_rtsp_stream()
+        logging_to_console_and_syslog("Unit testing function check_rtsp_stream()")
         self.assertFalse(self.rtsp_media_instance.check_rtsp_stream())
+        logging_to_console_and_syslog("Unit testing function start_rtsp_stream()")
         self.assertNotEqual(self.rtsp_media_instance.start_rtsp_stream(),0)
+        logging_to_console_and_syslog("Unit testing function move_media_files_to_shared_directory()")
         while self.rtsp_media_instance.move_media_files_to_shared_directory():
             time.sleep(1)
+            logging_to_console_and_syslog("Unit testing function check_rtsp_stream()")
             if not self.rtsp_media_instance.check_rtsp_stream():
                 break
 

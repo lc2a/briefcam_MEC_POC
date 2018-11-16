@@ -1,7 +1,7 @@
 FROM ubuntu
-RUN  mkdir /rtsp_operate_media
-RUN  cd /rtsp_operate_media
-WORKDIR /rtsp_operate_media
+RUN  mkdir /rtsp_recorder_orchestrator
+RUN  cd /rtsp_recorder_orchestrator
+WORKDIR /rtsp_recorder_orchestrator
 COPY requirements.txt requirements.txt
 RUN  apt-get update
 RUN  apt-get install -y scrot
@@ -28,5 +28,5 @@ RUN apt-get install -y python3-distutils
 RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY . .
-RUN chmod 777 -R /rtsp_operate_media
-CMD python3 rtsp_operate_media_unit_test.py
+RUN chmod 777 -R /rtsp_recorder_orchestrator
+CMD python3 rtsp_recorder_orchestrator_unit_test.py

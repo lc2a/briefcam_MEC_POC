@@ -1,19 +1,27 @@
 import os
 import sys
-import time
 import unittest
-import traceback
 import subprocess
 
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
+import docker
 
 
-class TestRTSPOperateMediaDocker(unittest.TestCase):
+class BuildAndTestThisDocker(unittest.TestCase):
+    DOCKER_TAG = None
+    DOCKER_IMAGE_NAME = None
+
     def setUp(self):
-        pass
+        self.assertIsNotNone(BuildAndTestThisDocker.DOCKER_TAG)
+        self.assertIsNotNone(BuildAndTestThisDocker.DOCKER_IMAGE_NAME)
+        logging_to_console_and_syslog("DOCKER_TAG={},DOCKER_IMAGE_NAME={}."
+                                      .format(BuildAndTestThisDocker.DOCKER_TAG,
+                                              BuildAndTestThisDocker.DOCKER_IMAGE_NAME))
+        self.docker_instance = docker.from_env()
+        self.container = None
 
-    def create_subprocess(self,process_args):
+    def create_subprocess(self, process_args):
         if not process_args or type(process_args) != list:
             return None
 
@@ -23,89 +31,90 @@ class TestRTSPOperateMediaDocker(unittest.TestCase):
         self.assertIsNotNone(completedProcess.stdout)
         return completedProcess.stdout
 
-    def create_rtsp_operate_media_docker_image(self):
+    def create_docker_image(self):
         docker_create_command_list = ["docker",
                                       "build",
-                                         ".",
+                                      ".",
                                       "-t",
-                                      "ssriram1978/rtsp_operate_media_ut:latest"]
+                                      "{}/{}:latest".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                                            BuildAndTestThisDocker.DOCKER_IMAGE_NAME)]
         self.assertIsNotNone(self.create_subprocess(docker_create_command_list))
 
-    def run_rtsp_operate_media_docker_container(self):
-        docker_run_command_list = ["docker",
-                                    "run",
-                                    "-it",
-                                    "--name",
-                                    "rtsp_operate_media_ut",
-                                    "-d",
-                                    "ssriram1978/rtsp_operate_media_ut:latest"]
-        self.assertIsNotNone(self.create_subprocess(docker_run_command_list))
+    def run_docker_container(self):
+        bind_mount = "/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker".split()
+        self.container = self.docker_instance.containers.run(
+            "{}/{}:latest".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                  BuildAndTestThisDocker.DOCKER_IMAGE_NAME),
+            volumes=bind_mount,
+            name=BuildAndTestThisDocker.DOCKER_IMAGE_NAME,
+            network_mode="host",
+            detach=True)
+        self.assertIsNotNone(self.container.short_id)
 
-    def wait_for_rtsp_operate_media_docker_container(self):
-        docker_wait_command_list = ["docker",
-                                    "wait",
-                                    "rtsp_operate_media_ut"]
-        self.assertEqual(self.create_subprocess(docker_wait_command_list), b'0\n')
+    def wait_for_docker_container_completion(self):
+        try:
+            container = self.docker_instance.containers.get(self.container.short_id)
+            if container:
+                result = container.wait()
+        except:
+            return None
 
-    def prune_old_rtsp_operate_media_docker_image(self):
+        logging_to_console_and_syslog("Capturing container logs.")
+        self.capture_docker_container_logs()
+        logging_to_console_and_syslog("Result returned {}.".format(result))
+        self.assertEqual(result['StatusCode'], 0)
+
+    def prune_old_docker_image(self):
         docker_prune_command_list = ["docker",
-                                    "container",
-                                    "prune",
-                                    "-f"]
+                                     "container",
+                                     "prune",
+                                     "-f"]
         self.assertIsNotNone(self.create_subprocess(docker_prune_command_list))
 
-    def capture_rtsp_operate_media_docker_container_logs(self):
+    def capture_docker_container_logs(self):
         docker_container_log_list = ["docker",
                                      "logs",
-                                     "rtsp_operate_media_ut"]
+                                     BuildAndTestThisDocker.DOCKER_IMAGE_NAME]
         logging_to_console_and_syslog(self.create_subprocess(docker_container_log_list).decode())
 
-    def remove_rtsp_operate_media_docker_image(self):
+    def remove_docker_image(self):
         docker_container_remove_image_list = ["docker",
-                                     "image",
-                                     "rm",
-                                     "-f",
-                                     "ssriram1978/rtsp_operate_media_ut"]
+                                              "image",
+                                              "rm",
+                                              "-f",
+                                              "{}/{}".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                                             BuildAndTestThisDocker.DOCKER_IMAGE_NAME)]
         self.assertIsNotNone(self.create_subprocess(docker_container_remove_image_list))
 
-    def test_rtsp_start_stop_media(self):
+    def test_docker_container(self):
         logging_to_console_and_syslog("Creating Docker image.")
-        self.create_rtsp_operate_media_docker_image()
+        self.create_docker_image()
         logging_to_console_and_syslog("Prune old docker container images.")
-        self.prune_old_rtsp_operate_media_docker_image()
+        self.prune_old_docker_image()
         logging_to_console_and_syslog("Running Docker image.")
-        self.run_rtsp_operate_media_docker_container()
+        self.run_docker_container()
         logging_to_console_and_syslog("Waiting for the Docker image to complete.")
-        self.wait_for_rtsp_operate_media_docker_container()
-        logging_to_console_and_syslog("Capturing container logs.")
-        self.capture_rtsp_operate_media_docker_container_logs()
+        self.wait_for_docker_container_completion()
         logging_to_console_and_syslog("Removing docker image.")
-        #self.remove_rtsp_operate_media_docker_image()
-        logging_to_console_and_syslog("Completed unit testing of rtsp_operate_media.")
+        self.remove_docker_image()
+        logging_to_console_and_syslog("Completed unit testing.")
 
     def tearDown(self):
         pass
 
 
 if __name__ == "__main__":
-    # debugging code.
-    try:
-        unittest.main()
-    except KeyboardInterrupt:
-        logging_to_console_and_syslog("You terminated the program by pressing ctrl + c")
-    except BaseException:
-        logging_to_console_and_syslog("Base Exception occurred {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    except:
-        logging_to_console_and_syslog("Unhandled exception {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    finally:
-        pass
+    BuildAndTestThisDocker.DOCKER_TAG = os.getenv("DOCKER_TAG",
+                                                  default=None)
+
+    BuildAndTestThisDocker.DOCKER_IMAGE_NAME = os.getenv("DOCKER_IMAGE_NAME",
+                                                         default=None)
+
+    if not BuildAndTestThisDocker.DOCKER_TAG or \
+            not BuildAndTestThisDocker.DOCKER_IMAGE_NAME:
+        BuildAndTestThisDocker.DOCKER_TAG = 'ssriram1978'
+        BuildAndTestThisDocker.DOCKER_IMAGE_NAME = "unit_test"
+
+    print("Setting DOCKER_TAG={},DOCKER_IMAGE_NAME={}".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                                              BuildAndTestThisDocker.DOCKER_IMAGE_NAME))
+    unittest.main()

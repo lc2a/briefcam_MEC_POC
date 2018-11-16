@@ -1,131 +1,120 @@
 import os
-import time
 import sys
-import traceback
 import unittest
 import subprocess
-from couchdb_client import CouchDBClient
 
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
+import docker
 
-#unit tests
-class TestCouchDB(unittest.TestCase):
+
+class BuildAndTestThisDocker(unittest.TestCase):
+    DOCKER_TAG = None
+    DOCKER_IMAGE_NAME = None
+
     def setUp(self):
-        os.environ["couchdb_server_key"] = "localhost:5984"
-        os.environ["id_to_container_name_key"] = "id_to_container"
-        os.environ["database_name_key"] = "briefcam"
-        self.create_couchdb_fauxton_docker_container()
-        self.couchdb_instance = CouchDBClient()
-        self.document_id1 = None
-        self.document_id2 = None
-        self.document1 = {'type': 'Person1', 'name': 'John Doe'}
-        self.document2 = {'type': 'Person2', 'name': 'Ashley'}
+        self.assertIsNotNone(BuildAndTestThisDocker.DOCKER_TAG)
+        self.assertIsNotNone(BuildAndTestThisDocker.DOCKER_IMAGE_NAME)
+        logging_to_console_and_syslog("DOCKER_TAG={},DOCKER_IMAGE_NAME={}."
+                                      .format(BuildAndTestThisDocker.DOCKER_TAG,
+                                              BuildAndTestThisDocker.DOCKER_IMAGE_NAME))
+        self.docker_instance = docker.from_env()
+        self.container = None
 
-    def test_run(self):
-        self.assertIsNotNone(self.couchdb_instance)
-        self.create_rows_in_master_db()
-        self.create_rows_in_id_to_container_db()
-        self.validate_data_from_master_db()
-        self.fetch_rows_from_master_db()
-        self.fetch_rows_from_id_to_container_db()
+    def create_subprocess(self, process_args):
+        if not process_args or type(process_args) != list:
+            return None
 
-    def create_couchdb_fauxton_docker_container(self):
-        completedProcess = subprocess.run(["docker-compose", "up", "-d"],
+        completedProcess = subprocess.run(process_args,
                                           stdout=subprocess.PIPE)
         self.assertIsNotNone(completedProcess)
         self.assertIsNotNone(completedProcess.stdout)
-        time.sleep(120)
+        return completedProcess.stdout
 
-    def create_rows_in_master_db(self):
+    def create_docker_image(self):
+        docker_create_command_list = ["docker",
+                                      "build",
+                                      ".",
+                                      "-t",
+                                      "{}/{}:latest".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                                            BuildAndTestThisDocker.DOCKER_IMAGE_NAME)]
+        self.assertIsNotNone(self.create_subprocess(docker_create_command_list))
 
-        self.document_id1 = self.couchdb_instance.add_entry_into_master_database(self.document1)
-        self.assertIsNotNone(self.document_id1)
+    def run_docker_container(self):
+        bind_mount = "/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker".split()
+        self.container = self.docker_instance.containers.run(
+            "{}/{}:latest".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                  BuildAndTestThisDocker.DOCKER_IMAGE_NAME),
+            volumes=bind_mount,
+            name=BuildAndTestThisDocker.DOCKER_IMAGE_NAME,
+            network_mode="host",
+            detach=True)
+        self.assertIsNotNone(self.container.short_id)
 
-        self.document_id2 = self.couchdb_instance.add_entry_into_master_database(self.document2)
-        self.assertIsNotNone(self.document_id2)
+    def wait_for_docker_container_completion(self):
+        try:
+            container = self.docker_instance.containers.get(self.container.short_id)
+            if container:
+                result = container.wait()
+        except:
+            return None
 
-    def fetch_rows_from_master_db(self):
-        self.assertIsNotNone(self.couchdb_instance.fetch_data_from_master_database(self.document_id1))
-        self.assertIsNotNone(self.couchdb_instance.fetch_data_from_master_database(self.document_id2))
+        logging_to_console_and_syslog("Capturing container logs.")
+        self.capture_docker_container_logs()
+        logging_to_console_and_syslog("Result returned {}.".format(result))
+        self.assertEqual(result['StatusCode'], 0)
 
-    def validate_data_from_master_db(self):
-        document_id1_found = False
-        document_id2_found = False
-        for key, data in self.couchdb_instance.yield_database_handle_entries():
-            self.assertIsNotNone(key)
-            self.assertIsNotNone(data)
-            if key == self.document_id1:
-                document_id1_found = True
-            if key == self.document_id2:
-                document_id2_found = True
+    def prune_old_docker_image(self):
+        docker_prune_command_list = ["docker",
+                                     "container",
+                                     "prune",
+                                     "-f"]
+        self.assertIsNotNone(self.create_subprocess(docker_prune_command_list))
 
-        self.assertTrue(document_id1_found)
-        self.assertTrue(document_id2_found)
+    def capture_docker_container_logs(self):
+        docker_container_log_list = ["docker",
+                                     "logs",
+                                     BuildAndTestThisDocker.DOCKER_IMAGE_NAME]
+        logging_to_console_and_syslog(self.create_subprocess(docker_container_log_list).decode())
 
-    def create_rows_in_id_to_container_db(self):
-        self.assertTrue(self.couchdb_instance.add_entry_into_id_to_container_database(self.document_id1, "2345"))
-        self.assertTrue(self.couchdb_instance.add_entry_into_id_to_container_database(self.document_id1, "2345"))
-        self.assertTrue(self.couchdb_instance.add_entry_into_id_to_container_database(self.document_id2, "3456"))
-        self.assertFalse(self.couchdb_instance.add_entry_into_id_to_container_database(self.document_id1, None))
-        self.assertFalse(self.couchdb_instance.add_entry_into_id_to_container_database(None, "2345"))
+    def remove_docker_image(self):
+        docker_container_remove_image_list = ["docker",
+                                              "image",
+                                              "rm",
+                                              "-f",
+                                              "{}/{}".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                                             BuildAndTestThisDocker.DOCKER_IMAGE_NAME)]
+        self.assertIsNotNone(self.create_subprocess(docker_container_remove_image_list))
 
-    def fetch_rows_from_id_to_container_db(self):
-        document_id1_found = False
-        document_id2_found = False
-        for key, container_id_dict in self.couchdb_instance.yield_id_to_container_entries():
-            self.assertIsNotNone(key)
-            self.assertIsNotNone(container_id_dict)
-            container_id = container_id_dict[key]
-            self.assertIsNotNone(container_id)
-            if key == self.document_id1:
-                document_id1_found = True
-            if key == self.document_id2:
-                document_id2_found = True
-        self.assertTrue(document_id1_found)
-        self.assertTrue(document_id2_found)
-        self.assertIsNone(self.couchdb_instance.fetch_data_from_id_to_container_entry("junk"))
-        self.assertIsNotNone(self.couchdb_instance.fetch_data_from_id_to_container_entry(self.document_id1))
-        self.assertIsNotNone(self.couchdb_instance.fetch_data_from_id_to_container_entry(self.document_id2))
-
-    def delete_rows(self):
-        self.assertTrue(self.couchdb_instance.delete_entry_from_master_database(self.document_id1))
-        self.assertTrue(self.couchdb_instance.delete_entry_from_master_database(self.document_id2))
-        self.assertFalse(self.couchdb_instance.delete_entry_from_master_database(self.document_id2))
-        self.assertTrue(self.couchdb_instance.delete_id_to_container_entry(self.document_id1))
-        self.assertTrue(self.couchdb_instance.delete_id_to_container_entry(self.document_id2))
-        self.assertFalse(self.couchdb_instance.delete_id_to_container_entry(self.document_id2))
-        self.assertFalse(self.couchdb_instance.delete_id_to_container_entry("junk"))
-
-    def delete_couchdb_fauxton_docker_container(self):
-        completedProcess = subprocess.run(["docker-compose", "down"],
-                                          stdout=subprocess.PIPE)
-        self.assertIsNotNone(completedProcess)
-        self.assertIsNotNone(completedProcess.stdout)
+    def test_docker_container(self):
+        logging_to_console_and_syslog("Creating Docker image.")
+        self.create_docker_image()
+        logging_to_console_and_syslog("Prune old docker container images.")
+        self.prune_old_docker_image()
+        logging_to_console_and_syslog("Running Docker image.")
+        self.run_docker_container()
+        logging_to_console_and_syslog("Waiting for the Docker image to complete.")
+        self.wait_for_docker_container_completion()
+        logging_to_console_and_syslog("Removing docker image.")
+        self.remove_docker_image()
+        logging_to_console_and_syslog("Completed unit testing.")
 
     def tearDown(self):
-        self.delete_rows()
-        self.couchdb_instance.cleanup()
-        self.delete_couchdb_fauxton_docker_container()
+        pass
+
 
 if __name__ == "__main__":
-    try:
-        unittest.main()
-    except KeyboardInterrupt:
-        logging_to_console_and_syslog("You terminated the program by pressing ctrl + c")
-    except BaseException:
-        logging_to_console_and_syslog("Base Exception occurred {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    except:
-        logging_to_console_and_syslog("Unhandled exception {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    finally:
-        pass
+    BuildAndTestThisDocker.DOCKER_TAG = os.getenv("DOCKER_TAG",
+                                     default=None)
+
+    BuildAndTestThisDocker.DOCKER_IMAGE_NAME = os.getenv("DOCKER_IMAGE_NAME",
+                                                  default=None)
+
+    if not BuildAndTestThisDocker.DOCKER_TAG or \
+        not BuildAndTestThisDocker.DOCKER_IMAGE_NAME:
+        BuildAndTestThisDocker.DOCKER_TAG = 'ssriram1978'
+        BuildAndTestThisDocker.DOCKER_IMAGE_NAME = "unit_test"
+
+    print("Setting DOCKER_TAG={},DOCKER_IMAGE_NAME={}".format(BuildAndTestThisDocker.DOCKER_TAG,
+                                                              BuildAndTestThisDocker.DOCKER_IMAGE_NAME))
+    unittest.main()
