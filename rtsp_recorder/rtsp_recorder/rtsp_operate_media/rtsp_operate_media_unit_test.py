@@ -33,24 +33,4 @@ class TestRTSPOperateMedia(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    # debugging code.
-    try:
-        unittest.main()
-    except KeyboardInterrupt:
-        print("You terminated the program by pressing ctrl + c")
-    except BaseException:
-        print("Base Exception occurred {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    except:
-        print("Unhandled exception {}.".format(sys.exc_info()[0]))
-        print("Exception in user code:")
-        print("-" * 60)
-        traceback.print_exc(file=sys.stdout)
-        print("-" * 60)
-        time.sleep(5)
-    finally:
-        pass
+    unittest.main()
