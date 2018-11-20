@@ -64,7 +64,8 @@ class Producer:
                 print("-" * 60)
                 time.sleep(5)
             else:
-                logging_to_console_and_syslog("Successfully connected to broker_name={}".format(self.broker_name))
+                logging_to_console_and_syslog("Producer Successfully connected to broker_name={}"
+                                              .format(self.broker_name))
 
     def get_current_job_count(self):
         return self.redis_instance.read_key_value_from_redis_db(self.total_job_done_count_redis_name)

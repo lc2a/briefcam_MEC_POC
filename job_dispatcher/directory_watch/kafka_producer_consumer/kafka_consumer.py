@@ -28,6 +28,7 @@ class Consumer:
         self.redis_instance = RedisClient()
         self.read_environment_variables()
         self.connect_to_kafka_broker()
+        self.perform_subscription = True
 
     def read_environment_variables(self):
         """
@@ -51,45 +52,58 @@ class Consumer:
         logging_to_console_and_syslog("redis_log_keyname={}".format(self.redis_log_keyname))
         logging_to_console_and_syslog("total_produced_count_redis_name={}".format(self.total_job_done_count_redis_name))
 
-
-    def connect_to_kafka_broker(self):
+    def connect_to_kafka_broker(self, identifer=None):
         """
         This method tries to connect to the kafka broker.
         :return:
         """
+        if self.consumer_instance:
+            return
+
         while self.consumer_instance is None:
             try:
+
+                logging_to_console_and_syslog("{}:Trying to connect to broker_name={}"
+                                              .format(identifer, self.broker_name))
                 self.consumer_instance = KafkaConsumer(bootstrap_servers=self.broker_name,
                                                        group_id="kafka-consumer")
-                time.sleep(5)
+                time.sleep(1)
             except:
-                print("Exception in user code:")
+                print("{}:Exception in user code:".format(identifer))
                 print("-" * 60)
                 traceback.print_exc(file=sys.stdout)
                 print("-" * 60)
                 time.sleep(5)
-        logging_to_console_and_syslog("Successfully connected to broker_name={}".format(self.broker_name))
 
-    def connect_to_kafka_broker_and_to_a_topic(self):
+        logging_to_console_and_syslog("{}:Consumer Successfully connected to broker_name={}"
+                                      .format(identifer, self.broker_name))
+
+    def connect_to_kafka_broker_and_to_a_topic(self,identifer=None):
         """
         This method tries to connect to the kafka broker.
         :return:
         """
+        if self.consumer_instance:
+            return
+
         while self.consumer_instance is None:
             try:
+                logging_to_console_and_syslog("{}:Trying to connect to broker_name={}"
+                                              .format(identifer, self.broker_name))
                 self.consumer_instance = KafkaConsumer(self.topic,
                                                        bootstrap_servers=self.broker_name,
                                                        group_id="kafka-consumer")
                 time.sleep(5)
             except:
-                print("Exception in user code:")
+                print("{}:Exception in user code:".format(identifer))
                 print("-" * 60)
                 traceback.print_exc(file=sys.stdout)
                 print("-" * 60)
                 time.sleep(5)
-        logging_to_console_and_syslog("Successfully connected to broker_name={},topic={}.".format(self.broker_name,
-                                                                                                  self.topic))
 
+        logging_to_console_and_syslog("{}:Successfully connected to "
+                                      "broker_name={},topic={}."
+                                      .format(identifer, self.broker_name, self.topic))
 
     def get_current_job_count(self):
         return self.redis_instance.read_key_value_from_redis_db(self.total_job_done_count_redis_name)
@@ -100,51 +114,64 @@ class Consumer:
     def write_an_event_in_redis_db(self, event):
         self.redis_instance.write_an_event_on_redis_db(event, self.redis_log_keyname)
 
-    def iterate_over_kafka_consumer_instance_messages(self):
-        logging_to_console_and_syslog("polling for new messages in topic {}.".format(self.topic))
+    def iterate_over_kafka_consumer_instance_messages(self, identifer=None):
+        logging_to_console_and_syslog("{}: Iterating the kafka consumer instance for "
+                                      "new messages in the topic {}."
+                                      .format(identifer, self.topic))
         for msg in self.consumer_instance:
             filename = msg.value.decode('utf-8')
-            logging_to_console_and_syslog("Dequeued message {}.".format(filename))
-            self.redis_instance.write_an_event_on_redis_db('Processing {}'.format(filename))
+            logging_to_console_and_syslog("{}: Dequeued message {}."
+                                          .format(identifer, filename))
+            self.redis_instance.write_an_event_on_redis_db('{}: Processing {}'
+                                                           .format(identifer, filename))
             self.increment_job_consumed_count()
+            time.sleep(5)
 
-    def poll_for_new_messages(self):
+    def poll_for_new_messages(self, identifer=None):
+        """
+        logging_to_console_and_syslog("{}: Polling the kafka consumer instance for "
+                                      "new messages in the topic {}."
+                                      .format(identifer, self.topic))
+        """
+
         msgs = self.consumer_instance.poll(timeout_ms=100, max_records=1)
         for msg in msgs.values():
-            logging_to_console_and_syslog('Received message: {}'.format(repr(msgs)))
-            logging_to_console_and_syslog('msg: {}'.format(repr(msg)))
+            logging_to_console_and_syslog('{}:Received message: {}'
+                                          .format(identifer, repr(msgs)))
+            logging_to_console_and_syslog('{}:msg: {}'
+                                          .format(identifer, repr(msg)))
+            time.sleep(5)
 
-    def subscribe_to_a_topic(self):
-        self.consumer_instance.subscribe([self.topic])
-        if self.topic in self.consumer_instance.subscription():
-            logging_to_console_and_syslog("Found the topic {} in the subscription.".format(
-                self.topic))
-            return True
-        return False
+    def subscribe_to_a_topic(self, identifer=None):
+        try:
+            if self.topic in self.consumer_instance.subscription():
+                logging_to_console_and_syslog("{}: Found the topic {} in the subscription."
+                                          .format(identifer, self.topic))
+        except:
+            self.consumer_instance.subscribe([self.topic])
+        return True
 
-    def connect_and_poll_for_new_message(self):
+    def connect_and_poll_for_new_message(self, identifer=None):
         status = False
         try:
-            #self.connect_to_kafka_broker()
-            #self.subscribe_to_a_topic()
-            #self.iterate_over_kafka_consumer_instance_messages()
-            self.connect_to_kafka_broker_and_to_a_topic()
-            for index in range(10):
-                time.sleep(1)
-                self.poll_for_new_messages()
-
+            if self.perform_subscription:
+                self.connect_to_kafka_broker(identifer)
+                self.subscribe_to_a_topic(identifer)
+                self.iterate_over_kafka_consumer_instance_messages(identifer)
+            else:
+                self.connect_to_kafka_broker_and_to_a_topic(identifer)
+                self.poll_for_new_messages(identifer)
             status = True
         except:
             logging_to_console_and_syslog(
-                "Exception occurred while polling for "
-                "a message from kafka Queue. {} ".format(sys.exc_info()[0]))
+                "{}:Exception occurred while polling for "
+                "a message from kafka Queue. {} ".format(identifer,
+                                                         sys.exc_info()[0]))
 
-            print("Exception in user code:")
+            print("{}:Exception in user code:".format(identifer))
             print("-" * 60)
             traceback.print_exc(file=sys.stdout)
             print("-" * 60)
-        finally:
-            self.cleanup()
         return status
 
     def cleanup(self):
