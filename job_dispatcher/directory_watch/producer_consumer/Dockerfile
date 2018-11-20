@@ -29,4 +29,4 @@ RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY . .
 RUN chmod 777 -R /kafka_post
-CMD python3 kafka_post_unit_test.py
+CMD python3 producer_consumer_unit_test.py

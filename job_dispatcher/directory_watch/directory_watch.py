@@ -23,7 +23,7 @@ class Directory_watch:
 
     def process_new_file(self,file_name):
         # post the file_name into a kafka topic kafka_topic_name
-        self.producer_instance.post_message_to_a_kafka_topic(file_name)
+        self.producer_instance.post_message(file_name)
 
     def watch_a_directory(self):
         self.before = dict([(f, None) for f in os.listdir(self.video_file_path)])
