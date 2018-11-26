@@ -2,16 +2,81 @@ import os
 import time
 import sys
 import traceback
-sys.path.append("..")  # Adds higher directory to python modules path.
+import subprocess
 import unittest
+sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
+from redis_client import RedisClient
+from redis_interface import RedisInterface
+
+
+class TestRedisInterface(unittest.TestCase):
+    def setUp(self):
+        os.environ["redis_log_keyname_key"] = "briefcam"
+        os.environ["total_job_enqueued_count_redis_name_key"] = "enqueue"
+        os.environ["total_job_dequeued_count_redis_name_key"] = "dequeue"
+        self.create_test_docker_container()
+        self.redisInterface = RedisInterface()
+
+    def test_redis_interface(self):
+        self.assertEqual(self.redisInterface.get_current_enqueue_count(), -1)
+        self.assertEqual(self.redisInterface.get_current_dequeue_count(), -1)
+        self.redisInterface.increment_enqueue_count()
+        self.assertEqual(self.redisInterface.get_current_enqueue_count().decode('utf8'), '1')
+        self.redisInterface.increment_dequeue_count()
+        self.assertEqual(self.redisInterface.get_current_enqueue_count().decode('utf8'), '1')
+
+    def create_test_docker_container(self):
+        completedProcess = subprocess.run(["docker-compose",
+                                           "-f",
+                                           "docker-compose_redis.yml",
+                                           "up",
+                                           "-d"],
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
+        # time.sleep(120)
+
+    def delete_test_docker_container(self):
+        completedProcess = subprocess.run(["docker-compose",
+                                           "-f",
+                                           "docker-compose_redis.yml",
+                                           "down"],
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
+
+    def tearDown(self):
+        self.delete_test_docker_container()
+
 
 class TestRedisClient(unittest.TestCase):
     def setUp(self):
-        os.environ["redis_server_hostname_key"] = "10.2.40.162"
+        os.environ["redis_server_hostname_key"] = "localhost"
         os.environ["redis_log_keyname_key"] = "briefcam"
         os.environ["redis_server_port_key"] = "6379"
+        self.create_test_docker_container()
         self.redisClient = RedisClient()
+
+    def create_test_docker_container(self):
+        completedProcess = subprocess.run(["docker-compose",
+                                           "-f",
+                                           "docker-compose_redis.yml",
+                                           "up",
+                                           "-d"],
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
+        # time.sleep(120)
+
+    def delete_test_docker_container(self):
+        completedProcess = subprocess.run(["docker-compose",
+                                           "-f",
+                                           "docker-compose_redis.yml",
+                                           "down"],
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
 
     def test_key_in_redis(self):
         redisClient_inst1 = RedisClient()
@@ -54,6 +119,7 @@ class TestRedisClient(unittest.TestCase):
         self.redisClient.delete_key_from_redis_db("abcxyz")
         self.redisClient.delete_key_from_redis_db("incr_key")
         self.redisClient.delete_key_from_redis_db(self.redisClient.cont_id)
+        self.delete_test_docker_container()
 
 
 if __name__ == "__main__":

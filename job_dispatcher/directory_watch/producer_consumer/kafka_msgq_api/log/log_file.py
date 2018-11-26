@@ -13,7 +13,7 @@ logging.basicConfig(format='(%(threadName)-2s:'
                            '%(funcName)s:'
                            '%(message)s',
                     datefmt='%m/%d/%Y %I:%M:%S %p',
-                    filename='producer_consumer.log',
+                    filename='kafka_msgq_api.log',
                     level=logging.DEBUG)
 
 

@@ -1,7 +1,7 @@
 FROM ubuntu
-RUN  mkdir /kafka_post
-RUN  cd /kafka_post
-WORKDIR /kafka_post
+RUN  mkdir /redisClient
+RUN  cd /redisClient
+WORKDIR /redisClient
 COPY requirements.txt requirements.txt
 RUN  apt-get update
 RUN  apt-get install -y scrot
@@ -27,6 +27,6 @@ RUN  apt-get install -y docker-ce
 RUN apt-get install -y python3-distutils
 RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
-COPY . .
-RUN chmod 777 -R /kafka_post
-CMD python3 producer_consumer_unit_test.py
+COPY ../.. .
+RUN chmod 777 -R /redisClient
+CMD python3 redis_unit_test.py

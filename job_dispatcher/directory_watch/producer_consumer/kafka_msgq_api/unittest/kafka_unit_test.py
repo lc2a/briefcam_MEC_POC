@@ -4,36 +4,35 @@ import sys
 import traceback
 import unittest
 import subprocess
-from kafka_producer import Kafka_Producer
-from consumer import Consumer
 import threading
 
 sys.path.append("..")  # Adds higher directory to python modules path.
 from log.log_file import logging_to_console_and_syslog
-
+from kafka_msgq_api import KafkaMsgQAPI
 
 class TestProducerConsumer(unittest.TestCase):
     def setUp(self):
         os.environ["broker_name_key"] = "localhost:9094"
         os.environ["topic_key"] = "video-file-name"
-        os.environ["redis_log_keyname_key"] = "redis_log"
-        os.environ["total_produced_count_redis_name_key"] = "total_produced_count"
-        os.environ["total_consumed_count_redis_name_key"] = "total_consumed_count"
+        os.environ["redis_log_keyname_key"] = "briefcam"
+        os.environ["total_job_enqueued_count_redis_name_key"] = "enqueue"
+        os.environ["total_job_dequeued_count_redis_name_key"] = "dequeue"
         os.environ["redis_server_hostname_key"] = "localhost"
         os.environ["redis_server_port_key"] = "6379"
         self.max_consumer_threads = 10
         self.create_test_docker_container()
-        self.producer_instance = Kafka_Producer()
+        self.producer_instance = KafkaMsgQAPI(isProducer=True)
         self.consumer_threads = None
         self.create_consumer_threads()
 
     @staticmethod
     def run_consumer_instance():
         logging_to_console_and_syslog("Starting {}".format(threading.current_thread().getName()))
-        consumer_instance = Consumer()
+        consumer_instance = KafkaMsgQAPI(isConsumer=True,
+                                         thread_identifier=threading.current_thread().getName())
         t = threading.currentThread()
         while getattr(t, "do_run", True):
-            consumer_instance.connect_and_poll_for_new_message(threading.current_thread().getName())
+            consumer_instance.dequeue()
         logging_to_console_and_syslog("Exiting {}".format(threading.current_thread().getName()))
 
     def create_consumer_threads(self):
@@ -60,14 +59,15 @@ class TestProducerConsumer(unittest.TestCase):
         time.sleep(60)
 
         logging_to_console_and_syslog("Validating if the consumer successfully dequeued messages.")
-        consumer_instance = Consumer()
-        self.assertEqual(self.producer_instance.get_current_job_count(),
-                         consumer_instance.get_current_job_count())
+        consumer_instance = KafkaMsgQAPI(isConsumer=True,
+                                         thread_identifier="X")
+        self.assertEqual(self.producer_instance.get_current_enqueue_count(),
+                         consumer_instance.get_current_dequeue_count())
 
     def post_messages(self):
         messages = [str(x) for x in range(10)]
         for message in messages:
-            self.producer_instance.post_message(message)
+            self.producer_instance.enqueue(message)
         return True
 
     def create_test_docker_container(self):
