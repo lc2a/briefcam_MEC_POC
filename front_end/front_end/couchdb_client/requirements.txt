@@ -1,9 +1,0 @@
-setuptools>=0
-pytz>=0
-zope.interface>=0
-datetime>=4.2
-enum34>=1.1.6
-futures>=0
-msgpack>=0
-couchdb>=0
-docker-compose>=0
