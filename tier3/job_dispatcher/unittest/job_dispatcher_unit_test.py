@@ -31,7 +31,7 @@ from tier3.job_dispatcher.job_dispatcher import DirectoryWatch
 from infrastructure_components.redisClient.redis_interface import RedisInterface
 
 
-class TestDirectoryWatch(unittest.TestCase):
+class TestJobDispatcher(unittest.TestCase):
 
     max_number_of_jobs = 100
     directory_name = 'test_files'
@@ -46,7 +46,7 @@ class TestDirectoryWatch(unittest.TestCase):
         current_file_path_list = os.path.realpath(__file__).split('/')
         video_path_directory = '/'.join(current_file_path_list[:-1])
         os.environ["video_file_path_key"] = "{}/{}".format(video_path_directory,
-                                                           TestDirectoryWatch.directory_name)
+                                                           TestJobDispatcher.directory_name)
         self.create_test_docker_container()
         self.producer_thread = None
 
@@ -54,9 +54,9 @@ class TestDirectoryWatch(unittest.TestCase):
     def create_new_files():
         producer_instance = DirectoryWatch()
         logging_to_console_and_syslog("Creating new files.")
-        subprocess.run(['mkdir', TestDirectoryWatch.directory_name], stdout=subprocess.PIPE)
-        for index in range(TestDirectoryWatch.max_number_of_jobs):
-            fh = open("{}/ss_{}.txt".format(TestDirectoryWatch.directory_name,
+        subprocess.run(['mkdir', TestJobDispatcher.directory_name], stdout=subprocess.PIPE)
+        for index in range(TestJobDispatcher.max_number_of_jobs):
+            fh = open("{}/ss_{}.txt".format(TestJobDispatcher.directory_name,
                                             index),
                       "w")
             fh.write("Hello")
@@ -65,7 +65,7 @@ class TestDirectoryWatch(unittest.TestCase):
 
     def create_producer_thread(self):
         self.producer_thread = threading.Thread(name="{}{}".format("thread", 1),
-                                                target=TestDirectoryWatch.create_new_files
+                                                target=TestJobDispatcher.create_new_files
                                                 )
         self.producer_thread.do_run = True
         self.producer_thread.name = "{}_{}".format("consumer", 1)
@@ -78,10 +78,10 @@ class TestDirectoryWatch(unittest.TestCase):
         logging_to_console_and_syslog("Validating if the Producer successfully enqueued the messages.")
         redis_instance = RedisInterface("Producer")
         self.assertEqual(redis_instance.get_current_enqueue_count().decode('utf8'),
-                         str(TestDirectoryWatch.max_number_of_jobs))
+                         str(TestJobDispatcher.max_number_of_jobs))
         logging_to_console_and_syslog("enqueue_count={},max_number_of_jobs={}"
                                       .format(redis_instance.get_current_enqueue_count(),
-                                              TestDirectoryWatch.max_number_of_jobs))
+                                              TestJobDispatcher.max_number_of_jobs))
 
     def test_run(self):
         logging_to_console_and_syslog("Validating **************** Job Dispatcher*****************.")
@@ -108,7 +108,7 @@ class TestDirectoryWatch(unittest.TestCase):
 
     def tearDown(self):
         self.delete_test_docker_container()
-        subprocess.run(['rm', '-rf', TestDirectoryWatch.directory_name], stdout=subprocess.PIPE)
+        subprocess.run(['rm', '-rf', TestJobDispatcher.directory_name], stdout=subprocess.PIPE)
         time.sleep(5)
         self.producer_thread.join(1.0)
 

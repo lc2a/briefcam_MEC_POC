@@ -19,4 +19,4 @@ def import_all_packages():
 
 import_all_packages()
 
-from unit_test_framework import unit_test
+from infrastructure_components.unit_test_framework import unit_test

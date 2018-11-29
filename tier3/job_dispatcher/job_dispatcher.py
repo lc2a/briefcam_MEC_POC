@@ -32,12 +32,16 @@ class DirectoryWatch:
     def __init__(self):
         self.before={}
         self.after={}
-        self.producer_instance=ProducerConsumerAPI(is_producer=True,
+        self.producer_instance = ProducerConsumerAPI(is_producer=True,
                                                      thread_identifier="Producer",
                                                      type_of_messaging_queue=ProducerConsumerAPI.kafkaMsgQType)
         self.video_file_path = None
         self.redis_instance = RedisInterface("Producer")
+        self.load_environment_variables()
+
+    def load_environment_variables(self):
         while self.video_file_path is None:
+            time.sleep(1)
             self.video_file_path = os.getenv("video_file_path_key", default=None)
         logging_to_console_and_syslog(("video_file_path={}".format(self.video_file_path)))
 
@@ -45,7 +49,7 @@ class DirectoryWatch:
         self.producer_instance.cleanup()
 
     def process_new_file(self,file_name):
-        # post the file_name into a kafka topic kafka_topic_name
+        # post the file_name into the producer queue.
         self.producer_instance.enqueue(file_name)
         event = "Producer: Successfully posted a message = {} into msgQ.".format(file_name)
         self.redis_instance.write_an_event_in_redis_db(event)
