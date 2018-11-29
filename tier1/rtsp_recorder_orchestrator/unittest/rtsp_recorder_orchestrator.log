@@ -1,0 +1,72 @@
+(MainThread:INFO:11/16/2018 03:49:47 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=rtsp_recorder_orchestrator.
+(MainThread:INFO:11/16/2018 03:49:47 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:56:05 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:56:05 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:56:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:56:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:56:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:56:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Result returned {'Error': None, 'StatusCode': 2}.
+(MainThread:INFO:11/16/2018 03:57:30 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=rtsp_recorder_orchestrator.
+(MainThread:INFO:11/16/2018 03:57:30 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 04:04:05 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 04:04:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 04:04:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 04:04:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 04:04:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 2018-11-16 21:04:08.235952 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Initializing RTSPRecorderOrchestrator instance.
+2018-11-16 21:04:08.236376 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc image_name=ssriram1978/rtsp_recorder:latest,environment=video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 min_file_size_key=10000000rtsp_capture_application_key=openRTSP ,bind_mount=/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker.
+2018-11-16 21:04:08.237300 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Trying to open a container withimage=ssriram1978/rtsp_recorder:latest environment=['video_file_path_key=/data', 'rtsp_file_name_prefix_key=briefcam', 'rtsp_duration_of_the_video_key=30', 'min_file_size_key=10000000rtsp_capture_application_key=openRTSP', "rtsp_message_key='{foo:bar}'"] volumes=['/var/run/docker.sock:/var/run/docker.sock', '/usr/bin/docker:/usr/bin/docker'] 
+2018-11-16 21:04:32.196472 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Unit testing function yield_container()
+2018-11-16 21:04:32.214017 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Unit testing function check_if_container_is_active()
+2018-11-16 21:04:32.216814 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Unit testing function check_if_container_is_active()
+2018-11-16 21:04:32.219269 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Unit testing function check_if_container_is_active()
+2018-11-16 21:04:32.221042 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Unit testing function stop_container()
+2018-11-16 21:04:49.193974 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=315a1f16cedc Unit testing function check_if_container_is_active()
+
+(MainThread:INFO:11/16/2018 04:04:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Result returned {'Error': None, 'StatusCode': 0}.
+(MainThread:INFO:11/16/2018 04:04:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Removing docker image.
+(MainThread:INFO:11/16/2018 04:04:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Completed unit testing.

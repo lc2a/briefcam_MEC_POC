@@ -1,0 +1,260 @@
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ couchdb_server_name=localhost:5984
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ database_name=briefcam
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ id_to_container_name=id_to_container
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to couchdb server localhost:5984.
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found the database name briefcam in the server.
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found the database name id_to_container in the server.
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Initializing RTSPRecorderOrchestrator instance.
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ image_name=ssriram1978/rtsp_recorder:latest,environment=video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 min_file_size_key=10000000rtsp_capture_application_key=openRTSP ,bind_mount=/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker.
+(MainThread:DEBUG:11/28/2018 01:30:58 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:11/28/2018 01:30:58 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:11/28/2018 01:30:58 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:11/28/2018 01:30:58 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:11/28/2018 01:30:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 01:30:59 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'name': 'camera1', 'ip': '10.136.66.233', '_id': '52d0f9f57e934ef26e9a84b7ba0009b7', '_rev': '1-50f89be73736d03bce29e166021abe97'}, id=52d0f9f57e934ef26e9a84b7ba0009b7 into the master database.
+(MainThread:INFO:11/28/2018 01:30:59 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 01:30:59 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'name': 'camera2', 'ip': '10.136.66.231', '_id': '52d0f9f57e934ef26e9a84b7ba001557', '_rev': '1-c20dce9207613c44c880d83725068b58'}, id=52d0f9f57e934ef26e9a84b7ba001557 into the master database.
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=52d0f9f57e934ef26e9a84b7ba0009b7, value={'_id': '52d0f9f57e934ef26e9a84b7ba0009b7', '_rev': '1-8ce425a9a52870cb0951d1bd0f2663ff', '52d0f9f57e934ef26e9a84b7ba0009b7': 'c7d99b1011'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=52d0f9f57e934ef26e9a84b7ba001557, value={'_id': '52d0f9f57e934ef26e9a84b7ba001557', '_rev': '1-a9c2660c99c0d0bdd568b4907cb791da', '52d0f9f57e934ef26e9a84b7ba001557': 'cd54d1283d'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:31:19 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c7d99b1011/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:31:19 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/cd54d1283d/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:31:19 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function stop_container()
+(MainThread:DEBUG:11/28/2018 01:31:19 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c7d99b1011/json HTTP/1.1" 200 None
+(MainThread:DEBUG:11/28/2018 01:31:31 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/c7d99b101163bcb99fcf5396febcc2144338eec5150e7a8e224aca47c73db356/stop HTTP/1.1" 204 0
+(MainThread:INFO:11/28/2018 01:31:31 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function stop_container()
+(MainThread:DEBUG:11/28/2018 01:31:31 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/cd54d1283d/json HTTP/1.1" 200 None
+(MainThread:DEBUG:11/28/2018 01:31:43 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/cd54d1283d8f100fc8ad4cae06129fb7b68885d78962d4e94b538f0cf4bc5e45/stop HTTP/1.1" 204 0
+(MainThread:INFO:11/28/2018 01:31:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:31:43 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c7d99b1011/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:31:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:31:43 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/cd54d1283d/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=52d0f9f57e934ef26e9a84b7ba0009b7, value={'_id': '52d0f9f57e934ef26e9a84b7ba0009b7', '_rev': '3-5d04acf9139fbb60e3b1415a807b97f7', '52d0f9f57e934ef26e9a84b7ba0009b7': 'c5a3bdf91b'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=52d0f9f57e934ef26e9a84b7ba001557, value={'_id': '52d0f9f57e934ef26e9a84b7ba001557', '_rev': '3-2683dc752eaca2b4e199fb3bb2d22f68', '52d0f9f57e934ef26e9a84b7ba001557': '8a15ff2670'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:32:13 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c5a3bdf91b/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:32:13 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/8a15ff2670/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 52d0f9f57e934ef26e9a84b7ba0009b7 from database_handle.
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_entry_in_master_database()
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 01:32:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 52d0f9f57e934ef26e9a84b7ba001557 from database_handle.
+(MainThread:INFO:11/28/2018 01:32:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_entry_in_master_database()
+(MainThread:INFO:11/28/2018 01:33:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:33:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:33:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:33:14 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c5a3bdf91b/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:33:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:33:14 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/8a15ff2670/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ couchdb_server_name=localhost:5984
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ database_name=briefcam
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ id_to_container_name=id_to_container
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to couchdb server localhost:5984.
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found the database name briefcam in the server.
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found the database name id_to_container in the server.
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Initializing RTSPRecorderOrchestrator instance.
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ image_name=ssriram1978/rtsp_recorder:latest,environment=video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 min_file_size_key=10000000rtsp_capture_application_key=openRTSP ,bind_mount=/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker.
+(MainThread:DEBUG:11/28/2018 01:37:06 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:11/28/2018 01:37:06 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:11/28/2018 01:37:06 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:11/28/2018 01:37:06 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'name': 'camera1', 'ip': '10.136.66.233', '_id': '49b78d23fc2b1e0b24330c2c8000036c', '_rev': '1-50f89be73736d03bce29e166021abe97'}, id=49b78d23fc2b1e0b24330c2c8000036c into the master database.
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 01:37:06 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'name': 'camera2', 'ip': '10.136.66.231', '_id': '49b78d23fc2b1e0b24330c2c80000c27', '_rev': '1-c20dce9207613c44c880d83725068b58'}, id=49b78d23fc2b1e0b24330c2c80000c27 into the master database.
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=49b78d23fc2b1e0b24330c2c8000036c, value={'_id': '49b78d23fc2b1e0b24330c2c8000036c', '_rev': '1-cf021bf537210240391683198177c9e6', '49b78d23fc2b1e0b24330c2c8000036c': '0c4b6f8fa5'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=49b78d23fc2b1e0b24330c2c80000c27, value={'_id': '49b78d23fc2b1e0b24330c2c80000c27', '_rev': '1-216f2d1ffd1bd35dcfdb688f922432c0', '49b78d23fc2b1e0b24330c2c80000c27': 'd09a69da5f'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:37:26 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/0c4b6f8fa5/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:37:26 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/d09a69da5f/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:37:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function stop_container()
+(MainThread:DEBUG:11/28/2018 01:37:26 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/0c4b6f8fa5/json HTTP/1.1" 200 None
+(MainThread:DEBUG:11/28/2018 01:37:39 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/0c4b6f8fa51a8a3858f04efe179a774b1286ea367aff54494727df256b7c97e6/stop HTTP/1.1" 204 0
+(MainThread:INFO:11/28/2018 01:37:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function stop_container()
+(MainThread:DEBUG:11/28/2018 01:37:39 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/d09a69da5f/json HTTP/1.1" 200 None
+(MainThread:DEBUG:11/28/2018 01:37:51 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/d09a69da5fe2d1bb25836b60a194a07b1bae21192dc872e92e314ed78c1508ef/stop HTTP/1.1" 204 0
+(MainThread:INFO:11/28/2018 01:37:51 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:37:51 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/0c4b6f8fa5/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:37:51 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:37:51 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/d09a69da5f/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=49b78d23fc2b1e0b24330c2c8000036c, value={'_id': '49b78d23fc2b1e0b24330c2c8000036c', '_rev': '3-45206a3eb482857856b822b7d2c3f32b', '49b78d23fc2b1e0b24330c2c8000036c': 'c0351dce98'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=49b78d23fc2b1e0b24330c2c80000c27, value={'_id': '49b78d23fc2b1e0b24330c2c80000c27', '_rev': '3-408b228d48f47b07e5cc26ad9f09bec3', '49b78d23fc2b1e0b24330c2c80000c27': '5a77ccafbf'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:38:21 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c0351dce98/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:38:21 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/5a77ccafbf/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 49b78d23fc2b1e0b24330c2c8000036c from database_handle.
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_entry_in_master_database()
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 49b78d23fc2b1e0b24330c2c80000c27 from database_handle.
+(MainThread:INFO:11/28/2018 01:38:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_entry_in_master_database()
+(MainThread:INFO:11/28/2018 01:39:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:39:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 01:39:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:39:21 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c0351dce98/json HTTP/1.1" 200 None
+(MainThread:INFO:11/28/2018 01:39:21 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:DEBUG:11/28/2018 01:39:21 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/5a77ccafbf/json HTTP/1.1" 200 None

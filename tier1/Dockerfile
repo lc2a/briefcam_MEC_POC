@@ -1,0 +1,19 @@
+FROM python:3.7-slim
+RUN  mkdir /front_end
+RUN  cd /front_end
+WORKDIR /front_end
+COPY requirements.txt requirements.txt
+RUN  apt-get update
+RUN  apt-get install -y scrot
+RUN  apt-get install -y net-tools
+RUN  apt-get install -y vim
+RUN  apt-get install -y wget
+RUN  apt-get install -y procps
+RUN  apt-get install -y libltdl7
+RUN  apt-get install -y iputils-ping
+RUN  wget https://bootstrap.pypa.io/get-pip.py
+RUN  python3 get-pip.py
+RUN  pip3 install -r requirements.txt
+COPY . .
+RUN chmod 777 -R /front_end
+CMD python3 front_end/front_end.py

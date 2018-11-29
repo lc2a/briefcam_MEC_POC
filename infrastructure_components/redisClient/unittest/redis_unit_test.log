@@ -1,0 +1,205 @@
+(MainThread:INFO:11/28/2018 10:13:11 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:11 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:11 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:11 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:13 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:13 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:13 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:13 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:26 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:26 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:26 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:26 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:28 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:28 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:28 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:28 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:44 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:44 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:44 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:44 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:57 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:57 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:57 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:57 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:13:59 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:13:59 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:13:59 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:13:59 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:12 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:12 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:14:12 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:14:12 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:14 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:14 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:14:14 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:14:14 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:16 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:16 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:14:16 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:14:16 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:30 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:30 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:14:30 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:14:30 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:32 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:32 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:14:32 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:14:32 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:32 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Writing 
+ Time=2018-11-28 10:14:32.135222,Hostname=sriramsridhar-HP-EliteBook-8460p
+,containerID=12345,event=Hello world to 12345
+(MainThread:INFO:11/28/2018 10:14:32 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Appending 
+ Time=2018-11-28 10:14:32.137742,Hostname=sriramsridhar-HP-EliteBook-8460p
+,containerID=12345,event=Hello world2 to 12345
+(MainThread:INFO:11/28/2018 10:14:45 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:45 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None redis_log_keyname=briefcam
+(MainThread:INFO:11/28/2018 10:14:45 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None total_job_enqueued_count_redis_name=enqueuetotal_job_dequeued_count_redis_name=dequeue
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Redis Client: Trying to read the environment variables...
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_hostname=localhost
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ redis_server_port=6379
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to redisClient server localhost,port 6379
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None.total_job_enqueued_count=enqueue
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None.total_job_dequeued_count=dequeue
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None.Incrementing total_job_enqueued_count=enqueue
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None.total_job_enqueued_count=enqueue
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None.Incrementing total_job_dequeued_count=dequeue
+(MainThread:INFO:11/28/2018 10:14:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ RedisInterface:None.total_job_enqueued_count=enqueue

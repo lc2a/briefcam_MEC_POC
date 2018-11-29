@@ -1,0 +1,258 @@
+(MainThread:INFO:11/28/2018 11:33:46 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ couchdb_server_name=localhost:5984
+(MainThread:INFO:11/28/2018 11:33:46 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ database_name=briefcam
+(MainThread:INFO:11/28/2018 11:33:46 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ id_to_container_name=id_to_container
+(MainThread:INFO:11/28/2018 11:33:46 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to couchdb server localhost:5984.
+(MainThread:INFO:11/28/2018 11:33:46 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating the database name briefcam in the server.
+(MainThread:INFO:11/28/2018 11:33:46 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating the database name id_to_container in the server.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Validating couchdb_instance to be not null.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'type': 'Person1', 'name': 'John Doe', '_id': '047db6a390cbe1cb1b98e559d20000e6', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613'}, id=047db6a390cbe1cb1b98e559d20000e6 into the master database.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'type': 'Person2', 'name': 'Ashley', '_id': '047db6a390cbe1cb1b98e559d2000f7f', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef'}, id=047db6a390cbe1cb1b98e559d2000f7f into the master database.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Adding 047db6a390cbe1cb1b98e559d20000e6,2345 into the id_to_container_database.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Updating 047db6a390cbe1cb1b98e559d20000e6,2345 into the id_to_container_database.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Adding 047db6a390cbe1cb1b98e559d2000f7f,3456 into the id_to_container_database.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ document_id or container_id is None.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ document_id or container_id is None.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function yield_database_handle_entries()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=047db6a390cbe1cb1b98e559d20000e6, value={'_id': '047db6a390cbe1cb1b98e559d20000e6', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613', 'type': 'Person1', 'name': 'John Doe'} from master database_handle.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=047db6a390cbe1cb1b98e559d2000f7f, value={'_id': '047db6a390cbe1cb1b98e559d2000f7f', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef', 'type': 'Person2', 'name': 'Ashley'} from master database_handle.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function yield_id_to_container_entries()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=047db6a390cbe1cb1b98e559d20000e6, value={'_id': '047db6a390cbe1cb1b98e559d20000e6', '_rev': '1-44c6db8a27a4398076d80a9ef2f4bbf2', '047db6a390cbe1cb1b98e559d20000e6': '2345'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=047db6a390cbe1cb1b98e559d2000f7f, value={'_id': '047db6a390cbe1cb1b98e559d2000f7f', '_rev': '1-9af1f646f006e38eaa63ba2e426eea24', '047db6a390cbe1cb1b98e559d2000f7f': '3456'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 047db6a390cbe1cb1b98e559d20000e6 from database_handle.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 047db6a390cbe1cb1b98e559d2000f7f from database_handle.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 047db6a390cbe1cb1b98e559d20000e6 from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 047db6a390cbe1cb1b98e559d2000f7f from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:33:47 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:41 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ couchdb_server_name=localhost:5984
+(MainThread:INFO:11/28/2018 11:38:41 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ database_name=briefcam
+(MainThread:INFO:11/28/2018 11:38:41 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ id_to_container_name=id_to_container
+(MainThread:INFO:11/28/2018 11:38:41 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to couchdb server localhost:5984.
+(MainThread:INFO:11/28/2018 11:38:41 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating the database name briefcam in the server.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating the database name id_to_container in the server.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Validating couchdb_instance to be not null.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'type': 'Person1', 'name': 'John Doe', '_id': 'ab040d53b149760656b80e38ab000bca', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613'}, id=ab040d53b149760656b80e38ab000bca into the master database.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'type': 'Person2', 'name': 'Ashley', '_id': 'ab040d53b149760656b80e38ab001823', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef'}, id=ab040d53b149760656b80e38ab001823 into the master database.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Adding ab040d53b149760656b80e38ab000bca,2345 into the id_to_container_database.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Updating ab040d53b149760656b80e38ab000bca,2345 into the id_to_container_database.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Adding ab040d53b149760656b80e38ab001823,3456 into the id_to_container_database.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ document_id or container_id is None.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_id_to_container_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ document_id or container_id is None.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function yield_database_handle_entries()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=ab040d53b149760656b80e38ab000bca, value={'_id': 'ab040d53b149760656b80e38ab000bca', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613', 'type': 'Person1', 'name': 'John Doe'} from master database_handle.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=ab040d53b149760656b80e38ab001823, value={'_id': 'ab040d53b149760656b80e38ab001823', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef', 'type': 'Person2', 'name': 'Ashley'} from master database_handle.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function yield_id_to_container_entries()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=ab040d53b149760656b80e38ab000bca, value={'_id': 'ab040d53b149760656b80e38ab000bca', '_rev': '1-de3e25bc76082e67bcc3242e16c19e34', 'ab040d53b149760656b80e38ab000bca': '2345'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=ab040d53b149760656b80e38ab001823, value={'_id': 'ab040d53b149760656b80e38ab001823', '_rev': '1-353d2f2c3bc7265ce4646a0859a9306a', 'ab040d53b149760656b80e38ab001823': '3456'} from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:42 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id ab040d53b149760656b80e38ab000bca from database_handle.
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id ab040d53b149760656b80e38ab001823 from database_handle.
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id ab040d53b149760656b80e38ab000bca from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id ab040d53b149760656b80e38ab001823 from id_to_container_db.
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/28/2018 11:38:43 AM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()

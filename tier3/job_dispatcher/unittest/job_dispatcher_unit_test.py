@@ -1,0 +1,117 @@
+import os
+import time
+import sys
+import traceback
+import unittest
+import subprocess
+import threading
+
+#sys.path.append("..")  # Adds higher directory to python modules path.
+
+def import_all_packages():
+    realpath=os.path.realpath(__file__)
+    #print("os.path.realpath({})={}".format(__file__,realpath))
+    dirname=os.path.dirname(realpath)
+    #print("os.path.dirname({})={}".format(realpath,dirname))
+    dirname_list=dirname.split('/')
+    #print(dirname_list)
+    for index in range(len(dirname_list)):
+        module_path='/'.join(dirname_list[:index])
+        #print("module_path={}".format(module_path))
+        try:
+            sys.path.append(module_path)
+        except:
+            #print("Invalid module path {}".format(module_path))
+            pass
+
+import_all_packages()
+
+from infrastructure_components.log.log_file import logging_to_console_and_syslog
+from tier3.job_dispatcher.job_dispatcher import DirectoryWatch
+from infrastructure_components.redisClient.redis_interface import RedisInterface
+
+
+class TestDirectoryWatch(unittest.TestCase):
+
+    max_number_of_jobs = 100
+    directory_name = 'test_files'
+    def setUp(self):
+        os.environ["broker_name_key"] = "localhost:9094"
+        os.environ["topic_key"] = "video-file-name"
+        os.environ["redis_log_keyname_key"] = "briefcam"
+        os.environ["total_job_enqueued_count_redis_name_key"] = "enqueue"
+        os.environ["total_job_dequeued_count_redis_name_key"] = "dequeue"
+        os.environ["redis_server_hostname_key"] = "localhost"
+        os.environ["redis_server_port_key"] = "6379"
+        current_file_path_list = os.path.realpath(__file__).split('/')
+        video_path_directory = '/'.join(current_file_path_list[:-1])
+        os.environ["video_file_path_key"] = "{}/{}".format(video_path_directory,
+                                                           TestDirectoryWatch.directory_name)
+        self.create_test_docker_container()
+        self.producer_thread = None
+
+    @staticmethod
+    def create_new_files():
+        producer_instance = DirectoryWatch()
+        logging_to_console_and_syslog("Creating new files.")
+        subprocess.run(['mkdir', TestDirectoryWatch.directory_name], stdout=subprocess.PIPE)
+        for index in range(TestDirectoryWatch.max_number_of_jobs):
+            fh = open("{}/ss_{}.txt".format(TestDirectoryWatch.directory_name,
+                                            index),
+                      "w")
+            fh.write("Hello")
+            fh.close()
+        producer_instance.watch_a_directory()
+
+    def create_producer_thread(self):
+        self.producer_thread = threading.Thread(name="{}{}".format("thread", 1),
+                                                target=TestDirectoryWatch.create_new_files
+                                                )
+        self.producer_thread.do_run = True
+        self.producer_thread.name = "{}_{}".format("consumer", 1)
+        self.producer_thread.start()
+
+    def perform_enqueue_dequeue(self):
+        logging_to_console_and_syslog("Validating producer instance to be not null.")
+        self.create_producer_thread()
+        time.sleep(30)
+        logging_to_console_and_syslog("Validating if the Producer successfully enqueued the messages.")
+        redis_instance = RedisInterface("Producer")
+        self.assertEqual(redis_instance.get_current_enqueue_count().decode('utf8'),
+                         str(TestDirectoryWatch.max_number_of_jobs))
+        logging_to_console_and_syslog("enqueue_count={},max_number_of_jobs={}"
+                                      .format(redis_instance.get_current_enqueue_count(),
+                                              TestDirectoryWatch.max_number_of_jobs))
+
+    def test_run(self):
+        logging_to_console_and_syslog("Validating **************** Job Dispatcher*****************.")
+        self.perform_enqueue_dequeue()
+
+    def create_test_docker_container(self):
+        completedProcess = subprocess.run(["docker-compose",
+                                           "-f",
+                                           "docker-compose_wurstmeister_kafka.yml",
+                                           "up",
+                                           "-d"],
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
+
+    def delete_test_docker_container(self):
+        completedProcess = subprocess.run(["docker-compose",
+                                           "-f",
+                                           "docker-compose_wurstmeister_kafka.yml",
+                                           "down"],
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
+
+    def tearDown(self):
+        self.delete_test_docker_container()
+        subprocess.run(['rm', '-rf', TestDirectoryWatch.directory_name], stdout=subprocess.PIPE)
+        time.sleep(5)
+        self.producer_thread.join(1.0)
+
+
+if __name__ == "__main__":
+    unittest.main()

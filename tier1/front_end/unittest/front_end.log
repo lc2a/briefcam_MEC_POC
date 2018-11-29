@@ -1,0 +1,166 @@
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ couchdb_server_name=localhost:5984
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ database_name=briefcam
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ id_to_container_name=id_to_container
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Successfully connected to couchdb server localhost:5984.
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found the database name briefcam in the server.
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found the database name id_to_container in the server.
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Initializing RTSPRecorderOrchestrator instance.
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ image_name=ssriram1978/rtsp_recorder:latest,environment=video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 min_file_size_key=10000000rtsp_capture_application_key=openRTSP ,bind_mount=/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker.
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'name': 'camera1', 'ip': '10.136.66.233', '_id': '8d903bab630c9bbf9253dad2290001e7', '_rev': '1-50f89be73736d03bce29e166021abe97'}, id=8d903bab630c9bbf9253dad2290001e7 into the master database.
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function add_entry_into_master_database()
+(MainThread:INFO:11/16/2018 10:53:41 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating  a document {'name': 'camera2', 'ip': '10.136.66.231', '_id': '8d903bab630c9bbf9253dad229000961', '_rev': '1-c20dce9207613c44c880d83725068b58'}, id=8d903bab630c9bbf9253dad229000961 into the master database.
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=8d903bab630c9bbf9253dad2290001e7, value={'_id': '8d903bab630c9bbf9253dad2290001e7', '_rev': '1-84701e3a79c3481e05c382698c167078', '8d903bab630c9bbf9253dad2290001e7': 'ae229b00b4'} from id_to_container_db.
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=8d903bab630c9bbf9253dad229000961, value={'_id': '8d903bab630c9bbf9253dad229000961', '_rev': '1-f6791bfb7886fa3ba6ed3f1201f8d61c', '8d903bab630c9bbf9253dad229000961': '8c65015ae3'} from id_to_container_db.
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:54:01 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function stop_container()
+(MainThread:INFO:11/16/2018 10:54:13 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function stop_container()
+(MainThread:INFO:11/16/2018 10:54:25 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:54:25 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=8d903bab630c9bbf9253dad2290001e7, value={'_id': '8d903bab630c9bbf9253dad2290001e7', '_rev': '3-e053f50e8d50ad9555597130f2ef2ea5', '8d903bab630c9bbf9253dad2290001e7': '1fde1ab13b'} from id_to_container_db.
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Fetching key=8d903bab630c9bbf9253dad229000961, value={'_id': '8d903bab630c9bbf9253dad229000961', '_rev': '3-2bf441cd6da249b31190235004391d4a', '8d903bab630c9bbf9253dad229000961': '8c79141ece'} from id_to_container_db.
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 8d903bab630c9bbf9253dad2290001e7 from database_handle.
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_entry_in_master_database()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function delete_entry_from_master_database()
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting document_id 8d903bab630c9bbf9253dad229000961 from database_handle.
+(MainThread:INFO:11/16/2018 10:54:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_entry_in_master_database()
+(MainThread:INFO:11/16/2018 10:55:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/16/2018 10:55:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function fetch_data_from_id_to_container_entry()
+(MainThread:INFO:11/16/2018 10:55:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 10:55:55 AM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Unit testing function check_if_container_is_active()
+(MainThread:INFO:11/16/2018 04:05:23 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=front_end.
+(MainThread:INFO:11/16/2018 04:05:23 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 04:12:22 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 04:12:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 04:12:27 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 04:15:16 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 04:15:16 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 2018-11-16 21:14:39.636611 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 couchdb_server_name=localhost:5984
+2018-11-16 21:14:39.636989 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 database_name=briefcam
+2018-11-16 21:14:39.637238 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 id_to_container_name=id_to_container
+2018-11-16 21:14:39.637898 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Successfully connected to couchdb server localhost:5984.
+2018-11-16 21:14:39.687275 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Creating the database name briefcam in the server.
+2018-11-16 21:14:39.916392 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Creating the database name id_to_container in the server.
+2018-11-16 21:14:40.285744 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Initializing RTSPRecorderOrchestrator instance.
+2018-11-16 21:14:40.285856 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 image_name=ssriram1978/rtsp_recorder:latest,environment=video_file_path_key=/data rtsp_file_name_prefix_key=briefcam rtsp_duration_of_the_video_key=30 min_file_size_key=10000000rtsp_capture_application_key=openRTSP ,bind_mount=/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker.
+2018-11-16 21:14:40.286547 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Unit testing function add_entry_into_master_database()
+2018-11-16 21:14:40.527346 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Creating  a document {'name': 'camera1', 'ip': '10.136.66.233', '_id': 'a9c0081b2b1104d44f69ddbe39000679', '_rev': '1-50f89be73736d03bce29e166021abe97'}, id=a9c0081b2b1104d44f69ddbe39000679 into the master database.
+2018-11-16 21:14:40.527892 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Unit testing function add_entry_into_master_database()
+2018-11-16 21:14:40.684890 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Creating  a document {'name': 'camera2', 'ip': '10.136.66.231', '_id': 'a9c0081b2b1104d44f69ddbe39001094', '_rev': '1-c20dce9207613c44c880d83725068b58'}, id=a9c0081b2b1104d44f69ddbe39001094 into the master database.
+2018-11-16 21:15:00.705519 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 21:15:00.710599 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=cf8dcd50ca25 Unit testing function fetch_data_from_id_to_container_entry()
+
+(MainThread:INFO:11/16/2018 04:15:16 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Result returned {'Error': None, 'StatusCode': 1}.

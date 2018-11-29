@@ -1,0 +1,1137 @@
+(MainThread:INFO:11/16/2018 01:23:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:23:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:25:47 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:25:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:25:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:27:53 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:27:53 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ [31mERROR[0m: Couldn't connect to Docker daemon. You might need to install Docker:
+
+https://docs.docker.com/engine/installation/
+2018-11-16 18:27:51.369864 hostname=7e0cdf0974d3
+ containerID=7e0cdf0974d3 couchdb_server_name=localhost:5984
+2018-11-16 18:27:51.370230 hostname=7e0cdf0974d3
+ containerID=7e0cdf0974d3 database_name=briefcam
+2018-11-16 18:27:51.370593 hostname=7e0cdf0974d3
+ containerID=7e0cdf0974d3 id_to_container_name=id_to_container
+2018-11-16 18:27:51.371470 hostname=7e0cdf0974d3
+ containerID=7e0cdf0974d3 Successfully connected to couchdb server localhost:5984.
+2018-11-16 18:27:51.409508 hostname=7e0cdf0974d3
+ containerID=7e0cdf0974d3 Creating the database name briefcam in the server.
+E
+======================================================================
+ERROR: test_run (__main__.TestCouchDB)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "couchdb_client_unit_test.py", line 19, in setUp
+    self.couchdb_instance = CouchDBClient()
+  File "/couchdb_client/couchdb_client.py", line 28, in __init__
+    self.create_document_database_name_in_the_server()
+  File "/couchdb_client/couchdb_client.py", line 79, in create_document_database_name_in_the_server
+    self.database_handle = self.couchdb_instance.create(self.database_name)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/client.py", line 221, in create
+    self.resource.put_json(name)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 578, in put_json
+    **params)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 596, in _request_json
+    headers=headers, **params)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 592, in _request
+    credentials=self.credentials)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 295, in request
+    conn = self.connection_pool.get(url)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 515, in get
+    conn.connect()
+  File "/usr/local/lib/python3.7/http/client.py", line 928, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/local/lib/python3.7/socket.py", line 727, in create_connection
+    raise err
+  File "/usr/local/lib/python3.7/socket.py", line 716, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+----------------------------------------------------------------------
+Ran 1 test in 120.610s
+
+FAILED (errors=1)
+
+(MainThread:INFO:11/16/2018 01:29:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:29:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:34:49 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:34:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:34:53 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:36:59 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:36:59 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ [31mERROR[0m: Couldn't connect to Docker daemon. You might need to install Docker:
+
+https://docs.docker.com/engine/installation/
+2018-11-16 18:36:56.800476 hostname=eb8d566211c4
+ containerID=eb8d566211c4 couchdb_server_name=localhost:5984
+2018-11-16 18:36:56.801122 hostname=eb8d566211c4
+ containerID=eb8d566211c4 database_name=briefcam
+2018-11-16 18:36:56.801653 hostname=eb8d566211c4
+ containerID=eb8d566211c4 id_to_container_name=id_to_container
+2018-11-16 18:36:56.802527 hostname=eb8d566211c4
+ containerID=eb8d566211c4 Successfully connected to couchdb server localhost:5984.
+2018-11-16 18:36:56.812447 hostname=eb8d566211c4
+ containerID=eb8d566211c4 Creating the database name briefcam in the server.
+E
+======================================================================
+ERROR: test_run (__main__.TestCouchDB)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "couchdb_client_unit_test.py", line 19, in setUp
+    self.couchdb_instance = CouchDBClient()
+  File "/couchdb_client/couchdb_client.py", line 28, in __init__
+    self.create_document_database_name_in_the_server()
+  File "/couchdb_client/couchdb_client.py", line 79, in create_document_database_name_in_the_server
+    self.database_handle = self.couchdb_instance.create(self.database_name)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/client.py", line 221, in create
+    self.resource.put_json(name)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 578, in put_json
+    **params)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 596, in _request_json
+    headers=headers, **params)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 592, in _request
+    credentials=self.credentials)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 295, in request
+    conn = self.connection_pool.get(url)
+  File "/usr/local/lib/python3.7/site-packages/couchdb/http.py", line 515, in get
+    conn.connect()
+  File "/usr/local/lib/python3.7/http/client.py", line 928, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/local/lib/python3.7/socket.py", line 727, in create_connection
+    raise err
+  File "/usr/local/lib/python3.7/socket.py", line 716, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+----------------------------------------------------------------------
+Ran 1 test in 121.559s
+
+FAILED (errors=1)
+
+(MainThread:INFO:11/16/2018 01:45:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:45:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:48:46 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:48:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:48:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:48:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:48:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 01:49:36 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:49:36 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:49:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:49:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:49:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:49:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:49:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 01:51:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:51:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:57:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:57:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:57:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:57:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:57:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 01:58:01 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:58:01 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:58:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:58:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:58:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:58:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:58:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 01:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 01:58:57 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 01:58:57 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 01:58:58 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 01:58:58 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 01:58:58 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 01:59:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 01:59:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:00:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:00:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:00:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:00:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:00:42 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:01:26 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:01:26 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:01:31 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:01:31 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:01:32 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:01:32 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:01:32 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:06:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:06:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:07:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:07:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:07:03 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:09:05 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:09:05 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ [31mERROR[0m: Couldn't connect to Docker daemon at http+docker://localhost - is it running?
+
+If it's at a non-standard location, specify the URL with the DOCKER_HOST environment variable.
+2018-11-16 19:09:04.011822 hostname=76a042043bd0
+ containerID=76a042043bd0 couchdb_server_name=localhost:5984
+2018-11-16 19:09:04.012048 hostname=76a042043bd0
+ containerID=76a042043bd0 database_name=briefcam
+2018-11-16 19:09:04.012163 hostname=76a042043bd0
+ containerID=76a042043bd0 id_to_container_name=id_to_container
+2018-11-16 19:09:04.012658 hostname=76a042043bd0
+ containerID=76a042043bd0 Successfully connected to couchdb server localhost:5984.
+2018-11-16 19:09:04.019538 hostname=76a042043bd0
+ containerID=76a042043bd0 Creating the database name briefcam in the server.
+E
+======================================================================
+ERROR: test_run (__main__.TestCouchDB)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "couchdb_client_unit_test.py", line 19, in setUp
+    self.couchdb_instance = CouchDBClient()
+  File "/couchdb_client/couchdb_client.py", line 28, in __init__
+    self.create_document_database_name_in_the_server()
+  File "/couchdb_client/couchdb_client.py", line 79, in create_document_database_name_in_the_server
+    self.database_handle = self.couchdb_instance.create(self.database_name)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/client.py", line 221, in create
+    self.resource.put_json(name)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 578, in put_json
+    **params)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 596, in _request_json
+    headers=headers, **params)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 592, in _request
+    credentials=self.credentials)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 295, in request
+    conn = self.connection_pool.get(url)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 515, in get
+    conn.connect()
+  File "/usr/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+----------------------------------------------------------------------
+Ran 1 test in 120.544s
+
+FAILED (errors=1)
+
+(MainThread:INFO:11/16/2018 02:17:15 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:17:15 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:17:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:17:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:17:27 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:19:40 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:19:40 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ [33mWARNING[0m: The Docker Engine you're using is running in swarm mode.
+
+Compose does not use swarm mode to deploy services to multiple nodes in a swarm. All containers will be scheduled on the current node.
+
+To deploy your application across the swarm, use `docker stack deploy`.
+
+Creating network "couchdb_client_default" with the default driver
+Creating couchdb_client_couchdb_1_d639ab6e6957 ... 
+[1A[2KCreating couchdb_client_couchdb_1_d639ab6e6957 ... [32mdone[0m[1BCreating couchdb_client_fauxton_1_48d08d89ca4d ... 
+[1A[2KCreating couchdb_client_fauxton_1_48d08d89ca4d ... [32mdone[0m[1B2018-11-16 19:19:38.935473 hostname=e949604208ff
+ containerID=e949604208ff couchdb_server_name=localhost:5984
+2018-11-16 19:19:38.936074 hostname=e949604208ff
+ containerID=e949604208ff database_name=briefcam
+2018-11-16 19:19:38.936544 hostname=e949604208ff
+ containerID=e949604208ff id_to_container_name=id_to_container
+2018-11-16 19:19:38.937438 hostname=e949604208ff
+ containerID=e949604208ff Successfully connected to couchdb server localhost:5984.
+2018-11-16 19:19:38.945469 hostname=e949604208ff
+ containerID=e949604208ff Creating the database name briefcam in the server.
+E
+======================================================================
+ERROR: test_run (__main__.TestCouchDB)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "couchdb_client_unit_test.py", line 19, in setUp
+    self.couchdb_instance = CouchDBClient()
+  File "/couchdb_client/couchdb_client.py", line 28, in __init__
+    self.create_document_database_name_in_the_server()
+  File "/couchdb_client/couchdb_client.py", line 79, in create_document_database_name_in_the_server
+    self.database_handle = self.couchdb_instance.create(self.database_name)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/client.py", line 221, in create
+    self.resource.put_json(name)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 578, in put_json
+    **params)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 596, in _request_json
+    headers=headers, **params)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 592, in _request
+    credentials=self.credentials)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 295, in request
+    conn = self.connection_pool.get(url)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 515, in get
+    conn.connect()
+  File "/usr/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 724, in create_connection
+    raise err
+  File "/usr/lib/python3.6/socket.py", line 713, in create_connection
+    sock.connect(sa)
+OSError: [Errno 99] Cannot assign requested address
+
+----------------------------------------------------------------------
+Ran 1 test in 131.340s
+
+FAILED (errors=1)
+
+(MainThread:INFO:11/16/2018 02:21:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:21:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:21:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:21:50 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:21:53 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:23:55 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:23:55 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ [33mWARNING[0m: The Docker Engine you're using is running in swarm mode.
+
+Compose does not use swarm mode to deploy services to multiple nodes in a swarm. All containers will be scheduled on the current node.
+
+To deploy your application across the swarm, use `docker stack deploy`.
+
+couchdb_client_couchdb_1_f23ebc3346fd is up-to-date
+couchdb_client_fauxton_1_4313f4c805fa is up-to-date
+2018-11-16 19:23:53.819858 hostname=6e0aa5325c4f
+ containerID=6e0aa5325c4f couchdb_server_name=couchdb:5984
+2018-11-16 19:23:53.820383 hostname=6e0aa5325c4f
+ containerID=6e0aa5325c4f database_name=briefcam
+2018-11-16 19:23:53.820921 hostname=6e0aa5325c4f
+ containerID=6e0aa5325c4f id_to_container_name=id_to_container
+2018-11-16 19:23:53.821751 hostname=6e0aa5325c4f
+ containerID=6e0aa5325c4f Successfully connected to couchdb server couchdb:5984.
+2018-11-16 19:23:53.862739 hostname=6e0aa5325c4f
+ containerID=6e0aa5325c4f Creating the database name briefcam in the server.
+E
+======================================================================
+ERROR: test_run (__main__.TestCouchDB)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "couchdb_client_unit_test.py", line 19, in setUp
+    self.couchdb_instance = CouchDBClient()
+  File "/couchdb_client/couchdb_client.py", line 28, in __init__
+    self.create_document_database_name_in_the_server()
+  File "/couchdb_client/couchdb_client.py", line 79, in create_document_database_name_in_the_server
+    self.database_handle = self.couchdb_instance.create(self.database_name)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/client.py", line 221, in create
+    self.resource.put_json(name)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 578, in put_json
+    **params)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 596, in _request_json
+    headers=headers, **params)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 592, in _request
+    credentials=self.credentials)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 295, in request
+    conn = self.connection_pool.get(url)
+  File "/usr/local/lib/python3.6/dist-packages/couchdb/http.py", line 515, in get
+    conn.connect()
+  File "/usr/lib/python3.6/http/client.py", line 936, in connect
+    (self.host,self.port), self.timeout, self.source_address)
+  File "/usr/lib/python3.6/socket.py", line 704, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.6/socket.py", line 745, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+----------------------------------------------------------------------
+Ran 1 test in 120.631s
+
+FAILED (errors=1)
+
+(MainThread:INFO:11/16/2018 02:31:57 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:31:57 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:32:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:32:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:32:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:32:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:32:08 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:33:37 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:33:37 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:33:46 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:33:46 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:33:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:33:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:33:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:34:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:34:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:34:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:34:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:34:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:34:35 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:34:35 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:35:38 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:35:38 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:35:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:35:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:35:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:35:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:35:48 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:36:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:36:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:36:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:36:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:36:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:36:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:36:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:36:28 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:36:28 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:36:37 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:36:38 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:36:38 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:36:38 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:36:38 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:38:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:38:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:44:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:44:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:44:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:44:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:44:39 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:50:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:50:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:50:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:50:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:50:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:50:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:50:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:51:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:51:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:51:18 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:51:18 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:51:20 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:51:20 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:51:20 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:51:58 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:51:58 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:52:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:52:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:52:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:52:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:52:07 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:56:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:56:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:56:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:56:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:56:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:56:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:56:44 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:57:03 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:57:03 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:57:13 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:57:13 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:57:13 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:57:13 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:57:13 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 02:58:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 02:58:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 02:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 02:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 02:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 02:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 02:58:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:02:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:02:52 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:03:01 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:03:01 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:03:02 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:03:02 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:03:02 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:06:15 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:06:15 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:06:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:06:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:06:25 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:06:25 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:06:25 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:12:31 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:12:31 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:12:40 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:12:40 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:12:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:12:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:12:41 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:13:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:13:00 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:13:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:13:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:13:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:13:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:13:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:14:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:14:10 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:14:20 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:14:20 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:14:23 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:14:23 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:14:24 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:15:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:15:09 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:15:18 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:15:18 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:15:22 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:15:22 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:15:22 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:11/16/2018 03:36:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:36:06 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:36:16 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:36:17 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:39:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:39:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:39:53 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:39:53 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:39:55 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:42:22 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:42:22 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 2018-11-16 20:42:05.253674 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed couchdb_server_name=localhost:5984
+2018-11-16 20:42:05.254052 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed database_name=briefcam
+2018-11-16 20:42:05.254304 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed id_to_container_name=id_to_container
+2018-11-16 20:42:05.255009 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Successfully connected to couchdb server localhost:5984.
+2018-11-16 20:42:05.350313 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Creating the database name briefcam in the server.
+2018-11-16 20:42:05.661071 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Creating the database name id_to_container in the server.
+2018-11-16 20:42:05.826413 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Validating couchdb_instance to be not null.
+2018-11-16 20:42:05.826585 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_master_database()
+2018-11-16 20:42:05.933864 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Creating  a document {'type': 'Person1', 'name': 'John Doe', '_id': '019722bd4721fb2c8946edb0900000af', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613'}, id=019722bd4721fb2c8946edb0900000af into the master database.
+2018-11-16 20:42:05.933992 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_master_database()
+2018-11-16 20:42:06.017469 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Creating  a document {'type': 'Person2', 'name': 'Ashley', '_id': '019722bd4721fb2c8946edb090000640', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef'}, id=019722bd4721fb2c8946edb090000640 into the master database.
+2018-11-16 20:42:06.017555 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:42:06.019913 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Adding 019722bd4721fb2c8946edb0900000af,2345 into the id_to_container_database.
+2018-11-16 20:42:06.111263 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:42:06.114996 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Updating 019722bd4721fb2c8946edb0900000af,2345 into the id_to_container_database.
+2018-11-16 20:42:06.115288 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:42:06.118116 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Adding 019722bd4721fb2c8946edb090000640,3456 into the id_to_container_database.
+2018-11-16 20:42:06.186849 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:42:06.186935 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed document_id or container_id is None.
+2018-11-16 20:42:06.186998 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:42:06.187058 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed document_id or container_id is None.
+2018-11-16 20:42:06.187121 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function yield_database_handle_entries()
+2018-11-16 20:42:06.207961 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function fetch_data_from_master_database()
+2018-11-16 20:42:06.212304 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Fetching key=019722bd4721fb2c8946edb0900000af, value={'_id': '019722bd4721fb2c8946edb0900000af', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613', 'type': 'Person1', 'name': 'John Doe'} from master database_handle.
+2018-11-16 20:42:06.212535 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function fetch_data_from_master_database()
+2018-11-16 20:42:06.216083 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Fetching key=019722bd4721fb2c8946edb090000640, value={'_id': '019722bd4721fb2c8946edb090000640', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef', 'type': 'Person2', 'name': 'Ashley'} from master database_handle.
+2018-11-16 20:42:06.216184 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function yield_id_to_container_entries()
+2018-11-16 20:42:06.222292 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 20:42:06.223829 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 20:42:06.226907 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Fetching key=019722bd4721fb2c8946edb0900000af, value={'_id': '019722bd4721fb2c8946edb0900000af', '_rev': '1-20003919bb06ef9e158f127d1062735b', '019722bd4721fb2c8946edb0900000af': '2345'} from id_to_container_db.
+2018-11-16 20:42:06.227021 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 20:42:06.230172 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Fetching key=019722bd4721fb2c8946edb090000640, value={'_id': '019722bd4721fb2c8946edb090000640', '_rev': '1-0aae985285849fbef7e89b309de90efd', '019722bd4721fb2c8946edb090000640': '3456'} from id_to_container_db.
+2018-11-16 20:42:06.230314 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+2018-11-16 20:42:06.231912 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Deleting document_id 019722bd4721fb2c8946edb0900000af from database_handle.
+2018-11-16 20:42:06.311593 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+2018-11-16 20:42:06.316128 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Deleting document_id 019722bd4721fb2c8946edb090000640 from database_handle.
+2018-11-16 20:42:06.405600 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+2018-11-16 20:42:06.408683 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+2018-11-16 20:42:06.413053 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Deleting document_id 019722bd4721fb2c8946edb0900000af from id_to_container_db.
+2018-11-16 20:42:06.497353 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+2018-11-16 20:42:06.501877 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Deleting document_id 019722bd4721fb2c8946edb090000640 from id_to_container_db.
+2018-11-16 20:42:06.590643 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+2018-11-16 20:42:06.596066 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=af00246b6eed Unit testing function delete_entry_from_master_database()
+
+(MainThread:INFO:11/16/2018 03:46:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ DOCKER_TAG=ssriram1978,DOCKER_IMAGE_NAME=couchdb_client.
+(MainThread:INFO:11/16/2018 03:46:34 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:11/16/2018 03:46:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:11/16/2018 03:46:43 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running Docker image.
+(MainThread:INFO:11/16/2018 03:46:46 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Waiting for the Docker image to complete.
+(MainThread:INFO:11/16/2018 03:49:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:11/16/2018 03:49:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 2018-11-16 20:48:54.605807 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 couchdb_server_name=localhost:5984
+2018-11-16 20:48:54.606183 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 database_name=briefcam
+2018-11-16 20:48:54.606446 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 id_to_container_name=id_to_container
+2018-11-16 20:48:54.607327 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Successfully connected to couchdb server localhost:5984.
+2018-11-16 20:48:54.666374 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Creating the database name briefcam in the server.
+2018-11-16 20:48:54.981551 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Creating the database name id_to_container in the server.
+2018-11-16 20:48:55.187192 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Validating couchdb_instance to be not null.
+2018-11-16 20:48:55.187559 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_master_database()
+2018-11-16 20:48:55.314458 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Creating  a document {'type': 'Person1', 'name': 'John Doe', '_id': '8456415c4ee3168af62a2b4940000e68', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613'}, id=8456415c4ee3168af62a2b4940000e68 into the master database.
+2018-11-16 20:48:55.314785 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_master_database()
+2018-11-16 20:48:55.429658 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Creating  a document {'type': 'Person2', 'name': 'Ashley', '_id': '8456415c4ee3168af62a2b49400012eb', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef'}, id=8456415c4ee3168af62a2b49400012eb into the master database.
+2018-11-16 20:48:55.429953 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:48:55.432187 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Adding 8456415c4ee3168af62a2b4940000e68,2345 into the id_to_container_database.
+2018-11-16 20:48:55.513541 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:48:55.516735 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Updating 8456415c4ee3168af62a2b4940000e68,2345 into the id_to_container_database.
+2018-11-16 20:48:55.516814 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:48:55.519158 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Adding 8456415c4ee3168af62a2b49400012eb,3456 into the id_to_container_database.
+2018-11-16 20:48:55.613987 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:48:55.614071 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 document_id or container_id is None.
+2018-11-16 20:48:55.614133 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function add_entry_into_id_to_container_database()
+2018-11-16 20:48:55.614193 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 document_id or container_id is None.
+2018-11-16 20:48:55.614256 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function yield_database_handle_entries()
+2018-11-16 20:48:55.625512 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function fetch_data_from_master_database()
+2018-11-16 20:48:55.629101 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Fetching key=8456415c4ee3168af62a2b4940000e68, value={'_id': '8456415c4ee3168af62a2b4940000e68', '_rev': '1-2e286c4f617b8c2ea07dd35a5a211613', 'type': 'Person1', 'name': 'John Doe'} from master database_handle.
+2018-11-16 20:48:55.629211 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function fetch_data_from_master_database()
+2018-11-16 20:48:55.632342 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Fetching key=8456415c4ee3168af62a2b49400012eb, value={'_id': '8456415c4ee3168af62a2b49400012eb', '_rev': '1-4e3901731bdd16ee5200da88e641c9ef', 'type': 'Person2', 'name': 'Ashley'} from master database_handle.
+2018-11-16 20:48:55.632454 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function yield_id_to_container_entries()
+2018-11-16 20:48:55.638748 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 20:48:55.640426 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 20:48:55.644217 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Fetching key=8456415c4ee3168af62a2b4940000e68, value={'_id': '8456415c4ee3168af62a2b4940000e68', '_rev': '1-44df173ee59e791bd277e9e468ec1802', '8456415c4ee3168af62a2b4940000e68': '2345'} from id_to_container_db.
+2018-11-16 20:48:55.644300 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function fetch_data_from_id_to_container_entry()
+2018-11-16 20:48:55.647727 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Fetching key=8456415c4ee3168af62a2b49400012eb, value={'_id': '8456415c4ee3168af62a2b49400012eb', '_rev': '1-fbcadef7c40e092833076fab8be85619', '8456415c4ee3168af62a2b49400012eb': '3456'} from id_to_container_db.
+2018-11-16 20:48:55.647857 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+2018-11-16 20:48:55.650060 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Deleting document_id 8456415c4ee3168af62a2b4940000e68 from database_handle.
+2018-11-16 20:48:55.757210 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+2018-11-16 20:48:55.762205 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Deleting document_id 8456415c4ee3168af62a2b49400012eb from database_handle.
+2018-11-16 20:48:55.841801 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+2018-11-16 20:48:55.846351 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+2018-11-16 20:48:55.849561 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Deleting document_id 8456415c4ee3168af62a2b4940000e68 from id_to_container_db.
+2018-11-16 20:48:55.933107 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+2018-11-16 20:48:55.937870 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Deleting document_id 8456415c4ee3168af62a2b49400012eb from id_to_container_db.
+2018-11-16 20:48:56.041428 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+2018-11-16 20:48:56.045983 hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=ca6bd2687591 Unit testing function delete_entry_from_master_database()
+
+(MainThread:INFO:11/16/2018 03:49:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Result returned {'Error': None, 'StatusCode': 0}.
+(MainThread:INFO:11/16/2018 03:49:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Removing docker image.
+(MainThread:INFO:11/16/2018 03:49:11 PM:24:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Completed unit testing.
