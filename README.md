@@ -1,4 +1,4 @@
-# briefcam_MEC_POC
+# MEC_POC
 ------------------
 This is a Mobile Edge Compute platform Proof Of Concept (POC).
 
