@@ -36,7 +36,7 @@ class DataParserInterface:
         self.hostname = os.popen("cat /etc/hostname").read()
         self.cont_id = os.popen("cat /proc/self/cgroup | head -n 1 | cut -d '/' -f3").read()
         self.load_environment_variables()
-        self.instantiate_objects()
+        self.__instantiate_objects()
 
     def load_environment_variables(self):
         while self.data_parser_type is None:
@@ -45,7 +45,7 @@ class DataParserInterface:
         logging_to_console_and_syslog(("DataParserInterface: data_parser_type={}"
                                        .format(self.data_parser_type)))
 
-    def instantiate_objects(self):
+    def __instantiate_objects(self):
         logging_to_console_and_syslog("DataParserInterface: instantiate_objects()")
         if self.data_parser_type == DataParserInterface.BriefCam:
             from infrastructure_components.data_parser.briefcam_parser.briefcam_parser import BriefcamParser
@@ -61,7 +61,7 @@ class DataParserInterface:
             self.parser_instance = PyTorchParser()
 
     def cleanup(self):
-        self.parser_instance.cleanup()
+        self.parser_instance.clean_up()
 
     def process_job(self, filename):
         if not self.parser_instance:

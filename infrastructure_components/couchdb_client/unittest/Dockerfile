@@ -29,4 +29,4 @@ RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY . .
 RUN chmod 777 -R /couchdb_client
-CMD python3 couchdb_client_unit_test.py
+CMD python3 test_couchdb.py

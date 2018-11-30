@@ -29,4 +29,4 @@ RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY . .
 RUN chmod 777 -R /front_end
-CMD python3 front_end_unit_test.py
+CMD python3 test_front_end.py

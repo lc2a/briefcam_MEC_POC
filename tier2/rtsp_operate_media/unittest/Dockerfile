@@ -29,4 +29,4 @@ RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY . .
 RUN chmod 777 -R /rtsp_operate_media
-CMD python3 rtsp_operate_media_unit_test.py
+CMD python3 test_rtsp_operate_media.py

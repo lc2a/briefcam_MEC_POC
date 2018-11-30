@@ -29,4 +29,4 @@ RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY ../.. .
 RUN chmod 777 -R /wurstmeister_kafka
-CMD python3 kafka_unit_test.py
+CMD python3 test_kafka.py

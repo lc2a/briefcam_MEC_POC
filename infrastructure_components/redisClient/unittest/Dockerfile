@@ -29,4 +29,4 @@ RUN  python3 get-pip.py
 RUN  pip3 install -r requirements.txt
 COPY ../.. .
 RUN chmod 777 -R /redisClient
-CMD python3 redis_unit_test.py
+CMD python3 test_redis.py

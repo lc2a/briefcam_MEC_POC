@@ -40,3 +40,6 @@ class TensorFlowParser:
         logging_to_console_and_syslog("**********Initializing Tensor Flow processing_job {} ***********"
                                       .format(message))
         return True
+
+    def clean_up(self):
+        pass

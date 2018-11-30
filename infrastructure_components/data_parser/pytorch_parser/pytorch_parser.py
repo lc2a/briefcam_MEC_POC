@@ -39,3 +39,6 @@ class PyTorchParser:
         logging_to_console_and_syslog("**********Processing pytorch Job {} ***********"
                                       .format(message))
         return True
+
+    def clean_up(self):
+        pass
