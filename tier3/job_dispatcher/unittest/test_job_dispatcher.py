@@ -6,35 +6,36 @@ import unittest
 import subprocess
 import threading
 
-#sys.path.append("..")  # Adds higher directory to python modules path.
+
+# sys.path.append("..")  # Adds higher directory to python modules path.
 
 def import_all_packages():
-    realpath=os.path.realpath(__file__)
-    #print("os.path.realpath({})={}".format(__file__,realpath))
-    dirname=os.path.dirname(realpath)
-    #print("os.path.dirname({})={}".format(realpath,dirname))
-    dirname_list=dirname.split('/')
-    #print(dirname_list)
+    realpath = os.path.realpath(__file__)
+    # print("os.path.realpath({})={}".format(__file__,realpath))
+    dirname = os.path.dirname(realpath)
+    print("os.path.dirname({})={}".format(realpath, dirname))
+    dirname_list = dirname.split('/')
+    # print(dirname_list)
     for index in range(len(dirname_list)):
-        module_path='/'.join(dirname_list[:index])
-        #print("module_path={}".format(module_path))
+        module_path = '/'.join(dirname_list[:index])
+        print("Appending module_path={} to sys.path".format(module_path))
         try:
             sys.path.append(module_path)
         except:
-            #print("Invalid module path {}".format(module_path))
+            # print("Invalid module path {}".format(module_path))
             pass
 
-import_all_packages()
 
+import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
-from tier3.job_dispatcher.job_dispatcher import DirectoryWatch
 from infrastructure_components.redisClient.redis_interface import RedisInterface
+from tier3.job_dispatcher.job_dispatcher import DirectoryWatch
 
 
 class TestJobDispatcher(unittest.TestCase):
-
     max_number_of_jobs = 100
     directory_name = 'test_files'
+
     def setUp(self):
         os.environ["broker_name_key"] = "localhost:9094"
         os.environ["topic_key"] = "video-file-name"
@@ -114,7 +115,9 @@ class TestJobDispatcher(unittest.TestCase):
 
     def tearDown(self):
         self.delete_test_docker_container()
-        subprocess.run(['rm', '-rf', TestJobDispatcher.directory_name], stdout=subprocess.PIPE)
+        subprocess.run(['rm', '-rf', "{}/{}".format(self.dirname,
+                                                    TestJobDispatcher.directory_name)],
+                       stdout=subprocess.PIPE)
         time.sleep(5)
         self.producer_thread.join(1.0)
 
