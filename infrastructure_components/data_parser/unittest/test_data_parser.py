@@ -32,7 +32,7 @@ class TestDataParser(unittest.TestCase):
     def setUp(self):
         self.dirname = os.path.dirname(os.path.realpath(__file__))
         self.data_parser_instance = None
-        self.filename = '00030.mp4'
+        self.filename = 'camera1_2018_11_15_14_42_55_745282.mp4'
         os.environ["redis_log_keyname_key"] = "briefcam"
         os.environ["total_job_enqueued_count_redis_name_key"] = "enqueue"
         os.environ["total_job_dequeued_count_redis_name_key"] = "dequeue"
