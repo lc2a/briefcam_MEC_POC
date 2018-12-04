@@ -2,9 +2,7 @@ import time
 import os
 import sys
 import traceback
-from sys import path
-import logging
-from ast import literal_eval
+
 
 #path.append(os.getcwd())
 
@@ -28,7 +26,7 @@ import_all_packages()
 
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 from infrastructure_components.couchdb_client.couchdb_client import CouchDBClient
-from tier1.rtsp_recorder_orchestrator.orchestrator import RTSPRecorderOrchestrator
+from tier2.front_end.rtsp_docker_orchestrator.orchestrator import RTSPDockerOrchestrator
 
 
 class FrontEnd:
@@ -48,7 +46,7 @@ class FrontEnd:
         logging_to_console_and_syslog("Trying to read the "
                                       "environment variables...")
         self.couchdb_instance = CouchDBClient()
-        self.rtsp_recorder_orchestrator = RTSPRecorderOrchestrator()
+        self.rtsp_recorder_orchestrator = RTSPDockerOrchestrator()
 
     def cleanup(self):
         """

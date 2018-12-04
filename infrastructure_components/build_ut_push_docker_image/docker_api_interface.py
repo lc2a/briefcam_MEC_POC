@@ -1,0 +1,316 @@
+# import infrastructure_components.dockerized_unit_test_framework.ut_framework
+import os
+import sys
+import unittest
+import subprocess
+import docker
+import time
+from docker.types.services import Mount
+
+
+def import_all_packages():
+    realpath = os.path.realpath(__file__)
+    # print("os.path.realpath({})={}".format(__file__,realpath))
+    dirname = os.path.dirname(realpath)
+    # print("os.path.dirname({})={}".format(realpath,dirname))
+    dirname_list = dirname.split('/')
+    # print(dirname_list)
+    for index in range(len(dirname_list)):
+        module_path = '/'.join(dirname_list[:index])
+        # print("module_path={}".format(module_path))
+        try:
+            sys.path.append(module_path)
+        except:
+            # print("Invalid module path {}".format(module_path))
+            pass
+
+
+import_all_packages()
+
+from infrastructure_components.log.log_file import logging_to_console_and_syslog
+
+
+class DockerAPIInterface(unittest.TestCase):
+    def __init__(self,
+                 docker_tag,
+                 image_name,
+                 dockerfile_directory_name=None):
+
+        if docker_tag:
+            self.docker_tag = docker_tag
+        else:
+            self.docker_tag = "ssriram1978"
+
+        if image_name:
+            self.image_name = image_name
+        else:
+            self.image_name = "unittest"
+
+        if dockerfile_directory_name:
+            self.dirname = dockerfile_directory_name
+        else:
+            logging_to_console_and_syslog("Cannot proceed without knowing the path to dockerfile.")
+            raise BaseException
+
+        self.docker_instance = docker.from_env()
+        self.container = None
+
+    def create_subprocess(self, process_args):
+        if not process_args or type(process_args) != list:
+            return None
+
+        completedProcess = subprocess.run(process_args,
+                                          stdout=subprocess.PIPE)
+        self.assertIsNotNone(completedProcess)
+        self.assertIsNotNone(completedProcess.stdout)
+        return completedProcess.stdout.decode('utf8')
+
+    @staticmethod
+    def find_directory_containing_package(source_package_name):
+        source_directory = None
+        cwd_list = os.getcwd().split('/')
+
+        logging_to_console_and_syslog("Trying to look for {}"
+                                      " in directory {}."
+                                      .format(source_package_name,
+                                              os.getcwd()))
+
+        for index in range(len(cwd_list) - 1, -1, -1):
+            current_directory = '/'.join(cwd_list[:index])
+            logging_to_console_and_syslog("Trying to look for {}"
+                                          " in directory {}."
+                                          .format(source_package_name,
+                                                  current_directory))
+            completed_process = subprocess.run(["find",
+                                                current_directory,
+                                                "-name",
+                                                source_package_name],
+                                               stdout=subprocess.PIPE)
+            output = completed_process.stdout.decode('utf8').split('\n')
+            if source_package_name in output[0]:
+                logging_to_console_and_syslog("Found package {} "
+                                              "in directory {}."
+                                              .format(source_package_name,
+                                                      output[0]))
+                source_directory = output[0]
+                break
+        return source_directory
+
+    def create_gzipped_directory(self, source_package_name, destination):
+        # example: tar -C /home/sriramsridhar/git/briefcam_MEC_POC -czvf
+        # infrastructure_components.tar.gz infrastructure_components
+        source = DockerAPIInterface.find_directory_containing_package(source_package_name)
+        if not source:
+            return
+        logging_to_console_and_syslog("Trying to find log files in source {}."
+                                      .format(source))
+        # clean up log files
+        completed_process = subprocess.run(["find",
+                                            source,
+                                            "-name",
+                                            "*.log"],
+                                           stdout=subprocess.PIPE)
+
+        for filename in completed_process.stdout.decode('utf8').split('\n'):
+            if '.log' in filename:
+                logging_to_console_and_syslog("Deleting log file {}."
+                                              .format(filename))
+                subprocess.run(["rm", "-f", filename], stdout=subprocess.PIPE)
+
+        # extract the filename.
+        filename = source.split('/')[-1]
+        parent_directory = '/'.join(source.split('/')[:-1])
+        logging_to_console_and_syslog("Going to gzip directory {}"
+                                      " from parent directory {}"
+                                      .format(filename,
+                                              parent_directory))
+        # tar.gzip the file.
+        gzipped_file = "{}/{}.tar.gz".format(destination, filename)
+        completed_process = subprocess.run(["tar",
+                                            "-C",
+                                            parent_directory,
+                                            "-czvf",
+                                            gzipped_file,
+                                            filename],
+                                           stdout=subprocess.PIPE)
+
+        logging_to_console_and_syslog("successfully gzipped "
+                                      "source directory {}, "
+                                      " and stored it in the dest directory {}"
+                                      " as {}"
+                                      .format(source,
+                                              destination,
+                                              gzipped_file))
+
+    def create_docker_image(self):
+        logging_to_console_and_syslog("Setting docker_tag={},"
+                                      "image_name={}"
+                                      .format(self.docker_tag,
+                                              self.image_name))
+        logging_to_console_and_syslog("Zipping infrastructure components "
+                                      "to be added to the docker image")
+        self.create_gzipped_directory("infrastructure_components",
+                                      self.dirname)
+
+        docker_create_command_list = ["docker",
+                                      "build",
+                                      self.dirname,
+                                      "-t",
+                                      "{}/{}:latest".format(self.docker_tag,
+                                                            self.image_name)]
+        output = self.create_subprocess(docker_create_command_list)
+        logging_to_console_and_syslog(output)
+        self.assertIsNotNone(output)
+
+    def __run_docker_container(self, command=None):
+        """
+        bind_mount = "/usr/bin/docker:/usr/bin/docker".split()
+        path_mount = []
+        for path in bind_mount:
+            path_list = path.split(':')
+            logging_to_console_and_syslog("Appending target={} "
+                                          "and source={} to mount list."
+                                          .format(path_list[0],
+                                                  path_list[1]))
+            path_mount.append(Mount(target=path_list[0],
+                                    source=path_list[1]))
+        volume_mount = "/var/run/docker.sock:/var/run/docker.sock"
+        """
+        volume_mount = {'/var/run/docker.sock': {'bind': '/var/run/docker.sock'},
+                        '/usr/bin/docker': {'bind': '/usr/bin/docker'}}
+
+        if command:
+            logging_to_console_and_syslog("Running docker container "
+                                          "{}/{}:latest "
+                                          "with command {}"
+                                          .format(self.docker_tag,
+                                                  self.image_name,
+                                                  command))
+
+            self.container = self.docker_instance.containers.run(
+                "{}/{}:latest".format(self.docker_tag,
+                                      self.image_name),
+                # mounts=volume_mount,
+                volumes=volume_mount,
+                name=self.image_name,
+                network_mode="host",
+                command=command,
+                detach=True)
+        else:
+            logging_to_console_and_syslog("Running docker container "
+                                          "{}/{}:latest "
+                                          .format(self.docker_tag,
+                                                  self.image_name))
+
+            self.container = self.docker_instance.containers.run(
+                "{}/{}:latest".format(self.docker_tag,
+                                      self.image_name),
+                volumes=volume_mount,
+                # mounts=path_mount,
+                name=self.image_name,
+                network_mode="host",
+                detach=True)
+        return self.container.short_id
+
+    def wait_for_docker_container_completion(self):
+        result = None
+        try:
+            container = self.docker_instance.containers.get(self.container.short_id)
+            if container:
+                result = container.wait()
+        except:
+            return None
+
+        logging_to_console_and_syslog("Capturing container logs.")
+        self.capture_docker_container_logs()
+        logging_to_console_and_syslog("Result returned {}.".format(result))
+        if result['StatusCode'] == 0:
+            logging_to_console_and_syslog("The docker exited successfully.")
+        else:
+            logging_to_console_and_syslog("The docker exited with code {}."
+                                          .format(result['StatusCode']))
+
+    def prune_old_docker_image(self):
+        docker_prune_command_list = ["docker",
+                                     "container",
+                                     "prune",
+                                     "-f"]
+        self.assertIsNotNone(self.create_subprocess(docker_prune_command_list))
+        docker_prune_command_list = ["docker",
+                                     "image",
+                                     "prune",
+                                     "-f"]
+        self.assertIsNotNone(self.create_subprocess(docker_prune_command_list))
+
+    def capture_docker_container_logs(self):
+        docker_container_log_list = ["docker",
+                                     "logs",
+                                     self.image_name]
+        logging_to_console_and_syslog(self.create_subprocess(docker_container_log_list))
+
+    def __remove_docker_image(self):
+        docker_container_remove_image_list = ["docker",
+                                              "image",
+                                              "rm",
+                                              "-f",
+                                              "{}/{}".format(self.docker_tag,
+                                                             self.image_name)]
+        self.assertIsNotNone(self.create_subprocess(docker_container_remove_image_list))
+        # remove the infrastructure package
+        parent_dirname = '/'.join(self.dirname.split('/')[:-1])
+        completed_process = subprocess.run(["rm",
+                                            "-f",
+                                            "{}/infrastructure_components.tar.gz".format(parent_dirname)],
+                                           stdout=subprocess.PIPE)
+
+    def create_docker_container(self):
+        logging_to_console_and_syslog("Prune old docker container images.")
+        self.prune_old_docker_image()
+        logging_to_console_and_syslog("Creating Docker image.")
+        self.create_docker_image()
+
+    def run_docker_container(self, command=None):
+        logging_to_console_and_syslog("Running Docker image.")
+        self.__run_docker_container(command)
+
+    def stop_docker_container(self):
+        try:
+            #logging_to_console_and_syslog("Stopping container {}.".format(self.container.id))
+            #self.docker_instance.containers.stop(self.container.id)
+            logging_to_console_and_syslog("Deleting container {}.".format(self.container.id))
+            completed_process = subprocess.run(["docker",
+                                                "container",
+                                                "rm",
+                                                "-f",
+                                                self.container.id],
+                                               stdout=subprocess.PIPE)
+            """
+            logging_to_console_and_syslog("kill container {}.".format(self.container.id))
+            self.docker_instance.containers.kill(self.container.id)
+            logging_to_console_and_syslog("remove container {}.".format(self.container.id))
+            self.docker_instance.containers.remove(self.container.id)
+            """
+
+        except:
+            return None
+
+    def remove_docker_image(self):
+        logging_to_console_and_syslog("Removing docker image.")
+        self.__remove_docker_image()
+
+    def deploy(self, dockerfile_path):
+        logging_to_console_and_syslog("Deploying docker image"
+                                      " found in directory {}."
+                                      .format(dockerfile_path))
+        """
+        Push the docker image to Github.
+        Credentials are pre-stored on the localhost.
+        :return:
+        """
+        docker_push_command_list = ["docker",
+                                    "image",
+                                    "push",
+                                    "{}/{}".format(self.docker_tag,
+                                                   self.image_name)
+                                    ]
+        self.assertIsNotNone(self.create_subprocess(docker_push_command_list))

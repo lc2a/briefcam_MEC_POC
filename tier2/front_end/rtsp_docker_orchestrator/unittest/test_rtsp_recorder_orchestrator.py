@@ -1,7 +1,6 @@
 import os
 import time
 import sys
-import traceback
 import unittest
 
 #sys.path.append("..")  # Adds higher directory to python modules path.
@@ -24,7 +23,7 @@ def import_all_packages():
 
 import_all_packages()
 
-from tier1.rtsp_recorder_orchestrator.orchestrator import RTSPRecorderOrchestrator
+from tier2.front_end.rtsp_docker_orchestrator.orchestrator import RTSPDockerOrchestrator
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 #unit tests
@@ -38,7 +37,7 @@ class TestOrchestrator(unittest.TestCase):
                                         "min_file_size_key=10000000" \
                                         "rtsp_capture_application_key=openRTSP "
         os.environ["bind_mount_key"] = "/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker"
-        self.rtsp_orchestrator = RTSPRecorderOrchestrator()
+        self.rtsp_orchestrator = RTSPDockerOrchestrator()
 
     def yield_container(self):
         logging_to_console_and_syslog("Unit testing function yield_container()")

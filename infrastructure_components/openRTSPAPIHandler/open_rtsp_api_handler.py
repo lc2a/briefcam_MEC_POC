@@ -31,7 +31,7 @@ import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 
-class RtspOperationsOnMedia:
+class OpenRTSPAPIHandler:
     """
     This class provides methods to do the following:
     1. Start an RTSP video capture background process to the pre-configured IPv4 address.

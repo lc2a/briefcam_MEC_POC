@@ -29,7 +29,7 @@ import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 
-class RTSPRecorderOrchestrator:
+class RTSPDockerOrchestrator:
     """
     This class does the following:
     1. It is a docker container orchestrator.
@@ -37,7 +37,7 @@ class RTSPRecorderOrchestrator:
     """
 
     def __init__(self):
-        logging_to_console_and_syslog("Initializing RTSPRecorderOrchestrator instance.")
+        logging_to_console_and_syslog("Initializing RTSPDockerOrchestrator instance.")
         self.image_name = None
         self.environment = None
         self.bind_mount = None

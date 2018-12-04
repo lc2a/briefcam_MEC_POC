@@ -1,8 +1,4 @@
 FROM ubuntu
-RUN  mkdir /rtsp_recorder_orchestrator
-RUN  cd /rtsp_recorder_orchestrator
-WORKDIR /rtsp_recorder_orchestrator
-COPY requirements.txt requirements.txt
 RUN  apt-get update
 RUN  apt-get install -y scrot
 RUN  apt-get install -y net-tools
@@ -26,7 +22,18 @@ RUN  apt-get update
 RUN  apt-get install -y docker-ce
 RUN apt-get install -y python3-distutils
 RUN  python3 get-pip.py
+RUN apt-get install -y vim
+RUN apt-get install -y net-tools
+RUN apt-get install -y procps
+RUN apt-get install -y iputils-ping
+RUN apt-get install -y livemedia-utils
+RUN mkdir /parent_directory
+RUN mkdir /parent_directory/tier2
+RUN mkdir /parent_directory/tier2/rtsp_recorder
+COPY . /parent_directory/tier2/rtsp_recorder
+COPY __init__.py /parent_directory/tier2
+WORKDIR /parent_directory/tier2
+COPY requirements.txt requirements.txt
 RUN  pip3 install -r requirements.txt
-COPY . .
-RUN chmod 777 -R /rtsp_recorder_orchestrator
-CMD python3 test_rtsp_recorder_orchestrator.py
+ADD  infrastructure_components.tar.gz /parent_directory
+CMD python3 /parent_directory/tier2/rtsp_recorder/rtsp_recorder.py

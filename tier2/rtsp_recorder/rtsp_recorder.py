@@ -26,18 +26,18 @@ def import_all_packages():
 
 import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
-from rtsp_operate_media.rtsp_operate_media import RtspOperationsOnMedia
+from infrastructure_components.openRTSPAPIHandler.open_rtsp_api_handler import openRTSPAPIHandler
 
 
 class RtspRecorder:
     """
     This class does the following
-    1. It instantiates RtspOperationsOnMedia class object.
-    2. It controls RtspOperationsOnMedia class object by starting and stoping RTSP media operation.
+    1. It instantiates OpenRTSPAPIHandler class object.
+    2. It controls OpenRTSPAPIHandler class object by starting and stoping RTSP media operation.
     3. It checks if the RTSP video capturing is going on and if it finds that the process is dead or in
     defunct state, it kills the process and restarts it.
     4. It checks for the video capture media files to be stored in the shared mount, and if it finds that
-    there are no media files being produced by RtspOperationsOnMedia class, then, it stops the operation
+    there are no media files being produced by OpenRTSPAPIHandler class, then, it stops the operation
     and restarts it.
     """
     def __init__(self):
@@ -52,9 +52,9 @@ class RtspRecorder:
 
     def initialize_instances(self):
         """
-        Initialize the rtsp media instance variable which instantiates RtspOperationsOnMedia class object.
+        Initialize the rtsp media instance variable which instantiates OpenRTSPAPIHandler class object.
         """
-        self.rtsp_media_instance = RtspOperationsOnMedia()
+        self.rtsp_media_instance = openRTSPAPIHandler()
 
     def check_and_restart_rtsp_video_capture(self):
         """
@@ -92,7 +92,7 @@ class RtspRecorder:
 
     def perform_operation(self):
         """
-        Instruct RtspOperationsOnMedia class object to start capturing video.
+        Instruct OpenRTSPAPIHandler class object to start capturing video.
         While this media capture operation is ongoing,
          a. Make sure that the video capture is still ongoing. If it is not active, stop and restart this capture.
          b. Make sure to move the media files periodically into shared media mount.

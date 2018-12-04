@@ -5,3 +5,5 @@ datetime>=4.2
 enum34>=1.1.6
 futures>=0
 msgpack>=0
+docker>=0
+docker-compose>=0

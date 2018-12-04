@@ -1,8 +1,4 @@
 FROM ubuntu
-RUN  mkdir /front_end
-RUN  cd /front_end
-WORKDIR /front_end
-COPY requirements.txt requirements.txt
 RUN  apt-get update
 RUN  apt-get install -y scrot
 RUN  apt-get install -y net-tools
@@ -26,7 +22,18 @@ RUN  apt-get update
 RUN  apt-get install -y docker-ce
 RUN apt-get install -y python3-distutils
 RUN  python3 get-pip.py
+RUN apt-get install -y vim
+RUN apt-get install -y net-tools
+RUN apt-get install -y procps
+RUN apt-get install -y iputils-ping
+RUN mkdir /parent_directory
+RUN mkdir /parent_directory/tier2
+RUN mkdir /parent_directory/tier2/front_end
+COPY . /parent_directory/tier2/front_end
+COPY __init__.py /parent_directory/tier2
+COPY rtsp_docker_orchestrator /parent_directory/tier2
+WORKDIR /parent_directory/tier2/front_end
+COPY requirements.txt requirements.txt
 RUN  pip3 install -r requirements.txt
-COPY . .
-RUN chmod 777 -R /front_end
-CMD python3 test_front_end.py
+ADD  infrastructure_components.tar.gz /parent_directory
+CMD python3 /parent_directory/tier2/front_end/front_end.py

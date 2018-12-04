@@ -1,8 +1,6 @@
 import time
 import os
 import sys
-import traceback
-from sys import path
 import subprocess
 import unittest
 
@@ -26,7 +24,7 @@ def import_all_packages():
 import_all_packages()
 
 from infrastructure_components.couchdb_client.couchdb_client import CouchDBClient
-from tier1.rtsp_recorder_orchestrator.orchestrator import RTSPRecorderOrchestrator
+from tier2.front_end.rtsp_docker_orchestrator.orchestrator import RTSPDockerOrchestrator
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 
@@ -47,7 +45,7 @@ class TestCouchDB(unittest.TestCase):
                                         "min_file_size_key=10000000" \
                                         "rtsp_capture_application_key=openRTSP "
         os.environ["bind_mount_key"] = "/var/run/docker.sock:/var/run/docker.sock /usr/bin/docker:/usr/bin/docker"
-        self.rtsp_orchestrator = RTSPRecorderOrchestrator()
+        self.rtsp_orchestrator = RTSPDockerOrchestrator()
         self.document_id1 = None
         self.document_id2 = None
         self.document1 = {'name': 'camera1', 'ip': '10.136.66.233'}

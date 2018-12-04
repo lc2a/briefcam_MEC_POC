@@ -8,9 +8,9 @@ print(dirname)
 #method 1. Just point the discover to the root parent directory.
 # It will automatically search for unit test files with the specified pattern and execute them.
 # Note that if the global modules are not available on the local host, then the import will fail the test case.
-#tests =unittest.TestLoader().discover(dirname,
-#                         pattern='test*.py')
-#result = unittest.TextTestRunner(verbosity=2).run(tests)
+tests = unittest.TestLoader().discover(dirname,
+                         pattern='test*.py')
+result = unittest.TextTestRunner(verbosity=2).run(tests)
 
 #method 2. Just point it to the directory where you have the unit test file name starting with test*.py format.
 #tests =unittest.TestLoader().discover('/home/sriramsridhar/git/briefcam_MEC_POC/tier3/machine_learning_workers/unittest')
@@ -29,6 +29,6 @@ print(dirname)
 
 #method 3. Build a docker image based upon the Dockerfile found in each submodule and unit test it.
 #Cleaner and better approach.
-tests =unittest.TestLoader().discover('/home/sriramsridhar/git/briefcam_MEC_POC/tier3/job_dispatcher/unittest',
-                                      pattern='docker_build_ut_publish.py')
-result = unittest.TextTestRunner(verbosity=2).run(tests)
+#tests =unittest.TestLoader().discover('/home/sriramsridhar/git/briefcam_MEC_POC/tier3/job_dispatcher/unittest',
+#                                      pattern='docker_build_ut_publish.py')
+#result = unittest.TextTestRunner(verbosity=2).run(tests)
