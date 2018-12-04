@@ -24,8 +24,9 @@ def import_all_packages():
 import_all_packages()
 
 
-from log.log_file import logging_to_console_and_syslog
-from couchdb_client.couchdb_client import CouchDBClient
+from infrastructure_components.log.log_file import logging_to_console_and_syslog
+from infrastructure_components.couchdb_client.couchdb_client import CouchDBClient
+
 
 #unit tests
 class TestCouchDB(unittest.TestCase):

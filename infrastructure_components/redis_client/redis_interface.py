@@ -20,8 +20,8 @@ def import_all_packages():
 
 import_all_packages()
 
-from redisClient.redis_client import RedisClient
-from log.log_file import logging_to_console_and_syslog
+from infrastructure_components.redis_client.redis_client import RedisClient
+from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 class RedisInterface:
     """

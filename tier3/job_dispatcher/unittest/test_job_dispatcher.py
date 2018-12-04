@@ -28,7 +28,7 @@ def import_all_packages():
 
 import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
-from infrastructure_components.redisClient.redis_interface import RedisInterface
+from infrastructure_components.redis_client.redis_interface import RedisInterface
 from tier3.job_dispatcher.job_dispatcher import DirectoryWatch
 
 

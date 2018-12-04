@@ -1,8 +1,4 @@
 FROM ubuntu
-RUN  mkdir /wurstmeister_kafka
-RUN  cd /wurstmeister_kafka
-WORKDIR /wurstmeister_kafka
-COPY requirements.txt requirements.txt
 RUN  apt-get update
 RUN  apt-get install -y scrot
 RUN  apt-get install -y net-tools
@@ -26,7 +22,12 @@ RUN  apt-get update
 RUN  apt-get install -y docker-ce
 RUN apt-get install -y python3-distutils
 RUN  python3 get-pip.py
+RUN apt-get install -y vim
+RUN apt-get install -y net-tools
+RUN apt-get install -y procps
+RUN apt-get install -y iputils-ping
+COPY requirements.txt requirements.txt
 RUN  pip3 install -r requirements.txt
-COPY ../.. .
-RUN chmod 777 -R /wurstmeister_kafka
-CMD python3 test_kafka.py
+RUN mkdir /parent_directory
+WORKDIR /parent_directory/infrastructure_components/data_parser
+ADD  infrastructure_components.tar.gz /parent_directory

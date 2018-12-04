@@ -30,17 +30,38 @@ from infrastructure_components.build_ut_push_docker_image.build_ut_push_docker_i
 class DockerBuildUTDeploy:
     dockerfile_identifier = 'Dockerfile'
     unittest_identifier = 'test*.py'
-
     def __init__(self):
-
         self.dockerfile_paths = []
-        #self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
+        self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3/job_dispatcher'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/rtsp_recorder'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/front_end'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2'
-        self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/redis_client'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/couchdb_client'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/producer_consumer'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/open_rtsp_api_handler'
         self.docker_instance = None
+        self.delete_all_tar_gz_files()
+
+    def delete_all_tar_gz_files(self, dirname=None):
+        logging_to_console_and_syslog("Trying to delete all *.tar.gz files from {}"
+                                      " directory."
+                                      .format(self.dirname))
+        if not dirname:
+            dirname = self.dirname
+
+        completed_process = subprocess.run(["find",
+                                            dirname,
+                                            "-name",
+                                            "\"*.tar.gz\"",
+                                            "-type",
+                                            "f",
+                                            "-delete"],
+                                           stdout=subprocess.PIPE)
+        logging_to_console_and_syslog(completed_process.stdout.decode('utf8'))
 
     def find_all_dockerfile_paths(self):
         logging_to_console_and_syslog("Trying to look for {}"
@@ -103,7 +124,9 @@ class DockerBuildUTDeploy:
                 path = '/'.join(dockerfile_path.split('/')[:-1])
                 self.build(path)
                 self.perform_unittest(path)
+                self.delete_all_tar_gz_files(path)
                 #self.deploy(path)
+
 
 if __name__ == "__main__":
     try:

@@ -25,7 +25,7 @@ import_all_packages()
 
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 from infrastructure_components.producer_consumer.producer_consumer import ProducerConsumerAPI
-from infrastructure_components.redisClient.redis_interface import RedisInterface
+from infrastructure_components.redis_client.redis_interface import RedisInterface
 
 
 class DirectoryWatch:

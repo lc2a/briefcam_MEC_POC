@@ -24,7 +24,7 @@ def import_all_packages():
 
 import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
-from rtsp_operate_media.rtsp_operate_media import RtspOperationsOnMedia
+from infrastructure_components.open_rtsp_api_handler.open_rtsp_api_handler import OpenRTSPAPIHandler
 
 
 class TestRTSPOperateMedia(unittest.TestCase):
@@ -35,7 +35,7 @@ class TestRTSPOperateMedia(unittest.TestCase):
         os.environ["rtsp_duration_of_the_video_key"] = "30"
         os.environ["rtsp_message_key"] = "{'name': 'camera1', 'ip': '10.136.66.233'}"
         os.environ["min_file_size_key"] = "10000000"
-        self.rtsp_media_instance = RtspOperationsOnMedia()
+        self.rtsp_media_instance = OpenRTSPAPIHandler()
 
     def test_rtsp_start_stop_media(self):
         logging_to_console_and_syslog("Unit testing function start_rtsp_stream()")
