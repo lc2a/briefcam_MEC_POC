@@ -71,7 +71,7 @@ services:
   machine_learning_workers:
     image: ssriram1978/machine_learning_workers
     deploy:
-      replicas: 10
+      replicas: 1
 #      resources:
 #        limits:
 #          cpus: "0.8"
@@ -89,6 +89,17 @@ services:
       - "5910:5900"
       - "5911:5900"
       - "5912:5900"
+      - "5913:5900"
+      - "5914:5900"
+      - "5915:5900"
+      - "5916:5900"
+      - "5917:5900"
+      - "5918:5900"
+      - "5919:5900"
+      - "5920:5900"
+      - "5921:5900"
+      - "5922:5900"
+      - "5923:5900"
     depends_on:
       - kafka
       - zookeeper

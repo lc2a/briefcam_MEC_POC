@@ -253,7 +253,7 @@ class BriefCamParser:
         if starting_index == -1:
             event = "Unable to find / in the filename {}.".format(filename)
             self.__write_log_to_redis_and_logging_framework(event)
-            return
+            starting_index = -1
 
         ending_index = filename.rfind(".mp4")
         if ending_index == -1:
@@ -460,7 +460,8 @@ class BriefCamParser:
 
                 self.__search_and_leftclick_case(file_name)
 
-                if not self.__add_video(file_name):
+                if not self.__add_video("{}/{}".format(self.video_file_path,
+                                                       file_name)):
                     self.__write_log_to_redis_and_logging_framework(
                         "Add video failed. Closing and reopening the browser.", True)
                     self.clean_up()

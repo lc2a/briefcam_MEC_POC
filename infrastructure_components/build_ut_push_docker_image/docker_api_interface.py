@@ -214,6 +214,14 @@ class DockerAPIInterface(unittest.TestCase):
                 detach=True)
         return self.container.short_id
 
+    @staticmethod
+    def __getNetworkIp():
+        import socket
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+        s.connect(('<broadcast>', 0))
+        return s.getsockname()[0]
+
     def run_docker_container2(self):
         completed_process = subprocess.run(["docker",
                                             "run",
@@ -222,6 +230,12 @@ class DockerAPIInterface(unittest.TestCase):
                                             "/var/run/docker.sock:/var/run/docker.sock",
                                             "-v",
                                             "/usr/bin/docker:/usr/bin/docker",
+                                            "-p",
+                                            "5901:5900",
+                                            "--add-host",
+                                            "mec-demo:10.2.40.160",
+                                            "--add-host",
+                                            "mec-poc:{}".format(DockerAPIInterface.__getNetworkIp()),
                                             self.docker_image_name],
                                            stdout=subprocess.PIPE)
         cont_id = completed_process.stdout.decode('utf8')

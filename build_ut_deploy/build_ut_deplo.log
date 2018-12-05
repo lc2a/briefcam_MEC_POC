@@ -41871,3 +41871,1819 @@ Successfully tagged ssriram1978/data_parser:latest
  docker container id =f9ec240fe0.
 (MainThread:DEBUG:12/05/2018 02:04:40 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/f9ec240fe0/json HTTP/1.1" 200 None
 (MainThread:DEBUG:12/05/2018 02:04:40 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/f9ec240fe0c0253167cfd2ad57adef81c87b36f9e39ccc21977687f1405255a0/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 02:14:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 02:14:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container f9ec240fe0c0253167cfd2ad57adef81c87b36f9e39ccc21977687f1405255a0.
+(MainThread:INFO:12/05/2018 02:14:42 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 02:14:42 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:14:50 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 02:14:50 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 02:14:52 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 02:14:52 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 02:15:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon  46.77MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 24c2728614e1
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in c79b6586b949
+Removing intermediate container c79b6586b949
+ ---> 581bc2928fac
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in d5a948e9a6ae
+Removing intermediate container d5a948e9a6ae
+ ---> 30e7d3b0ed24
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in e85756f535c5
+Removing intermediate container e85756f535c5
+ ---> f6f0e97ab2ab
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in bc51b1651a17
+Removing intermediate container bc51b1651a17
+ ---> ab99c865c2e4
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 238e8df30090
+Removing intermediate container 238e8df30090
+ ---> 8d6051c45552
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in c69c373a44c0
+Removing intermediate container c69c373a44c0
+ ---> 091a669bba7c
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 703e2e2603bb
+Removing intermediate container 703e2e2603bb
+ ---> 28164c5c58c5
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in 9229a57bf45e
+Removing intermediate container 9229a57bf45e
+ ---> cac3a5efe367
+Successfully built cac3a5efe367
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 02:15:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 02:15:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 02:15:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 02:15:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=72849b4c3e58
+(MainThread:DEBUG:12/05/2018 02:15:46 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/72849b4c3e58/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 02:15:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =72849b4c3e.
+(MainThread:DEBUG:12/05/2018 02:15:46 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/72849b4c3e/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 02:15:46 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/72849b4c3e5828e9c836030bb5007bcab3ff0fc0a51c03194c218a6079d3b41a/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 02:58:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 02:58:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container 72849b4c3e5828e9c836030bb5007bcab3ff0fc0a51c03194c218a6079d3b41a.
+(MainThread:INFO:12/05/2018 02:58:45 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 02:58:45 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 02:58:48 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 02:58:48 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 02:58:48 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 02:58:48 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 02:58:48 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 02:58:48 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:58:48 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 02:58:48 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:58:48 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 02:58:48 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 02:58:49 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:58:49 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 02:58:49 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 02:58:49 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 02:58:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 02:58:51 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 02:58:51 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 02:59:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon   46.8MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 48414b0f203f
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in 5bdc276cdd3b
+Removing intermediate container 5bdc276cdd3b
+ ---> 6657f75d979d
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in 0fe778def894
+Removing intermediate container 0fe778def894
+ ---> 559a5b0ff714
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in 7d6d0556c6df
+Removing intermediate container 7d6d0556c6df
+ ---> f4923c655344
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 3e2ea0fd9898
+Removing intermediate container 3e2ea0fd9898
+ ---> 65c8646d05f5
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in b5447ffc8c26
+Removing intermediate container b5447ffc8c26
+ ---> a8748c737eec
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in 2a29f8cc2d1c
+Removing intermediate container 2a29f8cc2d1c
+ ---> 9171b4ce6f75
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in e6ecb51aca3a
+Removing intermediate container e6ecb51aca3a
+ ---> ebb2c8d5d7a6
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in cd883c499a13
+Removing intermediate container cd883c499a13
+ ---> 1979a33d016d
+Successfully built 1979a33d016d
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 02:59:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 02:59:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 02:59:43 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 02:59:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=4f84c4bbdc64
+(MainThread:DEBUG:12/05/2018 02:59:46 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/4f84c4bbdc64/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 02:59:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =4f84c4bbdc.
+(MainThread:DEBUG:12/05/2018 02:59:46 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/4f84c4bbdc/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 02:59:46 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/4f84c4bbdc64677d06b7596ad258a71e8c463a54a8a8c4e6c762b76a1ba6b11d/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:05:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 03:05:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container 4f84c4bbdc64677d06b7596ad258a71e8c463a54a8a8c4e6c762b76a1ba6b11d.
+(MainThread:INFO:12/05/2018 03:05:28 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:05:28 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:05:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:05:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 03:05:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 03:05:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 03:06:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon   46.8MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 875fd2e428fa
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in dc5253397981
+Removing intermediate container dc5253397981
+ ---> 8e9dd7082097
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in f67fb97ea67b
+Removing intermediate container f67fb97ea67b
+ ---> 2f140ca4158c
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in 6f328bb983b4
+Removing intermediate container 6f328bb983b4
+ ---> 37210d495964
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 503c79ccc27e
+Removing intermediate container 503c79ccc27e
+ ---> 6e8419ce7778
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 7b126a2d6621
+Removing intermediate container 7b126a2d6621
+ ---> 47857b79e015
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in 320ddfc21e64
+Removing intermediate container 320ddfc21e64
+ ---> 93ba2d6d93ca
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 5bf054d912fb
+Removing intermediate container 5bf054d912fb
+ ---> 02538fe266f2
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in e9b875f35d90
+Removing intermediate container e9b875f35d90
+ ---> 65e1a3c85263
+Successfully built 65e1a3c85263
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 03:06:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:06:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 03:06:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 03:06:28 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=9789335fae47
+(MainThread:DEBUG:12/05/2018 03:06:28 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/9789335fae47/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:06:28 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =9789335fae.
+(MainThread:DEBUG:12/05/2018 03:06:28 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/9789335fae/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 03:06:28 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/9789335fae47cecd18bf5eb3b319c71e494287c5b7f46c873304214543c3e698/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:14:55 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 03:14:55 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container 9789335fae47cecd18bf5eb3b319c71e494287c5b7f46c873304214543c3e698.
+(MainThread:INFO:12/05/2018 03:14:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:14:58 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:25:13 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:25:13 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 03:25:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 03:25:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 03:26:05 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon  46.77MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 7782ea4bcd10
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in 78fd09c132ee
+Removing intermediate container 78fd09c132ee
+ ---> 8e1532d4c918
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in a41854d300f0
+Removing intermediate container a41854d300f0
+ ---> c5f03315a1c8
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in 777c3db2ada9
+Removing intermediate container 777c3db2ada9
+ ---> 243adfff3469
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in f95b93d5d7d8
+Removing intermediate container f95b93d5d7d8
+ ---> 7356979953bc
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 5e4a39aa5e5b
+Removing intermediate container 5e4a39aa5e5b
+ ---> f1fe7baf5f7c
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in 4dbc76e84e69
+Removing intermediate container 4dbc76e84e69
+ ---> f5937f2e8002
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 85af44ac4594
+Removing intermediate container 85af44ac4594
+ ---> d92a093f068d
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in d46cd8666829
+Removing intermediate container d46cd8666829
+ ---> 55e8cfa6862f
+Successfully built 55e8cfa6862f
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 03:26:05 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:26:05 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 03:26:05 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 03:26:08 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=dc5ab0fc5c13
+(MainThread:DEBUG:12/05/2018 03:26:08 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/dc5ab0fc5c13/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:26:08 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =dc5ab0fc5c.
+(MainThread:DEBUG:12/05/2018 03:26:08 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/dc5ab0fc5c/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 03:26:08 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/dc5ab0fc5c13e0b61f92466125505d9e1aeb4a0f3b8a6ed38b730122d8525b3d/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:28:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 03:28:49 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container dc5ab0fc5c13e0b61f92466125505d9e1aeb4a0f3b8a6ed38b730122d8525b3d.
+(MainThread:INFO:12/05/2018 03:28:51 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:28:51 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:29:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:29:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:29:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:29:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:29:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 03:29:33 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:29:33 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:29:33 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:29:33 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:29:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 03:29:34 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:29:34 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:29:34 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:29:34 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:29:34 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 03:29:35 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 03:29:35 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 03:30:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon  46.77MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 723facc6fe5e
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in b12b64f25acc
+Removing intermediate container b12b64f25acc
+ ---> a909e7001b66
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in cdb799a2e981
+Removing intermediate container cdb799a2e981
+ ---> e235bec6ac26
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in 7dd75bfe7373
+Removing intermediate container 7dd75bfe7373
+ ---> 0cb4a4da1e5a
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 9f94c79a97a4
+Removing intermediate container 9f94c79a97a4
+ ---> 7b5911748d32
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 948167b9fa42
+Removing intermediate container 948167b9fa42
+ ---> be23632280f4
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in 1f4c50c4e027
+Removing intermediate container 1f4c50c4e027
+ ---> 44d23a098a58
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in b87c4da9c701
+Removing intermediate container b87c4da9c701
+ ---> 017c69116aa6
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in 5a7ca9ab0ad7
+Removing intermediate container 5a7ca9ab0ad7
+ ---> 85b1a794b7ad
+Successfully built 85b1a794b7ad
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 03:30:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:30:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 03:30:26 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 03:30:29 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=c6b90e2eec5b
+(MainThread:DEBUG:12/05/2018 03:30:29 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c6b90e2eec5b/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:30:29 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =c6b90e2eec.
+(MainThread:DEBUG:12/05/2018 03:30:29 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/c6b90e2eec/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 03:30:29 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/c6b90e2eec5b0861fa86e61b5e8caf21205a6d8c2f5b00fbef9187402f7663da/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:44:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 03:44:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container c6b90e2eec5b0861fa86e61b5e8caf21205a6d8c2f5b00fbef9187402f7663da.
+(MainThread:INFO:12/05/2018 03:44:24 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:44:24 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 03:53:46 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 03:53:46 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 03:53:47 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 03:53:47 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 03:54:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon  46.77MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 2297ffcc69d2
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in 2fd3de58c023
+Removing intermediate container 2fd3de58c023
+ ---> fbcb8401dd78
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in 710ac06d0584
+Removing intermediate container 710ac06d0584
+ ---> 2c29d69ec5c0
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in c814f53dd0b6
+Removing intermediate container c814f53dd0b6
+ ---> 01d9d20d2d68
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in f68037845d38
+Removing intermediate container f68037845d38
+ ---> 2b3740931280
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 5b83ea530a6e
+Removing intermediate container 5b83ea530a6e
+ ---> 5c25664a8ab4
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in d10ffab6ad97
+Removing intermediate container d10ffab6ad97
+ ---> 48cbf844bf08
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in f728442ec2ad
+Removing intermediate container f728442ec2ad
+ ---> 98ea924fd9f7
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in 40f316d3454c
+Removing intermediate container 40f316d3454c
+ ---> 9f956e547dce
+Successfully built 9f956e547dce
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 03:54:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 03:54:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 03:54:39 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 03:54:41 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=ee43c507b50a
+(MainThread:DEBUG:12/05/2018 03:54:41 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/ee43c507b50a/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 03:54:41 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =ee43c507b5.
+(MainThread:DEBUG:12/05/2018 03:54:41 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/ee43c507b5/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 03:54:41 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/ee43c507b50a59e831a56d5a3c020c7929a821674904e063a7c999a958551d48/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 04:03:28 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 04:03:28 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container ee43c507b50a59e831a56d5a3c020c7929a821674904e063a7c999a958551d48.
+(MainThread:INFO:12/05/2018 04:03:31 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 04:03:31 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:03:32 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 04:03:32 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 04:03:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 04:03:33 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 04:04:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon  46.77MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> 3a4031e77358
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in f83e4b1680e9
+Removing intermediate container f83e4b1680e9
+ ---> 48b4fc6f049b
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in 382515dc8e10
+Removing intermediate container 382515dc8e10
+ ---> 67f49d1d7eb8
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in e0d3eb65c472
+Removing intermediate container e0d3eb65c472
+ ---> 4daadca6d9ab
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 9aedba0b06a8
+Removing intermediate container 9aedba0b06a8
+ ---> 98535ee4068f
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 36be84d21ff6
+Removing intermediate container 36be84d21ff6
+ ---> e91c2fd583be
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in e0c1fe64e10e
+Removing intermediate container e0c1fe64e10e
+ ---> 02245fcc8d0b
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 9c7b51f7655f
+Removing intermediate container 9c7b51f7655f
+ ---> 7bfeb310766d
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in a9dbea80aa42
+Removing intermediate container a9dbea80aa42
+ ---> ac2acabd1dee
+Successfully built ac2acabd1dee
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 04:04:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 04:04:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 04:04:25 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 04:04:27 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=f6a3c7a0bffb
+(MainThread:DEBUG:12/05/2018 04:04:27 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/f6a3c7a0bffb/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 04:04:27 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =f6a3c7a0bf.
+(MainThread:DEBUG:12/05/2018 04:04:27 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/f6a3c7a0bf/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 04:04:27 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/f6a3c7a0bffb78b4af54c3a15b95a421da385b13523ff7acdcec6c4ed34d6da0/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 04:08:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 04:08:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container f6a3c7a0bffb78b4af54c3a15b95a421da385b13523ff7acdcec6c4ed34d6da0.
+(MainThread:INFO:12/05/2018 04:08:17 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 04:08:17 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for Dockerfile in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker_tag=None,image_name=data_parser,dirname=/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating DockerAPIInterface instance()
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:28:config.py:find_config_file:No config file found
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:21:config.py:find_config_file:Trying paths: ['/root/.docker/config.json', '/root/.dockercfg']
+(MainThread:DEBUG:12/05/2018 04:08:22 PM:28:config.py:find_config_file:No config file found
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking create_docker_container
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Prune old docker container images.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Creating Docker image.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Setting docker_tag=ssriram1978,image_name=data_parser
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Zipping infrastructure components to be added to the docker image
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/build_ut_deploy.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to look for infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Found package infrastructure_components in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to find log files in source /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components.
+(MainThread:INFO:12/05/2018 04:08:22 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Going to gzip directory infrastructure_components from parent directory /home/sriramsridhar/git/briefcam_MEC_POC
+(MainThread:INFO:12/05/2018 04:08:23 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ successfully gzipped source directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components,  and stored it in the dest directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser as /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser/infrastructure_components.tar.gz
+(MainThread:INFO:12/05/2018 04:08:23 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Building docker image ssriram1978/data_parser:latest
+(MainThread:INFO:12/05/2018 04:09:11 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Sending build context to Docker daemon  31.25MB
+Step 1/38 : FROM selenium/standalone-chrome-debug:3.14.0-arsenic
+ ---> 3989b10ec28e
+Step 2/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> e776a6f6fdce
+Step 3/38 : RUN  sudo apt-get install -y scrot
+ ---> Using cache
+ ---> ab143bb10d70
+Step 4/38 : RUN  sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 0b716ee33613
+Step 5/38 : RUN  sudo apt-get install -y vim
+ ---> Using cache
+ ---> 779d27cd9f4d
+Step 6/38 : RUN  sudo apt-get install -y wget
+ ---> Using cache
+ ---> 5f35ff0d38e9
+Step 7/38 : RUN  sudo apt-get install -y procps
+ ---> Using cache
+ ---> 0020ef465849
+Step 8/38 : RUN  sudo apt-get install -y libltdl7
+ ---> Using cache
+ ---> 4dceb98bb311
+Step 9/38 : RUN  sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 108f74f910f5
+Step 10/38 : RUN  sudo wget https://bootstrap.pypa.io/get-pip.py
+ ---> Using cache
+ ---> 1d6361d04856
+Step 11/38 : RUN  sudo apt-get install -y apt-transport-https      ca-certificates      curl      gnupg2      software-properties-common
+ ---> Using cache
+ ---> d9ce2dc9f898
+Step 12/38 : RUN  sudo wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ ---> Using cache
+ ---> f2a1482017b8
+Step 13/38 : RUN  sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu    $(lsb_release -cs)    stable"
+ ---> Using cache
+ ---> 93db84593309
+Step 14/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 25a566ad9b20
+Step 15/38 : RUN  sudo apt-get install -y docker-ce
+ ---> Using cache
+ ---> e6c156dba735
+Step 16/38 : RUN  sudo python3 get-pip.py
+ ---> Using cache
+ ---> 5b3eb6aedaf6
+Step 17/38 : RUN sudo apt-get install -y vim
+ ---> Using cache
+ ---> 2f5c1e50d6dc
+Step 18/38 : RUN sudo apt-get install -y net-tools
+ ---> Using cache
+ ---> 3e2c2cab0125
+Step 19/38 : RUN sudo apt-get install -y procps
+ ---> Using cache
+ ---> 6d15f95224c7
+Step 20/38 : RUN sudo apt-get install -y iputils-ping
+ ---> Using cache
+ ---> 4e2c7a93d994
+Step 21/38 : RUN  sudo apt-get install -y python-setuptools python-dev build-essential
+ ---> Using cache
+ ---> d468d2b7e08c
+Step 22/38 : RUN  sudo add-apt-repository main
+ ---> Using cache
+ ---> d1eb7ffe58fa
+Step 23/38 : RUN  sudo apt-get update
+ ---> Using cache
+ ---> 9da074bf598d
+Step 24/38 : COPY requirements.txt requirements.txt
+ ---> Using cache
+ ---> 5283421e76bc
+Step 25/38 : RUN  sudo pip3 install -r requirements.txt
+ ---> Using cache
+ ---> 583fb8eb23c9
+Step 26/38 : RUN sudo chown seluser:seluser -R /home/seluser
+ ---> Using cache
+ ---> 5cf9b0c51aa1
+Step 27/38 : RUN sudo usermod -aG docker seluser
+ ---> Using cache
+ ---> fe5918127400
+Step 28/38 : RUN sudo usermod -aG sudo seluser
+ ---> Using cache
+ ---> f4d600a8ce7b
+Step 29/38 : RUN sudo mkdir /parent_directory
+ ---> Using cache
+ ---> 14262b2e8218
+Step 30/38 : ADD  infrastructure_components.tar.gz /parent_directory
+ ---> bd486434b046
+Step 31/38 : WORKDIR /parent_directory/infrastructure_components/data_parser
+ ---> Running in 370a7bc562d5
+Removing intermediate container 370a7bc562d5
+ ---> 8fbe4d11c0cc
+Step 32/38 : RUN sudo chown seluser:seluser -R /parent_directory/infrastructure_components
+ ---> Running in 0e70cbf57bc6
+Removing intermediate container 0e70cbf57bc6
+ ---> a9a35ba0eb56
+Step 33/38 : RUN sudo chmod 777 -R /parent_directory/infrastructure_components
+ ---> Running in 8a63266abfb8
+Removing intermediate container 8a63266abfb8
+ ---> e0f3364c2181
+Step 34/38 : RUN cat /opt/bin/entry_point.sh >> /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in ebee472fd9a9
+Removing intermediate container ebee472fd9a9
+ ---> ebab0b75b7ec
+Step 35/38 : RUN sudo chmod 777 /opt/bin/functions.sh
+ ---> Running in 2ec70f331ac9
+Removing intermediate container 2ec70f331ac9
+ ---> 0ce56fd8a83e
+Step 36/38 : RUN echo "\npython3 /parent_directory/infrastructure_components/data_parser/unittest/test_data_parser.py &" >> /opt/bin/functions.sh
+ ---> Running in fdfb839ffcb6
+Removing intermediate container fdfb839ffcb6
+ ---> 648271cd29c7
+Step 37/38 : RUN sudo chmod 777 /parent_directory/infrastructure_components/data_parser/shell_script.sh
+ ---> Running in 4d089ee54358
+Removing intermediate container 4d089ee54358
+ ---> c6e63ad65118
+Step 38/38 : CMD ["sh", "-c", "/parent_directory/infrastructure_components/data_parser/shell_script.sh"]
+ ---> Running in 4963dd8e40d7
+Removing intermediate container 4963dd8e40d7
+ ---> ccd6a0bf21d8
+Successfully built ccd6a0bf21d8
+Successfully tagged ssriram1978/data_parser:latest
+
+(MainThread:INFO:12/05/2018 04:09:11 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Performing Unittest of docker image found in directory /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser.
+(MainThread:INFO:12/05/2018 04:09:11 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Running unit test file unittest/test_data_parser.py.
+(MainThread:INFO:12/05/2018 04:09:11 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Invoking a special run container API for unittest/test_data_parser.py
+(MainThread:INFO:12/05/2018 04:09:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ cont_id=a308047229a7
+(MainThread:DEBUG:12/05/2018 04:09:14 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/a308047229a7/json HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 04:09:14 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ docker container id =a308047229.
+(MainThread:DEBUG:12/05/2018 04:09:14 PM:396:connectionpool.py:_make_request:http://localhost:None "GET /v1.35/containers/a308047229/json HTTP/1.1" 200 None
+(MainThread:DEBUG:12/05/2018 04:09:14 PM:396:connectionpool.py:_make_request:http://localhost:None "POST /v1.35/containers/a308047229a79ed0d35d9db6af81316fe74a15005bbade2a217a6981d6e34b10/wait HTTP/1.1" 200 None
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Capturing container logs.
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Result returned {'Error': None, 'StatusCode': 137}.
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ The docker exited with code 137.
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Stopping docker instance.
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Deleting container a308047229a79ed0d35d9db6af81316fe74a15005bbade2a217a6981d6e34b10.
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ Trying to delete all *.tar.gz files from /home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser directory.
+(MainThread:INFO:12/05/2018 04:14:15 PM:33:log_file.py:logging_to_console_and_syslog:hostname=sriramsridhar-HP-EliteBook-8460p
+ containerID=
+ 

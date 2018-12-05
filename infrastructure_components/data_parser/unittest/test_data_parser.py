@@ -35,7 +35,7 @@ class TestDataParser(unittest.TestCase):
         os.environ["redis_log_keyname_key"] = "briefcam"
         os.environ["total_job_enqueued_count_redis_name_key"] = "enqueue"
         os.environ["total_job_dequeued_count_redis_name_key"] = "dequeue"
-        os.environ["redis_server_hostname_key"] = "10.1.100.100"
+        os.environ["redis_server_hostname_key"] = "mec-poc"
         os.environ["redis_log_keyname_key"] = "briefcam"
         os.environ["redis_server_port_key"] = "6379"
         self.data_parser_instance = None
