@@ -66,7 +66,7 @@ services:
     volumes:
       - /home/mec-poc/fromMobile:/data
   machine_learning_workers:
-    image: ssriram1978/machine_learning_workers
+    image: ssriram1978/machine_learning_workers:latest
     deploy:
       replicas: 1
 #      resources:
