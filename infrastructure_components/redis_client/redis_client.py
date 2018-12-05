@@ -25,7 +25,7 @@ def import_all_packages():
 
 import_all_packages()
 
-from log.log_file import logging_to_console_and_syslog
+from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 class RedisClient(object):
     __instance = None
@@ -36,6 +36,7 @@ class RedisClient(object):
         return RedisClient.__instance
 
     def __init__(self):
+        logging_to_console_and_syslog("Instantiating RedisClient.")
         self.redis_instance = None
         self.redis_server_hostname = None
         self.redis_server_port = 0

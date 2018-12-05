@@ -29,6 +29,7 @@ class RedisInterface:
     """
 
     def __init__(self,thread_identifer=None):
+        logging_to_console_and_syslog("Instantiating RedisInterface.")
         self.total_job_enqueued_count_redis_name = None
         self.total_job_dequeued_count_redis_name = None
         self.redis_log_keyname = None
@@ -91,6 +92,20 @@ class RedisInterface:
                                       .format(self.thread_identifer,
                                               self.total_job_dequeued_count_redis_name))
         self.redis_instance.increment_key_in_redis_db(self.total_job_dequeued_count_redis_name)
+
+    def check_if_the_key_exists_in_redis_db(self, key):
+        logging_to_console_and_syslog("RedisInterface:{}."
+                                      "check_if_the_key_exists_in_redis_db key={}"
+                                      .format(self.thread_identifer,
+                                              key))
+        return self.redis_instance.check_if_the_key_exists_in_redis_db(key)
+
+    def set_the_key_in_redis_db(self, key):
+        logging_to_console_and_syslog("RedisInterface:{}."
+                                      "set_the_key_in_redis_db key={}"
+                                      .format(self.thread_identifer,
+                                              key))
+        return self.redis_instance.set_the_key_in_redis_db(key)
 
     def write_an_event_in_redis_db(self, event):
         logging_to_console_and_syslog("RedisInterface:{}."

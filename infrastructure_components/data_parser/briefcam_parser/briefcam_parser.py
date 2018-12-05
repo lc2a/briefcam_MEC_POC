@@ -48,8 +48,8 @@ class BriefCamClickTimeoutException(Exception):
     def __init__(self):
         event = "BriefCam Server click timeout occurred."
         logging_to_console_and_syslog(event)
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(event)
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(event)
         pyautogui.press('esc')
         pyautogui.press('esc')
         raise BriefCamServerException
@@ -59,20 +59,20 @@ class BriefCamServerException(Exception):
     def __init__(self):
         event = "BriefCam Server exception occurred."
         logging_to_console_and_syslog(event)
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(event)
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(event)
 
 
 class BriefCamNoProcessExcept(Exception):
     def __init__(self):
         event = "BriefCam Server No process occurred."
         logging_to_console_and_syslog(event)
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(event)
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(event)
         raise BriefCamServerException
 
 
-class BriefcamParser():
+class BriefCamParser:
     pyautogui.PAUSE = 0.1
     redis_instance = None
 
@@ -92,12 +92,12 @@ class BriefcamParser():
         self.time_for_browser_to_open = 60
         self.time_between_input_character = 0
         self.redis_log_keyname = None
-        self.data_file_path = None
+        self.video_file_path = None
         self.total_job_done_count_redis_name = None
         self.hostname = os.popen("cat /etc/hostname").read()
         self.cont_id = os.popen("cat /proc/self/cgroup | head -n 1 | cut -d '/' -f3").read()
+        BriefCamParser.redis_instance = RedisInterface("BriefCam+{}".format(self.cont_id))
         self.import_environment_variables()
-        BriefcamParser.redis_instance = RedisInterface("BriefCam+{}".format(self.cont_id))
         self.prepare_browser()
 
     def import_environment_variables(self):
@@ -112,7 +112,7 @@ class BriefcamParser():
                 self.sleep_time is 0 or \
                 self.time_between_input_character is 0 or \
                 self.redis_log_keyname is None or \
-                self.data_file_path is None or \
+                self.video_file_path is None or \
                 self.time_for_browser_to_open is 0:
 
             time.sleep(self.sleep_time)
@@ -130,7 +130,7 @@ class BriefcamParser():
             self.total_job_done_count_redis_name = os.getenv("total_job_done_count_redis_name_key", default=None)
             self.redis_log_keyname = os.getenv("redis_log_keyname_key",
                                                default=None)
-            self.data_file_path = os.getenv("data_file_path_key", default=None)
+            self.video_file_path = os.getenv("video_file_path_key", default=None)
 
         self.__write_log_to_redis_and_logging_framework("password={}"
                                                         .format(self.password), True)
@@ -170,9 +170,9 @@ class BriefcamParser():
                                                    event,
                                                    write_to_redis_event_summary=False):
         logging_to_console_and_syslog(event)
-        BriefcamParser.redis_instance.write_an_event_in_redis_db(event)
+        BriefCamParser.redis_instance.write_an_event_in_redis_db(event)
         if write_to_redis_event_summary:
-            BriefcamParser.redis_instance.write_an_event_in_redis_db(event)
+            BriefCamParser.redis_instance.write_an_event_in_redis_db(event)
 
 
     def __proceed_with_execution(self):
@@ -219,14 +219,15 @@ class BriefcamParser():
                     current_retry_count += 1
                     time.sleep(self.sleep_time)
 
-        buttonx, buttony = pyautogui.center(button_location)
-        event_log = "Clicking buttonx={} and buttony={}".format(buttonx, buttony)
+        button_x, button_y = pyautogui.center(button_location)
+        event_log = "Clicking button_x={} and button_y={}".format(button_x, button_y)
         self.__write_log_to_redis_and_logging_framework(event_log)
-        pyautogui.click(buttonx, buttony)
+        pyautogui.click(button_x, button_y)
         return True
 
     def __login_to_briefcam_server(self):
         pyautogui.press('esc')
+        return_value = None
         for index in range(5):
             return_value = self.__left_click_this_image(self.__filename_formatted('signin_button.png'), False)
             if return_value:
@@ -290,8 +291,9 @@ class BriefcamParser():
         # MEC-POC case is getting created for the first time.
         self._left_click_this_coordinate(create_case_coordinates)
         time.sleep(self.time_between_input_character)
+        # prints out the case name with a quarter second delay after each character
         pyautogui.typewrite(self.case_name,
-                            interval=0.1)  # prints out the case name with a quarter second delay after each character
+                            interval=0.1)
         pyautogui.hotkey('tab')
         pyautogui.hotkey('tab')
         pyautogui.hotkey('tab')
@@ -302,7 +304,6 @@ class BriefcamParser():
         self._left_click_this_coordinate(case_coordinates)
 
     def __search_and_leftclick_case(self, filename):
-        no_results_found = None
         pyautogui.press('esc')
         pyautogui.press('esc')
         self.__extract_case_name_from_video_file_name(filename)
@@ -316,7 +317,7 @@ class BriefcamParser():
         time.sleep(self.sleep_time)
         self._left_click_this_coordinate(case_coordinates)
 
-    def __leftclick_add_video_button(self):
+    def __left_click_add_video_button(self):
         return_value = False
         for index in range(4):
             return_value = self.__left_click_this_image(
@@ -328,7 +329,7 @@ class BriefcamParser():
         return return_value
 
     def __write_case_name_in_redis(self, case_name):
-        BriefcamParser.redis_instance.write_an_event_on_redis_db(case_name)
+        BriefCamParser.redis_instance.write_an_event_on_redis_db(case_name)
 
     def __make_sure_you_could_click_add_video_button(self):
         add_video_button_found = False
@@ -336,7 +337,7 @@ class BriefcamParser():
         while not add_video_button_found:
             if not self.browser_alive():
                 break
-            add_video_button_found = self.__leftclick_add_video_button()
+            add_video_button_found = self.__left_click_add_video_button()
             if not add_video_button_found:
                 self.__write_log_to_redis_and_logging_framework(
                     "Add video button is not found for case name {}."
@@ -344,7 +345,7 @@ class BriefcamParser():
                 # look up in redisClient db to check if the case name exists.
                 # if the case name already exists in redisDB, then, keep trying until you find the casename.
                 # else create the case name and update the same in redisClient DB.
-                if BriefcamParser.redis_instance.check_if_the_key_exists_in_redis_db(self.case_name):
+                if BriefCamParser.redis_instance.check_if_the_key_exists_in_redis_db(self.case_name):
                     self.__write_log_to_redis_and_logging_framework(
                         "Case name {} already exists. Retrying after a second.."
                             .format(self.case_name))
@@ -358,7 +359,7 @@ class BriefcamParser():
                     self._left_click_this_coordinate(cancel_search_coordinates)
                     pyautogui.press('esc')
                     self.__create_case_for_the_first_time()
-                    BriefcamParser.redis_instance.set_the_key_in_redis_db(self.case_name)
+                    BriefCamParser.redis_instance.set_the_key_in_redis_db(self.case_name)
         return add_video_button_found
 
     def __add_video(self, file_name):

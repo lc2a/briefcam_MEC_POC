@@ -32,7 +32,7 @@ class DockerBuildUTDeploy:
     unittest_identifier = 'test*.py'
     def __init__(self):
         self.dockerfile_paths = []
-        self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
+        #self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3/job_dispatcher'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/rtsp_recorder'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/front_end'
@@ -41,7 +41,7 @@ class DockerBuildUTDeploy:
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/redis_client'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/couchdb_client'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/producer_consumer'
-        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser'
+        self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/open_rtsp_api_handler'
         self.docker_instance = None
         self.delete_all_tar_gz_files()
@@ -105,7 +105,12 @@ class DockerBuildUTDeploy:
                     ut_file_path = '/'.join(ut_path_list[found_index+1:])
                     logging_to_console_and_syslog("Running unit test file {}."
                                                   .format(ut_file_path))
-                    self.docker_instance.run_docker_container("python3 {}"
+                    if "test_data_parser" in ut_file_path:
+                        logging_to_console_and_syslog("Invoking a special run container API for {}"
+                                                      .format(ut_file_path))
+                        self.docker_instance.run_docker_container2()
+                    else:
+                        self.docker_instance.run_docker_container("python3 {}"
                                                               .format(ut_file_path))
                     self.docker_instance.wait_for_docker_container_completion()
                     logging_to_console_and_syslog("Stopping docker instance.")

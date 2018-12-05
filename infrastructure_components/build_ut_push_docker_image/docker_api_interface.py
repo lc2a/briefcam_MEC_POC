@@ -46,6 +46,8 @@ class DockerAPIInterface(unittest.TestCase):
         else:
             self.image_name = "unittest"
 
+        self.docker_image_name = "{}/{}:latest".format(self.docker_tag, self.image_name)
+
         if dockerfile_directory_name:
             self.dirname = dockerfile_directory_name
         else:
@@ -152,12 +154,15 @@ class DockerAPIInterface(unittest.TestCase):
         self.create_gzipped_directory("infrastructure_components",
                                       self.dirname)
 
+        logging_to_console_and_syslog("Building docker image {}"
+                                      .format(self.docker_image_name))
+
         docker_create_command_list = ["docker",
                                       "build",
                                       self.dirname,
                                       "-t",
-                                      "{}/{}:latest".format(self.docker_tag,
-                                                            self.image_name)]
+                                      self.docker_image_name
+                                     ]
         output = self.create_subprocess(docker_create_command_list)
         logging_to_console_and_syslog(output)
         self.assertIsNotNone(output)
@@ -176,41 +181,58 @@ class DockerAPIInterface(unittest.TestCase):
                                     source=path_list[1]))
         volume_mount = "/var/run/docker.sock:/var/run/docker.sock"
         """
-        volume_mount = {'/var/run/docker.sock': {'bind': '/var/run/docker.sock'},
-                        '/usr/bin/docker': {'bind': '/usr/bin/docker'}}
+        volume = {'/var/run/docker.sock': {'bind': '/var/run/docker.sock'},
+                  '/usr/bin/docker': {'bind': '/usr/bin/docker'}}
+        mount = [Mount('/usr/bin/docker', '/usr/bin/docker')]
 
         if command:
             logging_to_console_and_syslog("Running docker container "
-                                          "{}/{}:latest "
+                                          "{} "
                                           "with command {}"
-                                          .format(self.docker_tag,
-                                                  self.image_name,
+                                          .format(self.docker_image_name,
                                                   command))
 
             self.container = self.docker_instance.containers.run(
-                "{}/{}:latest".format(self.docker_tag,
-                                      self.image_name),
-                # mounts=volume_mount,
-                volumes=volume_mount,
+                self.docker_image_name,
+                # mounts=mount,
+                volumes=volume,
                 name=self.image_name,
                 network_mode="host",
                 command=command,
                 detach=True)
         else:
             logging_to_console_and_syslog("Running docker container "
-                                          "{}/{}:latest "
-                                          .format(self.docker_tag,
-                                                  self.image_name))
+                                          "{} "
+                                          .format(self.docker_image_name))
 
             self.container = self.docker_instance.containers.run(
-                "{}/{}:latest".format(self.docker_tag,
-                                      self.image_name),
-                volumes=volume_mount,
-                # mounts=path_mount,
+                self.docker_image_name,
+                volumes=volume,
+                #mounts=mount,
                 name=self.image_name,
                 network_mode="host",
                 detach=True)
         return self.container.short_id
+
+    def run_docker_container2(self):
+        completed_process = subprocess.run(["docker",
+                                            "run",
+                                            "-itd",
+                                            "-v",
+                                            "/var/run/docker.sock:/var/run/docker.sock",
+                                            "-v",
+                                            "/usr/bin/docker:/usr/bin/docker",
+                                            self.docker_image_name],
+                                           stdout=subprocess.PIPE)
+        cont_id = completed_process.stdout.decode('utf8')
+        logging_to_console_and_syslog("cont_id={}".format(cont_id[:12]))
+        self.container = self.docker_instance.containers.get(cont_id[:12])
+        if self.container:
+            logging_to_console_and_syslog("docker container id ={}."
+                                          .format(self.container.short_id))
+        else:
+            logging_to_console_and_syslog("Unable to start the docker container.")
+            raise Exception
 
     def wait_for_docker_container_completion(self):
         result = None
@@ -253,8 +275,7 @@ class DockerAPIInterface(unittest.TestCase):
                                               "image",
                                               "rm",
                                               "-f",
-                                              "{}/{}".format(self.docker_tag,
-                                                             self.image_name)]
+                                              self.docker_image_name]
         self.assertIsNotNone(self.create_subprocess(docker_container_remove_image_list))
         # remove the infrastructure package
         parent_dirname = '/'.join(self.dirname.split('/')[:-1])
@@ -275,8 +296,8 @@ class DockerAPIInterface(unittest.TestCase):
 
     def stop_docker_container(self):
         try:
-            #logging_to_console_and_syslog("Stopping container {}.".format(self.container.id))
-            #self.docker_instance.containers.stop(self.container.id)
+            # logging_to_console_and_syslog("Stopping container {}.".format(self.container.id))
+            # self.docker_instance.containers.stop(self.container.id)
             logging_to_console_and_syslog("Deleting container {}.".format(self.container.id))
             completed_process = subprocess.run(["docker",
                                                 "container",

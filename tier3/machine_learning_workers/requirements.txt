@@ -16,3 +16,4 @@ pyautogui>=0.9.38
 msgpack>=0
 kafka-python>=0
 redis>=0
+docker-compose>=0

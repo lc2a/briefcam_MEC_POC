@@ -47,9 +47,12 @@ RUN  sudo pip3 install -r requirements.txt
 #CMD xauth generate :0 . trusted
 #RUN xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
 RUN sudo chown seluser:seluser -R /home/seluser
+RUN sudo usermod -aG docker seluser
+RUN sudo usermod -aG sudo seluser
 RUN sudo mkdir /parent_directory
 RUN sudo mkdir /parent_directory/tier3
 RUN sudo mkdir /parent_directory/tier3/machine_learning_workers
+ADD  infrastructure_components.tar.gz /parent_directory
 WORKDIR /parent_directory/tier3/machine_learning_workers
 COPY . /parent_directory/tier3/machine_learning_workers
 RUN sudo chown seluser:seluser -R /parent_directory/tier3/machine_learning_workers
@@ -62,5 +65,4 @@ RUN sudo chmod 777 /opt/bin/functions.sh
 RUN echo "\npython3 /parent_directory/tier3/machine_learning_workers/machine_learning_worker.py &" >> /opt/bin/functions.sh
 RUN sudo chmod 777 /parent_directory/tier3/machine_learning_workers/shell_script.sh
 #RUN  sudo apt-get install -y python3-distutils
-ADD  infrastructure_components.tar.gz /parent_directory
 CMD ["sh", "-c", "/parent_directory/tier3/machine_learning_workers/shell_script.sh"]

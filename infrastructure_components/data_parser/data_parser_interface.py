@@ -48,9 +48,9 @@ class DataParserInterface:
     def __instantiate_objects(self):
         logging_to_console_and_syslog("DataParserInterface: instantiate_objects()")
         if self.data_parser_type == DataParserInterface.BriefCam:
-            from infrastructure_components.data_parser.briefcam_parser.briefcam_parser import BriefcamParser
-            logging_to_console_and_syslog("Instantiating BriefcamParser instance.")
-            self.parser_instance = BriefcamParser()
+            from infrastructure_components.data_parser.briefcam_parser.briefcam_parser import BriefCamParser
+            logging_to_console_and_syslog("Instantiating BriefCamParser instance.")
+            self.parser_instance = BriefCamParser()
         elif self.data_parser_type == DataParserInterface.TensorFlow:
             from infrastructure_components.data_parser.tensorflow_parser.tensorflow_parser import TensorFlowParser
             logging_to_console_and_syslog("Instantiating TensorFlowParser instance.")

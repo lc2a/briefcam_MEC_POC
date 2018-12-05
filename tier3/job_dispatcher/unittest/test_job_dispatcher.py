@@ -123,4 +123,12 @@ class TestJobDispatcher(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    try:
+        unittest.main()
+    except:
+        logging_to_console_and_syslog("Exception occurred." + sys.exc_info()[0])
+        print("Exception in user code:")
+        print("-" * 60)
+        traceback.print_exc(file=sys.stdout)
+        print("-" * 60)
+
