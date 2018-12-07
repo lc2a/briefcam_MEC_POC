@@ -26,7 +26,7 @@ def import_all_packages():
 
 import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
-from infrastructure_components.open_rtsp_api_handler.open_rtsp_api_handler import openRTSPAPIHandler
+from infrastructure_components.open_rtsp_api_handler.open_rtsp_api_handler import OpenRTSPAPIHandler
 
 
 class RtspRecorder:
@@ -54,7 +54,7 @@ class RtspRecorder:
         """
         Initialize the rtsp media instance variable which instantiates OpenRTSPAPIHandler class object.
         """
-        self.rtsp_media_instance = openRTSPAPIHandler()
+        self.rtsp_media_instance = OpenRTSPAPIHandler()
 
     def check_and_restart_rtsp_video_capture(self):
         """

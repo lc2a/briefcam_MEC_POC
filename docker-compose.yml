@@ -47,7 +47,7 @@ services:
       KAFKA_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://_{HOSTNAME_COMMAND}:9094
       KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_CREATE_TOPICS: "video-file-name:10:1,split-video-file:5:1"
+      KAFKA_CREATE_TOPICS: "video-file-name:1:1"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - "/etc/timezone:/etc/timezone:ro"
