@@ -256,7 +256,14 @@ class DockerAPIInterface(unittest.TestCase):
                                             "--add-host",
                                             "mec-demo:10.2.40.160",
                                             "--add-host",
-                                            "mec-poc:{}".format(DockerAPIInterface.getNetworkIp()),
+                                            "mec-poc:{}"
+                                            .format(DockerAPIInterface.getNetworkIp()),
+                                            "--add-host",
+                                            "sriramsridhar-HP-EliteBook-8460p:{}"
+                                            .format(DockerAPIInterface.getNetworkIp()),
+                                            "--add-host",
+                                            "mecpoc-ProLiant-BL460c-Gen9:{}"
+                                           .format(DockerAPIInterface.getNetworkIp()),
                                             docker_image_name],
                                            stdout=subprocess.PIPE)
         cont_id = completed_process.stdout.decode('utf8')
