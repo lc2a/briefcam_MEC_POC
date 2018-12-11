@@ -29,6 +29,8 @@ import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 from infrastructure_components.producer_consumer.producer_consumer import ProducerConsumerAPI
 from infrastructure_components.redis_client.redis_interface import RedisInterface
+from infrastructure_components.build_ut_push_docker_image.docker_api_interface import DockerAPIInterface
+
 
 class TestProducerConsumer(unittest.TestCase):
     def setUp(self):
@@ -166,15 +168,23 @@ class TestProducerConsumer(unittest.TestCase):
         self.producer_instance = None
         for index in range(self.max_consumer_threads):
             self.consumer_threads[index].do_run = False
+            time.sleep(1)
+            logging_to_console_and_syslog("Trying to join thread {}."
+                                          .format(self.consumer_threads[index].getName()))
             self.consumer_threads[index].join(1.0)
             time.sleep(1)
-            while self.consumer_threads[index].is_alive():
+            if self.consumer_threads[index].is_alive():
                 try:
-                    self.consumer_threads[index].join()
+                    logging_to_console_and_syslog("Trying to __stop thread {}."
+                                                  .format(self.consumer_threads[index].getName()))
+                    self.consumer_threads[index].__stop()
 
                 except:
                     logging_to_console_and_syslog("Caught an exception while stopping thread {}"
                                                   .format(self.consumer_threads[index].getName()))
+                    docker_api_interface_instance = DockerAPIInterface(image_name=self.dirname.split('/')[-2],
+                                                                       dockerfile_directory_name=self.dirname)
+                    docker_api_interface_instance.stop_docker_container_by_name()
 
     def tearDown(self):
         self.delete_test_docker_container()

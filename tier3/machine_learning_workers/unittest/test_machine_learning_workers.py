@@ -31,7 +31,7 @@ from infrastructure_components.redis_client.redis_interface import RedisInterfac
 from infrastructure_components.producer_consumer.producer_consumer import ProducerConsumerAPI
 from infrastructure_components.data_parser.data_parser_interface import DataParserInterface
 from tier3.machine_learning_workers.machine_learning_worker import MachineLearningWorker
-
+from infrastructure_components.build_ut_push_docker_image.docker_api_interface import DockerAPIInterface
 
 class TestMachineLearningWorkers(unittest.TestCase):
 
@@ -136,8 +136,18 @@ class TestMachineLearningWorkers(unittest.TestCase):
         subprocess.run(['rm', '-rf', TestMachineLearningWorkers.directory_name], stdout=subprocess.PIPE)
         self.machine_learning_worker_thread.do_run = False
         time.sleep(1)
+        logging_to_console_and_syslog("Trying to join thread.")
+        self.machine_learning_worker_thread.join(1.0)
+        time.sleep(1)
         if self.machine_learning_worker_thread.isAlive():
-            self.machine_learning_worker_thread.join(1.0)
+            try:
+                logging_to_console_and_syslog("Trying to __stop thread.")
+                self.machine_learning_worker_thread._stop()
+            except:
+                logging_to_console_and_syslog("Caught an exception while stopping thread.")
+                docker_api_interface_instance = DockerAPIInterface(image_name=self.dirname.split('/')[-2],
+                                                                   dockerfile_directory_name=self.dirname)
+                docker_api_interface_instance.stop_docker_container_by_name()
 
 
 

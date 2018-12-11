@@ -32,8 +32,8 @@ from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
 class DockerAPIInterface(unittest.TestCase):
     def __init__(self,
-                 docker_tag,
-                 image_name,
+                 docker_tag=None,
+                 image_name=None,
                  dockerfile_directory_name=None):
 
         if docker_tag:
@@ -162,7 +162,7 @@ class DockerAPIInterface(unittest.TestCase):
                                       self.dirname,
                                       "-t",
                                       self.docker_image_name
-                                     ]
+                                      ]
         output = self.create_subprocess(docker_create_command_list)
         logging_to_console_and_syslog(output)
         self.assertIsNotNone(output)
@@ -208,7 +208,7 @@ class DockerAPIInterface(unittest.TestCase):
             self.container = self.docker_instance.containers.run(
                 self.docker_image_name,
                 volumes=volume,
-                #mounts=mount,
+                # mounts=mount,
                 name=self.image_name,
                 network_mode="host",
                 detach=True)
@@ -308,16 +308,40 @@ class DockerAPIInterface(unittest.TestCase):
         logging_to_console_and_syslog("Running Docker image.")
         self.__run_docker_container(command)
 
-    def stop_docker_container(self):
+    def yield_container(self):
+        """
+        This function reads all active docker containers and returns them back to the caller one container id at a time.
+        """
+        for container in self.docker_instance.containers.list():
+            yield container
+
+    def stop_docker_container_by_name(self):
+        for container in self.yield_container():
+            logging_to_console_and_syslog("container.name="+ container.name
+                                          + "container.image=" + str(container.image)
+                                          + "container.image=" + repr(container.image)
+                                          + "container.status="+container.status)
+
+            if self.docker_image_name in repr(container.image):
+                container_instance = container.attach()
+                logging_to_console_and_syslog("Stopping container name={}."
+                                              .format(container.image))
+                container.stop()
+                break
+
+    def stop_docker_container(self, container_id=None):
         try:
+            if container_id is None:
+                container_id = self.container.id
+
             # logging_to_console_and_syslog("Stopping container {}.".format(self.container.id))
             # self.docker_instance.containers.stop(self.container.id)
-            logging_to_console_and_syslog("Deleting container {}.".format(self.container.id))
+            logging_to_console_and_syslog("Deleting container {}.".format(container_id))
             completed_process = subprocess.run(["docker",
                                                 "container",
                                                 "rm",
                                                 "-f",
-                                                self.container.id],
+                                                container_id],
                                                stdout=subprocess.PIPE)
             """
             logging_to_console_and_syslog("kill container {}.".format(self.container.id))

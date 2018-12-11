@@ -29,6 +29,7 @@ import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 from infrastructure_components.producer_consumer.wurstmeister_kafka_msgq_api.kafka_msgq_api import KafkaMsgQAPI
 from infrastructure_components.redis_client.redis_interface import RedisInterface
+from infrastructure_components.build_ut_push_docker_image.docker_api_interface import DockerAPIInterface
 
 
 class TestProducerConsumer(unittest.TestCase):
@@ -142,14 +143,32 @@ class TestProducerConsumer(unittest.TestCase):
         for index in range(self.max_consumer_threads):
             self.consumer_threads[index].do_run = False
             time.sleep(1)
+            logging_to_console_and_syslog("Trying to join thread {}."
+                                          .format(self.consumer_threads[index].getName()))
             self.consumer_threads[index].join(1.0)
             if self.consumer_threads[index].is_alive():
                 try:
+                    logging_to_console_and_syslog("Trying to __stop thread {}."
+                                                  .format(self.consumer_threads[index].getName()))
                     self.consumer_threads[index]._stop()
 
                 except:
                     logging_to_console_and_syslog("Caught an exception while stopping thread {}"
                                                   .format(self.consumer_threads[index].getName()))
+                    docker_image_name = self.dirname.split('/')[-2]
+                    logging_to_console_and_syslog("Trying to stop docker image{}."
+                                                  .format(docker_image_name))
+                    try:
+                        docker_api_interface_instance = DockerAPIInterface(image_name=docker_image_name,
+                                                                           dockerfile_directory_name=self.dirname)
+                        docker_api_interface_instance.stop_docker_container_by_name()
+                    except:
+                        logging_to_console_and_syslog("Caught an exception while stopping {}"
+                                                      .format(docker_image_name))
+                        print("Exception in user code:")
+                        print("-" * 60)
+                        traceback.print_exc(file=sys.stdout)
+                        print("-" * 60)
 
 
 if __name__ == "__main__":
