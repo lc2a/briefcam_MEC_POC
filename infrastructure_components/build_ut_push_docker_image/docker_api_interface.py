@@ -167,6 +167,24 @@ class DockerAPIInterface(unittest.TestCase):
         logging_to_console_and_syslog(output)
         self.assertIsNotNone(output)
 
+        #Build a special docker image for unit test.
+        #Note that this docker image has the unit test file already mentioned in the RUN command.
+        if "machine_learning_workers" in self.dirname:
+            logging_to_console_and_syslog("Preparing a special image for unit testing {}"
+                                          .format(self.dirname))
+            docker_create_command_list = ["docker",
+                                          "build",
+                                          self.dirname,
+                                          "-f"
+                                          "{}/Dockerfile.unittest".format(self.dirname),
+                                          "-t",
+                                          "{}/{}_unittest".format(self.docker_tag,
+                                                                         self.image_name)
+                                          ]
+            output = self.create_subprocess(docker_create_command_list)
+            logging_to_console_and_syslog(output)
+            self.assertIsNotNone(output)
+
     def __run_docker_container(self, command=None):
         """
         bind_mount = "/usr/bin/docker:/usr/bin/docker".split()
@@ -215,14 +233,17 @@ class DockerAPIInterface(unittest.TestCase):
         return self.container.short_id
 
     @staticmethod
-    def __getNetworkIp():
+    def getNetworkIp():
         import socket
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         s.connect(('<broadcast>', 0))
         return s.getsockname()[0]
 
-    def run_docker_container2(self):
+    def run_docker_container2(self, docker_image_name=None):
+        if not docker_image_name:
+            docker_image_name = self.docker_image_name
+
         completed_process = subprocess.run(["docker",
                                             "run",
                                             "-itd",
@@ -235,8 +256,8 @@ class DockerAPIInterface(unittest.TestCase):
                                             "--add-host",
                                             "mec-demo:10.2.40.160",
                                             "--add-host",
-                                            "mec-poc:{}".format(DockerAPIInterface.__getNetworkIp()),
-                                            self.docker_image_name],
+                                            "mec-poc:{}".format(DockerAPIInterface.getNetworkIp()),
+                                            docker_image_name],
                                            stdout=subprocess.PIPE)
         cont_id = completed_process.stdout.decode('utf8')
         logging_to_console_and_syslog("cont_id={}".format(cont_id[:12]))

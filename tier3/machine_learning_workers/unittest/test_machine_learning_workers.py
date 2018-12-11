@@ -39,12 +39,12 @@ class TestMachineLearningWorkers(unittest.TestCase):
     directory_name = 'test_files'
 
     def setUp(self):
-        os.environ["broker_name_key"] = "localhost:9094"
-        os.environ["topic_key"] = "data-file-name"
+        os.environ["broker_name_key"] = "{}:9094".format("mec-poc")
+        os.environ["topic_key"] = "video-file-name"
         os.environ["redis_log_keyname_key"] = "briefcam"
         os.environ["total_job_enqueued_count_redis_name_key"] = "enqueue"
         os.environ["total_job_dequeued_count_redis_name_key"] = "dequeue"
-        os.environ["redis_server_hostname_key"] = "localhost"
+        os.environ["redis_server_hostname_key"] = "mec-poc"
         os.environ["redis_server_port_key"] = "6379"
         os.environ["producer_consumer_queue_type_key"] = ProducerConsumerAPI.kafkaMsgQType
         os.environ["data_parser_type_key"] = DataParserInterface.TensorFlow
@@ -113,7 +113,8 @@ class TestMachineLearningWorkers(unittest.TestCase):
         self.validate_machine_learning_workers()
 
     def create_test_docker_container(self):
-        completedProcess = subprocess.run(["docker-compose",
+        completedProcess = subprocess.run(["sudo",
+                                           "docker-compose",
                                            "-f",
                                            "{}/docker-compose_wurstmeister_kafka.yml".format(self.dirname),
                                            "up",
@@ -123,7 +124,8 @@ class TestMachineLearningWorkers(unittest.TestCase):
         self.assertIsNotNone(completedProcess.stdout)
 
     def delete_test_docker_container(self):
-        completedProcess = subprocess.run(["docker-compose",
+        completedProcess = subprocess.run(["sudo",
+                                           "docker-compose",
                                            "-f",
                                            "{}/docker-compose_wurstmeister_kafka.yml".format(self.dirname),
                                            "down"],
