@@ -3,6 +3,7 @@ import sys
 import subprocess
 import traceback
 import time
+import threading
 
 def import_all_packages():
     realpath = os.path.realpath(__file__)
@@ -25,26 +26,44 @@ import_all_packages()
 
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 from infrastructure_components.build_ut_push_docker_image.build_ut_push_docker_image import DockerBuildUTPublish
+from infrastructure_components.build_ut_push_docker_image.docker_api_interface import DockerAPIInterface
 
 
 class DockerBuildUTDeploy:
     dockerfile_identifier = 'Dockerfile'
     unittest_identifier = 'test*.py'
+
     def __init__(self):
         self.dockerfile_paths = []
-        #self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
+        self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3/job_dispatcher'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/rtsp_recorder'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/front_end'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2'
-        self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3'
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/redis_client'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/couchdb_client'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/producer_consumer'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/data_parser'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/infrastructure_components/open_rtsp_api_handler'
         self.docker_instance = None
+        self.consumer_threads = []
         self.delete_all_tar_gz_files()
+
+    @staticmethod
+    def validate_successful_completion(package_name, ut_file_path):
+        logging_to_console_and_syslog("Starting {},"
+                                      "package_name = {}"
+                                      " ut_file_path = {}"
+                                      .format(threading.current_thread().getName(),
+                                              package_name,
+                                              ut_file_path))
+        time.sleep(180)
+        docker_api_interface_instance = DockerAPIInterface(image_name=package_name,
+                                                           dockerfile_directory_name=ut_file_path)
+        docker_api_interface_instance.capture_docker_container_logs()
+        docker_api_interface_instance.stop_docker_container_by_name()
+        logging_to_console_and_syslog("Exiting {}".format(threading.current_thread().getName()))
 
     def delete_all_tar_gz_files(self, dirname=None):
         logging_to_console_and_syslog("Trying to delete all *.tar.gz files from {}"
@@ -105,6 +124,14 @@ class DockerBuildUTDeploy:
                     ut_file_path = '/'.join(ut_path_list[found_index+1:])
                     logging_to_console_and_syslog("Running unit test file {}."
                                                   .format(ut_file_path))
+
+                    thread_id = threading.Thread(name="{}_{}".format("thread", package_name),
+                                                 target=DockerBuildUTDeploy.validate_successful_completion,
+                                                 kwargs=dict(package_name=package_name,
+                                                             ut_file_path=ut_file_path))
+                    thread_id.start()
+                    self.consumer_threads.append(thread_id)
+
                     if package_name == "test_data_parser" or \
                        package_name == "machine_learning_workers":
                         logging_to_console_and_syslog("Invoking a special run container API for {}"

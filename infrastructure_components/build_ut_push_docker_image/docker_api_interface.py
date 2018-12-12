@@ -350,8 +350,8 @@ class DockerAPIInterface(unittest.TestCase):
                                           + "container.image=" + repr(container.image)
                                           + "container.status="+container.status)
 
-            if self.docker_image_name in repr(container.image):
-                container_instance = container.attach()
+            if self.image_name in repr(container.image):
+                #container_instance = container.attach()
                 logging_to_console_and_syslog("Stopping container name={}."
                                               .format(container.image))
                 container.stop()
