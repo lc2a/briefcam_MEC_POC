@@ -1,0 +1,14 @@
+setuptools>=0
+pytz>=0
+zope.interface>=0
+datetime>=4.2
+enum34>=1.1.6
+futures>=0
+msgpack>=0
+docker-compose>=0
+argh>=0.24.1
+pathtools>=0.1.1
+PyYAML>=3.10
+watchdog>=0.8.3
+redis>=0
+confluent_kafka>=0

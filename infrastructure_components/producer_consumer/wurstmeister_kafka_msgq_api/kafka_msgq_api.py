@@ -262,12 +262,6 @@ class KafkaMsgQAPI:
                                                   filename))
             yield msg
 
-    def get_current_enqueue_count(self):
-        return self.redis_instance.get_current_enqueue_count()
-
-    def get_current_dequeue_count(self):
-        return self.redis_instance.get_current_dequeue_count()
-
     def dequeue(self):
         try:
             if self.perform_subscription:

@@ -110,7 +110,7 @@ class RedisInterface:
     def write_an_event_in_redis_db(self, event):
         logging_to_console_and_syslog("RedisInterface:{}."
                                       "Writing at key={}"
-                                      "event={}"
+                                      " event={}"
                                       .format(self.thread_identifer,
                                               self.redis_log_keyname,
                                               event))
