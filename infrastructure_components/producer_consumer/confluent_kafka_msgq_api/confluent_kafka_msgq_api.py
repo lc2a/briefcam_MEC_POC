@@ -35,6 +35,9 @@ def stats_cb(stats_json_str):
     print('\nKAFKA Stats: {}\n'.format(pformat(stats_json)))
 
 
+def print_assignment(consumer, partitions):
+    logging_to_console_and_syslog('consumer = {}, Assignment {}:'.format(consumer, partitions))
+
 
 class ConfluentKafkaMsgQAPI:
     """
@@ -59,10 +62,10 @@ class ConfluentKafkaMsgQAPI:
         self.perform_subscription = perform_subscription
         self.thread_identifier = thread_identifier
         self.__read_environment_variables()
-        if is_producer:
-            self.__producer_connect()
-        if is_consumer:
-            self.__consumer_connect()
+        # if is_producer:
+        #    self.__producer_connect()
+        # if is_consumer:
+        #    self.__consumer_connect()
 
     def __read_environment_variables(self):
         """
@@ -95,11 +98,13 @@ class ConfluentKafkaMsgQAPI:
         This method tries to connect to the kafka broker based upon the type of kafka.
         :return:
         """
-        while self.producer_instance is None:
+        is_connected = False
+        if self.producer_instance is None:
             try:
                 self.producer_conf = {'bootstrap.servers': self.broker_name}
                 # Create Producer instance
                 self.producer_instance = Producer(**self.producer_conf)
+                is_connected = True
             except:
                 print("Exception in user code:")
                 print("-" * 60)
@@ -110,30 +115,7 @@ class ConfluentKafkaMsgQAPI:
                 logging_to_console_and_syslog("ConfluentKafkaMsgQAPI: Successfully "
                                               "connected to broker_name={}"
                                               .format(self.broker_name))
-
-    def __consumer_connect(self):
-        status = False
-        try:
-            if self.perform_subscription:
-                self.__consumer_connect_to_broker()
-                self.__subscribe_to_a_topic()
-                #self.__iterate_over_kafka_consumer_instance_messages()
-            else:
-                self.__consumer_connect_to_kafka_broker_and_to_a_topic()
-                # self.__consumer_poll_for_new_messages()
-            status = True
-        except:
-            logging_to_console_and_syslog(
-                "{}:Exception occurred while polling for "
-                "a message from kafka Queue. {} "
-                    .format(self.thread_identifier,
-                            sys.exc_info()[0]))
-
-            print("{}:Exception in user code:".format(self.thread_identifier))
-            print("-" * 60)
-            traceback.print_exc(file=sys.stdout)
-            print("-" * 60)
-        return status
+        return is_connected
 
     def enqueue(self, filename):
         """
@@ -147,8 +129,10 @@ class ConfluentKafkaMsgQAPI:
             logging_to_console_and_syslog("ConfluentKafkaMsgQAPI: filename is None or invalid")
             return status
         if self.producer_instance is None:
-            logging_to_console_and_syslog("ConfluentKafkaMsgQAPI: instance is None")
-            return status
+            logging_to_console_and_syslog("KafkaMsgQAPI: Producer instance is None. Trying to create one..")
+            if not self.__producer_connect():
+                logging_to_console_and_syslog("Unable to create producer instance.")
+                return status
 
         if not self.is_topic_created:
             try:
@@ -158,12 +142,12 @@ class ConfluentKafkaMsgQAPI:
                                                   .format(self.topic))
                     self.is_topic_created = True
             except KafkaException:
-                self.kafka_admin_client = admin.AdminClient(self.producer_conf)
+                kafka_admin_client = admin.AdminClient(self.producer_conf)
                 logging_to_console_and_syslog("Creating topic {}."
                                               .format(self.topic))
-                ret = self.kafka_admin_client.create_topics(new_topics=[admin.NewTopic(topic=self.topic,
-                                                                                       num_partitions=1)],
-                                                            operation_timeout=1.0)
+                ret = kafka_admin_client.create_topics(new_topics=[admin.NewTopic(topic=self.topic,
+                                                                                  num_partitions=1)],
+                                                       operation_timeout=1.0)
                 logging_to_console_and_syslog("ret = {}".format(ret))
 
         # Asynchronously produce a message, the delivery report callback
@@ -213,48 +197,22 @@ class ConfluentKafkaMsgQAPI:
 
             return status
 
-    def __consumer_connect_to_kafka_broker_and_to_a_topic(self):
-        """
-        This method tries to connect to the kafka broker.
-        :return:
-        """
-        pass
-
-    def __consumer_poll_for_new_messages(self):
-
-        if not self.consumer_instance:
-            logging_to_console_and_syslog("consumer instance is None.")
-            raise KafkaException
-
-        logging_to_console_and_syslog("{}: Polling the kafka consumer instance for "
-                                      "new messages in the topic {}."
-                                      .format(self.thread_identifier, self.topic))
-
-        # Read messages from Kafka
-        msg = self.consumer_instance.poll(timeout=5)
-        if msg is None or msg.error():
-            return msg
-        else:
-            return msg.value()
-
     def __consumer_connect_to_broker(self):
         """
         This method tries to connect to the kafka broker.
         :return:
         """
-        if self.consumer_instance:
-            logging_to_console_and_syslog("consumer instance is not None.")
-            return
+        is_connected = False
 
         # Consumer configuration
         # See https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md
         """
             self.consumer_conf = {'bootstrap.servers': self.broker_name,
-                              'group.id': 'kafka-consumer{}'.format(self.thread_identifier),
+                              'group.id': 'kafka-consumer',
                               'session.timeout.ms': 6000,
                               'auto.offset.reset': 'earliest'}
         """
-        while self.consumer_instance is None:
+        if self.consumer_instance is None:
             try:
 
                 logging_to_console_and_syslog("Consumer:{}:Trying to connect to broker_name={}"
@@ -267,9 +225,10 @@ class ConfluentKafkaMsgQAPI:
                                  'session.timeout.ms': 6000,
                                  'auto.offset.reset': 'earliest'}
 
-                #consumer_conf['stats_cb'] = stats_cb
-                #consumer_conf['statistics.interval.ms'] = 0
+                # consumer_conf['stats_cb'] = stats_cb
+                # consumer_conf['statistics.interval.ms'] = 0
                 self.consumer_instance = Consumer(consumer_conf)
+                is_connected = True
             except:
                 logging_to_console_and_syslog("Consumer:{}:Exception in user code:"
                                               .format(self.thread_identifier))
@@ -282,69 +241,30 @@ class ConfluentKafkaMsgQAPI:
                                       "connected to broker_name={}"
                                       .format(self.thread_identifier,
                                               self.broker_name))
+        return is_connected
 
     @staticmethod
     def print_assignment(consumer, partitions):
-        logging_to_console_and_syslog('consumer = {}, Assignment {}:'.format(repr(consumer), partitions))
-
-    def __subscribe_to_a_topic(self):
-        try:
-            # Subscribe to topics
-            cluster_meta_data = self.consumer_instance.list_topics(self.topic, timeout=1.0)
-            logging_to_console_and_syslog("ClusterMetaData={}".format(repr(cluster_meta_data)))
-            if self.topic not in cluster_meta_data.topics.keys():
-                logging_to_console_and_syslog("Topic {} is "
-                                              "not found in the ClusterMetaData {}"
-                                              .format(self.topic,
-                                                      repr(cluster_meta_data.topics.keys())))
-                raise KafkaException
-
-            def print_assignment(consumer, partitions):
-                logging_to_console_and_syslog('consumer = {} Assignment: {}'.format(consumer, partitions))
-
-            # Subscribe to topics
-            self.consumer_instance.subscribe(self.topics, on_assign=print_assignment)
-
-            """
-            self.consumer_instance.subscribe(self.topic,
-                                             on_assign=ConfluentKafkaMsgQAPI.print_assignment)
-            """
-        except:
-            logging_to_console_and_syslog("Consumer:{}: Subscribed to topic {}."
-                                          .format(self.thread_identifier,
-                                                  self.topic))
-        return True
-
-    def __iterate_over_kafka_consumer_instance_messages(self):
-        """
-        logging_to_console_and_syslog("Consumer:{}: dequeue {}."
-                                      .format(self.thread_identifier,
-                                           self.topic))
-        """
-        pass
+        print('consumer = {}, Assignment {}:'.format(consumer, partitions))
 
     def dequeue(self):
-        try:
-            if self.perform_subscription:
-                # logging_to_console_and_syslog("{}:Perform __consumer_poll_for_new_messages."
-                #                              .format(self.thread_identifier))
-                return self.__consumer_poll_for_new_messages()
-            else:
-                # logging_to_console_and_syslog("{}:Perform __iterate_over_kafka_consumer_instance_messages."
-                #                             .format(self.thread_identifier))
-                return self.__iterate_over_kafka_consumer_instance_messages()
-
-        except:
-            logging_to_console_and_syslog(
-                "ConfluentKafkaMsgQAPI:Exception occurred while polling for "
-                "a message from kafka Queue. {} ".format(sys.exc_info()[0]))
-
-            logging_to_console_and_syslog("ConfluentKafkaMsgQAPI:Exception in user code:")
-            logging_to_console_and_syslog("-" * 60)
-            traceback.print_exc(file=sys.stdout)
-            logging_to_console_and_syslog("-" * 60)
-
-        return None
+        conf = {'bootstrap.servers': self.broker_name, 'group.id': self.topic, 'session.timeout.ms': 6000,
+                'auto.offset.reset': 'earliest'}
+        if not self.consumer_instance:
+            self.consumer_instance = Consumer(conf)
+            self.consumer_instance.subscribe([self.topic], on_assign=ConfluentKafkaMsgQAPI.print_assignment)
+        msg = self.consumer_instance.poll(timeout=1.0)
+        if msg is None or msg.error():
+            return None
+        else:
+            logging_to_console_and_syslog('%% %s [%d] at offset %d with key %s:\n' %
+                                          (msg.topic(), msg.partition(), msg.offset(),
+                                           str(msg.key())))
+            msg = msg.value().decode('utf8')
+            logging_to_console_and_syslog("msg.value()={}".format(msg))
+            self.consumer_instance.close()
+            self.consumer_instance = None
+            return msg
 
     def cleanup(self):
         if self.consumer_instance:

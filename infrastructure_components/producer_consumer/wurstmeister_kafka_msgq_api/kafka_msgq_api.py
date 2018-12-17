@@ -24,7 +24,6 @@ def import_all_packages():
 import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
-
 class KafkaMsgQAPI:
     """
     This class provides API's into interact with Kafka Queue.
@@ -44,10 +43,10 @@ class KafkaMsgQAPI:
         self.perform_subscription = perform_subscription
         self.thread_identifier = thread_identifier
         self.__read_environment_variables()
-        if is_producer:
-            self.__producer_connect()
-        if is_consumer:
-            self.__consumer_connect()
+        #if is_producer:
+        #    self.__producer_connect()
+        #if is_consumer:
+        #    self.__consumer_connect()
 
     def __read_environment_variables(self):
         """
@@ -61,17 +60,27 @@ class KafkaMsgQAPI:
                                           "Trying to read the environment variables...")
             self.broker_name = os.getenv("broker_name_key", default=None)
             self.topic = os.getenv("topic_key", default=None)
-        logging_to_console_and_syslog("KafkaMsgQAPI: broker_name={}".format(self.broker_name))
-        logging_to_console_and_syslog("KafkaMsgQAPI: topic={}".format(self.topic))
+        logging_to_console_and_syslog("Consumer{}:KafkaMsgQAPI: broker_name={}"
+                                      .format(self.thread_identifier,
+                                              self.broker_name))
+        logging_to_console_and_syslog("Consumer{}:KafkaMsgQAPI: topic={}"
+                                      .format(self.thread_identifier,
+                                              self.topic))
+        logging_to_console_and_syslog("Consumer{}:self.perform_subscription={}"
+                                      .format(self.thread_identifier,
+                                              self.perform_subscription))
 
     def __producer_connect(self):
         """
         This method tries to connect to the kafka broker based upon the type of kafka.
         :return:
         """
-        while self.producer_instance is None:
+        is_connected = False
+        if self.producer_instance is None:
             try:
-                self.producer_instance = KafkaProducer(bootstrap_servers=self.broker_name)
+                self.producer_instance = KafkaProducer(bootstrap_servers=self.broker_name,
+                                                       acks=0)
+                is_connected = True
             except:
                 print("Exception in user code:")
                 print("-" * 60)
@@ -82,18 +91,18 @@ class KafkaMsgQAPI:
                 logging_to_console_and_syslog("KafkaMsgQAPI: Successfully "
                                               "connected to broker_name={}"
                                               .format(self.broker_name))
+        return is_connected
 
     def __consumer_connect(self):
         status = False
         try:
             if self.perform_subscription:
-                self.__consumer_connect_to_broker()
-                self.__subscribe_to_a_topic()
+                if self.__consumer_connect_to_broker():
+                    status = self.__subscribe_to_a_topic()
                 #self.__iterate_over_kafka_consumer_instance_messages()
             else:
-                self.__consumer_connect_to_kafka_broker_and_to_a_topic()
+                status = self.__consumer_connect_to_kafka_broker_and_to_a_topic()
                 #self.__consumer_poll_for_new_messages()
-            status = True
         except:
             logging_to_console_and_syslog(
                 "{}:Exception occurred while polling for "
@@ -119,8 +128,10 @@ class KafkaMsgQAPI:
             logging_to_console_and_syslog("KafkaMsgQAPI: filename is None or invalid")
             return status
         if self.producer_instance is None:
-            logging_to_console_and_syslog("KafkaMsgQAPI: instance is None")
-            return status
+            logging_to_console_and_syslog("KafkaMsgQAPI: Producer instance is None. Trying to create one..")
+            if not self.__producer_connect():
+                logging_to_console_and_syslog("Unable to create producer instance.")
+                return status
 
         # Asynchronously produce a message, the delivery report callback
         # will be triggered from poll() above, or flush() below, when the message has
@@ -151,7 +162,7 @@ class KafkaMsgQAPI:
             logging_to_console_and_syslog(event)
             # Wait for any outstanding messages to be delivered and delivery report
             # callbacks to be triggered.
-            self.producer_instance.flush()
+            #self.producer_instance.flush()
             return status
 
     def __consumer_connect_to_kafka_broker_and_to_a_topic(self):
@@ -159,10 +170,8 @@ class KafkaMsgQAPI:
         This method tries to connect to the kafka broker.
         :return:
         """
-        if self.consumer_instance:
-            return
-
-        while self.consumer_instance is None:
+        is_connected = False
+        if self.consumer_instance is None:
             try:
                 logging_to_console_and_syslog("Consumer:{}:Trying to connect to broker_name={}"
                                               .format(self.thread_identifier,
@@ -171,7 +180,7 @@ class KafkaMsgQAPI:
                 self.consumer_instance = KafkaConsumer(self.topic,
                                                        bootstrap_servers=self.broker_name,
                                                        group_id="kafka-consumer")
-                time.sleep(5)
+                is_connected = True
             except:
                 print("Consumer:{}:Exception in user code:"
                       .format(self.thread_identifier))
@@ -185,6 +194,7 @@ class KafkaMsgQAPI:
                                       .format(self.thread_identifier,
                                               self.broker_name,
                                               self.topic))
+        return is_connected
 
     def __consumer_poll_for_new_messages(self):
         """
@@ -202,17 +212,16 @@ class KafkaMsgQAPI:
             logging_to_console_and_syslog('Consumer:{}:msg: {}'
                                           .format(self.thread_identifier,
                                                   repr(msg)))
-            yield msg
+            self.cleanup()
+            return msg[0].value.decode('utf-8')
 
     def __consumer_connect_to_broker(self):
         """
         This method tries to connect to the kafka broker.
         :return:
         """
-        if self.consumer_instance:
-            return
-
-        while self.consumer_instance is None:
+        is_connected = False
+        if self.consumer_instance is None:
             try:
 
                 logging_to_console_and_syslog("Consumer:{}:Trying to connect to broker_name={}"
@@ -221,10 +230,10 @@ class KafkaMsgQAPI:
 
                 self.consumer_instance = KafkaConsumer(bootstrap_servers=self.broker_name,
                                                        group_id="kafka-consumer")
-                time.sleep(1)
+                is_connected = True
             except:
                 logging_to_console_and_syslog("Consumer:{}:Exception in user code:"
-                      .format(self.thread_identifier))
+                                              .format(self.thread_identifier))
                 logging_to_console_and_syslog("-" * 60)
                 traceback.print_exc(file=sys.stdout)
                 logging_to_console_and_syslog("-" * 60)
@@ -234,20 +243,29 @@ class KafkaMsgQAPI:
                                       "connected to broker_name={}"
                                       .format(self.thread_identifier,
                                               self.broker_name))
+        return is_connected
 
     def __subscribe_to_a_topic(self):
+        is_subscription_successful = False
         try:
             if self.topic in self.consumer_instance.subscription():
                 logging_to_console_and_syslog("Consumer:{}: Found the topic {} "
                                               "in the subscription."
                                               .format(self.thread_identifier,
                                                       self.topic))
+                is_subscription_successful = True
         except:
-            self.consumer_instance.subscribe([self.topic])
-            logging_to_console_and_syslog("Consumer:{}: Subscribed to topic {}."
-                                          .format(self.thread_identifier,
-                                                  self.topic))
-        return True
+            try:
+                self.consumer_instance.subscribe([self.topic])
+                is_subscription_successful = True
+                logging_to_console_and_syslog("Consumer:{}: Subscribed to topic {}."
+                                              .format(self.thread_identifier,
+                                                      self.topic))
+            except:
+                logging_to_console_and_syslog("Consumer:{}: Caught an exception while trying to subscribe to topic {}."
+                                              .format(self.thread_identifier,
+                                                      self.topic))
+        return is_subscription_successful
 
     def __iterate_over_kafka_consumer_instance_messages(self):
         """
@@ -264,10 +282,17 @@ class KafkaMsgQAPI:
 
     def dequeue(self):
         try:
+            if not self.consumer_instance:
+                logging_to_console_and_syslog("Consumer instance is None...Creating a new consumer instance.")
+                if not self.__consumer_connect():
+                    logging_to_console_and_syslog("Unable to create a consumer instance..")
+                    return None
+
             if self.perform_subscription:
                 #logging_to_console_and_syslog("{}:Perform __iterate_over_kafka_consumer_instance_messages."
                 #                             .format(self.thread_identifier))
-                return self.__iterate_over_kafka_consumer_instance_messages()
+                #return self.__iterate_over_kafka_consumer_instance_messages()
+                return self.__consumer_poll_for_new_messages()
             else:
                 #logging_to_console_and_syslog("{}:Perform __consumer_poll_for_new_messages."
                 #                              .format(self.thread_identifier))
@@ -285,4 +310,9 @@ class KafkaMsgQAPI:
         return None
 
     def cleanup(self):
-        self.producer_instance.close()
+        if self.producer_instance:
+            self.producer_instance.close()
+            self.producer_instance = None
+        if self.consumer_instance:
+            self.consumer_instance.close()
+            self.consumer_instance = None

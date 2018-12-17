@@ -26,6 +26,8 @@ import_all_packages()
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 from infrastructure_components.producer_consumer.wurstmeister_kafka_msgq_api.kafka_msgq_api import KafkaMsgQAPI
 from infrastructure_components.producer_consumer.rabbit_msgq_api.rabbit_msgq_api import RabbitMsgQAPI
+from infrastructure_components.producer_consumer.confluent_kafka_msgq_api.confluent_kafka_msgq_api import ConfluentKafkaMsgQAPI
+from infrastructure_components.redis_client.redis_interface import RedisInterface
 
 
 class ProducerConsumerAPI:
@@ -37,6 +39,7 @@ class ProducerConsumerAPI:
     """
     rabbitMsgQType = "Rabbit"
     kafkaMsgQType = "Kafka"
+    confluentKafkaMsgQType = "ConfluentKafka"
 
     def __init__(self,
                  is_producer=False,
@@ -45,13 +48,14 @@ class ProducerConsumerAPI:
                  type_of_messaging_queue=None,
                  thread_identifier=None):
         self.message_queue_instance = None
+        self.redis_instance = None
         self.is_producer = is_producer
         self.is_consumer = is_consumer
         self.perform_subscription = perform_subscription
         self.type_of_messaging_queue = type_of_messaging_queue
         self.thread_identifier = thread_identifier
         self.read_environment_variables()
-        self.__connect()
+        #self.__connect()
 
     def read_environment_variables(self):
         """
@@ -73,7 +77,7 @@ class ProducerConsumerAPI:
         This method tries to connect to the messaging queue.
         :return:
         """
-        while self.message_queue_instance is None:
+        if self.message_queue_instance is None:
             try:
                 if self.type_of_messaging_queue == ProducerConsumerAPI.kafkaMsgQType:
                     self.message_queue_instance = KafkaMsgQAPI(is_producer=self.is_producer,
@@ -85,6 +89,16 @@ class ProducerConsumerAPI:
                                                                 is_consumer=self.is_consumer,
                                                                 perform_subscription=self.perform_subscription,
                                                                 thread_identifier=self.thread_identifier)
+                elif self.type_of_messaging_queue == ProducerConsumerAPI.confluentKafkaMsgQType:
+                    self.message_queue_instance = ConfluentKafkaMsgQAPI(is_producer=self.is_producer,
+                                                                        is_consumer=self.is_consumer,
+                                                                        perform_subscription=self.perform_subscription,
+                                                                        thread_identifier=self.thread_identifier)
+                if not self.redis_instance:
+                    if self.is_producer:
+                        self.redis_instance = RedisInterface("Producer{}".format(self.thread_identifier))
+                    elif self.is_consumer:
+                        self.redis_instance = RedisInterface("Consumer{}".format(self.thread_identifier))
             except:
                 print("Exception in user code:")
                 print("-" * 60)
@@ -113,6 +127,9 @@ class ProducerConsumerAPI:
 
         if hasattr(self.message_queue_instance, 'enqueue'):
             status = self.message_queue_instance.enqueue(filename)
+            event = "Producer: Successfully posted a message = {} into msgQ. Status={}".format(filename, status)
+            self.redis_instance.write_an_event_in_redis_db(event)
+            self.redis_instance.increment_enqueue_count()
 
         return status
 
@@ -124,9 +141,18 @@ class ProducerConsumerAPI:
         """
         if self.message_queue_instance is None:
             self.__connect()
-
+        msg = None
         if hasattr(self.message_queue_instance, 'dequeue'):
-            return self.message_queue_instance.dequeue()
+            msg = self.message_queue_instance.dequeue()
+            if msg:
+                self.redis_instance.increment_dequeue_count()
+                self.redis_instance.write_an_event_in_redis_db("Consumer {}: Dequeued Message = {}"
+                                                               .format(self.thread_identifier,
+                                                                       msg))
+                self.cleanup()
+        return msg
 
     def cleanup(self):
-        self.message_queue_instance.cleanup()
+        if self.message_queue_instance:
+            self.message_queue_instance.cleanup()
+            self.message_queue_instance = None
