@@ -32,18 +32,22 @@ class DirectoryWatch:
     def __init__(self):
         self.before={}
         self.after={}
-        self.producer_instance = ProducerConsumerAPI(is_producer=True,
-                                                     thread_identifier="Producer",
-                                                     type_of_messaging_queue=ProducerConsumerAPI.kafkaMsgQType)
         self.video_file_path = None
+        self.producer_consumer_type = None
         self.redis_instance = RedisInterface("Producer")
         self.load_environment_variables()
+        self.producer_instance = ProducerConsumerAPI(is_producer=True,
+                                                     thread_identifier="Producer",
+                                                     type_of_messaging_queue=self.producer_consumer_type)
 
     def load_environment_variables(self):
-        while self.video_file_path is None:
+        while self.video_file_path is None or \
+              self.producer_consumer_type is None:
             time.sleep(1)
             self.video_file_path = os.getenv("video_file_path_key", default=None)
+            self.producer_consumer_type = os.getenv("producer_consumer_type_key", default=None)
         logging_to_console_and_syslog(("video_file_path={}".format(self.video_file_path)))
+        logging_to_console_and_syslog(("producer_consumer_type={}".format(self.producer_consumer_type)))
 
     def cleanup(self):
         self.producer_instance.cleanup()

@@ -61,6 +61,7 @@ services:
     hostname: job_dispatcher
     environment:
       video_file_path_key: /data
+      producer_consumer_type_key: ConfluentKafka
       broker_name_key: kafka:9092
       topic_key: video-file-name
     volumes:
@@ -121,6 +122,7 @@ services:
       sleep_time_key: 1
       time_between_input_character_key: 0.1
       time_for_browser_to_open_key: 60
+      producer_consumer_queue_type_key: ConfluentKafka
       DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
     volumes:
       - /home/mec-poc/fromMobile:/data
