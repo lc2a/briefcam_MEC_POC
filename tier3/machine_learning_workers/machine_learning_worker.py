@@ -64,7 +64,8 @@ class MachineLearningWorker:
         self.data_parser_instance.process_job(message)
 
     def dequeue_and_process_jobs(self):
-        for message in self.consumer_instance.dequeue():
+        message = self.consumer_instance.dequeue()
+        if message:
             event = "Consumer: Successfully dequeued a message = {} from msgQ.".format(message)
             self.redis_instance.write_an_event_in_redis_db(event)
             self.redis_instance.increment_dequeue_count()
