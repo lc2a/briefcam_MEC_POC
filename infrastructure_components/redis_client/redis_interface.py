@@ -53,7 +53,7 @@ class RedisInterface:
             self.redis_log_keyname = os.getenv("redis_log_keyname_key",
                                                default=None)
             self.total_job_enqueued_count_redis_name = os.getenv("total_job_enqueued_count_redis_name_key",
-                                                                 default=None)
+                                                                 default="total_job_enqueued_count")
             self.total_job_dequeued_count_redis_name = os.getenv("total_job_dequeued_count_redis_name_key",
                                                                  default=None)
         logging_to_console_and_syslog("RedisInterface:{} "

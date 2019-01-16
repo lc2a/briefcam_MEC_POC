@@ -69,7 +69,7 @@ class DirectoryWatch:
             if added:
                 logging_to_console_and_syslog("Added: " + str(added))
                 for filename in added:
-                    self.process_new_file(self.video_file_path + '/' + filename)
+                    self.process_new_file(filename)
             if removed:
                 logging_to_console_and_syslog("Removed: " + str(removed))
             self.before = self.after
