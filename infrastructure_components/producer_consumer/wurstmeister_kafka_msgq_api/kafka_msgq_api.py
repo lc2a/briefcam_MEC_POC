@@ -212,8 +212,12 @@ class KafkaMsgQAPI:
             logging_to_console_and_syslog('Consumer:{}:msg: {}'
                                           .format(self.thread_identifier,
                                                   repr(msg)))
+            msg_content = msg[0].value.decode('utf-8')
+            logging_to_console_and_syslog('Consumer:{}:msg.value: {}'
+                                          .format(self.thread_identifier,
+                                                  repr(msg_content)))
             self.cleanup()
-            return msg[0].value.decode('utf-8')
+            return msg_content
 
     def __consumer_connect_to_broker(self):
         """

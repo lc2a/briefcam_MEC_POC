@@ -122,6 +122,7 @@ services:
       redis_log_keyname_key: briefcam-events
       total_job_done_count_redis_name_key: total_job_done_count
       max_retry_attempts_key: 8
+      data_parser_type_key: BriefCam
       sleep_time_key: 1
       time_between_input_character_key: 0.1
       time_for_browser_to_open_key: 60

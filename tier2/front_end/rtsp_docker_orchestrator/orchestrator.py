@@ -121,6 +121,7 @@ class RTSPDockerOrchestrator:
                 self.image_name,
                 environment=environment_list,
                 volumes=bind_mount,
+                name=self.image_name,
                 detach=True)
 
             if container:
