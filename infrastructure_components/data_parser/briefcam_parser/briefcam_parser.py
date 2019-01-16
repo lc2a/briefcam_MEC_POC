@@ -443,9 +443,11 @@ class BriefCamParser:
         self.prepare_browser(skip_login=True)
 
     def __delete_video_clip_from_shared_volume(self, file_name):
+        path_to_file_name = "{}/{}".format(self.video_file_path,
+                                           file_name)
         self.__write_log_to_redis_and_logging_framework(
-            "Deleting file_name {}".format(file_name))
-        os.remove(file_name)
+            "Deleting file_name {}".format(path_to_file_name))
+        os.remove(path_to_file_name)
 
     def process_job(self, file_name):
         logging_to_console_and_syslog("**********Processing Briefcam Job {} ***********"
