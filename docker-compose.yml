@@ -62,9 +62,16 @@ services:
     hostname: job_dispatcher
     environment:
       video_file_path_key: /data
-      producer_consumer_type_key: ConfluentKafka
+      producer_consumer_type_key: Kafka
+      producer_consumer_queue_type_key: Kafka
       broker_name_key: kafka:9092
       topic_key: video-file-name
+      redis_server_hostname_key: redis
+      redis_server_port_key: 6379
+      redis_log_keyname_key: briefcam-events
+      total_job_done_count_redis_name_key: total_job_done_count
+      total_job_dequeued_count_redis_name_key: total_job_done_count
+      total_job_enqueued_count_redis_name_key: total_job_to_be_done_count
     volumes:
       - /home/mec-poc/fromMobile:/data
       - "/etc/timezone:/etc/timezone:ro"

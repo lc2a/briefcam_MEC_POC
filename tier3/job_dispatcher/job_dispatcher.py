@@ -45,7 +45,7 @@ class DirectoryWatch:
               self.producer_consumer_type is None:
             time.sleep(1)
             self.video_file_path = os.getenv("video_file_path_key", default=None)
-            self.producer_consumer_type = os.getenv("producer_consumer_type_key", default=None)
+            self.producer_consumer_type = os.getenv("producer_consumer_queue_type_key", default=None)
         logging_to_console_and_syslog(("video_file_path={}".format(self.video_file_path)))
         logging_to_console_and_syslog(("producer_consumer_type={}".format(self.producer_consumer_type)))
 
