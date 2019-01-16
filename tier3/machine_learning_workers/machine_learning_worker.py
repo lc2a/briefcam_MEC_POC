@@ -66,15 +66,22 @@ class MachineLearningWorker:
     def dequeue_and_process_jobs(self):
         message = self.consumer_instance.dequeue()
         if message:
-            event = "Consumer: Successfully dequeued a message = {} from msgQ.".format(message)
-            self.redis_instance.write_an_event_in_redis_db(event)
-            self.redis_instance.increment_dequeue_count()
-            start_time = datetime.now()
-            self.process_job(message)
-            time_elapsed = datetime.now() - start_time
-            event = 'Time taken to process {} = (hh:mm:ss.ms) {}'.format(message, time_elapsed)
-            self.redis_instance.write_an_event_in_redis_db(event)
-
+            try:
+                event = "Consumer: Successfully dequeued a message = {} from msgQ.".format(message)
+                self.redis_instance.write_an_event_in_redis_db(event)
+                self.redis_instance.increment_dequeue_count()
+                start_time = datetime.now()
+                self.process_job(message)
+                time_elapsed = datetime.now() - start_time
+                event = 'Time taken to process {} = (hh:mm:ss.ms) {}'.format(message, time_elapsed)
+                self.redis_instance.write_an_event_in_redis_db(event)
+            except:
+                print("Exception in dequeue_and_process_jobs:")
+                print("-" * 60)
+                traceback.print_exc(file=sys.stdout)
+                print("-" * 60)
+                self.cleanup()
+                self.instantiate_objects()
 
 if __name__ == '__main__':
     worker = MachineLearningWorker()
