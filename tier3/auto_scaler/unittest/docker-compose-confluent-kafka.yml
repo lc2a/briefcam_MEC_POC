@@ -235,7 +235,7 @@ services:
       restart_policy:
         condition: on-failure
     ports:
-      - target: 5900
+      - "5903-5100:5900"
     depends_on:
       - broker
       - zookeeper
