@@ -89,52 +89,82 @@ class RedisClient(object):
                 key_name = key
             else:
                 key_name = self.cont_id
-            if self.redis_instance.exists(key_name):
-                self.redis_instance.append(key_name, event_string)
-                logging_to_console_and_syslog("Appending "
-                "{} to {}".format(event_string, key_name))
-                return_value = True
-            else:
-                self.redis_instance.set(key_name, event_string)
-                logging_to_console_and_syslog("Writing "
-                "{} to {}".format(event_string, key_name))
-                return_value = True
+            try:
+                if self.redis_instance.exists(key_name):
+                    self.redis_instance.append(key_name, event_string)
+                    logging_to_console_and_syslog("Appending "
+                    "{} to {}".format(event_string, key_name))
+                    return_value = True
+                else:
+                    self.redis_instance.set(key_name, event_string)
+                    logging_to_console_and_syslog("Writing "
+                    "{} to {}".format(event_string, key_name))
+                    return_value = True
+            except redis.exceptions.ConnectionError:
+                logging_to_console_and_syslog("Unable to connect to Redis server.")
+            except BaseException:
+                logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
     def check_if_the_key_exists_in_redis_db(self, key):
         return_value = False
         if self.redis_instance is not None:
-            if self.redis_instance.exists(key):
-                return_value = True
+            try:
+                if self.redis_instance.exists(key):
+                    return_value = True
+            except redis.exceptions.ConnectionError:
+                logging_to_console_and_syslog("Unable to connect to Redis server.")
+            except BaseException:
+                logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
     def set_the_key_in_redis_db(self, key):
         return_value = False
         if self.redis_instance is not None:
-            self.redis_instance.set(key, 1)
-            return_value = True
+            try:
+                self.redis_instance.set(key, 1)
+                return_value = True
+            except redis.exceptions.ConnectionError:
+                logging_to_console_and_syslog("Unable to connect to Redis server.")
+            except BaseException:
+                logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
     def delete_key_from_redis_db(self, key):
         return_value = False
         if self.redis_instance is not None:
-            if self.redis_instance.exists(key):
-                if self.redis_instance.delete(key):
-                    return_value = True
+            try:
+                if self.redis_instance.exists(key):
+                    if self.redis_instance.delete(key):
+                        return_value = True
+            except redis.exceptions.ConnectionError:
+                logging_to_console_and_syslog("Unable to connect to Redis server.")
+            except BaseException:
+                logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
     def increment_key_in_redis_db(self,key):
         return_value = False
         if self.redis_instance is not None:
-            self.redis_instance.incr(key)
-            return_value = True
+            try:
+                self.redis_instance.incr(key)
+                return_value = True
+            except redis.exceptions.ConnectionError:
+                logging_to_console_and_syslog("Unable to connect to Redis server.")
+            except BaseException:
+                logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
     def read_key_value_from_redis_db(self,key):
         return_value = -1
         if self.redis_instance is not None:
-            if self.redis_instance.exists(key):
-                return_value = self.redis_instance.get(key)
+            try:
+                if self.redis_instance.exists(key):
+                    return_value = self.redis_instance.get(key)
+            except redis.exceptions.ConnectionError:
+                logging_to_console_and_syslog("Unable to connect to Redis server.")
+            except BaseException:
+                logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
     def cleanup(self):
