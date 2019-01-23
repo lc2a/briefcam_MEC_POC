@@ -385,19 +385,33 @@ class DockerAPIInterface(unittest.TestCase):
         logging_to_console_and_syslog("Removing docker image.")
         self.__remove_docker_image()
 
-    def deploy(self, dockerfile_path):
-        logging_to_console_and_syslog("Deploying docker image"
-                                      " found in directory {}."
-                                      .format(dockerfile_path))
+    def deploy(self, deployment_file, stack_name):
+        logging_to_console_and_syslog("Deploying {}."
+                                      .format(deployment_file))
+        docker_push_command_list = ["docker",
+                                    "stack",
+                                    "deploy",
+                                    "-c",
+                                    deployment_file,
+                                    stack_name
+                                    ]
+        self.assertIsNotNone(self.create_subprocess(docker_push_command_list))
+
+    def push(self):
         """
         Push the docker image to Github.
         Credentials are pre-stored on the localhost.
         :return:
         """
+        docker_image_name = "{}/{}".format(self.docker_tag,
+                                           self.image_name)
+
+        logging_to_console_and_syslog("Pushing docker image {}"
+                                      " into github."
+                                      .format(docker_image_name))
         docker_push_command_list = ["docker",
                                     "image",
                                     "push",
-                                    "{}/{}".format(self.docker_tag,
-                                                   self.image_name)
+                                    docker_image_name
                                     ]
         self.assertIsNotNone(self.create_subprocess(docker_push_command_list))

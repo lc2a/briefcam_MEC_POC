@@ -32,6 +32,8 @@ from infrastructure_components.build_ut_push_docker_image.docker_api_interface i
 class DockerBuildUTDeploy:
     dockerfile_identifier = 'Dockerfile'
     unittest_identifier = 'test*.py'
+    deployment_file = "docker-compose-confluent-kafka.yml"
+    stack_name = "briefcam"
 
     def __init__(self):
         self.dockerfile_paths = []
@@ -105,6 +107,9 @@ class DockerBuildUTDeploy:
         self.docker_instance = DockerBuildUTPublish(dockerfile_path=dockerfile_path)
         self.docker_instance.create_docker_container()
 
+    def push_docker_container_to_registry(self):
+        self.docker_instance.push()
+
     def perform_unittest(self, dockerfile_path):
         logging_to_console_and_syslog("Performing Unittest of docker image"
                                       " found in directory {}."
@@ -146,11 +151,12 @@ class DockerBuildUTDeploy:
                     logging_to_console_and_syslog("Stopping docker instance.")
                     self.docker_instance.stop_docker_container()
 
-    def deploy(self, dockerfile_path):
-        logging_to_console_and_syslog("Deploying docker image"
-                                      " found in directory {}."
-                                      .format(dockerfile_path))
-        self.docker_instance.deploy()
+    def deploy(self):
+        deployment_file = self.dirname + "/" + DockerBuildUTDeploy.deployment_file
+        logging_to_console_and_syslog("Deploying {}."
+                                      .format(deployment_file))
+        self.docker_instance.deploy(deployment_file,
+                                    DockerBuildUTDeploy.stack_name)
 
     def perform_build_ut_deploy(self) -> object:
         self.find_all_dockerfile_paths()
@@ -159,8 +165,9 @@ class DockerBuildUTDeploy:
                 path = '/'.join(dockerfile_path.split('/')[:-1])
                 self.build(path)
                 self.perform_unittest(path)
+                self.push_docker_container_to_registry()
                 self.delete_all_tar_gz_files(path)
-                #self.deploy(path)
+        self.deploy()
 
 
 if __name__ == "__main__":
