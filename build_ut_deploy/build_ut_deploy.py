@@ -35,8 +35,8 @@ class DockerBuildUTDeploy:
 
     def __init__(self):
         self.dockerfile_paths = []
-        #self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
-        self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3/auto_scaler'
+        self.dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
+        #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3/auto_scaler'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier3/job_dispatcher'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/rtsp_recorder'
         #self.dirname = '/home/sriramsridhar/git/briefcam_MEC_POC/tier2/front_end'
