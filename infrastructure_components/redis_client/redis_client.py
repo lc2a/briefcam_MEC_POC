@@ -27,7 +27,9 @@ import_all_packages()
 
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
+
 class RedisClient(object):
+
     __instance = None
 
     def __new__(cls):
@@ -118,11 +120,11 @@ class RedisClient(object):
                 logging_to_console_and_syslog("Base Except: Unable to connect to Redis server.")
         return return_value
 
-    def set_the_key_in_redis_db(self, key):
+    def set_the_key_in_redis_db(self, key, value=1):
         return_value = False
         if self.redis_instance is not None:
             try:
-                self.redis_instance.set(key, 1)
+                self.redis_instance.set(key, value)
                 return_value = True
             except redis.exceptions.ConnectionError:
                 logging_to_console_and_syslog("Unable to connect to Redis server.")

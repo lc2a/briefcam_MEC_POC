@@ -224,6 +224,20 @@ services:
       - /home/mec-poc/fromMobile:/data
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
+  auto_scaler:
+    image: ssriram1978/auto_scaler:latest
+    depends_on:
+      - redis
+    environment:
+      redis_log_keyname_key: auto_scaler
+      total_job_enqueued_count_redis_name_key: total_job_to_be_done_count
+      total_job_dequeued_count_redis_name_key: total_job_done_count
+      redis_server_hostname_key: localhost
+      redis_server_port_key: 6379
+      min_threshold_key: 1
+      max_threshold_key: 100
+      auto_scale_time_interval_key: 5
+      auto_scale_service_name_key: machine_learning_workers
   machine_learning_workers:
     image: ssriram1978/machine_learning_workers2:latest
     deploy:

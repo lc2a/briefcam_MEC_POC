@@ -1,0 +1,47 @@
+version: '3.2'
+services:
+  machine_learning_workers:
+    image: ssriram1978/machine_learning_workers2:latest
+    deploy:
+      replicas: 1
+#      resources:
+#        limits:
+#          cpus: "0.8"
+#          memory: 2000M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - target: 5900
+    hostname: machine_learning_workers
+    environment:
+      video_file_path_key: /data
+      broker_name_key: broker:9092
+      topic_key: video-file-name
+      case_url_key: http://mec-demo/synopsis/
+      browser_loc_key: google-chrome
+      browser_name_key: /opt/google/chrome/chrome
+      case_name_key: MEC-POC
+      login_username_key: Brief
+      login_password_key: Cam
+      image_directory: image_cont
+      redis_server_hostname_key: redis
+      redis_server_port_key: 6379
+      redis_log_keyname_key: briefcam-consumer-events
+      total_job_dequeued_count_redis_name_key: total_job_done_count
+      max_retry_attempts_key: 8
+      data_parser_type_key: BriefCam
+      sleep_time_key: 1
+      time_between_input_character_key: 0.1
+      time_for_browser_to_open_key: 60
+      producer_consumer_queue_type_key: ConfluentKafka
+      DBUS_SESSION_BUS_ADDRESS: 'unix:path=/var/run/dbus/system_bus_socket'
+    volumes:
+      - /home/mec-poc/fromMobile:/data
+      #- /home/sriramsridhar/PycharmProjects/briefcam/rtsp_recorder:/data
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    extra_hosts:
+      - "mec-demo: 10.2.40.160"
+      - "mec-poc: 10.2.40.162"
+volumes:
+    mi2: {}

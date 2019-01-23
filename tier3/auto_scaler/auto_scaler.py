@@ -44,9 +44,9 @@ class AutoScaler:
                 self.max_threshold is -1 or \
                 not self.auto_scale_service_name:
             time.sleep(1)
-            self.min_threshold = os.getenv("min_threshold_key", default=-1)
-            self.max_threshold = os.getenv("max_threshold_key", default=-1)
-            self.auto_scale_time_interval = os.getenv("auto_scale_time_interval_key", default=10)
+            self.min_threshold = int(os.getenv("min_threshold_key", default=-1))
+            self.max_threshold = int(os.getenv("max_threshold_key", default=-1))
+            self.auto_scale_time_interval = int(os.getenv("auto_scale_time_interval_key", default=10))
             self.auto_scale_service_name = os.getenv("auto_scale_service_name_key", default=None)
 
         logging_to_console_and_syslog(("min_threshold={}".format(self.min_threshold)))
@@ -56,7 +56,7 @@ class AutoScaler:
 
     def __perform_scale_down_operation(self):
         current_number_of_docker_instances = \
-            self.docker_instance.get_current_number_of_containers_per_service(self.auto_scale_service_name)
+            self.docker_instance.get_current_number_of_containers_per_service()
         if current_number_of_docker_instances == self.max_threshold and \
                 current_number_of_docker_instances - 30 >= self.min_threshold:
             self.docker_instance.scale(current_number_of_docker_instances - 30)
@@ -71,7 +71,7 @@ class AutoScaler:
 
     def __perform_scale_up_operation(self, jobs_in_pipe):
         current_number_of_docker_instances = \
-            self.docker_instance.get_current_number_of_containers_per_service(self.auto_scale_service_name)
+            self.docker_instance.get_current_number_of_containers_per_service()
         if 0 < jobs_in_pipe <= 10 and \
                 current_number_of_docker_instances + 1 < self.max_threshold:
             self.docker_instance.scale(current_number_of_docker_instances + 1)
@@ -126,11 +126,16 @@ class AutoScaler:
         self.docker_instance = DockerService(self.auto_scale_service_name)
         while True:
             time.sleep(self.auto_scale_time_interval)
-            current_job_to_be_done_count = self.redis_instance.get_current_enqueue_count()
-            current_job_done_count = self.redis_instance.get_current_dequeue_count()
+            current_job_to_be_done_count = int(self.redis_instance.get_current_enqueue_count())
+            current_job_done_count = int(self.redis_instance.get_current_dequeue_count())
             jobs_in_pipe = current_job_to_be_done_count - current_job_done_count
-
-            if jobs_in_pipe == 0:
+            logging_to_console_and_syslog("current_job_to_be_done_count={},"
+                                          "current_job_done_count={},"
+                                          "jobs_in_pipe={}."
+                                          .format(current_job_to_be_done_count,
+                                                  current_job_done_count,
+                                                  jobs_in_pipe))
+            if jobs_in_pipe <= 0:
                 self.__perform_scale_down_operation()
             else:
                 self.__perform_scale_up_operation(jobs_in_pipe)

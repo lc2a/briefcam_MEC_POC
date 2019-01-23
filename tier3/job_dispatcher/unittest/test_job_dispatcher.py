@@ -124,7 +124,8 @@ class TestJobDispatcher(unittest.TestCase):
 
 if __name__ == "__main__":
     try:
-        unittest.main()
+        # To avoid the end of execution traceback adding exit=False
+        unittest.main(exit=False)
     except:
         logging_to_console_and_syslog("Exception occurred." + sys.exc_info()[0])
         print("Exception in user code:")

@@ -184,4 +184,5 @@ class TestCouchDB(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main()
+    # To avoid the end of execution traceback adding exit=False
+    unittest.main(exit=False)

@@ -23,11 +23,11 @@ import_all_packages()
 from infrastructure_components.redis_client.redis_client import RedisClient
 from infrastructure_components.log.log_file import logging_to_console_and_syslog
 
-class RedisInterface:
+
+class RedisInterface(object):
     """
     This class does the following:
     """
-
     def __init__(self,thread_identifer=None):
         logging_to_console_and_syslog("Instantiating RedisInterface.")
         self.total_job_enqueued_count_redis_name = None
@@ -66,18 +66,22 @@ class RedisInterface:
                                               self.total_job_dequeued_count_redis_name))
 
     def get_current_enqueue_count(self):
+        count = self.redis_instance.read_key_value_from_redis_db(self.total_job_enqueued_count_redis_name)
         logging_to_console_and_syslog("RedisInterface:{}."
-                                      "total_job_enqueued_count={}"
+                                      "{}={}"
                                       .format(self.thread_identifer,
-                                              self.total_job_enqueued_count_redis_name))
-        return self.redis_instance.read_key_value_from_redis_db(self.total_job_enqueued_count_redis_name)
+                                              self.total_job_enqueued_count_redis_name,
+                                              count))
+        return count
 
     def get_current_dequeue_count(self):
+        count = self.redis_instance.read_key_value_from_redis_db(self.total_job_dequeued_count_redis_name)
         logging_to_console_and_syslog("RedisInterface:{}."
-                                      "total_job_dequeued_count={}"
+                                      "{}={}"
                                       .format(self.thread_identifer,
-                                              self.total_job_dequeued_count_redis_name))
-        return self.redis_instance.read_key_value_from_redis_db(self.total_job_dequeued_count_redis_name)
+                                              self.total_job_dequeued_count_redis_name,
+                                              count))
+        return count
 
     def increment_enqueue_count(self):
         logging_to_console_and_syslog("RedisInterface:{}."
@@ -100,12 +104,13 @@ class RedisInterface:
                                               key))
         return self.redis_instance.check_if_the_key_exists_in_redis_db(key)
 
-    def set_the_key_in_redis_db(self, key):
+    def set_the_key_in_redis_db(self, key, value=1):
         logging_to_console_and_syslog("RedisInterface:{}."
-                                      "set_the_key_in_redis_db key={}"
+                                      "set_the_key_in_redis_db {}={}"
                                       .format(self.thread_identifer,
-                                              key))
-        return self.redis_instance.set_the_key_in_redis_db(key)
+                                              key,
+                                              value))
+        return self.redis_instance.set_the_key_in_redis_db(key, value)
 
     def write_an_event_in_redis_db(self, event):
         logging_to_console_and_syslog("RedisInterface:{}."

@@ -152,6 +152,6 @@ class TestMachineLearningWorkers(unittest.TestCase):
                 docker_api_interface_instance.stop_docker_container_by_name()
 
 
-
 if __name__ == "__main__":
-    unittest.main()
+    # To avoid the end of execution traceback adding exit=False
+    unittest.main(exit=False)
