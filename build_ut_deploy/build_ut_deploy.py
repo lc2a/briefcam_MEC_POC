@@ -76,7 +76,7 @@ class DockerBuildUTDeploy:
         completed_process = subprocess.run(["find",
                                             dirname,
                                             "-name",
-                                            "\"*.tar.gz\"",
+                                            "*.tar.gz",
                                             "-type",
                                             "f",
                                             "-delete"],
