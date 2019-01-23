@@ -67,6 +67,11 @@ services:
       max_threshold_key: 100
       auto_scale_time_interval_key: 5
       auto_scale_service_name_key: machine_learning_workers
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
   job_dispatcher:
     image: ssriram1978/job_dispatcher:latest
     depends_on:
