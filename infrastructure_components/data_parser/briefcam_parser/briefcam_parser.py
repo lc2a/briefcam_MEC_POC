@@ -205,6 +205,8 @@ class BriefCamParser:
                 event = "File {} Not Found".format(button_name)
                 self.__write_log_to_redis_and_logging_framework(event)
                 raise FileNotFoundError
+            except:
+                pass
             if button_location is None:
                 if not force_wait:
                     return False
