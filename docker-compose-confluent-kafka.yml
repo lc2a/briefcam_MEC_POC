@@ -244,7 +244,7 @@ services:
       - "/etc/timezone:/etc/timezone:ro"
       - "/etc/localtime:/etc/localtime:ro"
   machine_learning_workers:
-    image: ssriram1978/machine_learning_workers2:latest
+    image: ssriram1978/machine_learning_workers:latest
     deploy:
       replicas: 1
 #      resources:
