@@ -152,10 +152,12 @@ class DockerBuildUTDeploy:
                     self.docker_instance.stop_docker_container()
 
     def deploy(self):
-        deployment_file = self.dirname + "/" + DockerBuildUTDeploy.deployment_file
+        dirname = '/'.join(os.path.dirname(os.path.realpath(__file__)).split('/')[:-1])
+        deployment_file = dirname + "/" + DockerBuildUTDeploy.deployment_file
         logging_to_console_and_syslog("Deploying {}."
                                       .format(deployment_file))
-        self.docker_instance.deploy(deployment_file,
+        docker_instance = DockerBuildUTPublish(dockerfile_path='/')
+        docker_instance.deploy(deployment_file,
                                     DockerBuildUTDeploy.stack_name)
 
     def perform_build_ut_deploy(self) -> object:
