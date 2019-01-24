@@ -87,7 +87,7 @@ class AutoScaler:
             else:
                 self.docker_instance.scale(current_number_of_docker_instances +
                                            self.max_threshold - current_number_of_docker_instances)
-        elif 100 < jobs_in_pipe <= 200:
+        else:
             if current_number_of_docker_instances + 30 < self.max_threshold:
                 self.docker_instance.scale(current_number_of_docker_instances + 30)
             else:
