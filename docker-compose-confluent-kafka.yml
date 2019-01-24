@@ -146,32 +146,6 @@ services:
       - ksql-server
     entrypoint: /bin/sh
     tty: true
-  ksql-datagen:
-    image: confluentinc/ksql-examples
-    hostname: ksql-datagen
-    depends_on:
-      - ksql-server
-      - broker
-      - schema-registry
-      - connect
-    volumes:
-      - mi2:/usr/share/java/monitoring-interceptors/
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
-    command: "bash -c 'echo Waiting for Kafka to be ready... && \
-                       cub kafka-ready -b broker:9092 1 40 && \
-                       echo Waiting for Confluent Schema Registry to be ready... && \
-                       cub sr-ready schema-registry 8081 40 && \
-                       echo Waiting a few seconds for topic creation to finish... && \
-                       sleep 11 && \
-                       cp /usr/share/java/monitoring-interceptors/monitoring-interceptors-5.1.0.jar /usr/share/java/ksql-examples/monitoring-interceptors-5.1.0.jar && \
-                       tail -f /dev/null'"
-    environment:
-      KSQL_CONFIG_DIR: "/etc/ksql"
-      KSQL_LOG4J_OPTS: "-Dlog4j.configuration=file:/etc/ksql/log4j-rolling.properties"
-      STREAMS_BOOTSTRAP_SERVERS: broker:9092
-      STREAMS_SCHEMA_REGISTRY_HOST: schema-registry
-      STREAMS_SCHEMA_REGISTRY_PORT: 8081
   rest-proxy:
     image: confluentinc/cp-kafka-rest
     depends_on:
@@ -232,7 +206,7 @@ services:
       redis_log_keyname_key: auto_scaler
       total_job_enqueued_count_redis_name_key: total_job_to_be_done_count
       total_job_dequeued_count_redis_name_key: total_job_done_count
-      redis_server_hostname_key: localhost
+      redis_server_hostname_key: redis
       redis_server_port_key: 6379
       min_threshold_key: 1
       max_threshold_key: 100
@@ -350,7 +324,7 @@ services:
     extra_hosts:
     - "mec-poc: 10.2.40.162"
   jenkins:
-    image: ssriram1978/jenkins:latest
+    image: jenkins/jenkins:lts
     volumes:
       - "/home/mec-poc/jenkins_home:/var/jenkins_home"
     ports:
