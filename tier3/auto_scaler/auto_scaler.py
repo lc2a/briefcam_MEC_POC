@@ -35,6 +35,8 @@ class AutoScaler:
         self.max_threshold = -1
         self.auto_scale_service_name = None
         self.auto_scale_time_interval = 10
+        self.scale_down_count = 0
+        self.scale_down_count_max_threshold = 0
         self.redis_instance = RedisInterface("AutoScaler")
         self.__load_environment_variables()
         self.__perform_auto_scaling()
@@ -46,6 +48,7 @@ class AutoScaler:
             time.sleep(1)
             self.min_threshold = int(os.getenv("min_threshold_key", default=-1))
             self.max_threshold = int(os.getenv("max_threshold_key", default=-1))
+            self.scale_down_count_max_threshold = int(os.getenv("scale_down_count_max_threshold_key", default=60))
             self.auto_scale_time_interval = int(os.getenv("auto_scale_time_interval_key", default=10))
             self.auto_scale_service_name = os.getenv("auto_scale_service_name_key", default=None)
 
@@ -136,9 +139,18 @@ class AutoScaler:
                                                   current_job_done_count,
                                                   jobs_in_pipe))
             if jobs_in_pipe <= 0:
-                self.__perform_scale_down_operation()
+                if self.scale_down_count == self.scale_down_count_max_threshold:
+                    logging_to_console_and_syslog("Performing scale down operation.")
+                    self.__perform_scale_down_operation()
+                    self.scale_down_count = 0
+                else:
+                    self.scale_down_count += 1
+                    logging_to_console_and_syslog("Bumping up self.scale_down_count to {}."
+                                                  .format(self.scale_down_count))
             else:
+                logging_to_console_and_syslog("Performing scale up operation.")
                 self.__perform_scale_up_operation(jobs_in_pipe)
+                self.scale_down_count = 0
 
     def cleanup(self):
         pass
