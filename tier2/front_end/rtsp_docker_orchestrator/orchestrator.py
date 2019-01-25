@@ -121,7 +121,7 @@ class RTSPDockerOrchestrator:
                 self.image_name,
                 environment=environment_list,
                 volumes=bind_mount,
-                name=self.image_name,
+                #name=self.image_name, With the latest Docker API, name should not have /latest at the end.
                 detach=True)
 
             if container:
