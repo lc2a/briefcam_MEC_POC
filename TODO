@@ -1,0 +1,10 @@
+1. Create a micro container in tier3 that does the following:
+  a. Log into the briefcam server.
+  b. Deletes cases that are older than 2 days by performing a series of clicks on the websiste.
+2. Try using rabbit message queue instead of confluent kakfka.
+3. Move the "tier2 - orchestration service for opening rtsp media streams" into docker service / docker swarm. 
+   a. Bring in the messaging queue between the fauxon/couch db and the tier1 producer which reads the camera document from the 
+   database and enqueues them to the rabbit message queue.
+   b. A swarm of docker service microservice containers dequeue the message from the queue and connects to the RTSP camera 
+   mentioned in the document.
+   
