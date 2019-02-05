@@ -9,3 +9,7 @@
    mentioned in the document.
 4. Run pylint on the code and fix all the warnings.
 5. Make sure that all the unit test cases run successfully when the Jenkins check in trigger hook gets invoked.
+6. Create a Dockerfile.unittest for every docker image. Change the ut logic to pick only the Dockerfile.unittest to test the docker image.
+7. Migrate to Kubernetes.
+8. Start learning on how to plug in Tensor flow logic into the data_parser module.
+
