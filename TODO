@@ -7,4 +7,5 @@
    database and enqueues them to the rabbit message queue.
    b. A swarm of docker service microservice containers dequeue the message from the queue and connects to the RTSP camera 
    mentioned in the document.
-   
+4. Run pylint on the code and fix all the warnings.
+5. Make sure that all the unit test cases run successfully when the Jenkins check in trigger hook gets invoked.
